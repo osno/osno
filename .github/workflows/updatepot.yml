@@ -27,5 +27,5 @@ jobs:
           git add -u
           git add * || :
           git commit -m "pot update"
-          git remote add upstream https://${GITHUB_TOKEN}@github.com/opendroid-Team/enigma2.git > /dev/null 2>&1
+          git remote add upstream https://${GITHUB_TOKEN}@github.com/formiano/enigma2.git > /dev/null 2>&1
           git push --quiet upstream 7.3 || echo "failed to push with error $?"
