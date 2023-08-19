@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 17:19+0200\n"
-"PO-Revision-Date: 2023-08-14 22:53+0200\n"
+"PO-Revision-Date: 2023-08-20 00:08+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -1051,7 +1051,7 @@ msgstr[1] "Sono stati identificati %d pacchetti da aggiornare."
 msgid "%d package was installed."
 msgid_plural "%d packages were installed."
 msgstr[0] "È stato installato %d pacchetto."
-msgstr[1] "Sono stati configurati %d pacchetti."
+msgstr[1] "Sono stati installati %d pacchetti."
 
 #, python-format
 msgid "%d package was removed."
@@ -1260,7 +1260,7 @@ msgstr "%s è disinstallato"
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
-msgstr "%s non  più utilizzato. Vuoi cancellarlo?"
+msgstr "%s non è più utilizzato. Vuoi eliminarlo?"
 
 #, python-format
 msgid "%s long"
@@ -1554,8 +1554,17 @@ msgstr "16:9"
 msgid "16:9 Always"
 msgstr "16:9 sempre"
 
+msgid "16:9 Combined"
+msgstr "16:9 combinato"
+
+msgid "16:9 Ignore"
+msgstr "16:9 ignora"
+
 msgid "16:9 Letterbox"
 msgstr "16:9 Letterbox"
+
+msgid "16:9 PanScan"
+msgstr "16:9 PanScan"
 
 msgid "16K"
 msgstr "16K"
@@ -1564,10 +1573,10 @@ msgid "18 V"
 msgstr "18 V"
 
 msgid "1st InfoBar timeout"
-msgstr "1st infobar timeout"
+msgstr "Timeout barra informazioni 1"
 
 msgid "1st infobar timeout"
-msgstr "1st infobar timeout"
+msgstr "Timeout barra informazioni 1"
 
 msgid "1x"
 msgstr "1x"
@@ -1658,19 +1667,19 @@ msgid "29.97"
 msgstr "29.97"
 
 msgid "2nd InfoBar"
-msgstr "2nd InfoBar"
+msgstr "Barra informazioni 2"
 
 msgid "2nd InfoBar Actions"
-msgstr "2nd InfoBar Actions"
+msgstr "Azioni barra informazioni 2"
 
 msgid "2nd InfoBar ECM"
-msgstr "2nd InfoBar ECM"
+msgstr "ECM barra informazioni 2"
 
 msgid "2nd InfoBar INFO"
-msgstr "2nd InfoBar INFO"
+msgstr "Info barra informazioni 2"
 
 msgid "2nd InfoBar timeout"
-msgstr "2nd InfoBar timeout"
+msgstr "Timeout barra informazioni 2"
 
 msgid "2x"
 msgstr "2x"
@@ -1946,7 +1955,7 @@ msgid "A"
 msgstr "A"
 
 msgid "A background update check is in progress, please wait a few minutes and try again."
-msgstr "E' in corso il controllo in background di un aggiornamento,attendere qualche minuto e riprovare."
+msgstr "È in corso un controllo dell'aggiornamento in background, attendi qualche minuto e riprova."
 
 msgid "A comma separated list of extensions to be used for 'My Extension' setting of 'Filter extension'. Enter the extension names without a leading dot (.)."
 msgstr "Un elenco di estensioni separato da virgole da utilizzare per impostare 'Mie estensioni' di 'Filtra estensioni'. Immetti i nomi delle estensioni senza punto iniziale (.)."
@@ -2016,10 +2025,10 @@ msgstr ""
 "Cosa vuoi fare?"
 
 msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-msgstr "È attualmente in corso una registrazione. Si prega di interrompere la registrazione prima di provare a configurare il posizionatore."
+msgstr "È attualmente in corso una registrazione. Interrompi la registrazione prima di provare a configurare il posizionatore."
 
 msgid "A recording is currently running. Please stop the recording before trying to scan."
-msgstr "È attualmente in corso una registrazione. Si prega di interrompere la registrazione prima di provare a eseguire la scansione."
+msgstr "È attualmente in corso una registrazione. Interrompi la registrazione prima di provare a eseguire la scansione."
 
 msgid "A recording is currently running. Please stop the recording before trying to start the satellite finder."
 msgstr "È in corso una registrazione. Interrompi la registrazione prima di avviare una ricerca satelliti."
@@ -2146,13 +2155,13 @@ msgid "Abort Favorites Edit"
 msgstr "Interrompi modifica preferiti"
 
 msgid "Aborted a pseudo recording.\n"
-msgstr "Annullata una pseudo registrazione.\n"
+msgstr "Interrotta una pseudo registrazione.\n"
 
 msgid "Aborted a streaming service.\n"
-msgstr "Annullato un servizio streaming.\n"
+msgstr "Interrotto un servizio di streaming.\n"
 
 msgid "About"
-msgstr "Informazioni Opendroid"
+msgstr "Informazioni openDroid"
 
 msgid "About to start"
 msgstr "Avvio in corso"
@@ -2163,11 +2172,14 @@ msgstr "Informazioni su..."
 msgid "Access point:"
 msgstr "Punto di accesso:"
 
+msgid "Access to geolocation information requires an Internet connection."
+msgstr "L'accesso alla geolocalizzazione richiede una connessione a Internet."
+
 msgid "Accessed"
 msgstr "Accesso"
 
 msgid "Accesspoint:"
-msgstr "Accesspoint:"
+msgstr "Punto di accesso"
 
 msgid "Action"
 msgstr "Azione"
@@ -2185,13 +2197,13 @@ msgid "Activate"
 msgstr "Attivare"
 
 msgid "Activate HbbTV (RED button)"
-msgstr "Attivare HbbTV (Pulsante Rosso)"
+msgstr "Attiva HbbTV (Pulsante Rosso)"
 
 msgid "Activate MAC address configuration"
-msgstr "Esci dalla configurazione del MAC-address"
+msgstr "Attiva configurazione dell'indirizzo MAC"
 
 msgid "Activate Picture in Picture"
-msgstr "Attivare PiP"
+msgstr "Attiva Picture in Picture"
 
 msgid "Activate a way to send individual or specific internal HDMI-CEC commands from the command line."
 msgstr "Attiva modo per inviare comandi HDMI-CEC interni singoli o specifici dalla riga di comando."
@@ -2200,10 +2212,13 @@ msgid "Activate network adapter configuration"
 msgstr "Attiva la configurazione della scheda di rete"
 
 msgid "Activate network settings"
-msgstr "Impostazioni di rete MAC"
+msgstr "Attiva impostazioni di rete"
 
 msgid "Activate the configured network settings."
 msgstr "Attiva impostazioni di rete configurate."
+
+msgid "Activate the flash expander, save all changed settings and exit"
+msgstr "Attiva espansore flash, salva tutte le impostazioni modificate ed esci"
 
 msgid "Activate time shift End"
 msgstr "Attiva la fine del timeshift"
@@ -2305,40 +2320,43 @@ msgid "Add a marker"
 msgstr "Aggiungi indicatore"
 
 msgid "Add a new tag"
-msgstr "Aggiungere nuovo titolo"
+msgstr "Aggiungi nuovo tag"
 
 msgid "Add a new timer"
-msgstr "Aggiungere nuovo titolo"
+msgstr "Aggiungi nuovo timer"
 
 msgid "Add a new title"
-msgstr "Aggiungere nuovo titolo"
+msgstr "Aggiungi nuovo titolo"
 
 msgid "Add a service to the Volume Offsets list"
 msgstr "Aggiungi servizio all'elenco offset volume"
 
 msgid "Add a timer for the current event"
-msgstr "Aggiungi un timer di zapping per l'evento attuale"
+msgstr "Aggiungi timer per l'evento in corso"
 
 msgid "Add an AutoTimer for the current event"
-msgstr "Aggiugi auto timer per evento attuale"
+msgstr "Aggiungi timer automatico per l'evento in corso"
 
 msgid "Add current directory to bookmarks"
-msgstr "Aggiungere cartella alla playlist"
+msgstr "Aggiungi cartella attuale ai segnalibri"
 
 msgid "Add directory to play list"
-msgstr "Aggiungere cartella alla playlist"
+msgstr "Aggiungi cartella alla playlist"
 
 msgid "Add file to play list"
-msgstr "Aggiungere file alla playlist"
+msgstr "Aggiungi file alla playlist"
 
 msgid "Add files to play list"
-msgstr "Aggiungere file alla playlist"
+msgstr "Aggiungi file alla playlist"
 
 msgid "Add highlighted directory to bookmarks"
-msgstr "Aggiungere cartella alla playlist"
+msgstr "Aggiungi cartella selezionata ai segnalibri"
 
 msgid "Add legacy LEFT/RIGHT actions"
 msgstr "Aggiungi azioni SIN/DES legacy"
+
+msgid "Add more slots"
+msgstr "Aggiungi più slot"
 
 msgid "Add new CCcam line"
 msgstr "Aggiungi nuova linea CCcam"
@@ -2347,10 +2365,10 @@ msgid "Add new NewCamd line"
 msgstr "Aggiungi nuova linea NewCamd"
 
 msgid "Add new tag"
-msgstr "Aggiungere nuovo titolo"
+msgstr "Aggiungi nuovo tag"
 
 msgid "Add provider"
-msgstr "Aggiungere provider"
+msgstr "Aggiungi fornitore"
 
 msgid "Add recording (enter recording duration)"
 msgstr "Aggiungi registrazione (insersci durata)"
@@ -2362,13 +2380,16 @@ msgid "Add recording (indefinitely)"
 msgstr "Aggiungi registrazione (tempo indeterminato)"
 
 msgid "Add recording (stop after current event)"
-msgstr "Aggiungi registrazione (ferma dopo questo evento)"
+msgstr "Aggiungi registrazione (interrompi dopo l'evento in corso)"
 
 msgid "Add selected service to bouquet or alternative"
 msgstr "Aggiungi servizio selezionato al bouquet o come alternativa"
 
 msgid "Add service"
-msgstr "Aggiungere canale"
+msgstr "Aggiungi servizio"
+
+msgid "Add services to this bouquet?"
+msgstr "Aggiungere servizi a questo bouquet?"
 
 msgid "Add the current directory as a bookmark"
 msgstr "Aggiungi cartella attuale come segnalibro"
@@ -2380,22 +2401,22 @@ msgid "Add title"
 msgstr "Aggiungere titolo"
 
 msgid "Add/Remove Timer"
-msgstr "Rim. timer"
+msgstr "Aggiungi o rimuovi timer"
 
 msgid "Add/Remove a timer for the current event"
-msgstr "Aggiungi/elimina Timer per evento attuale"
+msgstr "Aggiungi o rimuovi un timer per l'evento in corso"
 
 msgid "Adding schedule..."
-msgstr "Aggiungi a lista ..."
+msgstr "Aggiungi pianificazione..."
 
 msgid "Additional files/folders to backup"
 msgstr "Selezionare file/cartelle per il backup"
 
 msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move the dish from one satellite to another satellite."
-msgstr "Altre opzioni motore ti permettono di inserire dettagli dalla scheda tecnica del tuo motore in modo che l'enigma possa calcolare il tempo necessario per spostare il piatto da un satellite a un altro satellite."
+msgstr "Ulteriori opzioni del motore ti consentono di inserire i dettagli dalla scheda tecnica del motore in modo che enigma possa capire quanto tempo ci vorrà per spostare la parabola da un satellite a un altro satellite."
 
 msgid "Additional motor options allow you to enter details from your motor's spec sheet so enigma can work out how long it will take to move to another satellite."
-msgstr "Altre opzioni motore ti permettono di inserire dettagli dalla scheda tecnica del tuo motore in modo che l'enigma possa calcolare il tempo necessario per spostarsi su un altro satellite."
+msgstr "Ulteriori opzioni del motore ti consentono di inserire i dettagli dalla scheda tecnica del motore in modo che enigma possa capire quanto tempo ci vorrà per passare a un altro satellite."
 
 msgid "Addons"
 msgstr "Componenti aggiuntivi"
@@ -2404,10 +2425,10 @@ msgid "Address"
 msgstr "Indirizzo"
 
 msgid "Adjust 3D settings"
-msgstr "Regola i settaggi 3D"
+msgstr "Regola impostazioni 3D"
 
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
-msgstr "Regolare il colore in modo che tutte le sfumature risultino visibili, ma appaiano le più sature possibili. Se il risultato appare soddisfacente, premere OK per uscire dalla configurazione avanzata video, o usare i tasti numerici per accedere alle altre schermate Se soddisfatto del risultato, premere OK per terminare le regolazioni di precisione. Usare i tasti numerici più immagini di prova possono essere selezionati. chiudere il video messa a punto , o utilizzare i tasti numerici per selezionare altre schermate di test ."
+msgstr "Regola le impostazioni del colore in modo che tutte le sfumature di colore siano distinguibili, ma appaiano il più saturate possibile. Se sei soddisfatto del risultato, premi OK per chiudere la regolazione fine del video, oppure usa i tasti numerici per selezionare altre schermate di prova."
 
 msgid "Adjust the horizontal position of the letters used for teletext."
 msgstr "Regola la posizione orizzontale delle lettere utilizzate per il televideo."
@@ -2443,16 +2464,16 @@ msgid "Advanced video enhancement setup"
 msgstr "Configurazione avanzata miglioramento video"
 
 msgid "Adventure"
-msgstr ""
+msgstr "Avventura"
 
 msgid "Afar"
-msgstr ""
+msgstr "Afar"
 
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afghanistan"
 
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 msgid "After Event"
 msgstr "Dopo l'evento"
@@ -2473,25 +2494,25 @@ msgid "After zap"
 msgstr "Dopo lo zap"
 
 msgid "Akan"
-msgstr ""
+msgstr "Akan"
 
 msgid "Aland Islands"
-msgstr ""
+msgstr "Isole Aland"
 
 msgid "Albania"
-msgstr ""
+msgstr "Albania"
 
 msgid "Albanian"
-msgstr "Rumeno"
+msgstr "Albanese"
 
 msgid "Album"
 msgstr "Album"
 
 msgid "Algeria"
-msgstr ""
+msgstr "Algeria"
 
 msgid "Alias"
-msgstr "Alias"
+msgstr "Pseudonimo:"
 
 msgid "Alignment channel number"
 msgstr "Numero del canale di allineamento"
@@ -2503,7 +2524,7 @@ msgid "Alignment of events"
 msgstr "Allineamento degli eventi"
 
 msgid "Alignment of service names"
-msgstr "Allineamento dei nomi dei canale"
+msgstr "Allineamento dei nomi dei servizi"
 
 msgid "All"
 msgstr "Tutti"
@@ -2549,7 +2570,7 @@ msgid "Allocate"
 msgstr "Assegnare"
 
 msgid "Allocate a number to the physical LNB you are configuring. You will be able to select this LNB again for other satellites (e.g. motorized dishes) to save setting up the same LNB multiple times."
-msgstr "Assegnare un numero all'LNB fisico che si sta configurando. Sarà possibile selezionare nuovamente questo LNB per altri satelliti (ad esempio piatti motorizzati) per salvare più volte lo stesso LNB."
+msgstr "Assegna un numero all'LNB fisico che stai configurando. Potrai selezionare nuovamente questo LNB per altri satelliti (ad es. parabole motorizzate) per salvare la configurazione dello stesso LNB più volte."
 
 msgid "Allow 10bit"
 msgstr "Consenti 10bit"
@@ -2567,7 +2588,7 @@ msgid "Allow subtitles for hearing impaired"
 msgstr "Consenti sottotitoli per non udenti"
 
 msgid "Allow unsupported modes"
-msgstr "Consenti modalità supportate"
+msgstr "Consenti modalità non supportate"
 
 msgid "Allows the %s %s to read the stored EPG data regularly."
 msgstr "Consente a %s %s di leggere regolarmente i dati EPG memorizzati."
@@ -2672,28 +2693,31 @@ msgid "Always use smart1080p mode"
 msgstr "Usa sempre la modalità smart1080p"
 
 msgid "American Football"
-msgstr ""
+msgstr "Football americano"
 
 msgid "American Samoa"
-msgstr ""
+msgstr "Samoa americane"
 
 msgid "Amharic"
-msgstr ""
+msgstr "Amarico"
 
 msgid "Amlogic"
 msgstr "Amlogic"
+
+msgid "Amlogic remote"
+msgstr "Telecomando Amlogic"
 
 msgid "An attempt is made to capture the current TV status. If this is not possible due to incorrect or missing status messages it may cause the receiver to respond unexpectedly. On the other hand, tries to respond better to different operating conditions."
 msgstr "Viene effettuato un tentativo di acquisire lo stato TV attuale. Se non è possibile a causa di messaggi di stato errati o mancanti, il ricevitore potrebbe rispondere in modo imprevisto. D'altra parte, cerca di rispondere meglio alle diverse condizioni operative."
 
 msgid "An error occurred while downloading the packet list. Please try again."
-msgstr "Errore durante il download del packetlist. Riprova."
+msgstr "Si è verificato un errore durante il download dell'elenco dei pacchetti. Per favore riprova."
 
 msgid "An unknown error occurred!"
 msgstr "Si è verificato un errore sconosciuto!"
 
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 msgid "Android"
 msgstr "Android"
@@ -2701,17 +2725,20 @@ msgstr "Android"
 msgid "Android Linux SE"
 msgstr "Android Linux SE"
 
+msgid "Angle"
+msgstr "Angolo"
+
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 msgid "Animation"
-msgstr "Animazioni"
+msgstr "Animazione"
 
 msgid "Animation Setup"
-msgstr "Configurazione Animazione"
+msgstr "Impostazioni animazioni"
 
 msgid "Animation Speed"
 msgstr "Velocità animazione"
@@ -2720,10 +2747,10 @@ msgid "Animations"
 msgstr "Animazioni"
 
 msgid "Antarctica"
-msgstr ""
+msgstr "Antartide"
 
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua e Barbuda"
 
 msgid "Any activity"
 msgstr "Tutte le attività"
@@ -2756,7 +2783,7 @@ msgid "Are you sure to delete all cuts and marks?"
 msgstr "Sei sicuro di eliminare tutti i tagli e i segni?"
 
 msgid "Are you sure to purge all deleted user bouquets?"
-msgstr "Sei sicuro di eliminare definitivamente i bouquet utente cancellati?"
+msgstr "Sei sicuro di eliminare tutti i bouquet utente eliminati?"
 
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
@@ -2781,7 +2808,7 @@ msgid ""
 "Are you sure you want to delete\n"
 "the following backup:\n"
 msgstr ""
-"Sei sicuro di voler cancellare\n"
+"Sei sicuro di voler eliminare\n"
 "il seguente backup:\n"
 
 msgid ""
@@ -2792,7 +2819,7 @@ msgstr ""
 " "
 
 msgid "Are you sure you want to delete all selected logs:\n"
-msgstr "Sei sicuro di voler cancellare tutti i log selezionati:\n"
+msgstr "Sei sicuro di voler eliminare tutti i registri selezionati:\n"
 
 msgid "Are you sure you want to delete the EPG data from:\n"
 msgstr "Sei sicuro di voler eliminare i dati EPG da::\n"
@@ -2801,7 +2828,7 @@ msgid "Are you sure you want to delete this image?"
 msgstr "Sei sicuro di voler eliminare questa immagine?"
 
 msgid "Are you sure you want to delete this log:\n"
-msgstr "Sei sicuro di voler cancellare questo log:\n"
+msgstr "Sei sicuro di voler eliminare questo registro:\n"
 
 msgid ""
 "Are you sure you want to delete this:\n"
@@ -2845,7 +2872,7 @@ msgid ""
 "Are you sure you want to restore your %s %s backup?\n"
 "STB will restart after the restore"
 msgstr ""
-"Sei sicuro di voler ripristinare il backup %s %s ?\n"
+"Sei sicuro di voler ripristinare il backup del %s %s ?\n"
 "Il ricevitore sarà riavviato dopo il ripristino"
 
 msgid "Are you sure you want to save the EPG Cache to:\n"
@@ -2855,13 +2882,13 @@ msgid "Are you sure you want to start the image now?:\n"
 msgstr "Sei sicuro di voler salvare la cache EPG in:\n"
 
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 msgid "Armenia"
-msgstr ""
+msgstr "Armenia"
 
 msgid "Armenian"
-msgstr "Rumeno"
+msgstr "Armeno"
 
 msgid "Artist"
 msgstr "Artista"
@@ -2870,10 +2897,10 @@ msgid "Arts & Culture"
 msgstr "Arti/Cultura"
 
 msgid "Arts/Culture"
-msgstr "Arti/Cultura"
+msgstr "Arte/Cultura"
 
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 msgid "As plugin in extended bar"
 msgstr "Come plugin nella barra estesa"
@@ -2891,22 +2918,25 @@ msgid "Ask user (with default as 'Yes')"
 msgstr "Chiedi all'utente (predefinito \"Sì\")"
 
 msgid "Aspect"
-msgstr "Rapporto TV"
+msgstr "Aspetto"
 
 msgid "Aspect Ratio Actions"
 msgstr "Azioni relative alle proporzioni"
 
 msgid "Aspect Ratio: "
-msgstr "Proporzioni: "
+msgstr "Rapporto proporzioni"
 
 msgid "Aspect Ratio: n/a"
-msgstr "Proporzioni: n/a"
+msgstr "Rapporto proporzioni: n/a"
 
 msgid "Aspect list..."
 msgstr "Elenco aspetti..."
 
 msgid "Aspect ratio"
 msgstr "Rapporto proporzioni"
+
+msgid "Aspect switch"
+msgstr "Cambia aspetto"
 
 msgid "Assamese"
 msgstr "Assamese"
@@ -3077,7 +3107,7 @@ msgid "Auto timeout:"
 msgstr "Timeout automatico:"
 
 msgid "Auto(not available)"
-msgstr "Auto(non disponibile)"
+msgstr "Automatico (non disponibile)"
 
 msgid "AutoMountManager"
 msgstr "Gestore di montaggio automatico"
@@ -3137,22 +3167,22 @@ msgid "Available:"
 msgstr "A disposizione:"
 
 msgid "Avaric"
-msgstr ""
+msgstr "Avarico"
 
 msgid "Avestan"
-msgstr ""
+msgstr "Avestico"
 
 msgid "Avoid getting stuck (at the expense of some stuttering) when the jump time is smaller than the time between I-frames."
 msgstr "Evita blocchi (al costo di qualche rallentamento) quando il tempo di salto è più piccolo del tempo fra due I-frames."
 
 msgid "Aymara"
-msgstr ""
+msgstr "Aymara"
 
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbaijan"
 
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaigiano"
 
 msgid "B"
 msgstr "B"
@@ -3253,6 +3283,12 @@ msgstr "Opzione elimina in background"
 msgid "Background delete speed"
 msgstr "Velocità eliminazione in background"
 
+msgid "Background selected:"
+msgstr "Sfondo selezionato:"
+
+msgid "Background:"
+msgstr "Sfondo:"
+
 msgid "Backup"
 msgstr "Backup"
 
@@ -3261,10 +3297,10 @@ msgid "Backup Date: %s\n"
 msgstr "Data Backup: %s\n"
 
 msgid "Backup Image"
-msgstr "Backup immagine"
+msgstr "Immagine backup"
 
 msgid "Backup Location"
-msgstr "Percorso Backup"
+msgstr "Posizione backup"
 
 msgid "Backup Log"
 msgstr "Registro backup"
@@ -3290,14 +3326,17 @@ msgstr "Backup terminato."
 msgid "Backup done."
 msgstr "Backup completato."
 
+msgid "Backup failed!"
+msgstr "Backup non riuscito!"
+
 msgid "Backup failed."
-msgstr "Backup fallito."
+msgstr "Backup non riuscito."
 
 msgid "Backup images"
-msgstr "Backup immagine"
+msgstr "Immagini di backup"
 
 msgid "Backup is running..."
-msgstr "Backup in corso..."
+msgstr "Il backup è in esecuzione..."
 
 msgid ""
 "Backup plugins found\n"
@@ -3323,7 +3362,7 @@ msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of you
 msgstr "Backup immagine attuale su HDD o USB. Verrà creata una copia 1:1 del ricevitore"
 
 msgid "Backup your current settings"
-msgstr "Backup impostazioni attuali"
+msgstr "Backup configurazione attuale"
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files"
 msgstr "Backup impostazioni attuali. Include le impostazioni E2, i canali, la rete e tutti i file selezionati"
@@ -3332,25 +3371,25 @@ msgid "Backup your running %s %s image to HDD or USB."
 msgstr "Backup immagine in esecuzione del %s %s su HDD o USB."
 
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrain"
 
 msgid "Bambara"
-msgstr "Samba"
+msgstr "Bambara"
 
 msgid "Band"
 msgstr "Banda"
 
 msgid "Bandwidth"
-msgstr "Banda passante"
+msgstr "Larghezza banda"
 
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 msgid "Base time"
 msgstr "Ora base"
@@ -3362,10 +3401,10 @@ msgid "Base transparency for teletext, more options available within teletext sc
 msgstr "Trasparenza di base per il televideo, più opzioni disponibili all'interno della schermata del televideo."
 
 msgid "Baseball"
-msgstr ""
+msgstr "Baseball"
 
 msgid "Bashkir"
-msgstr ""
+msgstr "Baschiro"
 
 msgid "Basic PID info"
 msgstr "Informazioni PID di base"
@@ -3395,31 +3434,31 @@ msgid "Behavior when a movie is stopped"
 msgstr "Comportamento quando viene fermato un video"
 
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorussia"
 
 msgid "Belarusian"
-msgstr "Persiano"
+msgstr "Bielorusso"
 
 msgid "Belgian"
-msgstr "Norvegese"
+msgstr "Belga"
 
 msgid "Belgium"
-msgstr ""
+msgstr "Belgio"
 
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 msgid "Bengali"
-msgstr ""
+msgstr "Bengali"
 
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda"
 
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhutan"
 
 msgid "Big PiP"
 msgstr "Pip grande"
@@ -3428,7 +3467,7 @@ msgid "Bihari languages"
 msgstr "Lingue Bihari"
 
 msgid "Biography"
-msgstr ""
+msgstr "Biografia"
 
 msgid "Bislama"
 msgstr ""
@@ -3450,6 +3489,9 @@ msgstr "Schermo nero"
 
 msgid "Black screen till locked"
 msgstr "Schermo nero fino al blocco"
+
+msgid "Blacklist"
+msgstr "Lista nera"
 
 msgid "Blinking REC"
 msgstr "REC lampeggiante"
@@ -3480,10 +3522,10 @@ msgid "BogoMIPS:\t%s"
 msgstr ""
 
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 msgid "Bonaire"
-msgstr ""
+msgstr "Bonaire"
 
 msgid "Bookmark Sequence Actions"
 msgstr "Azioni sequenza di segnalibri"
@@ -3548,13 +3590,13 @@ msgid "Bootsetup"
 msgstr "Impostazioni Boot"
 
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnia Erzegovina"
 
 msgid "Bosnian"
-msgstr "Estone"
+msgstr "Bosniaco"
 
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 msgid "Bottom"
 msgstr "Basso"
@@ -3578,19 +3620,19 @@ msgid "BouquetList"
 msgstr "Lista bouquet"
 
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Isola Bouvet"
 
 msgid "Box or driver is not support Quad PiP."
 msgstr "Il ricevitore o il driver non supportano Quad PiP."
 
 msgid "Boxing"
-msgstr ""
+msgstr "Pugilato"
 
 msgid "Brazil"
-msgstr ""
+msgstr "Brasile"
 
 msgid "Breton"
-msgstr ""
+msgstr "Bretone"
 
 msgid "Brightness"
 msgstr "Luminosità"
@@ -3626,7 +3668,7 @@ msgid "Browse, install or remove extensions / plugins."
 msgstr "Sfoglia, installa o rimuovi estensioni/plugin."
 
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brunei Darusalam"
 
 #, python-format
 msgid "Buffering %d%%"
@@ -3650,25 +3692,25 @@ msgid "Bulgarian"
 msgstr "Bulgaro"
 
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 msgid "Burmese"
-msgstr ""
+msgstr "Birmano"
 
 msgid "Burn Blu-ray disc"
-msgstr "Masterizza Bluray"
+msgstr "Masterizza disco Bluray"
 
 msgid "Burn DVD"
 msgstr "Masterizzare DVD"
 
 msgid "Burn existing image to medium"
-msgstr "Scrivere immagine esistente su DVD"
+msgstr "Masterizza l'immagine esistente su supporto"
 
 msgid "Burn to medium"
-msgstr "Masterizzare su DVD"
+msgstr "Masterizza su supporto"
 
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 msgid "Bus: "
 msgstr "Bus: "
@@ -3680,10 +3722,10 @@ msgid "Button error timeout"
 msgstr "Timeout errore tasto"
 
 msgid "Button setup"
-msgstr "Configurazione Telecomando"
+msgstr "Impostazioni tasti"
 
 msgid "ButtonSetup"
-msgstr "Configurazione Telecomando"
+msgstr "Impostazioni tasti"
 
 msgid "By OPD Image Team"
 msgstr "By openDroid Image Team"
@@ -3692,7 +3734,7 @@ msgid "By openATV Image Team"
 msgstr "By openDroid Image Team"
 
 msgid "Bypass HDMI EDID Check"
-msgstr "Bypassa controllo HDMI EDID"
+msgstr "Ignora controllo HDMI EDID"
 
 msgid "Bytes received:"
 msgstr "Bytes ricevuti:"
@@ -3828,6 +3870,9 @@ msgstr "CI Plus 1.3"
 msgid "CI assignment"
 msgstr "Assegnazione CI"
 
+msgid "CI enabled"
+msgstr "CI abilitato"
+
 msgid "CI slot: "
 msgstr "Slot CI: "
 
@@ -3885,7 +3930,7 @@ msgid "Cache thumbnails"
 msgstr "Miniature cache"
 
 msgid "Cached:"
-msgstr "In cache:"
+msgstr "Memorizzati nella cache:"
 
 msgid "Calculate"
 msgstr "Calcolare"
@@ -3903,13 +3948,13 @@ msgid "Calibrate"
 msgstr "Calibrazione"
 
 msgid "Cambodia"
-msgstr ""
+msgstr "Cambogia"
 
 msgid "Camera"
 msgstr ""
 
 msgid "Cameroon"
-msgstr ""
+msgstr "Camerun"
 
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Può essere utilizzato per diversi fps tra sottotitoli esterni e video."
@@ -4013,7 +4058,7 @@ msgid "Can't unmount partiton, make sure it is not being used for swap or record
 msgstr "Non è possibile eseguire l’unmount. Assicurati che il dispositivo non sia usato swap, registrazioni o timeshift"
 
 msgid "Canada"
-msgstr ""
+msgstr "Canada"
 
 msgid "Cancel"
 msgstr "Annullare"
@@ -4161,7 +4206,7 @@ msgid "Capacity: "
 msgstr "Capacità: "
 
 msgid "Cape Verde"
-msgstr ""
+msgstr "Capo Verde"
 
 msgid "Card infos (CCcam-Reader)"
 msgstr "Info schede (CCcam-Reader)"
@@ -4182,19 +4227,19 @@ msgid "Cardserial"
 msgstr "Seriale scheda"
 
 msgid "Cartoon"
-msgstr ""
+msgstr "Cartoni animati"
 
 msgid "Cascade PiP"
 msgstr "PiP a cascata"
 
 msgid "Catalan / Valencian"
-msgstr ""
+msgstr "Catalano / Valenciano"
 
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Isole Cayman"
 
 msgid "Celsius"
-msgstr ""
+msgstr "Celsius"
 
 msgid "Center"
 msgstr "Centro"
@@ -4206,16 +4251,16 @@ msgid "Centered, wrapped"
 msgstr "Centrato, avvolto"
 
 msgid "Central African Republic"
-msgstr ""
+msgstr "Repubblica Centrafricana"
 
 msgid "Central Khmer"
-msgstr ""
+msgstr "Khmer centrale"
 
 msgid "Chad"
-msgstr ""
+msgstr "Ciad"
 
 msgid "Chamorro"
-msgstr ""
+msgstr "Camorro"
 
 msgid "Change Boxmode to control Hardware Chip Modes*"
 msgstr "Cambia Boxmode per controllare le modalità chip hardware*"
@@ -4412,7 +4457,7 @@ msgid "Checking Feeds"
 msgstr "Controllo Feeds"
 
 msgid "Checking Logs..."
-msgstr "Controllo logs..."
+msgstr "Controllo registri..."
 
 msgid "Checking disk"
 msgstr "Controllo del disco"
@@ -4422,7 +4467,7 @@ msgid "Checking disk %s"
 msgstr "Controllo del disco %s"
 
 msgid "Checking file system..."
-msgstr "Verifica filesystem in corso..."
+msgstr "Controllo file system..."
 
 msgid "Checking the internet connection"
 msgstr "Il ricevitore non dispone di una connessione ad internet"
@@ -4436,25 +4481,25 @@ msgstr ""
 "porta DiSEqC %s per %s"
 
 msgid "Chichewa / Chewa / Nyanja"
-msgstr ""
+msgstr "Chichewa / Chewa / Nyanja"
 
 msgid "Children"
-msgstr "Bambini/giovani"
+msgstr "Bambini"
 
 msgid "Children's"
-msgstr "Bambini/giovani"
+msgstr "Bambini"
 
 msgid "Children/Youth"
-msgstr "Bambini/giovani"
+msgstr "Bambini/Ragazzi"
 
 msgid "Chile"
-msgstr ""
+msgstr "Cile"
 
 msgid "China"
-msgstr ""
+msgstr "Cina"
 
 msgid "Chinese"
-msgstr ""
+msgstr "Cinese"
 
 #, python-format
 msgid "Chipset:\t%s\n"
@@ -4621,28 +4666,28 @@ msgid "Clean up (delete) all completed timers?"
 msgstr "Pulire (eliminare) tutti i timer completati?"
 
 msgid "Clean up and remove all completed timers"
-msgstr "Rimuovere definitivamente tutti gli elementi eliminati"
+msgstr "Pulisci e rimuovi tutti i timer completati"
 
 msgid "Clean up and remove all completed timers?"
 msgstr "Pulire e rimuovere tutti i timer completati?"
 
-msgid "Cleaning Trashes"
+msgid "Cleaning Trashcan"
 msgstr "Pulizia del cestino"
 
 msgid "Cleanup"
-msgstr "Ripulire"
+msgstr "Pulizia"
 
 msgid "Clear"
-msgstr "Cancella"
+msgstr "Pulisci"
 
 msgid "Clear Log"
-msgstr "Canc. log"
+msgstr "Pulisci registro"
 
 msgid "Clear Now"
-msgstr "Canc. log"
+msgstr "Pulisci ora"
 
 msgid "Clear before scan"
-msgstr "Cancellare prima di cercare"
+msgstr "Pulisci prima di cercare"
 
 msgid "Clear fixed"
 msgstr "Eliminare l'indirizzo fisso"
@@ -4688,7 +4733,7 @@ msgid "Clone TV screen to LCD"
 msgstr "Clona schermo TV su LCD"
 
 msgid "Close"
-msgstr "Chiudere"
+msgstr "Chiudi"
 
 msgid "Close PiP on exit"
 msgstr "Chiudi PiP all'uscita"
