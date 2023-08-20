@@ -13,8 +13,8 @@
 
 namespace eSimpleConfig
 {
-	static std::map<std::string, std::string> configValues; // NOSONAR
-	static int lastModified = 0; // NOSONAR
+	static std::map<std::string, std::string> configValues;
+	static int lastModified = 0;
 
 	static void load()
 	{

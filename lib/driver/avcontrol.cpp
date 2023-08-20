@@ -13,28 +13,28 @@
 #include <lib/base/modelinformation.h>
 #include <lib/driver/avcontrol.h>
 
-const char *__MODULE__ = "eAVControl"; // NOSONAR
+const char *__MODULE__ = "eAVControl";
 
-const char *proc_hdmi_rx_monitor = "/proc/stb/hdmi-rx/0/hdmi_rx_monitor";	// NOSONAR
-const char *proc_hdmi_rx_monitor_audio = "/proc/stb/audio/hdmi_rx_monitor"; // NOSONAR
+const char *proc_hdmi_rx_monitor = "/proc/stb/hdmi-rx/0/hdmi_rx_monitor";
+const char *proc_hdmi_rx_monitor_audio = "/proc/stb/audio/hdmi_rx_monitor";
 #ifdef DREAMNEXTGEN
-const char *proc_policy169 = "/sys/class/video/screen_mode";	 // NOSONAR
-const char *proc_policy43 = "/sys/class/video/screen_mode";		 // NOSONAR
-const char *proc_videomode = "/sys/class/display/mode";			 // NOSONAR
-const char *proc_videoaspect_r = "/sys/class/video/screen_mode"; // NOSONAR
-const char *proc_videoaspect_w = "/sys/class/video/screen_mode"; // NOSONAR
+const char *proc_policy169 = "/sys/class/video/screen_mode";
+const char *proc_policy43 = "/sys/class/video/screen_mode";
+const char *proc_videomode = "/sys/class/display/mode";
+const char *proc_videoaspect_r = "/sys/class/video/screen_mode";
+const char *proc_videoaspect_w = "/sys/class/video/screen_mode";
 #else
-const char *proc_policy169 = "/proc/stb/video/policy2";		 // NOSONAR
-const char *proc_policy43 = "/proc/stb/video/policy";		 // NOSONAR
-const char *proc_videomode = "/proc/stb/video/videomode";	 // NOSONAR
-const char *proc_videoaspect_r = "/proc/stb/vmpeg/0/aspect"; // NOSONAR
-const char *proc_videoaspect_w = "/proc/stb/video/aspect";	 // NOSONAR
+const char *proc_policy169 = "/proc/stb/video/policy2";
+const char *proc_policy43 = "/proc/stb/video/policy";
+const char *proc_videomode = "/proc/stb/video/videomode";
+const char *proc_videoaspect_r = "/proc/stb/vmpeg/0/aspect";
+const char *proc_videoaspect_w = "/proc/stb/video/aspect";
 #endif
-const char *proc_videomode_50 = "/proc/stb/video/videomode_50hz"; // NOSONAR
-const char *proc_videomode_60 = "/proc/stb/video/videomode_60hz"; // NOSONAR
-const char *proc_videomode_24 = "/proc/stb/video/videomode_24hz"; // NOSONAR
+const char *proc_videomode_50 = "/proc/stb/video/videomode_50hz";
+const char *proc_videomode_60 = "/proc/stb/video/videomode_60hz";
+const char *proc_videomode_24 = "/proc/stb/video/videomode_24hz";
 
-const char *proc_wss = "/proc/stb/denc/0/wss"; // NOSONAR
+const char *proc_wss = "/proc/stb/denc/0/wss";
 
 eAVControl *eAVControl::m_instance = nullptr;
 

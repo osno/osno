@@ -43,7 +43,7 @@ public:
 	ePyObject &operator=(PyListObject *ob) { return operator=((PyObject*)ob); }
 	ePyObject &operator=(PyUnicodeObject *ob) { return operator=((PyObject*)ob); }
 	operator PyObject*();
-	operator PyVarObject*() { return (PyVarObject*)operator PyVarObject*(); } // NOSONAR
+	operator PyVarObject*() { return (PyVarObject*)operator PyVarObject*(); }
 	operator PyTupleObject*() { return (PyTupleObject*)operator PyObject*(); }
 	operator PyListObject*() { return (PyListObject*)operator PyObject*(); }
 	operator PyUnicodeObject*() { return (PyUnicodeObject*)operator PyObject*(); }

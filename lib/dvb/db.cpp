@@ -115,9 +115,9 @@ RESULT eBouquet::moveService(const eServiceReference &ref, unsigned int pos)
 	while (source != dest)
 	{
 		if (forward)
-			std::iter_swap(source++, source); // NOSONAR
+			std::iter_swap(source++, source);
 		else
-			std::iter_swap(source--, source); // NOSONAR
+			std::iter_swap(source--, source);
 	}
 	eDVBDB::getInstance()->renumberBouquet();
 	return 0;

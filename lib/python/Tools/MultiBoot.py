@@ -484,7 +484,7 @@ class MultiBootClass():
 			else:
 				data.append(line)
 		data.append("")
-		result = md5(bytearray("\n".join(data), "UTF-8", errors="ignore")).hexdigest()  # NOSONAR
+		result = md5(bytearray("\n".join(data), "UTF-8", errors="ignore")).hexdigest()
 		return value != result
 
 	def processValue(self, value):  # Part of readSlotInfo() within analyzeSlot() within getSlotImageList().

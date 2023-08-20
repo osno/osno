@@ -27,7 +27,7 @@ gRC::gRC() : rp(0), wp(0)
 			 m_notify_pump(eApp, 1, "gRC")
 #endif
 			 ,
-			 m_spinner_enabled(0), m_spinneronoff(1), m_prev_idle_count(0) // NOSONAR
+			 m_spinner_enabled(0), m_spinneronoff(1), m_prev_idle_count(0)
 {
 	ASSERT(!instance);
 	instance = this;

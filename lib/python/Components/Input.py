@@ -24,7 +24,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		self.setText(text)
 
 	def __len__(self):  # NOTE: self.text is a property of VariableText!!!
-		return len(self.text)  #NOSONAR
+		return len(self.text)
 
 	def createWidget(self, parent):
 		if self.allMarked:

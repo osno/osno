@@ -99,7 +99,7 @@ void eAVSwitch::setColorFormat(int format)
 	if (*fmt == '\0')
 		return; // invalid format
 
-	if ((fd = open("/proc/stb/avs/0/colorformat", O_WRONLY)) < 0) {  //NOSONAR
+	if ((fd = open("/proc/stb/avs/0/colorformat", O_WRONLY)) < 0) {
 		eDebug("[eAVSwitch] cannot open /proc/stb/avs/0/colorformat: %m");
 		return;
 	}

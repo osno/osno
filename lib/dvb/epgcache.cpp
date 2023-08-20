@@ -694,7 +694,7 @@ void eEPGCache::flushEPG(const uniqueEPGKey & s, bool lock) // lock only affects
 	eDebug("[eEPGCache] flushEPG %d", (int)(bool)s);
 	if (s)  // clear only this service
 	{
-		singleLock l(cache_lock);  // TODO : Probably double lock ( Sonar : This lock has already been acquired elock.h line 13)
+		singleLock l(cache_lock);
 		eDebug("[eEPGCache] flushEPG svc(%04x:%04x:%04x)", s.onid, s.tsid, s.sid);
 		eventCache::iterator it = eventDB.find(s);
 		if (it != eventDB.end())
@@ -2716,7 +2716,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 											for (lloop=0x0;lloop<(dbglen+EIT_EXTENDED_EVENT_DESCRIPTOR_SIZE+2);lloop++)
 											{
 												if ((lloop>0) && (lloop%16==0)) { eDebug(buff); z=0; }
-												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]); //NOSONAR
+												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]);
 												z++;
 											}
 											if (z>1) { eDebug(buff);}
@@ -2746,7 +2746,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 											for (lloop=0x0;lloop<(dbglen+EIT_EXTENDED_EVENT_DESCRIPTOR_SIZE+2);lloop++)
 											{
 												if ((lloop>0) && (lloop%16==0)) { eDebug(buff); z=0; }
-												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]); //NOSONAR
+												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]);
 												z++;
 											}
 											if (z>1) { eDebug(buff);}
@@ -3266,7 +3266,7 @@ void eEPGCache::crossepgImportEPGv21(std::string dbroot)
 	}
 
 	ret = fread(&aliases_groups_count, sizeof (int), 1, aliases);
-	epgdb_aliases_t all_aliases[aliases_groups_count]; // NOSONAR
+	epgdb_aliases_t all_aliases[aliases_groups_count];
 	for (int i=0; i<aliases_groups_count; i++)
 	{
 		int j;
