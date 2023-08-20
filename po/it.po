@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 17:19+0200\n"
-"PO-Revision-Date: 2023-08-20 00:08+0200\n"
+"PO-Revision-Date: 2023-08-20 23:06+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -1020,8 +1020,8 @@ msgstr "%d ms"
 #, python-format
 msgid "%d package upgraded."
 msgid_plural "%d packages upgraded."
-msgstr[0] "%d pacchetto aggiornato."
-msgstr[1] "%d pacchetti aggiornati."
+msgstr[0] "È stato aggiornato %d pacchetto."
+msgstr[1] "Sono stati aggiornati %d pacchetti."
 
 #, python-format
 msgid "%d package was configured."
@@ -2140,7 +2140,7 @@ msgid "AZPlay"
 msgstr "AZPlay"
 
 msgid "Abkhazian"
-msgstr ""
+msgstr "Abcaso"
 
 msgid "Abort"
 msgstr "Interrompi"
@@ -2230,7 +2230,7 @@ msgid "Active"
 msgstr "Attivo"
 
 msgid "Active clients"
-msgstr "Attiva Clients"
+msgstr "Clienti attivi"
 
 msgid "Adapter Settings"
 msgstr "Impostazioni adattatore"
@@ -2894,7 +2894,7 @@ msgid "Artist"
 msgstr "Artista"
 
 msgid "Arts & Culture"
-msgstr "Arti/Cultura"
+msgstr "Arte & Cultura"
 
 msgid "Arts/Culture"
 msgstr "Arte/Cultura"
@@ -3164,7 +3164,7 @@ msgid "Available shares:"
 msgstr "Condivisioni disponibili:"
 
 msgid "Available:"
-msgstr "A disposizione:"
+msgstr "Disponibile:"
 
 msgid "Avaric"
 msgstr "Avarico"
@@ -3897,11 +3897,30 @@ msgstr "Menu principale CI"
 msgid "CPU"
 msgstr "CPU"
 
+#, python-format
+msgid "CPU / Core %d type"
+msgstr "Tipo di CPU a %d core"
+
+msgid "CPU Control"
+msgstr "Controllo CPU"
+
+msgid "CPU architecture"
+msgstr "Architettura CPU"
+
+msgid "CPU benchmark"
+msgstr "Benchmark CPU"
+
 msgid "CPU brand"
 msgstr "Marca CPU"
 
 msgid "CPU priority for scripts"
 msgstr "Priorità CPU per gli script"
+
+msgid "CPU rating"
+msgstr "Valutazione CPU"
+
+msgid "CPU temperature"
+msgstr "Temperatura della CPU"
 
 msgid "CPU speed/cores"
 msgstr "Velocità CPU e numero core"
@@ -4478,7 +4497,7 @@ msgid ""
 "DiSEqC port %s for %s"
 msgstr ""
 "Controllo tuner %d\n"
-"porta DiSEqC %s per %s"
+"Porta DiSEqC %s per %s"
 
 msgid "Chichewa / Chewa / Nyanja"
 msgstr "Chichewa / Chewa / Nyanja"
@@ -4645,22 +4664,25 @@ msgid "Church Slavic"
 msgstr "Chiesa slava"
 
 msgid "Chuvash"
-msgstr ""
+msgstr "Ciuvascio"
 
 msgid "Circular LNB"
 msgstr "LNB circolare"
 
 msgid "Circular left"
-msgstr "Circolare a sinistra"
+msgstr "Circolare sinistra"
 
 msgid "Circular right"
-msgstr "Circolare a destra"
+msgstr "Circolare destra"
+
+msgid "City"
+msgstr "Città"
 
 msgid "Clean (Just flash and start clean)"
 msgstr "Flash e installazione pulita"
 
 msgid "Clean network 'Trash'"
-msgstr "Pulizia del cestino"
+msgstr "Svuota il cestino di rete"
 
 msgid "Clean up (delete) all completed timers?"
 msgstr "Pulire (eliminare) tutti i timer completati?"
@@ -4710,6 +4732,9 @@ msgstr "Cancella configurazione memoria"
 msgid "Click the button on your remote you want to change."
 msgstr "Premi il tasto del telecomando da personalizzare."
 
+msgid "Client"
+msgstr "Client"
+
 #, python-format
 msgid "Client Info ( Oscam-Version: %s )"
 msgstr "Info client (versione di Oscam: %s)"
@@ -4728,6 +4753,9 @@ msgstr "IP del cliente"
 
 msgid "Clients"
 msgstr "Clienti"
+
+msgid "Clock:"
+msgstr "Orologio:"
 
 msgid "Clone TV screen to LCD"
 msgstr "Clona schermo TV su LCD"
@@ -4755,6 +4783,9 @@ msgstr "Chiudi finestra"
 
 msgid "Close screen"
 msgstr "Chiudi schermata"
+
+msgid "Close the Plugin Browser screen"
+msgstr "Chiudi schermata elenco plugin"
 
 msgid "Close the current screen"
 msgstr "Chiudi schermata attuale"
@@ -4813,8 +4844,14 @@ msgstr "Formato colore"
 msgid "Color space"
 msgstr "Spazio colore"
 
+msgid "Combined"
+msgstr "Combinato"
+
 msgid "Combo"
 msgstr "Combo"
+
+msgid "Combo Tuner"
+msgstr "Tuner combinato"
 
 msgid "Comedy"
 msgstr "Commedia"
@@ -4841,11 +4878,29 @@ msgstr "Tipo comando"
 msgid "CommitInfo"
 msgstr "Informazioni Commit"
 
+msgid "Commit Log"
+msgstr "Registro commit"
+
+msgid "Commit Log Information"
+msgstr "Informazioni sul registro commit"
+
+msgid "Commit Logs"
+msgstr "Registro commit"
+
+msgid "Common Information Actions"
+msgstr "Azioni sulle informazioni comuni"
+
 msgid "Common Interface"
 msgstr "Common Interface"
 
 msgid "Common Interface Assignment"
 msgstr "Assegnazione Common Interface"
+
+msgid "Common Interface Settings"
+msgstr "Impostazioni Common Interface"
+
+msgid "Common Settings"
+msgstr "Impostazioni comuni"
 
 msgid "Common Setup Actions"
 msgstr "Azioni di configurazione comuni"
@@ -4858,6 +4913,9 @@ msgstr ""
 
 msgid "Complete"
 msgstr "Completo"
+
+msgid "Complete Backup"
+msgstr "Backup completo"
 
 msgid "Complex (allows mixing audio tracks and aspects)"
 msgstr "Complessa (consente mix tracce audio e aspetti)"
@@ -4899,7 +4957,7 @@ msgid "Configuration tool for OScam"
 msgstr "Tool di progettazione per OSCam"
 
 msgid "Configure DNS (name servers)"
-msgstr ""
+msgstr "Configura DNS (server dei nomi)"
 
 msgid "Configure an additional delay to improve external subtitle synchronization."
 msgstr "Configura un ritardo aggiuntivo per migliorare la sincronizzazione dei sottotitoli esterni."
@@ -4957,6 +5015,9 @@ msgid ""
 "\n"
 "When the settings are correct press OK to continue."
 msgstr ""
+"Configura o verifica i DNS (server dei nomi) regolando i valori visualizzati.\n"
+"\n"
+"Quando le impostazioni sono corrette premi OK per continuare."
 
 msgid "Configure remote control type"
 msgstr "Configurazione tipo di telecomando"
@@ -4972,6 +5033,9 @@ msgid ""
 "\n"
 "When the settings are correct press OK to continue."
 msgstr ""
+"Configura la connessione Internet regolando i valori visualizzati.\n"
+"\n"
+"Quando le impostazioni sono corrette premi OK per continuare."
 
 msgid "Configure the alignment of events."
 msgstr "Configura allineamento degli eventi."
@@ -5019,7 +5083,7 @@ msgid "Configure the contrast level of the front panel display."
 msgstr "Configura livello di contrasto del display del pannello frontale."
 
 msgid "Configure the current keymap file."
-msgstr "Configura il file keymap corrente."
+msgstr "Configura file keymap attuale."
 
 msgid "Configure the cursor behavior in the channel selection list. When opening the channel selection list you can remain on the current service or already select up/down and you are able to revert the B+/B- buttons."
 msgstr "Configura comportamento del cursore nell'elenco di selezione dei canali. Quando si apre l'elenco di selezione dei canali è possibile rimanere sul servizio attuale o selezionare su/giù, in questo modo si possono ripristinare i tasti B+/B-."
@@ -5255,6 +5319,9 @@ msgstr "Configura quale tuner sarà preferito, quando è disponibile più di un 
 msgid "Configure your NTP server."
 msgstr "Configura server NTP."
 
+msgid "Configure your Network"
+msgstr "Configura rete"
+
 msgid "Configure your internal LAN"
 msgstr "Configura LAN interna"
 
@@ -5299,6 +5366,9 @@ msgstr "Clienti connessi"
 msgid "Connected satellites"
 msgstr "Satelliti connessi"
 
+msgid "Connected through another tuner"
+msgstr "Connesso tramite un altro tuner"
+
 msgid "Connected to"
 msgstr "Connesso a"
 
@@ -5309,16 +5379,16 @@ msgid "Connection using the supplied FTP parameters failed. Please recheck the d
 msgstr "La connessione utilizzando i parametri FTP forniti non è riuscita. Si prega di ricontrollare i dettagli e riprovare."
 
 msgid "Console"
-msgstr ""
+msgstr "Console"
 
 msgid "Constellation & FFT mode"
-msgstr "Costellazione"
+msgstr "Modalità costellazione e FFT"
 
 msgid "Consult your SCR device spec sheet for this information."
 msgstr "Consultare la scheda tecnica del dispositivo SCR per queste informazioni."
 
 msgid "Consult your motor's spec sheet for this information, or leave the default setting."
-msgstr "Consultare la scheda tecnica dei motori per queste informazioni o lasciare le impostazioni predefinite."
+msgstr "Consulta scheda tecnica del motore per queste informazioni o lascia l'impostazione predefinita."
 
 msgid "Contact Info"
 msgstr "Informazioni evento"
@@ -5342,19 +5412,22 @@ msgid "Context"
 msgstr "Contesto"
 
 msgid "Continue ->"
-msgstr "Continuare ->"
+msgstr "Continua ->"
 
 msgid "Continue in background"
 msgstr "Riprodurre l'audio in background"
 
 msgid "Continue playback"
-msgstr "Continuare la riproduzione"
+msgstr "Continua riproduzione"
 
 msgid "Continue playing"
-msgstr "Continuare la riproduzione"
+msgstr "Continua riproduzione"
 
 msgid "Continue to run the task in the background"
-msgstr "Eseguire un controllo degli aggiornamenti on-line in background"
+msgstr "Continua a eseguire l'attività in background"
+
+msgid "Continue with package download and installation"
+msgstr "Continua con il download e l'installazione del pacchetto"
 
 msgid "Continue with the flash process"
 msgstr "Continua con il processo di flash"
@@ -5389,23 +5462,38 @@ msgstr "Posizione nella quale i timer conclusi vengono visualizzati nell'elenco 
 msgid "Control the InfoBar fading speed"
 msgstr "Velocità dissolvenza barra informazioni"
 
+msgid "Control your Softcams"
+msgstr "Controlla softcam"
+
+msgid "Controlled by HDMI"
+msgstr "controllata da HDMI"
+
 msgid "Convert EXT3 File System to EXT4"
 msgstr "Converti file system da ext3 a ext4"
 
 msgid "Convert ext3 to ext4"
-msgstr "Convertire ext3 a ext4"
+msgstr "Converti da ext3 a ext4"
 
 msgid "Convert file system ext3 to ext4"
-msgstr "Convertire file system ext3 a ext4"
+msgstr "Converti file system ext3 in ext4"
+
+msgid "Convert to AC3"
+msgstr "converti in AC3"
+
+msgid "Convert to DTS"
+msgstr "converti in DTS"
+
+msgid "Convert to multi-channel PCM"
+msgstr "converti in PCM multicanale"
 
 msgid "Converting ext3 to ext4..."
-msgstr "Conversione ext3 a ext4 ..."
+msgstr "Converto ext3 in ext4..."
 
 msgid "Cook Islands"
-msgstr ""
+msgstr "Isole Cook"
 
 msgid "Cooking"
-msgstr "Arte"
+msgstr "Cucina"
 
 msgid "Copy"
 msgstr "Copia"
@@ -5447,28 +5535,28 @@ msgid "Cores:\t%s"
 msgstr "Cores:\t%s"
 
 msgid "Cornish"
-msgstr "Danese"
+msgstr "Cornico"
 
 msgid "Correct invalid EPG data"
-msgstr ""
+msgstr "Correggi dati EPG non validi"
 
 msgid "Corsican"
-msgstr ""
+msgstr "Corso"
 
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 msgid "Cote d'Ivoire / Ivory Coast"
 msgstr ""
 
 msgid "Could not connect to server"
-msgstr "Impossibile connettersi a IP remoto"
+msgstr "Impossibile connettersi al server"
 
 msgid "Could not load Medium! No disc inserted?"
-msgstr "Supporto ottico non letto! E’ stato inserito il disco?"
+msgstr "Impossibile caricare il supporto! Nessun disco inserito?"
 
 msgid "Could not open Picture in Picture"
-msgstr "Impossibile aprire PiP"
+msgstr "Impossibile aprire Picture in Picture"
 
 #, python-format
 msgid "Could not open the file %s!"
@@ -5476,21 +5564,21 @@ msgstr "Impossibile aprire il file %s!"
 
 #, python-format
 msgid "Could not record due to conflicting timer %s"
-msgstr "Impossibile registrare a causa di conflitto timer %s"
+msgstr "Impossibile registrare a causa di un conflitto tra timer %s"
 
 #, python-format
 msgid "Could not record due to invalid service %s"
-msgstr "Impossibile registrare a causa di canale non valido %s"
+msgstr "Impossibile registrare a causa di un servizio non valido %s"
 
 #, python-format
 msgid "Could not save configuration file %s!"
 msgstr "Impossibile salvare il file di configurazione %s!"
 
 msgid "Country"
-msgstr "Nazione"
+msgstr "Paese"
 
 msgid "Country for EPG event genre information"
-msgstr ""
+msgstr "Paese per informazioni sul genere dell'evento EPG"
 
 msgid "Country for EPG event rating information"
 msgstr "Paese per informazioni sulla classificazione degli eventi EPG"
@@ -5499,28 +5587,34 @@ msgid "Cpu"
 msgstr "Cpu"
 
 msgid "Crash Logs"
-msgstr "Crash Logs"
+msgstr "Registri crash"
 
 msgid "Crash at skin error for debug reasons"
 msgstr "Crash in caso di errore della skin per motivi di debug"
 
 msgid "Create"
-msgstr "Crea"
+msgstr "Creare"
 
 msgid "Create Blu-ray disc ISO file"
 msgstr "Crea file ISO del disco Blu-ray"
 
 msgid "Create DVD-ISO"
-msgstr "Creare DVD-ISO"
+msgstr "Crea ISO DVD"
 
 msgid "Create Directory"
-msgstr "Creare cartella"
+msgstr "Crea cartella"
+
+msgid "Create Expander"
+msgstr "Create espansore"
 
 msgid "Create ISO"
 msgstr "Crea ISO"
 
+msgid "Create Slots"
+msgstr "Crea slot"
+
 msgid "Create a directory"
-msgstr "Creare cartella"
+msgstr "Crea una cartella"
 
 msgid "Create a randomly generated password"
 msgstr "Crea una password generata casualmente"
@@ -5532,14 +5626,23 @@ msgid "Create directory"
 msgstr "Creare cartella"
 
 msgid "Create separate radio user bouquet"
-msgstr "Crea un bouquet utente radio separato"
+msgstr "Crea bouquet separato per le radio"
+
+msgid "Create swap"
+msgstr "Crea swap"
+
+msgid "Create the additional slots on the selected device"
+msgstr "Crea gli slot aggiuntivi sul dispositivo selezionato"
+
+msgid "Create the flash expander in the selected device"
+msgstr "Crea espansione flash nel dispositivo selezionato"
 
 msgid "Create:"
-msgstr "Creare:"
+msgstr "Crea:"
 
 #, python-format
 msgid "Create: Recovery Fullbackup %s"
-msgstr "Crea: Ripristino Fullbackup %s"
+msgstr "Crea: ripristino backup completo %s"
 
 msgid "Creating .ap and .sc files"
 msgstr "Creazione di file .ap e .sc"
@@ -5548,22 +5651,22 @@ msgid "Creating file system"
 msgstr "Creazione di file system"
 
 msgid "Creating hard link to time shift file failed!"
-msgstr "Creazione Hardlink al file TimeShift fallito !"
+msgstr "Creazione di un hard link al file timeshift non riuscita!"
 
 msgid "Creating partition"
 msgstr "Creazione partizione"
 
 msgid "Cree"
-msgstr ""
+msgstr "Cree"
 
 msgid "Cricket"
-msgstr ""
+msgstr "Cricket"
 
 msgid "Crime"
-msgstr ""
+msgstr "Crimine"
 
 msgid "Croatia"
-msgstr "Croato"
+msgstr "Croazia"
 
 msgid "Croatian"
 msgstr "Croato"
@@ -5578,22 +5681,40 @@ msgid "CronTimers"
 msgstr "Elenco Timer"
 
 msgid "Cuba"
-msgstr ""
+msgstr "Cuba"
 
 msgid "Cult"
-msgstr ""
+msgstr "Culto"
 
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
+
+msgid "Currency"
+msgstr "Valuta"
 
 msgid "Current"
 msgstr "Attuale"
 
+msgid "Current 1/1"
+msgstr "Attuale 1/1"
+
 msgid "Current Affairs"
-msgstr "Notizie Affari"
+msgstr "Attualità"
 
 msgid "Current CEC address"
 msgstr "Attuale indirizzo CEC"
+
+#, python-format
+msgid "Current CPU Frequency cores 0 and 1: %s MHz"
+msgstr "Frequenza attuale CPU core 0 e 1: %s MHz"
+
+#, python-format
+msgid "Current CPU Frequency other cores: %s MHz"
+msgstr "Frequenza attuale CPU altri core: %s MHz"
+
+#, python-format
+msgid "Current CPU cores 0 and 1 Voltage: %s V"
+msgstr "Tensione attuale CPU core 0 e 1: %s V"
 
 msgid "Current Directory"
 msgstr "Cartella attuale"
@@ -5604,12 +5725,22 @@ msgstr "Evento attuale:"
 msgid "Current Status:"
 msgstr "Stato attuale:"
 
+#, python-format
+msgid "Current Temperature (SoC): %s °C"
+msgstr "Temperatura attuale (SoC): %s °C"
+
+msgid "Current crash log"
+msgstr "Registro di crash attuale"
+
 msgid "Current directory"
 msgstr "Cartella attuale"
 
 #, python-format
 msgid "Current directory (%s)"
 msgstr "Cartella attuale (%s)"
+
+msgid "Current installed"
+msgstr "Attualmente installato"
 
 #, python-format
 msgid "Current location is '%s'."
@@ -5679,7 +5810,7 @@ msgid "Cut"
 msgstr "Tagliare"
 
 msgid "Cutlist Editor"
-msgstr "Editor di taglio"
+msgstr "Editor elenco tagli"
 
 msgid "Cutlist editor..."
 msgstr "Editor elenco tagli..."
@@ -5688,7 +5819,7 @@ msgid "Cycle PiP(zap)"
 msgstr "Ciclo PIP(zap)"
 
 msgid "Cycling"
-msgstr ""
+msgstr "Ciclismo"
 
 #, python-format
 msgid "Cylinders: %s (max) %s (current)"
@@ -5698,16 +5829,16 @@ msgid "Cylinders: unknown"
 msgstr "Cilindri: sconosciuti"
 
 msgid "Cyprus"
-msgstr ""
+msgstr "Cipro"
 
 msgid "Czech"
 msgstr "Ceco"
 
 msgid "Czech Republic"
-msgstr ""
+msgstr "Repubblica Ceca"
 
 msgid "Czechia"
-msgstr "Ceco"
+msgstr "Cechia"
 
 msgid "D"
 msgstr "D"
@@ -5838,6 +5969,10 @@ msgstr "Stile data"
 
 msgid "Date/time input"
 msgstr "Inserimento data/ora"
+
+#, python-format
+msgid "Date: %s   Author: %s"
+msgstr "Data: %s Autore: %s"
 
 msgid "Day D Mon"
 msgstr "Giorno D Mese"
@@ -5983,6 +6118,12 @@ msgstr "NomeGiorno Anno/M/DD"
 msgid "Deactivate"
 msgstr "Disattivare"
 
+msgid "Deactivate Expander"
+msgstr "Disattiva espansore"
+
+msgid "Deactivate the flash expander in the selected device"
+msgstr "Disattiva espansore flash nel dispositivo selezionato"
+
 msgid "Debug"
 msgstr "Debug"
 
@@ -5994,16 +6135,16 @@ msgid "Debug Information"
 msgstr "Informazioni di debug"
 
 msgid "Debug Log Information"
-msgstr "Informazioni sul Log di debug"
+msgstr "Informazioni sul registro di debug"
 
 msgid "Debug Log Information Actions"
-msgstr "Azioni sulle informazioni del Log di debug"
+msgstr "Azioni sulle informazioni del registro di debug"
 
 msgid "Debug Logs"
-msgstr "Log di debug"
+msgstr "Registro di debug"
 
 msgid "Debug log time format *"
-msgstr "Formato dell'ora del Log debug *"
+msgstr "Formato dell'ora del registro debug *"
 
 msgid "Decoding Setup"
 msgstr "Decodifica programma di installazione"
@@ -6085,6 +6226,12 @@ msgstr "Ordinamento predefinito per i file nella colonna di sinistra."
 msgid "Default sort order for files in the right column."
 msgstr "Ordinamento predefinito per i file nella colonna di destra."
 
+msgid "Default video mode selected"
+msgstr "Modalità video predefinita selezionata"
+
+msgid "Default video mode selected for the TV."
+msgstr "Modalità video predefinita selezionata per la TV."
+
 msgid "Default volume offset"
 msgstr "Volume predefinito disattivato"
 
@@ -6097,6 +6244,9 @@ msgstr "Predefiniti"
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
 msgstr "Definisci un ritardo aggiuntivo in millisecondi prima dell'inizio dei flussi http."
+
+msgid "Defined / Active"
+msgstr "Definito/Attivo"
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
 msgstr "Definisce quanto veloce sono ripetuti i salti temporali. Valori minori di 500ms possono essere fonti di problemi con i NAS."
@@ -6150,10 +6300,10 @@ msgid "Delay after voltage change before motor command"
 msgstr "Ritardo dopo cambio di voltaggio prima di un comando al motore"
 
 msgid "Delay before key repeat starts:"
-msgstr "Ritardo prima dell'avvio del tasto inizio:"
+msgstr "Ritardo tasto ripetizione iniziale:"
 
 msgid "Delay before sequence repeat"
-msgstr "Ritardo prima dell'avvio del tasto inizio"
+msgstr "Ritardo prima della ripetizione della sequenza"
 
 msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
 msgstr "Ritardo tra comandi CEC durante l'invio di una serie di comandi. Alcuni dispositivi richiedono questo ritardo per il corretto funzionamento, generalmente compreso tra 50 e 150 ms."
@@ -6165,7 +6315,7 @@ msgid "Delay between switch and motor command"
 msgstr "Ritardo tra commutazione e comando motore"
 
 msgid "Delay for external subtitles"
-msgstr "Ritardo prima dell'avvio del tasto inizio"
+msgstr "Ritardo per sottotitoli esterni"
 
 msgid "Delay in milliseconds after finish scrolling text on display."
 msgstr "Ritardo in millisecondi dopo lo scorrimento del testo sul display."
@@ -6174,7 +6324,7 @@ msgid "Delay in milliseconds before start of scrolling text on display."
 msgstr "Ritardo in millisecondi prima dell'inizio dello scorrimento del testo sul display."
 
 msgid "Delay time"
-msgstr "Tempo di ritardo"
+msgstr "Ritardo"
 
 msgid "Delay:"
 msgstr "Ritardo:"
@@ -6184,14 +6334,14 @@ msgid "Delay: %s"
 msgstr "Ritardo: %s"
 
 msgid "Delete"
-msgstr "Rimuovere"
+msgstr "Elimina"
 
 #, python-format
 msgid "Delete %s?"
-msgstr "Cancellare %s?"
+msgstr "Eliminare %s?"
 
 msgid "Delete Confirmation"
-msgstr "Conferma cancellazione"
+msgstr "Conferma eliminazione"
 
 msgid "Delete Directory"
 msgstr "Elimina cartella"
@@ -6209,16 +6359,16 @@ msgid "Delete Line"
 msgstr "Elimina riga"
 
 msgid "Delete Timer"
-msgstr "Rimuovere il timer"
+msgstr "Elimina timer"
 
 msgid "Delete all duplicated lines"
 msgstr "Elimina tutte le righe duplicate"
 
 msgid "Delete all log files"
-msgstr "Elimina tutti i file di log"
+msgstr "Elimina tutti i file di registro"
 
 msgid "Delete all logs"
-msgstr "Elimina tutti i log"
+msgstr "Elimina tutti i registri"
 
 msgid "Delete all related files"
 msgstr "Elimina tutti i file correlati"
@@ -6248,13 +6398,13 @@ msgid "Delete empty and white space only lines"
 msgstr "Elimina righe vuote e contenenti solo spazi bianchi"
 
 msgid "Delete entry"
-msgstr "Rimuovere la voce"
+msgstr "Elimina voce"
 
 msgid "Delete failed!"
-msgstr "Rimozione fallita!"
+msgstr "Eliminazione fallita!"
 
 msgid "Delete file"
-msgstr "Rimuovere file"
+msgstr "Elimina file"
 
 msgid "Delete job completed."
 msgstr "Eliminazione processo completata."
@@ -6266,22 +6416,28 @@ msgid "Delete job queued."
 msgstr "Eliminazione processo in coda."
 
 msgid "Delete log"
-msgstr "Elimina log"
+msgstr "Elimina registro"
 
 msgid "Delete only highlighted file"
-msgstr "Deseleziona solo il file evidenziato"
+msgstr "Elimina solo file evidenziati"
 
 msgid "Delete or Wipe the highlighted slot"
 msgstr "Elimina o cancella lo slot evidenziato"
 
 msgid "Delete play list entry"
-msgstr "Rimuovere voce dalla playlist"
+msgstr "Elimina voce dalla playlist"
 
 msgid "Delete saved play list"
-msgstr "Rimuovere la playlist salvata"
+msgstr "Elimina playlist salvata"
 
 msgid "Delete the character to the left of text cursor"
 msgstr "Elimina carattere a sinistra del cursore del testo"
+
+msgid "Delete the character to the left of the cursor"
+msgstr "Elimina carattere a sinistra del cursore"
+
+msgid "Delete the character under the cursor"
+msgstr "Elimina carattere sotto il cursore"
 
 msgid "Delete the character under the text cursor"
 msgstr "Elimina carattere sotto il cursore del testo"
@@ -6336,10 +6492,10 @@ msgid "Delivery system workaround"
 msgstr "Soluzione del sistema di consegna"
 
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Repubblica Democratica del Congo"
 
 msgid "Denmark"
-msgstr ""
+msgstr "Danimarca"
 
 msgid "Depth"
 msgstr "Profondità"
@@ -6367,7 +6523,7 @@ msgid "Deselected packages usually occur because those packaged are incompatible
 msgstr "I pacchetti deselezionati di solito si verificano perché quelli impacchettati non sono compatibili con i pacchetti esistenti. Anche se questo è per lo più innocuo, è possibile che il %s %s possa riscontrare problemi."
 
 msgid "Detail of GStreamer log"
-msgstr "Dettaglio del log di GStreamer"
+msgstr "Dettaglio del registro di GStreamer"
 
 msgid "Details"
 msgstr "Dettagli"
@@ -6392,7 +6548,7 @@ msgid "Device Information"
 msgstr "Informazioni dispositivo"
 
 msgid "Device Manager"
-msgstr "Gestore Dispositivi"
+msgstr "Gestore dispositivi"
 
 msgid "Device Manager - Fast Mounted Remove"
 msgstr "Gestione periferiche - Rimuovere rapidamente"
@@ -6416,7 +6572,7 @@ msgid "Device: "
 msgstr "Dispositivo: "
 
 msgid "Devices"
-msgstr "Dispositivo"
+msgstr "Dispositivi"
 
 msgid "Devices Manager"
 msgstr "Gestore dispositivi"
