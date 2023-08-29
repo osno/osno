@@ -15,7 +15,7 @@
 #include <lib/base/cfile.h>
 
 const char *OLED_PROC_1 = "/proc/stb/lcd/oled_brightness";
-const char *OLED_PROC_2 = "/proc/stb/fp/oled_brightness";R
+const char *OLED_PROC_2 = "/proc/stb/fp/oled_brightness";
 
 const char *VFD_scroll_delay_proc = "/proc/stb/lcd/scroll_delay";
 const char *VFD_initial_scroll_delay_proc = "/proc/stb/lcd/initial_scroll_delay";
