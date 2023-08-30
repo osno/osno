@@ -15230,19 +15230,19 @@ msgid "Remember service PIN"
 msgstr "Ricordare il PIN canale"
 
 msgid "Remote Control Button Settings"
-msgstr "Tipo Telecomando"
+msgstr "Impostazioni tasti del telecomando"
 
 msgid "Remote Control Code"
-msgstr "Tipo Telecomando"
+msgstr "Codice telecomando"
 
 msgid "Remote box"
 msgstr "Box remoto"
 
 msgid "Remote control type"
-msgstr "Tipo Telecomando"
+msgstr "Tipo di Telecomando"
 
 msgid "Remove"
-msgstr "Rimuovere"
+msgstr "Rimuovi"
 
 msgid "Remove Bookmark"
 msgstr "Rimuovi segnalibro"
