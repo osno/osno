@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 17:19+0200\n"
-"PO-Revision-Date: 2023-09-24 20:32+0200\n"
+"PO-Revision-Date: 2023-09-24 21:16+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -1015,6 +1015,42 @@ msgid "%d ms"
 msgstr "%d ms"
 
 #, python-format
+msgid "%d package found."
+msgid_plural "%d packages found."
+msgstr[0] "È stato trovato %d pacchetto."
+msgstr[1] "Sono stati trovati %d pacchetti."
+
+#, python-format
+msgid "%d package has an update"
+msgid_plural "%d packages have updates."
+msgstr[0] "C'è %d pacchetto con un aggiornamento."
+msgstr[1] "Ci sono %d pacchetti con aggiornamenti."
+
+#, python-format
+msgid "%d package installable."
+msgid_plural "%d packages installable."
+msgstr[0] "C'è %d pacchetto installabile."
+msgstr[1] "Ci sono %d pacchetti installabili."
+
+#, python-format
+msgid "%d package installed."
+msgid_plural "%d packages installed."
+msgstr[0] "È stato installato %d pacchetto."
+msgstr[1] "Sono stati installati %d pacchetti."
+
+#, python-format
+msgid "%d package marked for install."
+msgid_plural "%d packages marked for install."
+msgstr[0] "È stato contrassegnato %d pacchetto per l'installazione."
+msgstr[1] "Sono stati contrassegnati %d pacchetti per l'installazione."
+
+#, python-format
+msgid "%d package marked for remove."
+msgid_plural "%d packages marked for remove."
+msgstr[0] "È stato contrassegnato %d pacchetto per la rimozione."
+msgstr[1] "Sono stati contrassegnati %d pacchetti per la rimozione."
+
+#, python-format
 msgid "%d package upgraded."
 msgid_plural "%d packages upgraded."
 msgstr[0] "È stato aggiornato %d pacchetto."
@@ -1219,6 +1255,14 @@ msgid "%s GHz"
 msgstr "%s GHz"
 
 #, python-format
+msgid "%s Information"
+msgstr "%s informazioni"
+
+#, python-format
+msgid "%s Information Actions"
+msgstr "%s azioni d'informazione"
+
+#, python-format
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
 
@@ -1340,6 +1384,10 @@ msgstr "'necessario' è un argomento non valido per i posizionali"
 
 msgid "( All readers)"
 msgstr "(Tutti i reader)"
+
+#, python-format
+msgid "(Access to the '%s' commit log requires an Internet connection.)"
+msgstr "(L'accesso ai registri di commit %s richiede una connessione a Internet.)"
 
 #, python-format
 msgid "(Attention: There will be a restart after %d crashes.)"
@@ -8884,6 +8932,9 @@ msgstr "File o cartelle da escludere dal backup"
 msgid "Filesystem Check"
 msgstr "Verifica filesystem"
 
+msgid "Filesystem check your hard drive"
+msgstr "Controllo del file system del disco rigido"
+
 msgid "Film-Noir"
 msgstr ""
 
@@ -8905,8 +8956,21 @@ msgstr "Ritardo finale dello scorrimento"
 msgid "Finance"
 msgstr "Finanza"
 
+msgid "Find Currently Playing Service"
+msgstr "Trova servizio attualmente in riproduzione"
+
+#, python-format
+msgid "Find out more at %s"
+msgstr "Scopri di più su %s"
+
 msgid "Find similar events in the EPG"
 msgstr "Trova eventi simili nell'EPG"
+
+msgid "Find the service currently playing"
+msgstr "Trova servizio attualmente in riproduzione"
+
+msgid "Finding available log files, please wait..."
+msgstr "Ricerca dei file di registro disponibili, attendi..."
 
 msgid "Fine movement"
 msgstr "Movimento fine"
@@ -9394,14 +9458,23 @@ msgid "Getting plugin information. Please wait..."
 msgstr "Recupero informazioni sui plugin. Attendi..."
 
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 msgid "Gibraltar"
-msgstr "Ghana"
+msgstr "Gibilterra"
 
 #, python-format
 msgid "Glibc version:\t%s"
 msgstr "Glibc versione:\t%s"
+
+msgid "Given device id"
+msgstr "ID dispositivo fornito"
+
+msgid "Glibc version"
+msgstr "Versione Glibc"
+
+msgid "Go back to the previous step"
+msgstr "Torna al passaggio precedente"
 
 msgid "Go down the list"
 msgstr "Vai in basso all'elenco"
@@ -9487,6 +9560,9 @@ msgstr "Vai in standby"
 msgid "GotoX calibration"
 msgstr "Calibrazione GotoX"
 
+msgid "Grab"
+msgstr "Afferrare"
+
 msgid "Graphical EPG"
 msgstr "EPG grafico"
 
@@ -9566,10 +9642,10 @@ msgid "H: = Hourly / D: = Daily / W: = Weekly / M: = Monthly"
 msgstr "H: = Oraria / D: = Giornaliera / W: = Settimanale / M: = Mensile"
 
 msgid "H:mm"
-msgstr ""
+msgstr "O:min"
 
 msgid "H:mm:ss"
-msgstr ""
+msgstr "O:min:sec"
 
 msgid "HARD DISK: "
 msgstr "HARD DISK: "
@@ -10271,7 +10347,7 @@ msgid "Image created on: %s/%s-%s-%s-backup-%s_%s.zip"
 msgstr "Immagine creata su: %s/%s-%s-%s-backup-%s_%s.zip"
 
 msgid "Image creation failed - "
-msgstr "La creazione dell'immagine non è riuscita - "
+msgstr "Creazione immagine fallita - "
 
 msgid "Image will be booted on the next STB boot!"
 msgstr "L'immagine verrà avviata nel prossimo avvio del Ricevitore!"
@@ -11510,10 +11586,10 @@ msgid "Log results to harddisk"
 msgstr "Registra eventi sul disco rigido"
 
 msgid "Log-Manager"
-msgstr "Gestore-Log"
+msgstr "Gestore-registro"
 
 msgid "LogManager"
-msgstr "Gestore Log"
+msgstr "Gestore registro"
 
 msgid "Login"
 msgstr "Accesso"
@@ -11715,7 +11791,7 @@ msgid "Manage the highlighted plugin"
 msgstr "Gestisci plugin evidenziato"
 
 msgid "Manage your online update files"
-msgstr "Gestisci gli aggiornamenti online"
+msgstr "Gestisci file di aggiornamento in linea"
 
 msgid "Manual"
 msgstr "Manuale"
@@ -11965,7 +12041,7 @@ msgid "MiniDLNA"
 msgstr "MiniDLNA"
 
 msgid "MiniDLNA Log"
-msgstr "MiniDLNA Log"
+msgstr "Registro MiniDLNA"
 
 msgid "MiniDLNA Settings"
 msgstr "Impostazioni MiniDLNA"
@@ -12070,7 +12146,7 @@ msgid "Modulation modes"
 msgstr "Modalità di modulazione"
 
 msgid "Modulator"
-msgstr "Modulazione"
+msgstr "Modulatore"
 
 msgid "Module"
 msgstr "Modulo"
@@ -12184,7 +12260,7 @@ msgid "MountManager"
 msgstr "Gestore mount periferiche"
 
 msgid "Mountpoints"
-msgstr "Punti di mount"
+msgstr "Punti di montaggio"
 
 msgid "Mounts"
 msgstr "Montaggi"
@@ -12513,7 +12589,7 @@ msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr "Immagine multiboot creata in: %s/%s-%s-%s-backup-%s_usb.zip"
 
 msgid "Multiple service support"
-msgstr "Supporto canali multipli"
+msgstr "Supporto per più servizi"
 
 msgid "Multisat"
 msgstr "Multisat"
@@ -12743,6 +12819,13 @@ msgstr "Indirizzo di rete"
 msgid "Network configuration..."
 msgstr "Configurazione rete..."
 
+msgid "Network information"
+msgstr "Informazioni rete"
+
+#, python-format
+msgid "Network information for %s %s"
+msgstr "Informazioni rete per %s %s"
+
 msgid "Network menu"
 msgstr "Menu di rete"
 
@@ -12759,28 +12842,31 @@ msgid "Network peers"
 msgstr "Server di rete"
 
 msgid "Network scan"
-msgstr "Ricerca rete"
+msgstr "Scansione rete"
 
 msgid "Network setup"
 msgstr "Test della rete"
 
 msgid "Network test"
-msgstr "Test della rete"
+msgstr "Test di rete"
 
 msgid "Network test..."
-msgstr "Test della rete..."
+msgstr "Test di rete..."
 
 msgid ""
 "Network wizard completed.\n"
 "\n"
 "Press OK to continue."
-msgstr "Premere OK per proseguire."
+msgstr ""
+"Procedura guidata di rete completata.\n"
+"\n"
+"Premi OK per continuare."
 
 msgid "Network:"
-msgstr "Reti:"
+msgstr "Rete:"
 
 msgid "NetworkWizard"
-msgstr "Configurazione guidata della rete"
+msgstr "Procedura guidata rete"
 
 msgid "Neutrino  (keymap.ntr)"
 msgstr "Neutrino  (keymap.ntr)"
@@ -12801,19 +12887,28 @@ msgid "New"
 msgstr "Nuovo"
 
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nuova Caledonia"
 
 msgid "New PIN"
 msgstr "Nuovo PIN"
 
 msgid "New Zealand"
-msgstr ""
+msgstr "Nuova Zelanda"
+
+msgid "New customer"
+msgstr "Nuovo cliente"
+
+msgid "New event info"
+msgstr "Nuove informazioni sull'evento"
 
 msgid "New password"
 msgstr "Nuova password"
 
 msgid "New profile: "
 msgstr "Nuovo profilo: "
+
+msgid "New program info"
+msgstr "Nuove informazioni sul programma"
 
 msgid "New version:"
 msgstr "Nuova versione:"
@@ -12825,13 +12920,13 @@ msgid "NewCamd DES Key"
 msgstr "Chiave DES NewCamd"
 
 msgid "NewDirectory"
-msgstr "Cartella"
+msgstr "Nuova cartella"
 
 msgid "News"
-msgstr ""
+msgstr "Notizie"
 
 msgid "News/Current Affairs"
-msgstr "Notizie Affari"
+msgstr "Notizie/Affari attuali"
 
 msgid "Next"
 msgstr "Il prossimo"
@@ -12840,8 +12935,17 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Prossimo"
 
+msgid "Next Log"
+msgstr "Registro successivo"
+
+msgid "Next Picture"
+msgstr "Immagine successiva"
+
 msgid "Next bouquet"
 msgstr "Bouquet successivo"
+
+msgid "Next higher resolution"
+msgstr "successiva risoluzione più alta"
 
 msgid "Next page"
 msgstr "Pagina successiva"
@@ -12853,16 +12957,16 @@ msgid "Nextsong"
 msgstr "Brano successivo"
 
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicaragua"
 
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigeria"
 
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 msgid "Nne"
 msgstr "Nessuno"
@@ -12882,6 +12986,9 @@ msgstr "No - semplice"
 msgid "No Connection"
 msgstr "Nessuna connessione"
 
+msgid "No Devices Found !!"
+msgstr "Nessun dispositivo trovato!"
+
 msgid "No Cover"
 msgstr ""
 
@@ -12890,6 +12997,21 @@ msgstr "Nessun ECMPids disponibile"
 
 msgid "No HDD found or HDD not initialized!"
 msgstr "HDD non trovato o non formattato!"
+
+msgid "No Internet connection"
+msgstr "Nessuna connessione Internet"
+
+msgid ""
+"No Settings loaded !!\n"
+"\n"
+"Please install first a settinglist"
+msgstr ""
+"Nessun elenco programmi caricato!\n"
+"\n"
+"Installa prima un elenco programmi"
+
+msgid "No TS recorder available"
+msgstr "Nessun registratore TS disponibile"
 
 msgid "No active channel found."
 msgstr "Nessun Canale attivo trovato."
@@ -12904,7 +13026,7 @@ msgid "No cable tuner found!"
 msgstr "Nessun sintonizzatore via cavo trovato!"
 
 msgid "No card inserted!"
-msgstr "Card non inserita!"
+msgstr "Nessuna scheda inserita!"
 
 msgid "No channel"
 msgstr "Nessun canale"
@@ -12922,14 +13044,20 @@ msgstr ""
 msgid "No delay"
 msgstr "Nessun ritardo"
 
+msgid "No demux available"
+msgstr "Nessun demux disponibile"
+
 msgid "No displayable files on this medium found!"
 msgstr "Nessun file riproducibile trovato sul supporto!"
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr "Nessuna voce nel database LCN. Effettua una scansione canali."
+msgstr "Nessuna voce nel database LCN. Effettua una scansione dei servizi."
+
+msgid "No error"
+msgstr "Nessun errore"
 
 msgid "No event info found, recording indefinitely."
-msgstr "Informazioni evento non disponibili, registrazione illimitata."
+msgstr "Nessuna informazione sull'evento trovata, registrazione a tempo indeterminato."
 
 msgid "No fast winding possible yet.. but you can use the number buttons to skip forward/backward!"
 msgstr "Non è ancora possibile la navigazione veloce, ma puoi usare i tasti numerici per saltare avanti/indietro!"
@@ -12940,8 +13068,20 @@ msgstr "Nessun indice libero disponibile"
 msgid "No free tuner!"
 msgstr "Nessun tuner disponibile!"
 
+msgid "No hard disks detected."
+msgstr "Nessun disco rigido rilevato."
+
+msgid "No log files found so debug logs are unavailable!"
+msgstr "Nessun file di registro trovato, quindi i registri di debug non sono disponibili!"
+
 msgid "No matching place names found"
 msgstr "Non è stato trovato nessun nome di luogo"
+
+msgid "No network adapters enabled/available!"
+msgstr "Nessun adattatore di rete abilitato/disponibile!"
+
+msgid "No network storage detected."
+msgstr "Nessuna memoria di rete rilevata."
 
 msgid "No networks found"
 msgstr "Nessuna rete rilevata"
@@ -12951,6 +13091,9 @@ msgstr "Nessun nuovo plugin trovato"
 
 msgid "No of items switch (increase or reduced)"
 msgstr "Nessun elemento da cambiare (aumentare o ridurre)"
+
+msgid "No pictures available"
+msgstr "Nessuna immagine disponibile"
 
 msgid "No packages found."
 msgstr "Nessun pacchetto trovato."
@@ -12968,13 +13111,16 @@ msgid "No service"
 msgstr "Nessun servizio"
 
 msgid "No services/providers selected"
-msgstr "Nessun canale/provider selezionato"
+msgstr "Nessun servizio/fornitore selezionato"
 
 msgid "No slot images found"
 msgstr "Nessuna immagine di slot trovata"
 
 msgid "No standby"
 msgstr "Sempre attivo"
+
+msgid "No storage or hard disks detected."
+msgstr "Nessuna memoria o disco rigido rilevato."
 
 msgid "No suitable backup locations found!"
 msgstr "Nessuna posizione trovata adatta al backup!"
@@ -13019,7 +13165,10 @@ msgid ""
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
 "Nessun tuner è abilitato!\n"
-"Si prega di configurare le impostazioni del tuner prima di avviare una scansione dei canali."
+"Configura le impostazioni del tuner prima di avviare una scansione dei servizi."
+
+msgid "No tuners are currently streaming."
+msgstr "Nessun tuner è attualmente in streaming."
 
 msgid "No update required!"
 msgstr "Nessun aggiornamento richiesto!"
@@ -13030,6 +13179,16 @@ msgstr "Nessun aggiornamento disponibile."
 msgid "No updates were available.  Please try again later."
 msgstr "Nessun aggiornamento disponibile.  Per favore riprova più tardi."
 
+msgid "No valid device detected - Press OK"
+msgstr "Nessun dispositivo valido rilevato - Premi OK"
+
+#, python-format
+msgid "No valid mount for '%s' found!"
+msgstr "Nessun montaggio valido trovato per '%s'!"
+
+msgid "No valid region details were found"
+msgstr "Nessun valido dettaglio sulla regione trovato"
+
 msgid "No wireless networks found! Searching..."
 msgstr "Nessuna rete wireless trovata! Ricerca in corso..."
 
@@ -13038,7 +13197,7 @@ msgid ""
 "Please verify that you have attached a network cable and your network is configured correctly."
 msgstr ""
 "Nessuna scheda di rete locate trovata!\n"
-"Verificare che il cavo sia collegato e che la rete sia configurata correttamente."
+"Verifica di aver collegato il cavo di rete che la rete sia configurata correttamente."
 
 msgid ""
 "No working wireless network adapter found.\n"
@@ -13076,16 +13235,16 @@ msgid "No, scan later manually"
 msgstr "No, scansiona più tardi manualmente"
 
 msgid "No, show always the plugin browser"
-msgstr "No, mostra sempre la lista dei plugin"
+msgstr "No, mostra sempre l'elenco plugin"
 
 msgid "No, show always the timer list"
-msgstr "No, mostra sempre la lista dei timer"
+msgstr "No, mostra sempre l'elenco dei timer"
 
 msgid "NodeID"
-msgstr "NodeID"
+msgstr "ID nodo"
 
 msgid "NodeID: "
-msgstr "ID nodo: "
+msgstr "ID nodo:"
 
 msgid "Nominate how many IP Addresses are to be checked for active connections."
 msgstr "Indica quanti indirizzi IP devono essere controllati per le connessioni attive."
