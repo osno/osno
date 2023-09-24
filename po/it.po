@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 17:19+0200\n"
-"PO-Revision-Date: 2023-09-20 12:59+0200\n"
+"PO-Revision-Date: 2023-09-24 20:32+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-SourceCharset: ISO-8859-1\n"
 
 msgid ""
@@ -12691,9 +12691,9 @@ msgstr "Azioni di impostazione della scheda di rete"
 
 msgid "Network Adapter Text Actions"
 msgstr "Azioni di testo della scheda di rete"
+
 msgid "Network Browser"
 msgstr "Risorse di rete"
-
 
 msgid "Network ID"
 msgstr "ID di rete"
