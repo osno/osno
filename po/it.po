@@ -10409,7 +10409,7 @@ msgid "InfoBar fade-out speed"
 msgstr "Velocità dissolvenza barra informazioni"
 
 msgid "InfoBar front end data source"
-msgstr "Seleziona origine dati Infobar"
+msgstr "Seleziona origine dati barra informazioni"
 
 msgid "Infobar Setup"
 msgstr "Setup Infobar"
@@ -10874,6 +10874,9 @@ msgstr "Kashmiri"
 msgid "Kazakh"
 msgstr "Kazaco"
 
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
+
 msgid "Keep EPG history (in minutes)"
 msgstr "Mantieni cronologia EPG (in minuti)"
 
@@ -10928,7 +10931,10 @@ msgstr ""
 "Questo può richiedere da 1 -> 5 minuti per slot."
 
 msgid "Kexec MultiBoot Manager"
-msgstr "Gestore multiboot Kexec"
+msgstr "Gestore MultiBoot Kexec"
+
+msgid "Kexec MultiBoot files are missing."
+msgstr "Mancano i file Kexec MultiBoot."
 
 msgid "Key"
 msgstr "Chiave"
@@ -10952,16 +10958,16 @@ msgid "Keymap changed, you need to restart the GUI"
 msgstr "Keymap cambiato, è necessario riavviare la GUI"
 
 msgid "Kikuyu / Gikuyu"
-msgstr ""
+msgstr "Kikuyu / Gikuyu"
 
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 msgid "Kirghiz / Kyrgyz"
-msgstr ""
+msgstr "Kirghizistan / Kyrghyzistan"
 
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 msgid "Kodi"
 msgstr "Kodi"
@@ -10970,31 +10976,31 @@ msgid "Kodi MediaCenter"
 msgstr "Media Center Kodi"
 
 msgid "Komi"
-msgstr ""
+msgstr "Komi"
 
 msgid "Kongo"
-msgstr ""
+msgstr "Kongo"
 
 msgid "Korea, Democratic People's Republic of"
-msgstr ""
+msgstr "Corea, Repubblica Popolare Democratica di"
 
 msgid "Korea, Republic of"
-msgstr ""
+msgstr "Corea, Repubblica di"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coreano"
 
 msgid "Kuanyama / Kwanyama"
-msgstr ""
+msgstr "Kuanyama / Kwanyama"
 
 msgid "Kurdish"
-msgstr ""
+msgstr "Curdo"
 
 msgid "Kuwait"
 msgstr "Kuwait"
 
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kyrgyzstan"
 
 msgid "LAN"
 msgstr "LAN"
@@ -11056,6 +11062,9 @@ msgstr "Luminosità LED durante le normali operazioni."
 msgid "LED brightness during standby."
 msgstr "Luminosità LED in standby."
 
+msgid "LIRC remote"
+msgstr "Telecomando LIRC"
+
 msgid "LNB"
 msgstr "LNB"
 
@@ -11095,7 +11104,7 @@ msgid "Languages"
 msgstr "Lingue"
 
 msgid "Lao"
-msgstr ""
+msgstr "Laotiano"
 
 msgid "Lao People's Democratic Republic"
 msgstr "Laos (Repubblica Democratica Popolare del)"
@@ -11111,6 +11120,9 @@ msgstr "Traduzione"
 
 msgid "Last config"
 msgstr "Ultima configurazione"
+
+msgid "Last flash"
+msgstr "Ultimo flash"
 
 msgid "Last speed"
 msgstr "Ultima velocità"
@@ -11146,10 +11158,10 @@ msgid "Latitude"
 msgstr "Latitudine"
 
 msgid "Latvia"
-msgstr "Lettone"
+msgstr "Lettonia"
 
 msgid "Latvian"
-msgstr "Lettone"
+msgstr "Lituano"
 
 msgid "Leave DVD player?"
 msgstr "Uscire dal Player DVD?"
@@ -11158,7 +11170,7 @@ msgid "Leave this set to 'yes' unless you fully understand why you are adjusting
 msgstr "Lascia questa impostazione su 'sì' a meno che tu non comprenda appieno il motivo per cui la stai regolando."
 
 msgid "Lebanon"
-msgstr ""
+msgstr "Libano"
 
 msgid "Left"
 msgstr "Sinistra"
@@ -11182,7 +11194,7 @@ msgid "Leisure hobbies"
 msgstr "Interessi per il tempo libero"
 
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #. TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
 msgid "Letterbox"
@@ -11192,16 +11204,19 @@ msgid "Letterbox zoom"
 msgstr "Letterbox zoom"
 
 msgid "Liberia"
-msgstr ""
+msgstr "Liberia"
+
+msgid "Libs"
+msgstr "Librerie"
 
 msgid "Libya"
-msgstr ""
+msgstr "Libia"
 
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
 msgid "Lifestyle"
-msgstr "Stile dell'oratorio"
+msgstr "Stile di vita"
 
 msgid "Light Grey"
 msgstr "Grigio Chiaro"
@@ -11210,7 +11225,7 @@ msgid "Light source"
 msgstr "Fonte di luce"
 
 msgid "Limburgan / Limburger / Limburgish"
-msgstr ""
+msgstr "Limburgo / Limburger / Limburghese"
 
 msgid "Limit character set for recording filenames"
 msgstr "Limita set di caratteri per i nomi dei file di registrazione"
@@ -11226,6 +11241,9 @@ msgstr "Limita i caratteri che possono essere utilizzati nella registrazione dei
 
 msgid "Limit west"
 msgstr "Limite ovest"
+
+msgid "Limited memory size, swap file required"
+msgstr "Dimensioni di memoria limitate, è richiesto un file di swap"
 
 msgid "Limits cancelled"
 msgstr "Limiti rimossi"
@@ -11244,7 +11262,7 @@ msgid "Line %d / %d"
 msgstr "Linea %d / %d"
 
 msgid "Lingala"
-msgstr ""
+msgstr "Lingala"
 
 msgid "Link Quality:"
 msgstr "Qualità del link:"
@@ -11328,10 +11346,13 @@ msgid "Loading slot information, please wait..."
 msgstr "Caricamento informazioni slot, attendere..."
 
 msgid "Local box"
-msgstr "Box locale"
+msgstr "Ricevitore locale"
 
 msgid "Local date/time"
 msgstr "Data/ora locale"
+
+msgid "Local information"
+msgstr "Informazioni locali"
 
 msgid "Local network"
 msgstr "Rete locale"
@@ -11356,6 +11377,9 @@ msgstr "Localizzazione (crescente)"
 msgid "Locale (Descending)"
 msgstr "Localizzazione (decrescente)"
 
+msgid "Locale / Language Settings"
+msgstr "Impostazioni localizzazione /lingua"
+
 msgid "Locale Selection Settings"
 msgstr "Impostazioni di selezione localizzazione"
 
@@ -11378,7 +11402,7 @@ msgid "Locales to be displayed"
 msgstr "Localizzazioni da visualizzare"
 
 msgid "Location"
-msgstr "Percorso"
+msgstr "Posizione"
 
 msgid "Location Selection Actions"
 msgstr "Azioni di selezione della posizione"
@@ -11386,24 +11410,39 @@ msgstr "Azioni di selezione della posizione"
 msgid "Location of where image backup should be saved."
 msgstr "Posizione in cui deve essere salvato il backup dell'immagine."
 
+msgid "Location list"
+msgstr "Elenco posizioni"
+
 #, python-format
 msgid "Location: %s"
 msgstr "Posizione: %s"
 
 msgid "Lock:"
-msgstr ""
+msgstr "Blocco:"
 
 msgid "Log"
-msgstr "Log"
+msgstr "Registro"
+
+#, python-format
+msgid "Log %d/%d"
+msgstr "Registro %d/%d"
 
 msgid "Log Manager"
-msgstr "Gestore Log"
+msgstr "Gestore registro"
+
+#, python-format
+msgid "Log file '%s' deleted."
+msgstr "File di registro '%s' eliminato."
+
+#, python-format
+msgid "Log file: '%s'  (%s)"
+msgstr "File di registro: '%s' (%s)"
 
 msgid "Log python stack trace on spinner"
-msgstr "Log eventi stack trace di python su spinner"
+msgstr "Registra eventi stack trace di python su spinner"
 
 msgid "Log results to harddisk"
-msgstr "Salvare log su harddisk"
+msgstr "Registra eventi sul disco rigido"
 
 msgid "Log-Manager"
 msgstr "Gestore-Log"
@@ -11411,11 +11450,20 @@ msgstr "Gestore-Log"
 msgid "LogManager"
 msgstr "Gestore Log"
 
+msgid "Login"
+msgstr "Accesso"
+
+msgid "Login failure"
+msgstr "Accesso fallito"
+
+msgid "Login to IceTV server"
+msgstr "Accedi al server IceTV"
+
 msgid "Logs Settings"
-msgstr "Impostazioni Log"
+msgstr "Impostazioni registri"
 
 msgid "Logs location"
-msgstr "Percorso Log"
+msgstr "Posizione registri"
 
 msgid "Logs older then the set no of days will be deleted."
 msgstr "I registri più vecchi del numero di giorni impostato verranno eliminati."
@@ -11464,16 +11512,16 @@ msgid "Lowest Video output mode"
 msgstr "Modalità di uscita video più bassa"
 
 msgid "Luba-Katanga"
-msgstr ""
+msgstr "Luba-Katanga"
 
 msgid "Luxembourg"
-msgstr "Lussemburghese"
+msgstr "Lussemburgo"
 
 msgid "Luxembourgish"
 msgstr "Lussemburghese"
 
 msgid "Luxembourgish / Letzeburgesch"
-msgstr "Lussemburghese"
+msgstr "Lussemburghese / Letzburghese"
 
 msgid "M2k"
 msgstr ""
@@ -11483,6 +11531,9 @@ msgstr "Impostazioni MAC-address"
 
 msgid "MAC Address Settings"
 msgstr "Impostazioni indirizzo MAC"
+
+msgid "MAC address"
+msgstr "Indirizzo MAC"
 
 msgid "MAC-address"
 msgstr "Indirizzo MAC"
@@ -11494,31 +11545,43 @@ msgid "MB"
 msgstr "MB"
 
 msgid "MENU"
-msgstr ""
+msgstr "MENU"
 
 msgid "MIME Version"
 msgstr "Versione-immagine"
 
 msgid "MMA"
-msgstr ""
+msgstr "MMA"
 
 msgid "MORE"
-msgstr ""
+msgstr "DI PIÙ"
 
 msgid "MOUSE"
-msgstr ""
+msgstr "MOUSE"
+
+msgid "MTD boot"
+msgstr "Avvio MTD"
+
+msgid "MTD kernel"
+msgstr "Kernel MTD"
+
+msgid "MTD root"
+msgstr "Radice MTD"
+
+msgid "MTU"
+msgstr "MTU"
 
 msgid "Macao"
-msgstr ""
+msgstr "Macao"
 
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedone"
 
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagascar"
 
 msgid "Magic"
-msgstr ""
+msgstr "Magia"
 
 msgid "Main Menu"
 msgstr "Menù principale"
@@ -11527,7 +11590,7 @@ msgid "Main menu"
 msgstr "Menù principale"
 
 msgid "Maintain your multi boot device."
-msgstr "Mantieni dispositivo multiboot."
+msgstr "Mantieni dispositivo MultiBoot."
 
 msgid "Make"
 msgstr "Contrassegna"
@@ -11542,31 +11605,31 @@ msgid "Make this mark just a mark"
 msgstr "Contrassegna solamente"
 
 msgid "Malagasy"
-msgstr ""
+msgstr "Malgascio"
 
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 msgid "Malay"
-msgstr ""
+msgstr "Malese"
 
 msgid "Malayalam"
-msgstr ""
+msgstr "Malayalam"
 
 msgid "Malaysia"
-msgstr ""
+msgstr "Malesia"
 
 msgid "Maldives"
-msgstr ""
+msgstr "Maldive"
 
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 msgid "Maltese"
-msgstr ""
+msgstr "Maltese"
 
 msgid "Manage Locale/Language Selection settings"
 msgstr "Gestisci impostazioni di selezione localizzazione/lingua"
@@ -11574,8 +11637,17 @@ msgstr "Gestisci impostazioni di selezione localizzazione/lingua"
 msgid "Manage Plugins"
 msgstr "Gestisci plugin"
 
+msgid "Manage Plugins. This will remove/install Plugins on your box"
+msgstr "Gestisci plugin: installa e rimuove i plugin dal ricevitore"
+
 msgid "Manage and explore directories and files."
 msgstr "Gestisci ed esplora cartelle e file."
+
+msgid "Manage network mounts"
+msgstr "Gestisci montaggi di rete"
+
+msgid "Manage the highlighted plugin"
+msgstr "Gestisci plugin evidenziato"
 
 msgid "Manage your online update files"
 msgstr "Gestisci gli aggiornamenti online"
@@ -11584,7 +11656,10 @@ msgid "Manual"
 msgstr "Manuale"
 
 msgid "Manual Scan"
-msgstr "Ricerca manuale"
+msgstr "Scansione manuale"
+
+msgid "Manual Service Searching"
+msgstr "Ricerca manuale dei servizi"
 
 msgid "Manual configuration"
 msgstr "Configurazione manuale"
@@ -11596,16 +11671,16 @@ msgid "Manual transponder"
 msgstr "Transponder manuale"
 
 msgid "Manufacturer"
-msgstr "Costruttore"
+msgstr "Produttore"
 
 msgid "Manx"
-msgstr ""
+msgstr "Mannese"
 
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 msgid "Marathi"
-msgstr ""
+msgstr "Marathi"
 
 msgid "Margin after recording"
 msgstr "Margine dopo la registrazione (minuti)"
@@ -11620,10 +11695,10 @@ msgid "Margin before zap"
 msgstr "Margine prima dello zap"
 
 msgid "Mark service as dedicated 3D service"
-msgstr ""
+msgstr "Contrassegna come servizio 3D dedicato"
 
 msgid "Mark/Portal/Playlist"
-msgstr "Marchio / Portale/ Elenco di riproduzione"
+msgstr "Contrassegno/Portal/Elenco di riproduzione"
 
 msgid "Marker Actions"
 msgstr "Azioni marcatore"
@@ -11632,28 +11707,31 @@ msgid "Marshall Islands"
 msgstr "Isole Marshall"
 
 msgid "Marshallese"
-msgstr ""
+msgstr "Marshallese"
 
 msgid "Martinique"
-msgstr ""
+msgstr "Martinica"
 
 msgid "Mature Adult Audience 15+"
-msgstr ""
+msgstr "Pubblico adulto 15+"
 
 msgid "Mature Audience 15+"
-msgstr ""
+msgstr "Pubblico maturo 15+"
 
 msgid "Mauritania"
-msgstr "Lituano"
+msgstr "Mauritania"
 
 msgid "Mauritius"
 msgstr "Mauritius"
 
+msgid "Max channels"
+msgstr "Numero massimo di canali"
+
 msgid "Max memory positions"
-msgstr "Max Posizioni in memoria"
+msgstr "Posizioni di memoria massime"
 
 msgid "Max. bitrate: "
-msgstr "Bitrate Max: "
+msgstr "Bitrate massimo: "
 
 msgid "Maxdown +"
 msgstr "Maxdown +"
@@ -11699,7 +11777,7 @@ msgid "Media playback Remaining/Elapsed as"
 msgstr "Riproduzione Rimanente/Trascorso come"
 
 msgid "Media scanner"
-msgstr "Scanner multimediale"
+msgstr "Scansione multimediale"
 
 msgid "Media service"
 msgstr "Servizio multimediale"
@@ -11710,11 +11788,14 @@ msgstr "MediaInfo"
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
+msgid "MediaStream"
+msgstr "MediaStream"
+
 msgid "Medical"
 msgstr "Medico"
 
 msgid "Medium is not a writeable DVD!"
-msgstr "Il supporto ottico non è un DVD masterizzabile!"
+msgstr "Il supporto non è un DVD scrivibile!"
 
 msgid "Medium is not empty!"
 msgstr "Il supporto ottico non è vuoto!"
@@ -11735,10 +11816,13 @@ msgid "Memory Info"
 msgstr "Informazioni sulla memoria"
 
 msgid "Memory Information"
-msgstr "Informazioni Memoria"
+msgstr "Informazioni memoria"
+
+msgid "Memory Information Actions"
+msgstr "Azioni di informazioni memoria"
 
 msgid "Memory index"
-msgstr "Indice Memoria"
+msgstr "Indice memoria"
 
 msgid "Memory:"
 msgstr "Memoria:"
@@ -11762,7 +11846,7 @@ msgid "Menu config"
 msgstr "Configurazione menu"
 
 msgid "Menu entry sort order"
-msgstr "Ordinamento voci di menu"
+msgstr "Ordinamento voci dei menu"
 
 msgid "Menu entry style"
 msgstr "Stile voce di menu"
@@ -11771,10 +11855,10 @@ msgid "Menu style"
 msgstr "Stile menu"
 
 msgid "Merging time shift files"
-msgstr "Unire file Timeshift"
+msgstr "Unione di file timeshift"
 
 msgid "Merlin EPG Center"
-msgstr ""
+msgstr "Centro EPG Merlin"
 
 msgid "Message"
 msgstr "Messaggio"
@@ -11792,16 +11876,16 @@ msgid "Metering mode"
 msgstr "Modalità misurazione"
 
 msgid "Mexico"
-msgstr ""
+msgstr "Messico"
 
 msgid "Micronesia, Federated States of"
-msgstr ""
+msgstr "Micronesia, Stati Federali di"
 
 msgid "Middle"
-msgstr ""
+msgstr "Medio"
 
 msgid "Middle - Lite image"
-msgstr "Elimina immagine"
+msgstr "Medio - Immagine leggera"
 
 msgid "Mini DLNA Actions"
 msgstr "Azioni Mini DLNA"
@@ -11811,6 +11895,9 @@ msgstr "Azioni impostazione Mini DLNA"
 
 msgid "Mini Series"
 msgstr "Miniserie"
+
+msgid "MiniDLNA"
+msgstr "MiniDLNA"
 
 msgid "MiniDLNA Log"
 msgstr "MiniDLNA Log"
@@ -11852,6 +11939,9 @@ msgstr "Mipsel"
 msgid "Miscellaneous"
 msgstr "Varie"
 
+msgid "Misconfiguration in channel allocation"
+msgstr "Configurazione errata nell'allocazione del canale"
+
 #, python-format
 msgid ""
 "Misconfigured unicable connection from tuner %s to tuner %s!\n"
@@ -11862,6 +11952,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Mancante "
+
+msgid "Mobile connection"
+msgstr "Connessione mobile"
 
 msgid "Mode"
 msgstr "Modalità"
@@ -11908,6 +12001,9 @@ msgstr "Modificato"
 msgid "Modulation"
 msgstr "Modulazione"
 
+msgid "Modulation modes"
+msgstr "Modalità di modulazione"
+
 msgid "Modulator"
 msgstr "Modulazione"
 
@@ -11915,7 +12011,7 @@ msgid "Module"
 msgstr "Modulo"
 
 msgid "Moldova, Republic of"
-msgstr ""
+msgstr "Moldavia, Repubblica di"
 
 msgid "Mon"
 msgstr "Lun"
@@ -11924,49 +12020,49 @@ msgid "Mon-Fri"
 msgstr "Lun-Ven"
 
 msgid "Monaco"
-msgstr ""
+msgstr "Monaco"
 
 msgid "Monday"
 msgstr "Lunedì"
 
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolia"
 
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolo"
 
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 msgid "Monthly"
 msgstr "Mensilmente"
 
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 msgid "Morocco"
-msgstr ""
+msgstr "Marocco"
 
 msgid "Mosquito noise reduction"
 msgstr "Riduzione sfarfallio"
 
 msgid "Motor Sport"
-msgstr "Motor sport"
+msgstr "Sport motoristici"
 
 msgid "Motor command retries"
-msgstr "Ordine di ordine per le voci di menu"
+msgstr "Tentativi di comando al motore"
 
 msgid "Motor running timeout"
-msgstr "Timeout di funzionamento del motore"
+msgstr "Timeout spostamento motore"
 
 msgid "Mount"
-msgstr "Mount"
+msgstr "Monta"
 
 msgid "Mount Actions"
-msgstr "Rimontare"
+msgstr "Azioni montaggio"
 
 msgid "Mount Manager"
-msgstr "Mount Manager"
+msgstr "Gestore montaggio"
 
 msgid "Mount Settings"
 msgstr "Impostazioni montaggio"
@@ -12008,7 +12104,7 @@ msgid "Mount as main hdd"
 msgstr "Montare come hdd principale"
 
 msgid "Mount failed"
-msgstr "Mount fallito"
+msgstr "Montaggio non riuscito"
 
 msgid "Mount on custom path"
 msgstr "Monta su percorso personalizzato"
@@ -12026,7 +12122,10 @@ msgid "Mountpoints"
 msgstr "Punti di mount"
 
 msgid "Mounts"
-msgstr "Monta"
+msgstr "Montaggi"
+
+msgid "Mounts Devices"
+msgstr "Dispositivi di montaggio"
 
 msgid "Mounts Settings"
 msgstr "Impostazioni montaggio"
@@ -12036,6 +12135,9 @@ msgstr "Sposta"
 
 msgid "Move Left/Right"
 msgstr "Sposta a sinistra/destra"
+
+msgid "Move Mode"
+msgstr "Modalità sposta"
 
 msgid "Move Mode Off"
 msgstr "Modalità sposta off"
@@ -12179,11 +12281,35 @@ msgstr "Sposta all'ultima riga/schermata"
 msgid "Move to last line / screen in the panel"
 msgstr "Sposta all'ultima riga/schermata nel pannello"
 
+msgid "Move to the first item on the current line"
+msgstr "Sposta al primo elemento della riga attuale"
+
+msgid "Move to the first item on the first screen"
+msgstr "Sposta al primo elemento della prima schermata"
+
 msgid "Move to the first line / screen"
 msgstr "Sposta alla prima riga/schermata"
 
+msgid "Move to the last item on the current line"
+msgstr "Sposta all'ultimo elemento della riga attuale"
+
+msgid "Move to the last item on the last screen"
+msgstr "Sposta all'ultimo elemento dell'ultima schermata"
+
 msgid "Move to the last line / screen"
 msgstr "Sposta all'ultima riga/schermata"
+
+msgid "Move to the next category in the list"
+msgstr "Sposta alla categoria successiva nell'elenco"
+
+msgid "Move to the next item in the list"
+msgstr "Sposta all'elemento successivo nell'elenco"
+
+msgid "Move to the previous category in the list"
+msgstr "Sposta alla categoria precedente nell'elenco"
+
+msgid "Move to the previous item in list"
+msgstr "Sposta all'elemento precedente nell'elenco"
 
 msgid "Move up a line"
 msgstr "Sposta su una riga"
@@ -12290,17 +12416,32 @@ msgstr "Mtd"
 msgid "Multi EPG"
 msgstr "EPG multiplo"
 
+msgid "MultiBoot"
+msgstr "Multiboot"
+
+msgid "MultiBoot Information"
+msgstr "Informazioni MultiBoot"
+
 msgid "MultiBoot Manager"
-msgstr "Gestore immagini multiboot"
+msgstr "Gestore MultiBoot"
 
 msgid "MultiBoot Manager Actions"
-msgstr "Selettore immagini multiboot"
+msgstr "Azioni gestore MultiBoot"
+
+msgid "MultiBoot boot mode"
+msgstr "Modalità di avvio di MultiBoot"
+
+msgid "MultiBoot startup file"
+msgstr "File di avvio di MultiBoot"
 
 msgid "MultiEPG Settings"
 msgstr "Configurazione EPG multiplo"
 
 msgid "MultiQuickButton"
 msgstr "MultiQuickButton"
+
+msgid "MultiTranscoding"
+msgstr "Transcodifica multipla"
 
 #, python-format
 msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
@@ -12351,6 +12492,9 @@ msgstr "N/A"
 msgid "NEXT"
 msgstr "PROSSIMO"
 
+msgid "NFS"
+msgstr "NFS"
+
 msgid "NFS Actions"
 msgstr "Azioni NFS"
 
@@ -12359,6 +12503,9 @@ msgstr "Impostazioni NFS"
 
 msgid "NIM & Type"
 msgstr "NIM e tipo"
+
+msgid "NOTE"
+msgstr "NOTA"
 
 #, python-format
 msgid "NOTE: The directory/file '%s' exists and will be overwritten!"
@@ -12384,10 +12531,10 @@ msgid "Name"
 msgstr "Nome"
 
 msgid "Name ascending"
-msgstr "Namespace"
+msgstr "Nome ascendente"
 
 msgid "Name descending"
-msgstr ""
+msgstr "Nome discendente"
 
 #, python-format
 msgid "Name server %d"
@@ -12412,25 +12559,25 @@ msgid "Namespace & Orbital pos."
 msgstr "Nome e posizione orbitale."
 
 msgid "Namibia"
-msgstr ""
+msgstr "Namibia"
 
 msgid "Native"
-msgstr "Relativo"
+msgstr "Nativo"
 
 msgid "Native name (Ascdending)"
-msgstr ""
+msgstr "Nome nativo (crescente)"
 
 msgid "Native name (Descending)"
-msgstr ""
+msgstr "Nome nativo (decrescente)"
 
 msgid "Nature"
-msgstr "NaturA"
+msgstr "Natura"
 
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 msgid "Navajo / Navaho"
-msgstr ""
+msgstr "Navajo / Navaho"
 
 msgid "Navigate to the selected directory"
 msgstr "Passa alla cartella selezionata"
@@ -12442,40 +12589,46 @@ msgid "NcamInfo"
 msgstr "NcamInfo"
 
 msgid "Ndonga"
-msgstr ""
+msgstr "Ndonga"
 
 msgid "Ne"
 msgstr "Nuovo"
 
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 msgid "Nepali"
-msgstr ""
+msgstr "Nepalese"
 
 msgid "Netball"
 msgstr "Netball"
 
 msgid "Netherlands"
-msgstr ""
+msgstr "Paesi Bassi"
 
 msgid "Netmask"
-msgstr "Netmask"
+msgstr "Maschera di rete"
 
 msgid "Netmask:"
-msgstr "Netmask:"
+msgstr "Maschera di rete"
 
 msgid "Network"
 msgstr "Rete"
 
 msgid "Network Adapter Actions"
-msgstr "Scheda di rete"
+msgstr "Azioni della scheda di rete"
+
+msgid "Network Adapter Selection"
+msgstr "Selezione scheda di rete"
 
 msgid "Network Adapter Setting Actions"
-msgstr "Scheda di rete"
+msgstr "Azioni di impostazione della scheda di rete"
 
 msgid "Network Adapter Text Actions"
-msgstr "Scheda di rete"
+msgstr "Azioni di testo della scheda di rete"
+msgid "Network Browser"
+msgstr "Risorse di rete"
+
 
 msgid "Network ID"
 msgstr "ID di rete"
@@ -12483,20 +12636,26 @@ msgstr "ID di rete"
 msgid "Network Information"
 msgstr "Informazioni di Rete"
 
+msgid "Network Information Actions"
+msgstr "Azioni di informazione rete"
+
+msgid "Network Interface"
+msgstr "Interfaccia di rete"
+
 msgid "Network Log Actions"
-msgstr "Informazioni di Rete"
+msgstr "Azioni del registro di rete"
 
 msgid "Network MAC settings"
-msgstr "Impostazioni di rete MAC"
+msgstr "Configurazioni MAC di rete"
 
 msgid "Network Neighbourhood"
-msgstr "Configurazione guidata della rete"
+msgstr "Cerca in risorse di rete vicine"
 
 msgid "Network Servers:"
 msgstr "Server di rete:"
 
 msgid "Network Settings"
-msgstr "Impostazioni di rete MAC"
+msgstr "Impostazioni di rete"
 
 msgid "Network Speed:"
 msgstr "Server di rete:"
@@ -12508,7 +12667,13 @@ msgid "Network Test:"
 msgstr "Test della rete:"
 
 msgid "Network Wizard"
-msgstr "Configurazione guidata della rete"
+msgstr "Procedura guidata rete"
+
+msgid "Network adapter not connected to a network!"
+msgstr "Adattatore di rete non connesso ad alcuna rete!"
+
+msgid "Network address"
+msgstr "Indirizzo di rete"
 
 msgid "Network configuration..."
 msgstr "Configurazione rete..."
