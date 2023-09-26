@@ -7,15 +7,20 @@ on:
     branches: [ 7.3, master ]
 
 jobs:
-  build:
-    name: Build enigma2
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        gcc: [11]
-        python: ['3.11']
-    steps:
-      - name: Install prerequisites
+      permissions:
+      contents: read
+      pull-requests: write
+steps:
+- uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          build:
+          name: Build enigma2
+          runs-on: ubuntu-22.04
+          strategy:
+          matrix:
+          gcc: [11]
+- name: Install prerequisites
         run: |
           sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
           sudo apt-get -q update
@@ -40,14 +45,11 @@ jobs:
           sudo apt-get install libjpeg-turbo8-dev
           sudo apt-get install libgif-dev
           sudo apt-get install libcurl4-openssl-dev
-
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
+          - uses: actions/checkout@v3
+          - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
-
-      - name: Build enigma2 dependencies, gcc-${{ matrix.gcc }}
+            - name: Build enigma2 dependencies, gcc-${{ matrix.gcc }}
         env:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
@@ -80,7 +82,6 @@ jobs:
 
       - name: Build enigma2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
