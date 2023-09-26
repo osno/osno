@@ -80,6 +80,7 @@ jobs:
 
       - name: Build enigma2
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
