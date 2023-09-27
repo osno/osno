@@ -18,6 +18,7 @@ DEFAULT_SKIN = "GlamourAuraSky/skin.xml"
 EMERGENCY_SKIN = "skin_default.xml"
 EMERGENCY_NAME = "Default OE-A"
 DEFAULT_DISPLAY_SKIN = "skin_display_grautec.xml" if BoxInfo.getItem("grautec") else "skin_display.xml"
+DEFAULT_STANDBY_SKIN = "lcd_skin/skin_standby_analog_black.xml"
 USER_SKIN = "skin_user.xml"
 USER_SKIN_TEMPLATE = "skin_user_%s.xml"
 SUBTITLE_SKIN = "skin_subtitles.xml"
@@ -56,9 +57,11 @@ if not isfile(skin):
 	DEFAULT_SKIN = EMERGENCY_SKIN
 config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
+config.skin.standby_skin = ConfigText(default=DEFAULT_STANDBY_SKIN)
 
 currentPrimarySkin = None
 currentDisplaySkin = None
+currentStandbySkin = None
 callbacks = []
 runCallbacks = False
 
@@ -76,7 +79,7 @@ runCallbacks = False
 # E.g. "MySkin/skin_display.xml"
 #
 def InitSkins():
-	global currentPrimarySkin, currentDisplaySkin, resolutions
+	global currentPrimarySkin, currentDisplaySkin, resolutions, currentStandbySkin
 	runCallbacks = False
 	# Add the emergency skin.  This skin should provide enough functionality
 	# to enable basic GUI functions to work.

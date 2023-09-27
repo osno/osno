@@ -1,23 +1,23 @@
 # -*- coding: iso-8859-1 -*-
 # (c) 2006 Stephan Reichholf
 # This Software is Free, use it where you want, when you want for whatever you want and modify it if you want but don't remove my copyright!
-from __future__ import print_function
-from __future__ import absolute_import
-from Screens.Screen import Screen
-from Screens.Standby import TryQuitMainloop
-from Screens.MessageBox import MessageBox
+from os import listdir
+from os import path as os_path
+from os import walk
+
+from enigma import eEnv
+
 from Components.ActionMap import NumberActionMap
+from Components.config import ConfigSelection, config
+from Components.Label import Label
+from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
-from Components.MenuList import MenuList
-from Plugins.Plugin import PluginDescriptor
-import Components.config
-from Components.Label import Label
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
-from os import path, walk
-from enigma import eEnv
-from skin import *
-import os
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
+from skin import DISPLAY_SKIN_ID, getDesktop, loadSkin
+from Tools.Directories import SCOPE_GUISKIN
 
 
 class VFDSkinSelector(Screen):
@@ -80,10 +80,9 @@ class VFDSkinSelector(Screen):
 		self.fill()
 		self.onLayoutFinish.append(self.layoutFinished)
 
-
 	def fill(self):
 		i = 0
-		self.filesArray = sorted([x for x in os.listdir(self.root) if x.endswith('.xml')])
+		self.filesArray = sorted([x for x in listdir(self.root) if x.endswith('.xml')])
 		config.skin.display_skin = ConfigSelection(choices=self.filesArray)
 		while i < len(self.filesArray):
 			self.list.append((_(self.filesArray[i].split('.')[0]), "chose"))
@@ -133,7 +132,7 @@ class VFDSkinSelector(Screen):
 
 	def ok(self):
 		skinfile = self["SkinList"].getCurrent()[0] + ".xml"
-		loadSkin(skinfile, SCOPE_CONFIG)
+		loadSkin(skinfile, scope=SCOPE_GUISKIN, desktop=getDesktop(DISPLAY_SKIN_ID), screenID=DISPLAY_SKIN_ID)
 		config.skin.display_skin.value = skinfile
 		config.skin.display_skin.save()
 		print("Selected Value", config.skin.display_skin.value)
@@ -146,7 +145,7 @@ class VFDSkinSelector(Screen):
 			pngpath = self.root + pngpath
 		except AttributeError:
 			pass
-		if not os.path.exists(pngpath):
+		if not os_path.exists(pngpath):
 			pngpath = "/usr/share/enigma2/display/noprev.png"
 		if self.previewPath != pngpath:
 			self.previewPath = pngpath
