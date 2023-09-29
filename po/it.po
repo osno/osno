@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 17:19+0200\n"
-"PO-Revision-Date: 2023-09-24 21:16+0200\n"
+"PO-Revision-Date: 2023-09-29 15:58+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -4329,6 +4329,9 @@ msgstr "Centro"
 
 msgid "Centered"
 msgstr "Centrato"
+
+msgid "Center DVB Subs On This Service"
+msgstr "Centro sottotitoli DVB su questo servizio"
 
 msgid "Centered, wrapped"
 msgstr "Centrato, avvolto"
@@ -17594,6 +17597,9 @@ msgstr "Servizi"
 msgid "Services may be grouped in bouquets. When enabled, you can use more than one bouquet."
 msgstr "I servizi possono essere raggruppati in bouquet. Se abilitato, puoi utilizzare più di un bouquet."
 
+msgid "Set As Startup Service"
+msgstr "Imposta come servizio di avvio"
+
 msgid "Set Base time"
 msgstr "Imposta tempo base"
 
@@ -18220,6 +18226,9 @@ msgstr "Mostra elenco timer"
 
 msgid "Show True/False as graphical switch"
 msgstr "Mostra Vero/Falso come interruttore grafico"
+
+msgid "Show Transponder Information"
+msgstr "Mostra informazioni transponder"
 
 msgid "Show Tune failed info"
 msgstr "Mostra Tune informazioni non riuscite"
