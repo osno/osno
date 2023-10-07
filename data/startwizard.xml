@@ -102,8 +102,9 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
+
 		<step id="nimd">
-				<condition>
+			<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 3 and not nimmanager.nim_slots[3].empty and not isFBCLink(nimmanager.nim_slots[3].slot)
@@ -147,12 +148,13 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 			</step>
+
 			<step id="nimg">
 			<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 6 and not nimmanager.nim_slots[6].empty and not isFBCLink(nimmanager.nim_slots[6].slot)
-            </condition>
+			</condition>
 			<text value="Please set up tuner G\nFor Hybrid Tuner Models switch Tuner Type with left and right keys" />
 			<displaytext value="Please set up tuner G" />
 			<config screen="NimSetup" module="Satconfig" args="6" type="ConfigList" />
@@ -163,11 +165,11 @@ self.selectKey("RIGHT")
 			</code>
 			</step>
 			<step id="nimh">
-				<condition>
+			<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 7 and not nimmanager.nim_slots[7].empty and not isFBCLink(nimmanager.nim_slots[7].slot)
-            </condition>
+			</condition>
 			<text value="Please set up tuner H\nFor Hybrid Tuner Models switch Tuner Type with left and right keys" />
 			<displaytext value="Please set up tuner H" />
 			<config screen="NimSetup" module="Satconfig" args="7" type="ConfigList" />
@@ -193,7 +195,7 @@ self.selectKey("RIGHT")
 			</code>
 			</step>
 			<step id="nimj">
-				<condition>
+			<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 9 and not nimmanager.nim_slots[9].empty and not isFBCLink(nimmanager.nim_slots[9].slot)
@@ -206,9 +208,9 @@ self.clearSelectedKeys()
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
-			</step>
+		</step>
 			<step id="nimk">
-				<condition>
+			<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 10 and not nimmanager.nim_slots[10].empty and not isFBCLink(nimmanager.nim_slots[10].slot)
@@ -394,15 +396,19 @@ self.selectKey("OK")
 			</code>
 		</step>
 
-	<step id="timezone">
-			<text value="Set the time options.\n\nPress YELLOW to set the time zone via geolocation."/>
-			<displaytext value="Set time options" />
-			<config screen="Time" module="Time" type="ConfigList" />
+		<step id="timezone">
+			<text value="Please set your time options.\n\nPress YELLOW to set the time zone via geolocation."/>
+			<displaytext value="Please set your time options"/>
+			<config screen="Time" module="Time" type="ConfigList"/>
 			<code>
 self.clearSelectedKeys()
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 self.selectKey("YELLOW")
+self["key_yellow"].text = _("Use Geolocation")
+			</code>
+			<code pos="after">
+self["key_yellow"].text = ""
 			</code>
 		</step>
 
