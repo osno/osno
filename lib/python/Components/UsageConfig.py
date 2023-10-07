@@ -65,7 +65,7 @@ def InitUsageConfig():
 		("horzicon", _("Horizontal icons")),
 		("standard", _("Vertical menu"))
 	])
-	config.usage.menuEntryStyle = ConfigSelection(default="both", choices=[
+	config.usage.menuEntryStyle = ConfigSelection(default="text", choices=[
 		("text", _("Entry text only")),
 		("number", _("Entry number and text")),
 		("image", _("Entry image and text")),
@@ -294,6 +294,11 @@ def InitUsageConfig():
 		("3", _("2nd InfoBar ECM"))
 	])
 	config.usage.second_infobar_timeout = ConfigSelection(default="5", choices=choiceList)
+	config.usage.show_infobar_subservices = ConfigSelection(default=1, choices=[
+		(0, _("Off")),
+		(1, _("If EPG available")),
+		(2, _("Always"))
+	])
 
 	def showsecondinfobarChanged(configElement):
 		if config.usage.show_second_infobar.value != "INFOBAREPG":

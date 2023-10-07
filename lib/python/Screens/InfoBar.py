@@ -1,5 +1,6 @@
-from __future__ import print_function
-from __future__ import absolute_import
+from glob import glob
+from os.path import splitext
+
 from Tools.Profile import profile
 
 # workaround for required config entry dependencies.
@@ -163,7 +164,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		if self.execing:
 			InfoBarShowHide.serviceStarted(self)
 			self.current_begin_time = 0
-		elif not self.__checkServiceStarted in self.onShown and new:
+		elif self.__checkServiceStarted not in self.onShown and new:
 			self.onShown.append(self.__checkServiceStarted)
 
 	def __checkServiceStarted(self):
@@ -529,6 +530,15 @@ class MoviePlayer(InfoBarAspectSelection, InfoBarSimpleEventView, InfoBarBase, I
 		self.onChangedEntry = []
 		self.servicelist = slist
 		self.lastservice = lastservice or session.nav.getCurrentlyPlayingServiceOrGroup()
+		path = splitext(service.getPath())[0]
+		subs = []
+		for sub in ("srt", "ass", "ssa"):
+			subs = glob("%s*.%s" % (path, sub))
+			if subs:
+				break
+		if subs:
+			service.setSubUri(subs[0])
+
 		session.nav.playService(service)
 		self.cur_service = service
 		self.returning = False

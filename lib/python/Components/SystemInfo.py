@@ -33,7 +33,7 @@ class BoxInformation:  # To maintain data integrity class variables should not b
 				if line.startswith("#") or line.strip() == "":
 					continue
 				if "=" in line:
-					item, value = [x.strip() for x in line.split("=", 1)]
+					item, value = (x.strip() for x in line.split("=", 1))
 					if item:
 						self.immutableList.append(item)
 						self.enigmaInfoList.append(item)
@@ -50,7 +50,7 @@ class BoxInformation:  # To maintain data integrity class variables should not b
 				if line.startswith("#") or line.strip() == "":
 					continue
 				if "=" in line:
-					item, value = [x.strip() for x in line.split("=", 1)]
+					item, value = (x.strip() for x in line.split("=", 1))
 					if item:
 						self.enigmaConfList.append(item)
 						if item in self.boxInfo:
@@ -65,7 +65,7 @@ class BoxInformation:  # To maintain data integrity class variables should not b
 		data = []
 		for line in lines:
 			if line.startswith("checksum"):
-				item, value = [x.strip() for x in line.split("=", 1)]
+				item, value = (x.strip() for x in line.split("=", 1))
 			else:
 				data.append(line)
 		data.append("")
@@ -242,7 +242,7 @@ def getBoxName():
 		box = "miraclebox-twin"
 	elif box == "xp1000" and machinename == "sf8 hd":
 		box = "sf8"
-	elif box.startswith('et') and not box in ('et8000', 'et8500', 'et8500s', 'et10000'):
+	elif box.startswith('et') and box not in ('et8000', 'et8500', 'et8500s', 'et10000'):
 		box = box[0:3] + 'x00'
 	elif box == "odinm9":
 		box = "maram9"

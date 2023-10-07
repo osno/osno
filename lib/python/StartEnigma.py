@@ -349,7 +349,7 @@ def runScreenTest():
 		filename = "/media/hdd/images/config/autorestore"
 		if exists(filename):
 			try:
-				with open(filename, "r") as fd:
+				with open(filename) as fd:
 					line = fd.read().strip().replace("\0", "")
 					count = int(line) if line.isdecimal() else 0
 				if count >= 3:
@@ -403,7 +403,7 @@ def runScreenTest():
 		filename = "/media/hdd/images/config/autorestore"
 		try:
 			remove(filename)
-		except IOError as err:
+		except OSError as err:
 			if err.errno != ENOENT:  # ENOENT - No such file or directory.
 				print("[StartEnigma] Error %d: Unable to delete file '%s'!  (%s)" % (err.errno, filename, err.strerror))
 		screensToRun = [p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
@@ -416,6 +416,8 @@ def runScreenTest():
 		runNextScreen(session, screensToRun)
 	profile("InitVolumeControl")
 	vol = VolumeControl(session)
+	profile("InitProcessing")
+	processing = Processing(session)
 	profile("InitPowerKey")
 	power = PowerKey(session)
 	if BoxInfo.getItem("VFDSymbols"):
@@ -835,11 +837,14 @@ from Screens.Ci import CiHandler
 profile("Load:VolumeControl")
 from Components.VolumeControl import VolumeControl
 
+profile("Load:Processing")
+from Screens.Processing import Processing
+
 profile("Load:StackTracePrinter")
 from Components.StackTrace import StackTracePrinter
 StackTracePrinterInst = StackTracePrinter()
 
-from time import time, localtime, strftime
+from time import localtime, strftime
 from Tools.StbHardware import setFPWakeuptime, setRTCtime
 
 profile("Init:skin")
