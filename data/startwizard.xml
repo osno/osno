@@ -12,7 +12,7 @@ self.selectKey("OK")
 			<text value="Use the up/down keys on your remote control to select an option. After that, press OK." />
 			<displaytext value="Use the up/down keys on your remote control to select an option. After that, press OK." />
 			<list>
-				<listentry caption="Use the wizard to set up basic features" step="nima" />
+				<listentry caption="Use the wizard to set up basic features" step="network" />
 				<listentry caption="Exit the wizard" step="end" />
 			</list>
 			<code>
@@ -393,19 +393,16 @@ self.clearSelectedKeys()
 self.selectKey("OK")
 			</code>
 		</step>
-		<step id="timezone">
-			<text value="Please set your time options.\n\nPress YELLOW to set the time zone via geolocation."/>
-			<displaytext value="Please set your time options"/>
-			<config screen="Time" module="Time" type="ConfigList"/>
+
+	<step id="timezone">
+			<text value="Set the time options.\n\nPress YELLOW to set the time zone via geolocation."/>
+			<displaytext value="Set time options" />
+			<config screen="Time" module="Time" type="ConfigList" />
 			<code>
 self.clearSelectedKeys()
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 self.selectKey("YELLOW")
-self["key_yellow"].text = _("Use Geolocation")
-			</code>
-			<code pos="after">
-self["key_yellow"].text = ""
 			</code>
 		</step>
 
