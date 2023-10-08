@@ -459,7 +459,7 @@ class MultiBootClass():
 				if line.startswith("#") or line.strip() == "":
 					continue
 				if "=" in line:
-					item, value = [x.strip() for x in line.split("=", 1)]
+					item, value = (x.strip() for x in line.split("=", 1))
 					if item:
 						info[item] = self.processValue(value)
 		lines = fileReadLines(path.replace(".info", ".conf"), source=MODULE_NAME)
@@ -468,7 +468,7 @@ class MultiBootClass():
 				if line.startswith("#") or line.strip() == "":
 					continue
 				if "=" in line:
-					item, value = [x.strip() for x in line.split("=", 1)]
+					item, value = (x.strip() for x in line.split("=", 1))
 					if item:
 						if item in info:
 							print("[MultiBoot] Note: Enigma information value '%s' with value '%s' being overridden to '%s'." % (item, info[item], value))
@@ -480,11 +480,11 @@ class MultiBootClass():
 		data = []
 		for line in lines:
 			if line.startswith("checksum"):
-				item, value = [x.strip() for x in line.split("=", 1)]
+				item, value = (x.strip() for x in line.split("=", 1))
 			else:
 				data.append(line)
 		data.append("")
-		result = md5(bytearray("\n".join(data), "UTF-8", errors="ignore")).hexdigest()
+		result = md5(bytearray("\n".join(data), "UTF-8", errors="ignore")).hexdigest()  # NOSONAR
 		return value != result
 
 	def processValue(self, value):  # Part of readSlotInfo() within analyzeSlot() within getSlotImageList().

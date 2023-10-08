@@ -16,7 +16,6 @@ from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_TIMESHIFT, SCOPE
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo
-from Tools.HardwareInfo import HardwareInfo
 from Components.AVSwitch import iAVSwitch
 
 DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")
@@ -1515,7 +1514,7 @@ def InitUsageConfig():
 		def setZapmode(el):
 			open(BoxInfo.getItem("ZapMode"), "w").write(el.value)
 		config.misc.zapmode = ConfigSelection(default="mute", choices=[
-			("mute", _("Black screen")),
+			("mute", _("Black Screen")),
 			("hold", _("Hold screen")),
 			("mutetilllock", _("Black screen till locked")),
 			("holdtilllock", _("Hold till locked"))
@@ -1599,7 +1598,7 @@ def InitUsageConfig():
 	languageChoiceList = [
 		("", _("None")),
 		("und", _("Undetermined")),
-		("orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ oth", _("Original")),
+		("orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth", _("Original")),
 		("ara", _("Arabic")),
 		("eus baq", _("Basque")),
 		("bul", _("Bulgarian")),
@@ -2100,7 +2099,7 @@ def updateChoices(sel, choices):
 	if choices:
 		defval = None
 		val = int(sel.value)
-		if not val in choices:
+		if val not in choices:
 			tmp = choices[:]
 			tmp.reverse()
 			for x in tmp:
