@@ -1,8 +1,9 @@
+from __future__ import absolute_import
 from sys import _getframe
 from Tools.LogConfig import LogConfig, LOG_TYPE_DEBUG, LOG_TYPE_INFO, LOG_TYPE_WARNING, LOG_TYPE_ERROR, LOG_LEVEL_ERROR, LOG_LEVEL_WARNING, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG
 
 
-class Log:
+class Log(object):
 	@staticmethod
 	def e(text=""):
 		#ERROR
@@ -47,7 +48,7 @@ class Log:
 		msg = ""
 		if not text:
 			text = "<no detail>"
-		if cls is not None:
+		if cls != None:
 			cls = cls.__class__.__name__
 			msg = "%s [%s.%s] :: %s" % (type, cls, func, text)
 		else:

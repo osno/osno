@@ -1,3 +1,5 @@
+import six
+
 InfoBarCount = 0
 
 
@@ -8,7 +10,7 @@ class InfoBarBase:
 
 	@staticmethod
 	def connectInfoBarOpened(fnc):
-		if fnc not in InfoBarBase.onInfoBarOpened:
+		if not fnc in InfoBarBase.onInfoBarOpened:
 			InfoBarBase.onInfoBarOpened.append(fnc)
 
 	@staticmethod
@@ -23,7 +25,7 @@ class InfoBarBase:
 
 	@staticmethod
 	def connectInfoBarClosed(fnc):
-		if fnc not in InfoBarBase.onInfoBarClosed:
+		if not fnc in InfoBarBase.onInfoBarClosed:
 			InfoBarBase.onInfoBarClosed.append(fnc)
 
 	@staticmethod

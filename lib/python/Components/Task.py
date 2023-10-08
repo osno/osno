@@ -2,11 +2,12 @@
 # A Job consists of many "Tasks".
 # A task is the run of an external tool, with proper methods for failure handling
 
+from __future__ import print_function
 from Tools.CList import CList
 import six
 
 
-class Job:
+class Job(object):
 	NOT_STARTED, IN_PROGRESS, FINISHED, FAILED = list(range(4))
 
 	def __init__(self, name):
@@ -117,7 +118,7 @@ class Job:
 		return "Components.Task.Job name=%s #tasks=%s" % (self.name, len(self.tasks))
 
 
-class Task:
+class Task(object):
 	def __init__(self, job, name):
 		self.name = name
 		self.immediate_preconditions = []

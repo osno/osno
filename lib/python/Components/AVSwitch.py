@@ -196,13 +196,14 @@ class AVSwitchBase:
 		self.on_hotplug = CList()
 		self.current_mode = None
 		self.current_port = None
-		print("[AVSwitch] getAvailableModes:'%s'" % eAVControl.getInstance().getAvailableModes())
+		self.readAvailableModes()
 		self.is24hzAvailable()
 		self.readPreferredModes()
 		self.createConfig()
 
 	def readAvailableModes(self):
 		modes = eAVControl.getInstance().getAvailableModes()
+		print("[AVSwitch] getAvailableModes:'%s'" % modes)
 		return modes.split()
 
 	def is24hzAvailable(self):
@@ -291,11 +292,11 @@ class AVSwitchBase:
 	def isPortAvailable(self, port):  # Fix me!
 		return True
 
-	def isModeAvailable(self, port, mode, rate, availableModes):  # Check if a high-level mode with a given rate is available.
+	def isModeAvailable(self, port, mode, rate):  # Check if a high-level mode with a given rate is available.
 		rate = self.rates[mode][rate]
 		for mode in rate.values():
 			if port != "HDMI":
-				if mode not in availableModes:
+				if mode not in self.readAvailableModes():
 					return False
 			elif mode not in self.modes_preferred:
 				return False
@@ -328,9 +329,8 @@ class AVSwitchBase:
 
 	def getModeList(self, port):  # Get a list with all modes, with all rates, for a given port.
 		results = []
-		availableModes = self.readAvailableModes()
 		for mode in self.modes[port]:
-			rates = [rate for rate in self.rates[mode] if self.isModeAvailable(port, mode, rate, availableModes)]  # List all rates which are completely valid.
+			rates = [rate for rate in self.rates[mode] if self.isModeAvailable(port, mode, rate)]  # List all rates which are completely valid.
 			if len(rates):  # If at least one rate is OK then add this mode.
 				results.append((mode, rates))
 		return results
@@ -663,7 +663,7 @@ def InitAVSwitch():
 
 		policy2_choices_raw = "letterbox"
 		try:
-			with open(policy2_choices_proc) as fd:
+			with open(policy2_choices_proc, "r") as fd:
 				policy2_choices_raw = fd.read()
 		except OSError:
 			pass
@@ -678,7 +678,7 @@ def InitAVSwitch():
 			# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 			policy2_choices.update({"panscan": _("Pan&scan")})
 
-		if "nonliner" in policy2_choices_raw and "nonlinear" not in policy2_choices_raw:
+		if "nonliner" in policy2_choices_raw and not "nonlinear" in policy2_choices_raw:
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the top/bottom (Center of picture maintains aspect, top/bottom lose aspect heaver than on linear stretch))
 			policy2_choices.update({"nonliner": _("Stretch nonlinear")})
 		if "nonlinear" in policy2_choices_raw:
@@ -703,7 +703,7 @@ def InitAVSwitch():
 		policy_choices_proc = "/proc/stb/video/policy_choices"
 		policy_choices_raw = "panscan"
 		try:
-			with open(policy_choices_proc) as fd:
+			with open(policy_choices_proc, "r") as fd:
 				policy_choices_raw = fd.read()
 		except OSError:
 			pass
@@ -1461,8 +1461,7 @@ class VideomodeHotplug:
 		port = config.av.videoport.value
 		mode = config.av.videomode[port].value
 		rate = config.av.videorate[mode].value
-		availableModes = iAVSwitch.readAvailableModes()
-		if not iAVSwitch.isModeAvailable(port, mode, rate, availableModes):
+		if not iAVSwitch.isModeAvailable(port, mode, rate):
 			print("[AVSwitch] VideoModeHoyplug: Mode for port '%s', mode '%s', rate '%s' went away." % (port, mode, rate))
 			modeList = iAVSwitch.getModeList(port)
 			if len(modeList):

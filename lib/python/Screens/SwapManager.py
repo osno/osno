@@ -1,7 +1,8 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
-from Components.config import config, configfile, ConfigYesNo
+from Components.config import config, configfile, ConfigYesNo, ConfigSubsection
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -35,7 +36,7 @@ class StartSwap:
 		self.Console.ePopen("sfdisk -l /dev/sd? 2>/dev/null | grep swap", self.startSwap2)
 
 	def startSwap2(self, result=None, retval=None, extra_args=None):
-		if result is not None:
+		if result != None:
 			result = six.ensure_str(result)
 		swap_place = ""
 		if result and result.find('sd') != -1:
@@ -148,7 +149,7 @@ class Swap(Screen):
 		self.Console.ePopen("sfdisk -l /dev/sd? 2>/dev/null | grep swap", self.updateSwap2)
 
 	def updateSwap2(self, result=None, retval=None, extra_args=None):
-		if result is not None:
+		if result != None:
 			result = six.ensure_str(result)
 		self.swapsize = 0
 		self.swap_place = ''
@@ -163,7 +164,7 @@ class Swap(Screen):
 					if self.swap_place == 'sfdisk:':
 						self.swap_place = ''
 					self.device = True
-				f = open('/proc/swaps')
+				f = open('/proc/swaps', 'r')
 				for line in f.readlines():
 					parts = line.strip().split()
 					if line.find('partition') != -1:
@@ -199,7 +200,7 @@ class Swap(Screen):
 		self['labplace'].setText(self.swap_place)
 		self['labplace'].show()
 
-		f = open('/proc/swaps')
+		f = open('/proc/swaps', 'r')
 		for line in f.readlines():
 			parts = line.strip().split()
 			if line.find('partition') != -1:
@@ -224,7 +225,7 @@ class Swap(Screen):
 		self['labsize'].setText(self.swapsize)
 		self['labsize'].show()
 
-		if self.swap_active is True:
+		if self.swap_active == True:
 			self['inactive'].hide()
 			self['active'].show()
 			self['key_red'].setText(_("Deactivate"))
@@ -244,7 +245,7 @@ class Swap(Screen):
 		self['swapname_summary'].setText(name)
 
 	def actDeact(self):
-		if self.swap_active is True:
+		if self.swap_active == True:
 			self.Console.ePopen('swapoff ' + self.swap_place, self.updateSwap)
 		else:
 			if not self.device:
@@ -259,7 +260,7 @@ class Swap(Screen):
 	def createDel(self):
 		if not self.device:
 			if self.swap_place != '':
-				if self.swap_active is True:
+				if self.swap_active == True:
 					self.Console.ePopen('swapoff ' + self.swap_place, self.createDel2)
 				else:
 					self.createDel2(None, 0)
@@ -291,7 +292,7 @@ class Swap(Screen):
 	def doCSplace(self, name):
 		if name:
 			self.new_place = name[1]
-			myoptions = [[_("%d MB") % s, str(s * 1024)] for s in (32, 64, 128, 256, 512, 1024, 1536, 2048)]
+			myoptions = [[_("32 Mb"), '32768'], [_("64 Mb"), '65536'], [_("128 Mb"), '131072'], [_("256 Mb"), '262144'], [_("512 Mb"), '524288'], [_("1024 Mb"), '1048576'], [_("1536 Mb"), '1572864'], [_("2048 Mb"), '2097152']]
 			self.session.openWithCallback(self.doCSsize, ChoiceBox, title=_("Select the Swap File Size:"), list=myoptions)
 
 	def doCSsize(self, swapsize):

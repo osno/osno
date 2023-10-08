@@ -69,7 +69,7 @@ class ServiceList(GUIComponent):
 		self.progressBarWidth = 52
 		self.fieldMargins = 10
 		self.itemsDistances = 8
-		self.listMarginRight = 25  # scrollbar is fixed 20 + 5 Extra marge
+		self.listMarginRight = 25 #scrollbar is fixed 20 + 5 Extra marge
 		self.listMarginLeft = 5
 
 		self.onSelectionChanged = []
@@ -213,7 +213,7 @@ class ServiceList(GUIComponent):
 		return rc
 
 	def connectSelChanged(self, fnc):
-		if fnc not in self.onSelectionChanged:
+		if not fnc in self.onSelectionChanged:
 			self.onSelectionChanged.append(fnc)
 
 	def disconnectSelChanged(self, fnc):

@@ -1,4 +1,5 @@
 # takes a header file, outputs action ids
+from __future__ import print_function
 import tokenize
 import sys
 
@@ -21,7 +22,7 @@ def filter(g):
 
 
 def do_file(f, mode):
-	tokens = filter(tokenize.generate_tokens(open(f).readline))
+	tokens = filter(tokenize.generate_tokens(open(f, 'r').readline))
 
 	sys.stderr.write("parsing %s\n" % f)
 

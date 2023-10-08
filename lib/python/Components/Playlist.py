@@ -1,3 +1,4 @@
+from __future__ import print_function
 from ServiceReference import ServiceReference
 from enigma import eServiceReference
 import os
@@ -47,7 +48,7 @@ class PlaylistIOInternal(PlaylistIO):
 	def open(self, filename):
 		self.clear()
 		try:
-			file = open(filename)
+			file = open(filename, "r")
 		except OSError:
 			return None
 		while True:
@@ -76,7 +77,7 @@ class PlaylistIOM3U(PlaylistIO):
 		self.clear()
 		self.displayname = None
 		try:
-			file = open(filename)
+			file = open(filename, "r")
 		except OSError:
 			return None
 		while True:
@@ -108,11 +109,11 @@ class PlaylistIOPLS(PlaylistIO):
 	def open(self, filename):
 		self.clear()
 		try:
-			file = open(filename)
+			file = open(filename, "r")
 		except OSError:
 			return None
 		entry = file.readline().strip()
-		if entry == "[playlist]":  # extended pls
+		if entry == "[playlist]": # extended pls
 			while True:
 				entry = file.readline().strip()
 				if entry == "":
