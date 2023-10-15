@@ -1,4 +1,3 @@
-<!--suppress XmlUnboundNsPrefix -->
 <wizard>
 		<step id="start" nextstep="introduction">
 			<text value="Welcome.\n\nThis start wizard will guide you through the basic setup of your %s %s.\nPress the OK button on your remote control to move to the next step." />
@@ -12,7 +11,7 @@ self.selectKey("OK")
 			<text value="Use the up/down keys on your remote control to select an option. After that, press OK." />
 			<displaytext value="Use the up/down keys on your remote control to select an option. After that, press OK." />
 			<list>
-				<listentry caption="Use the wizard to set up basic features" step="network" />
+				<listentry caption="Use the wizard to set up basic features" step="nima" />
 				<listentry caption="Exit the wizard" step="end" />
 			</list>
 			<code>
@@ -102,9 +101,8 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
-
 		<step id="nimd">
-			<condition>
+				<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 3 and not nimmanager.nim_slots[3].empty and not isFBCLink(nimmanager.nim_slots[3].slot)
@@ -148,13 +146,12 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 			</step>
-
 			<step id="nimg">
 			<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 6 and not nimmanager.nim_slots[6].empty and not isFBCLink(nimmanager.nim_slots[6].slot)
-			</condition>
+            </condition>
 			<text value="Please set up tuner G\nFor Hybrid Tuner Models switch Tuner Type with left and right keys" />
 			<displaytext value="Please set up tuner G" />
 			<config screen="NimSetup" module="Satconfig" args="6" type="ConfigList" />
@@ -165,11 +162,11 @@ self.selectKey("RIGHT")
 			</code>
 			</step>
 			<step id="nimh">
-			<condition>
+				<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 7 and not nimmanager.nim_slots[7].empty and not isFBCLink(nimmanager.nim_slots[7].slot)
-			</condition>
+            </condition>
 			<text value="Please set up tuner H\nFor Hybrid Tuner Models switch Tuner Type with left and right keys" />
 			<displaytext value="Please set up tuner H" />
 			<config screen="NimSetup" module="Satconfig" args="7" type="ConfigList" />
@@ -195,7 +192,7 @@ self.selectKey("RIGHT")
 			</code>
 			</step>
 			<step id="nimj">
-			<condition>
+				<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 9 and not nimmanager.nim_slots[9].empty and not isFBCLink(nimmanager.nim_slots[9].slot)
@@ -208,9 +205,9 @@ self.clearSelectedKeys()
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
-		</step>
+			</step>
 			<step id="nimk">
-			<condition>
+				<condition>
 from Components.NimManager import nimmanager
 from enigma import isFBCLink
 self.condition = len(nimmanager.nim_slots) > 10 and not nimmanager.nim_slots[10].empty and not isFBCLink(nimmanager.nim_slots[10].slot)
@@ -364,7 +361,7 @@ config.ParentalControl.setuppin.save()
 -->
 		<step id="plugins" nextstep="skins">
 			<condition>
-self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+self.condition = config.misc.networkenabled.value
 			</condition>
 			<text value="Plugin install"/>
 			<config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList"/>
@@ -375,7 +372,7 @@ self.selectKey("OK")
 		</step>
 		<step id="skins" nextstep="NetworkPassword">
 			<condition>
-self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+self.condition = config.misc.networkenabled.value
 			</condition>
 			<text value="Skin install" />
 			<config screen="InstallWizard" module="InstallWizard" args="3" type="ConfigList" />
@@ -386,7 +383,7 @@ self.selectKey("OK")
 		</step>
 		<step id="NetworkPassword" nextstep="timezone">
 			<condition>
-self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
+self.condition = config.misc.networkenabled.value
 			</condition>
 			<text value="Password setup" />
 			<config screen="InstallWizard" module="InstallWizard" args="4" type="ConfigList" />
@@ -395,7 +392,6 @@ self.clearSelectedKeys()
 self.selectKey("OK")
 			</code>
 		</step>
-
 		<step id="timezone">
 			<text value="Please set your time options.\n\nPress YELLOW to set the time zone via geolocation."/>
 			<displaytext value="Please set your time options"/>

@@ -20,6 +20,7 @@ from Tools.Directories import fileReadLines, fileWriteLines
 MODULE_NAME = __name__.split(".")[-1]
 
 config.misc.firstrun = ConfigBoolean(default=True)
+config.misc.networkenabled = ConfigBoolean(default=False)
 config.misc.videowizardenabled = ConfigBoolean(default=True)
 config.misc.wizardLanguageEnabled = ConfigBoolean(default=True)
 

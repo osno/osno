@@ -7,6 +7,7 @@ from Components.Console import Console
 from Components.Network import iNetwork
 from Tools.Directories import fileReadLines, fileWriteLines
 
+config.misc.networkenabled.value = False
 MODULE_NAME = __name__.split(".")[-1]
 MODE_LIST = ["WPA/WPA2", "WPA2", "WPA", "WEP", "Unencrypted"]
 WEP_LIST = ["ASCII", "HEX"]
@@ -437,7 +438,9 @@ class Status:
 				scanResults = None
 				print("[Wlan] No wireless networks could be found.")
 			aps = {}
-			if scanResults:
+			if scanResults is not None:
+				config.misc.networkenabled.value = True
+				print("[NetworkWizard] networkenabled value = %s" % config.misc.networkenabled.value)
 				for i in range(len(scanResults)):
 					bssid = scanResults[i].ssid
 					aps[bssid] = {
