@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-21 08:32+0200\n"
-"PO-Revision-Date: 2023-10-22 13:00+0200\n"
+"PO-Revision-Date: 2023-10-22 14:22+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -1165,7 +1165,7 @@ msgstr "%m/%d/%Y"
 
 #, python-format
 msgid "%r is not callable"
-msgstr "%r non disponibile."
+msgstr "%r non disponibile"
 
 #, python-format
 msgid "%s "
@@ -9820,8 +9820,8 @@ msgstr "Installa estensioni."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr "Installa da /media/opdboot/OPDBootUpload"
 
-msgid "Install from Internet (OpenOPD,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
-msgstr "Installa da Internet (OpenOPD,OpenATV,Egami,OpenVIX,OpenHDF)"
+msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgstr "Installa da Internet (OpenDroid,OpenATV,Egami,OpenVIX,OpenHDF)"
 
 msgid "Install lcd picons on"
 msgstr "Installa picon LCD su"
@@ -22157,12 +22157,11 @@ msgstr "Devi impostare almeno un comando"
 msgid "You must set at least one command!"
 msgstr "Devi impostare almeno un comando!"
 
-#, fuzzy
 msgid ""
-"You need a PC connected to your %s %s. Visit the website https:// for further instructions.\n"
+"You need a PC connected to your %s %s. Visit the website https://droidsat.org/ for further instructions.\n"
 "The %s %s will now be halted. After you have performed the update instructions from the website, the new firmware will ask you to restore the settings."
 msgstr ""
-"Hai bisogno di un PC connesso con il %s %s. Se ti servono ulteriori istruzioni, visita il sito web https://.\n"
+"Hai bisogno di un PC connesso con il %s %s. Se ti servono ulteriori istruzioni, visita il sito web https://droidsat.org/\n"
 "Il %s %s a breve sarà arrestato. Dopo che avrai seguito le istruzioni di aggiornamento presenti sul sito, il nuovo firmware ti chiederà di ripristinare le impostazioni."
 
 msgid "You need to initialize your storage device first"

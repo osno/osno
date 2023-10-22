@@ -577,7 +577,7 @@ class OPDBootImageChoose(Screen):
                 else:
                         menulist = []
                         menulist.append((_('Install from /media/opdboot/OPDBootUpload'), 'media'))
-                        menulist.append((_('Install from Internet (OpenOPD,OpenATV,OpenNFR,OpenVIX,OpenHDF)'), 'internet'))
+                        menulist.append((_('Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)'), 'internet'))
                         self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_('Choose they way for installation!'), list=menulist)
 
         def menuCallback(self, choice):
