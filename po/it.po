@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-21 08:32+0200\n"
-"PO-Revision-Date: 2023-10-21 14:58+0200\n"
+"PO-Revision-Date: 2023-10-22 13:00+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -27,10 +27,10 @@ msgstr ""
 
 msgid ""
 "\n"
-"<This tuner is configured automatically>"
+"[This tuner is configured automatically]\n"
 msgstr ""
 "\n"
-"<Questo tuner è configurato automaticamente>"
+"[Questo tuner è configurato automaticamente]\n"
 
 msgid ""
 "\n"
@@ -156,11 +156,11 @@ msgstr " (priorità del motore su auto)"
 msgid " (lower than any auto)"
 msgstr " (inferiore ad auto)"
 
-msgid " <No Channel>"
-msgstr " <Nessun canale>"
+msgid " No Channel"
+msgstr " Nessun canale"
 
-msgid " <empty>"
-msgstr " <vuoto>"
+msgid " empty"
+msgstr " vuoto"
 
 msgid " HI "
 msgstr " CIAO "
@@ -2714,10 +2714,10 @@ msgid "Ask user"
 msgstr "Chiedi all'utente"
 
 msgid "Ask user (with default as 'No')"
-msgstr "Chiedi all'utente (predefinito \"No\")"
+msgstr "Chiedi all'utente (predefinito 'No')"
 
 msgid "Ask user (with default as 'Yes')"
-msgstr "Chiedi all'utente (predefinito \"Sì\")"
+msgstr "Chiedi all'utente (predefinito 'Sì')"
 
 msgid "Aspect"
 msgstr "Aspetto"
@@ -6676,7 +6676,7 @@ msgstr "E "
 
 #, python-format
 msgid "E2 (re)starts:\t%s\n"
-msgstr ""
+msgstr "E2 (ri)parte:\t%s\n"
 
 msgid "E2 Light Multiboot"
 msgstr "E2 Multiboot Leggero"
@@ -11697,7 +11697,7 @@ msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. O
 msgstr "Naviga su/giù con i tasti SU/GIÙ e pagina su/giù con SINISTRA/DESTRA. OK per eseguire l'azione descritta nella guida attualmente evidenziata."
 
 msgid "NcamInfo"
-msgstr "Indo Ncam"
+msgstr "Info Ncam"
 
 msgid "Ndonga"
 msgstr "Ndonga"
@@ -16845,7 +16845,7 @@ msgid "Settings:"
 msgstr "Impostazioni:"
 
 msgid "Setup"
-msgstr "Impostazioni"
+msgstr "Configurazioni generali"
 
 msgid "Setup Bootmanagertimeout"
 msgstr "Imposta il timeout del gestore di avvio"
@@ -20343,52 +20343,52 @@ msgid "Tune failed!"
 msgstr "Sintonia fallita!"
 
 msgid "Tuner"
-msgstr "Tuner"
+msgstr "Sintonizzatore"
 
 msgid "Tuner "
-msgstr "Tuner "
+msgstr "Sintonizzatore "
 
 msgid "Tuner :"
-msgstr "Tuner:"
+msgstr "Sintonizzatore:"
 
 msgid "Tuner Configuration"
-msgstr "Configurazione tuner"
+msgstr "Configurazione Sintonizzatore"
 
 msgid "Tuner Settings"
-msgstr "Impostazioni del tuner"
+msgstr "Impostazioni del Sintonizzatore"
 
 msgid "Tuner is not supported"
-msgstr "Il tuner non è supportato"
+msgstr "Il Sintonizzatore non è supportato"
 
 msgid "Tuner live values"
-msgstr "Tuner in tempo reale"
+msgstr "Sintonizzatore in tempo reale"
 
 msgid "Tuner setting values"
-msgstr "Impostazioni tuner"
+msgstr "Impostazioni Sintonizzatore"
 
 msgid "Tuner setup"
 msgstr "Configurazione del sintonizzatore"
 
 msgid "Tuner slot"
-msgstr "Slot per tuner"
+msgstr "Slot per Sintonizzatore"
 
 msgid "Tuner status FAILED"
-msgstr "Stato del tuner FAILED"
+msgstr "Stato del Sintonizzatore FAILED"
 
 msgid "Tuner status IDLE"
-msgstr "Stato del tuner IDLE"
+msgstr "Stato del Sintonizzatore IDLE"
 
 msgid "Tuner status LOCKED"
-msgstr "Stato del tuner LOCKED"
+msgstr "Stato del Sintonizzatore LOCKED"
 
 msgid "Tuner status LOSTLOCK"
-msgstr "Stato del tuner LOSTLOCK"
+msgstr "Stato del Sintonizzatore LOSTLOCK"
 
 msgid "Tuner status TUNING"
-msgstr "Stato del tuner TUNING"
+msgstr "Stato del Sintonizzatore TUNING"
 
 msgid "Tuner status UNKNOWN"
-msgstr "Stato del tuner SCONOSCIUTO"
+msgstr "Stato del Sintonizzatore SCONOSCIUTO"
 
 #, python-format
 msgid "Tuner type %s"
@@ -21731,7 +21731,7 @@ msgid "When enabled, it is possible to leave the movie player with exit."
 msgstr "Se abilitato, sarà possibile lasciare il movieplayer con esci."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
-msgstr "Se abilitato, misurerà il consumo di energia per rilevare quando il motore smette di girare (se supportato dal tuner)."
+msgstr "Se abilitato, misurerà il consumo di energia per rilevare quando il motore smette di girare (se supportato dal Sintonizzatore)."
 
 msgid "When enabled, network trash cans are probed for cleaning."
 msgstr "Se abilitato, il cestino di rete sarà visualizzato prima dello svuotamento."
@@ -21932,7 +21932,7 @@ msgid "Wolof"
 msgstr "Wolof"
 
 msgid "Workaround for old tuner driver"
-msgstr "Soluzione per driver di vecchi tuner"
+msgstr "Soluzione per driver dei vecchi Sintonizzatori"
 
 #, python-format
 msgid "Would you save the entered PIN %s persistent?"
@@ -22104,7 +22104,7 @@ msgstr "È possibile saltare questa funzione e spegnere la TV quando si riattiva
 
 #, python-format
 msgid "You can switch with left and right this tuner types %s"
-msgstr "È possibile alternare con sinistra e destra questo tipo di tuner %s"
+msgstr "È possibile alternare con sinistra e destra questo tipo di Sintonizzatore %s"
 
 msgid "You cannot delete this!"
 msgstr "Non puoi eliminarlo!"
@@ -22159,10 +22159,10 @@ msgstr "Devi impostare almeno un comando!"
 
 #, fuzzy
 msgid ""
-"You need a PC connected to your %s %s. Visit the website https://www.opena.tv/ for further instructions.\n"
+"You need a PC connected to your %s %s. Visit the website https:// for further instructions.\n"
 "The %s %s will now be halted. After you have performed the update instructions from the website, the new firmware will ask you to restore the settings."
 msgstr ""
-"Hai bisogno di un PC connesso con il %s %s. Se ti servono ulteriori istruzioni, visita il sito web https://www.opena.tv.\n"
+"Hai bisogno di un PC connesso con il %s %s. Se ti servono ulteriori istruzioni, visita il sito web https://.\n"
 "Il %s %s a breve sarà arrestato. Dopo che avrai seguito le istruzioni di aggiornamento presenti sul sito, il nuovo firmware ti chiederà di ripristinare le impostazioni."
 
 msgid "You need to initialize your storage device first"
@@ -22398,7 +22398,7 @@ msgid "Zap back to service before positioner setup?"
 msgstr "Tornare al servizio precedente alla configurazione del posizionatore?"
 
 msgid "Zap back to service before tuner setup?"
-msgstr "Tornare al servizio precedente alla configurazione del tuner?"
+msgstr "Tornare al servizio precedente alla configurazione del Sintonizzatore?"
 
 msgid "Zap down"
 msgstr "Canale giù"
@@ -23530,6 +23530,10 @@ msgid ""
 "but it's not possible to search for new TV channels\n"
 "or to configure tuner settings"
 msgstr ""
+"satellites.xml non trovato o danneggiato!\n"
+"È possibile guardare la TV\n"
+"ma non è possibile cercare nuovi canali TV\n"
+"o per configurare le impostazioni del sintonizzatore"
 
 msgid "save"
 msgstr "salva"
