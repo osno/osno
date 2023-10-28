@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-21 08:32+0200\n"
+"POT-Creation-Date: 2023-10-28 21:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7802,7 +7802,7 @@ msgstr ""
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenOPD,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
 msgstr ""
 
 msgid "Install lcd picons on"
@@ -22295,16 +22295,16 @@ msgid ""
 "For Hybrid Tuner Models switch Tuner Type with left and right keys"
 msgstr ""
 
-msgid "Please set your time options"
+msgid "Plugin install"
 msgstr ""
 
 msgid ""
-"Please set your time options.\n"
+"Set the time options.\n"
 "\n"
 "Press YELLOW to set the time zone via geolocation."
 msgstr ""
 
-msgid "Plugin install"
+msgid "Set time options"
 msgstr ""
 
 msgid "Skin install"
@@ -23134,7 +23134,7 @@ msgid "You have chosen to restore the settings. Enigma2 will restart after resto
 msgstr ""
 
 msgid ""
-"You need a PC connected to your %s %s. Visit the website https://www.opena.tv/ for further instructions.\n"
+"You need a PC connected to your %s %s. Visit the website https://droidsat.org/ for further instructions.\n"
 "The %s %s will now be halted. After you have performed the update instructions from the website, the new firmware will ask you to restore the settings."
 msgstr ""
 
