@@ -237,8 +237,8 @@ self.session.open(UsbFormat)
 	</menu>
 	<!-- Menu / Timer -->
 	<menu weight="15" level="0" text="Timers" key="timer_menu">
-		<item weight="0" level="0" text="Timers" key="timer_edit"><screen module="TimerEdit" screen="TimerEditList" /></item>
-		<item weight="5" level="0" text="PowerTimers" key="powertimer_edit"><screen module="PowerTimerEdit" screen="PowerTimerEditList" /></item>
+		<item weight="0" level="0" text="Timers" key="timer_edit"><screen module="Timers" screen="RecordTimerOverview" /></item>
+		<item weight="5" level="0" text="PowerTimers" key="powertimer_edit"><screen module="Timers" screen="RecordTimerOverview" /></item>
                 <item weight="20" level="0" text="Sleep Timer" requires="DeepstandbySupport" key="sleep"><screen module="SleepTimer" screen="SleepTimer" /></item>
 		<item weight="10" level="0" text="CronTimers" key="crontimer_edit"><screen module="CronTimer" screen="CronTimers" /></item>
 	</menu>
