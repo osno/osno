@@ -8,7 +8,7 @@
 
 > RAM:  16GB
 >
-> SWAP: 16GB (if building feeds then RAM+SWAP should be larger) CPU: Modello
+> RAM: 16GB SWAP: 16GB (if building feeds then RAM+SWAP should be larger)> CPU: Multi core\thread Model
 >
 > CPU:  Multi core\thread Model
 >
