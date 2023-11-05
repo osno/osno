@@ -40,7 +40,6 @@
 
     sudo update-alternatives --config python
     select python3
-    ```
 
 3 - Set your shell to  `/bin/bash`
 
@@ -48,7 +47,6 @@
     sudo dpkg-reconfigure dash
     When asked: Install dash as /bin/sh?
     select "NO"
-    ```
 
 4 - modify max_user_watches
 
@@ -56,49 +54,41 @@
     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 
     sudo sysctl -n -w fs.inotify.max_user_watches=524288
-    ```
 
 5 - Add user opendroidbuilder
 
     ```sh
     sudo adduser opendroidbuilder
-    ```
 
 6 - Switch to user opendroidbuilder
 
     ```sh
     su opendroidbuilder
-    ```
 
 7 - Create folder opendroid
 
     ```sh
 8-    mkdir -p opendroid
-    ```
 
 9 - Switch to folder opendroid
 
     ```sh
     cd opendroid
-    ```
 
 10. Clone oe-alliance repository
 
     ```sh
     git clone https://github.com/oe-alliance/build-enviroment.git -b 5.3
-    ```
 
 11 - Switch to folder build-enviroment
 
     ```sh
     cd build-enviroment
-    ```
 
 12 - Update build-enviroment
 
     ```sh
     make update
-    ```
 
 13 - Finally you can start building a image
 
@@ -106,19 +96,16 @@
 
     ```sh
  15 -    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make image
-    ```
 
 * Build an image without feed (build time 1-2h)
 
     ```sh
  16 -    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make enigma2-image
-    ```
 
 * Build the feeds
 
     ```sh
     MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make feeds
-    ```
 
 * Build specific packages
 
@@ -129,5 +116,4 @@
 
     source env.source
 
-    bitbake nfs-utils rcpbind ...
-    ```
+    bitbake nfs-utils rcpbind
