@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-28 21:08+0200\n"
-"PO-Revision-Date: 2023-10-28 23:07+0200\n"
+"PO-Revision-Date: 2023-11-05 20:28+0100\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -2219,7 +2219,6 @@ msgstr "Ulteriori opzioni del motore ti consentono di inserire i dettagli dalla 
 msgid "Addons"
 msgstr "Componenti aggiuntivi"
 
-#, fuzzy
 msgid "Addons "
 msgstr "Componenti aggiuntivi"
 
@@ -3257,7 +3256,7 @@ msgid "Blue Panel"
 msgstr "Blue Panel"
 
 msgid "BluePanel/OPENDROID"
-msgstr "OPENDROID"
+msgstr "BluePanel/OPENDROID"
 
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -3424,7 +3423,7 @@ msgid "Burmese"
 msgstr "Birmano"
 
 msgid "Burn Blu-ray disc"
-msgstr "Masterizza disco Bluray"
+msgstr "Masterizza disco Blu-ray"
 
 msgid "Burn DVD"
 msgstr "Masterizza DVD"
@@ -3454,7 +3453,7 @@ msgid "ButtonSetup"
 msgstr "Impostazioni tasti"
 
 msgid "By OPD Image Team"
-msgstr "By openDroid Image Team"
+msgstr "A cura del team immagini OPD"
 
 msgid "By OpenDROID Image Team"
 msgstr "A cura del team immagini openDROID"
@@ -5643,7 +5642,7 @@ msgid "Decoding Setup"
 msgstr "Decodifica programma di installazione"
 
 msgid "Decoding_Setup"
-msgstr "Decoding_Setup"
+msgstr "Impostazione della decodifica"
 
 msgid "Deep Standby"
 msgstr "Spegni ricevitore"
@@ -5921,7 +5920,7 @@ msgid "Delete the current time shift buffer and restart time shift"
 msgstr "Elimina buffer timeshift attuale e riavvia timeshift"
 
 msgid "Delete the currently highlighted service from the Volume Offsets list"
-msgstr "Elimina il servizio attualmente evidenziato dall'elenco delle impostazioni del volume disattivato"
+msgstr "Elimina servizio attualmente evidenziato dall'elenco delle impostazioni del volume disattivato"
 
 msgid "Delete the currently selected timer"
 msgstr "Elimina timer attualmente selezionato"
@@ -6004,7 +6003,7 @@ msgid "Detected Devices:"
 msgstr "Dispositivi rilevati:"
 
 msgid "Detected NIMs:"
-msgstr "Tuner rilevati:"
+msgstr "NIM rilevati:"
 
 msgid "Device Details"
 msgstr "Dettagli del dispositivo"
@@ -7190,7 +7189,7 @@ msgid "End time"
 msgstr "Orario fine"
 
 msgid "Ene"
-msgstr "Uno"
+msgstr "Ene"
 
 msgid "Energy Timer"
 msgstr "Timer energia"
@@ -8011,7 +8010,7 @@ msgid "Fast DiSEqC"
 msgstr "DiSEqC veloce"
 
 msgid "Fast Mounted Remove"
-msgstr "Rimozione rapida montata"
+msgstr "Rimozione montaggio veloce"
 
 msgid "Fast Scan"
 msgstr "Scansione veloce"
@@ -8170,7 +8169,7 @@ msgid "Files/folders to exclude from backup"
 msgstr "File o cartelle da escludere dal backup"
 
 msgid "Filesystem Check"
-msgstr "Verifica filesystem"
+msgstr "Controllo filesystem"
 
 msgid "Film-Noir"
 msgstr "Film noir"
@@ -8432,7 +8431,7 @@ msgid "Free:"
 msgstr "Libera:"
 
 msgid "Free: "
-msgstr "Gratuito: "
+msgstr "Libera: "
 
 msgid "FreeSpace"
 msgstr "Spazio libero"
@@ -8600,7 +8599,7 @@ msgid "Gambia"
 msgstr "Gambia"
 
 msgid "Game Show"
-msgstr "Mostra giochi"
+msgstr "Spettacolo di giochi"
 
 msgid "Ganda"
 msgstr "Ganda"
@@ -8627,7 +8626,7 @@ msgid "General PCM delay"
 msgstr "Ritardo generale PCM"
 
 msgid "Generator"
-msgstr "Generale"
+msgstr "Generatore"
 
 msgid "Generic"
 msgstr "Generico"
@@ -8940,7 +8939,7 @@ msgid "Harddisk Setup"
 msgstr "Configurazione HDD"
 
 msgid "Harddisk standby after"
-msgstr "Harddisk standby dopo"
+msgstr "Standby del disco rigido dopo"
 
 #, python-format
 msgid "Hardware MultiBoot device:\t%s"
@@ -8957,7 +8956,7 @@ msgid "Heads: %s (max) %s (current)"
 msgstr "Heads: %s (max) %s (attuale)"
 
 msgid "Heads: unknown"
-msgstr "Teste: sconosciuto"
+msgstr "Heads: sconosciuto"
 
 msgid "Heard Island and McDonald Islands"
 msgstr "Isola Heard e isole McDonald"
@@ -8978,7 +8977,7 @@ msgid "Help animation speed"
 msgstr "Velocità animazione"
 
 msgid "Help screen style"
-msgstr "Conservare screen"
+msgstr "Stile della schermata di aiuto"
 
 msgid "Help text uninitialized"
 msgstr "Testo della guida non inizializzato"
@@ -9690,13 +9689,13 @@ msgid "InfoBar front end data source"
 msgstr "Sorgente dati front-end barra informazioni"
 
 msgid "Infobar Setup"
-msgstr "Setup Infobar"
+msgstr "Configurazione della barra delle informazioni"
 
 msgid "Infobar frontend data source"
-msgstr "Seleziona origine dati Infobar"
+msgstr "Origine dati frontend della barra informazioni"
 
 msgid "Infobar_Setup"
-msgstr "Infobar_Setup"
+msgstr "Configurazione della barra delle informazioni"
 
 msgid "Information"
 msgstr "Informazioni"
@@ -9781,7 +9780,7 @@ msgid "Install All"
 msgstr "Installa tutto"
 
 msgid "Install Confirmation"
-msgstr "Installa conferma"
+msgstr "Conferma installazione"
 
 msgid "Install Failed !!"
 msgstr "Installazione non riuscita!"
@@ -9808,7 +9807,7 @@ msgid "Install a new image with your web browser"
 msgstr "Installa una nuova immagine con il browser web"
 
 msgid "Install channel list"
-msgstr "Installare lista dei canali"
+msgstr "Installare lista canali"
 
 msgid "Install extensions"
 msgstr "Installa estensioni"
@@ -9910,7 +9909,7 @@ msgid "Intermediate"
 msgstr "Intermedio"
 
 msgid "Internal"
-msgstr "Interno"
+msgstr "Interna"
 
 msgid "Internal Flash"
 msgstr "Flash interna"
@@ -10062,7 +10061,7 @@ msgid "Job overview"
 msgstr "Vista attività"
 
 msgid "JobManager"
-msgstr "GestoreJob"
+msgstr "JobManager"
 
 msgid "Jordan"
 msgstr "Giordania"
@@ -10203,10 +10202,10 @@ msgid "Keyboard data entry"
 msgstr "Inserimento dati da tastiera"
 
 msgid "Keymap Selection"
-msgstr "Selezione keymap"
+msgstr "Selezione della mappa dei tasti"
 
 msgid "Keymap changed, you need to restart the GUI"
-msgstr "Keymap cambiato, è necessario riavviare la GUI"
+msgstr "La mappa dei tasti è cambiata, è necessario riavviare la GUI"
 
 msgid "Kikuyu / Gikuyu"
 msgstr "Kikuyu / Gikuyu"
@@ -10377,11 +10376,11 @@ msgstr "Ultimo aggiornamento"
 
 #, python-format
 msgid "Last update:\t%s"
-msgstr "Aggiornamento elenco pacchetti: %s"
+msgstr "Ultimo aggiornamento: %s"
 
 #, python-format
 msgid "Last update: %s"
-msgstr "Aggiornamento elenco pacchetti: %s"
+msgstr "Ultimo aggiornamento: %s"
 
 msgid "Last used column"
 msgstr "Ultima colonna utilizzata"
@@ -10504,7 +10503,7 @@ msgid "Lingala"
 msgstr "Lingala"
 
 msgid "Link Quality:"
-msgstr "Qualità del link:"
+msgstr "Qualità del collegamento:"
 
 msgid "Link quality:"
 msgstr "Qualità collegamento:"
@@ -10516,7 +10515,7 @@ msgid "Link:"
 msgstr "Collegamento:"
 
 msgid "Linked titles with a DVD menu"
-msgstr "Titoli collegati ad un Menu DVD"
+msgstr "Titoli collegati con un menu DVD"
 
 msgid "Links"
 msgstr "Collegamenti"
@@ -10751,7 +10750,7 @@ msgid "MENU"
 msgstr "MENU"
 
 msgid "MIME Version"
-msgstr "Versione-immagine"
+msgstr "Versione MIME"
 
 msgid "MMA"
 msgstr "MMA"
@@ -10844,7 +10843,7 @@ msgid "Manual configuration"
 msgstr "Configurazione manuale"
 
 msgid "Manual scan"
-msgstr "scansione manuale"
+msgstr "Scansione manuale"
 
 msgid "Manual transponder"
 msgstr "Transponder manuale"
@@ -10950,7 +10949,7 @@ msgid "Media Stream"
 msgstr "Media Stream"
 
 msgid "Media playback Remaining/Elapsed as"
-msgstr "Riproduzione Rimanente/Trascorso come"
+msgstr "Riproduzione rimanente/trascorso come"
 
 msgid "Media scanner"
 msgstr "Scansione multimediale"
@@ -10977,7 +10976,7 @@ msgid "Mem cleared"
 msgstr "Memoria cancellata"
 
 msgid "MemInfo"
-msgstr "Memoria Info"
+msgstr "Informazioni sulla memoria"
 
 msgid "Memory"
 msgstr "Memoria"
@@ -11651,7 +11650,7 @@ msgid "Name server %d"
 msgstr "Server dei nomi %d"
 
 msgid "Name: "
-msgstr "Name: "
+msgstr "Nome: "
 
 msgid "Name: n/a"
 msgstr "Nome: n/a"
@@ -11702,7 +11701,7 @@ msgid "Ndonga"
 msgstr "Ndonga"
 
 msgid "Ne"
-msgstr "Nuovo"
+msgstr "Ne"
 
 msgid "Nepal"
 msgstr "Nepal"
@@ -11780,16 +11779,16 @@ msgid "Network name (SSID)"
 msgstr "Nome rete (SSID)"
 
 msgid "Network peer"
-msgstr "Scheda di rete"
+msgstr "Peer di rete"
 
 msgid "Network peers"
-msgstr "Server di rete"
+msgstr "Peers di rete"
 
 msgid "Network scan"
 msgstr "Scansione rete"
 
 msgid "Network setup"
-msgstr "Test della rete"
+msgstr "Configurazione di rete"
 
 msgid "Network test"
 msgstr "Test di rete"
@@ -11898,10 +11897,10 @@ msgid "Niue"
 msgstr "Niue"
 
 msgid "Nne"
-msgstr "Nessuno"
+msgstr "Nne"
 
 msgid "Nnw"
-msgstr "Nuovo"
+msgstr "Nnw"
 
 msgid "No"
 msgstr "No"
@@ -12217,8 +12216,8 @@ msgid ""
 "\n"
 "Exit plugin."
 msgstr ""
-"Spazio libero insufficiente su / media / opdboot / !!n\n"
-"Hai bisogno di almeno 300 MB di spazio libero.\n"
+"Spazio libero insufficiente su /media/ opdboot/ !!\n"
+"Hai bisogno di almeno 300MB di spazio libero.\n"
 "\n"
 "Esci dal plugin."
 
@@ -12276,7 +12275,7 @@ msgid "Nr"
 msgstr "Nr"
 
 msgid "Nse"
-msgstr "Nuovo"
+msgstr "Nse"
 
 msgid "Number"
 msgstr "Numero"
@@ -12306,7 +12305,7 @@ msgid "OE Changes"
 msgstr "Modifiche OE"
 
 msgid "OE Log"
-msgstr "Log OE"
+msgstr "Registro OE"
 
 msgid "OK"
 msgstr "OK"
@@ -12333,16 +12332,16 @@ msgid "OPD BootLogo settings"
 msgstr "Impostazioni OPD BootLogo"
 
 msgid "OPD CronManager"
-msgstr "OPD CronManager"
+msgstr "Gestore Cron OPD"
 
 msgid "OPD Download Panel"
-msgstr "OPD Download Panel"
+msgstr "Pannello download OPD"
 
 msgid "OPD Green Panel"
 msgstr "OPD Green Panel"
 
 msgid "OPD MountManager"
-msgstr "OPD MountManager"
+msgstr "Gestore montaggio OPD"
 
 msgid "OPD MultiBoot"
 msgstr "OPD MultiBoot"
@@ -12696,7 +12695,7 @@ msgid ""
 "Oscam Binary is not installed\n"
 "You must this install"
 msgstr ""
-"Oscam Binario non è installato\n"
+"Binario Oscam non è installato\n"
 "È necessario installarlo"
 
 msgid "Oscam Info - Main Menu"
@@ -13027,7 +13026,7 @@ msgid "Pause playback"
 msgstr "Pausa riproduzione"
 
 msgid "Pause/Continue playback"
-msgstr "Pausa/Continua la riproduzione"
+msgstr "Pausa/continua la riproduzione"
 
 msgid "Pausing"
 msgstr "Pausa"
@@ -13593,11 +13592,11 @@ msgid ""
 "Please: DO NOT reboot your STB and turn off the power.\n"
 "\n"
 msgstr ""
-"Per favore: NON riavviare e non spegnere la corrente del Ricevitore.\n"
+"Per favore: NON riavviare e non spegnere il Ricevitore.\n"
 "\n"
 
 msgid "Plugin"
-msgstr "Plugins"
+msgstr "Plugin"
 
 msgid "Plugin Browser"
 msgstr "Elenco plugin"
@@ -13798,7 +13797,7 @@ msgid "Press GREEN to enable MultiBoot!"
 msgstr "Premi VERDE per abilitare MultiBoot!"
 
 msgid "Press GREEN to remove all"
-msgstr "Premere VERDE per rimuovere tutti"
+msgstr "Premi VERDE per rimuovere tutti"
 
 msgid "Press OK for MultiBoot selection."
 msgstr "Premi OK per la selezione MultiBoot."
@@ -14157,7 +14156,7 @@ msgid "Query before image backup starts"
 msgstr "Interrogazione prima dell'avvio del backup dell'immagine"
 
 msgid "Query before starting image backup."
-msgstr "Eseguire una query prima di avviare il backup dell'immagine."
+msgstr "Interrogazione prima di avviare il backup dell'immagine."
 
 msgid "Question"
 msgstr "Avviso"
@@ -14211,7 +14210,7 @@ msgid "RED long"
 msgstr "Rosso lungo"
 
 msgid "RF Output Settings"
-msgstr "Configurazioni Output RF"
+msgstr "Impostazioni dell'uscita RF"
 
 msgid "Radio"
 msgstr "Radio"
@@ -14532,7 +14531,7 @@ msgid "Reload Bookmarks"
 msgstr "Ricarica segnalibri"
 
 msgid "Reload Services"
-msgstr "Ricarica Servizi"
+msgstr "Ricarica servizi"
 
 msgid "Reload all services from disk"
 msgstr "Ricarica tutti i servizi dal disco"
@@ -14786,7 +14785,7 @@ msgid "Repeat how often"
 msgstr "Ripeti quante volte"
 
 msgid "Repeat play list"
-msgstr "Ripetere playlist"
+msgstr "Ripeti playlist"
 
 msgid "Repeat the sent standby and wake up commands"
 msgstr "Ripeto i comandi “Standby” e “Riattiva”"
@@ -16760,15 +16759,14 @@ msgstr "Imposta l'ora di inizio del backup."
 msgid "Set the time of day to perform the import."
 msgstr "Impostare il tempo di visualizzazione della Infobar."
 
-#, fuzzy
 msgid ""
 "Set the time options.\n"
 "\n"
 "Press YELLOW to set the time zone via geolocation."
 msgstr ""
-"Imposta opzioni del tempo.\n"
+"Imposta le opzioni dell'ora.\n"
 "\n"
-"Premi GIALLO per impostare il fuso orario tramite geolocalizzazione."
+"Premere GIALLO per impostare il fuso orario tramite geolocalizzazione."
 
 msgid "Set the time to hide the infobar."
 msgstr "Imposta il tempo di visualizzazione della barra informazioni."
