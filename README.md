@@ -96,24 +96,25 @@
 ----------
 13 - Finally you can start building a image
 
-Build an image with feed (build time 5-12h)
+----------
+14 -Build an image with feed (build time 5-12h)
 
- 15 -    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make image
+    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make image
 
 ----------
-* Build an image without feed (build time 1-2h)
+15 - Build an image without feed (build time 1-2h)
 
- 16 -    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make enigma2-image
+    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make enigma2-image
 
 ----------
-* Build the feeds
+16 - Build the feeds
 
     MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make feeds
 
 ----------
-* Build specific packages
+17 -Build specific packages
 
- 17 -    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make init
+    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make init
 
     cd builds/opendroid/sf4008/
     source env.source
