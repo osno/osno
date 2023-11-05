@@ -96,7 +96,7 @@
 ----------
 13 - Finally you can start building a image
 
-* Build an image with feed (build time 5-12h)
+Build an image with feed (build time 5-12h)
 
  15 -    MACHINE=sf4008 DISTRO=opendroid DISTRO_TYPE=release make image
 
