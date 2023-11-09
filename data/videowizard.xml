@@ -19,7 +19,7 @@ self.selectKey("OK")
 		<condition>
 self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
-		<text value="Use automatic mode detection.\n This option reads all supported modes from your TV.\n Please disable it only if you want to customize the preferred configuration." />
+		<text value="Use automatic mode detection?\n This option reads all supported modes from your TV.\n Please disable it only if you want to customize the preferred configuration." />
 		<displaytext value="Use automatic mode detection" />
 		<list>
 			<listentry caption="Yes" step="modeauto" />
