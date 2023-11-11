@@ -63,6 +63,14 @@ msgid ""
 " - for GigaBlue UE and GigaBlue Quad\n"
 " - for VU+ Ultimo and VU+ Duo2"
 msgstr ""
+"\n"
+"Selettore skin VFD\n"
+"da satinfo & henrylicious (grazie per il supporto)\n"
+"\n"
+"Plugin per selezionare la skin per il display VFD\n"
+"\n"
+" - per GigaBlue UE e GigaBlue Quad\n"
+" - per VU+ Ultimo e VU+ Duo2"
 
 msgid ""
 "\n"
@@ -166,7 +174,7 @@ msgid " HI "
 msgstr " CIAO "
 
 msgid " Server and "
-msgstr " Server and "
+msgstr " Server e "
 
 msgid " and"
 msgstr " e"
@@ -942,8 +950,8 @@ msgstr[1] "%d pixel"
 #, python-format
 msgid "%d Pixel wide"
 msgid_plural "%d Pixels wide"
-msgstr[0] "Largo %d pixel"
-msgstr[1] "Largo %d pixel"
+msgstr[0] "%d pixel largo"
+msgstr[1] "%d pixel larghi"
 
 #, python-format
 msgid "%d Pixels"
@@ -1286,7 +1294,7 @@ msgstr "%s: %s"
 
 #, python-format
 msgid "%s: error: %s\n"
-msgstr "%s: error: %s\n"
+msgstr "%s: errore: %s\n"
 
 #, python-format
 msgid "%sMode for FHD (up to 1080p)"
@@ -1659,7 +1667,7 @@ msgid ""
 "5. Press the green button and select the source to install the multiboot image.\n"
 "\n"
 msgstr ""
-"5. Premere il tasto verde e  selezionare la sorgente per installare l'immagine in multiboot.\n"
+"5. Premere il tasto verde e selezionare la sorgente per installare l'immagine in multiboot.\n"
 "\n"
 
 msgid "512 Mb"
@@ -1786,7 +1794,7 @@ msgid "A crash log was %s created in '%s'"
 msgstr "È stato creato un registro dei crash %s in '%s'"
 
 msgid "A file from media is in use!"
-msgstr "Un file multimediale è in uso!"
+msgstr "C'è un file aperto nel dispositivo!"
 
 #, python-format
 msgid "A finished PowerTimer wants to reboot your %s %s. Do that now?"
@@ -1977,7 +1985,7 @@ msgid "Accessed"
 msgstr "Accesso"
 
 msgid "Accesspoint:"
-msgstr "Punto di accesso"
+msgstr "Punto di accesso:"
 
 msgid "Action"
 msgstr "Azione"
@@ -2031,7 +2039,7 @@ msgid "Adapter Settings"
 msgstr "Impostazioni adattatore"
 
 msgid "Add"
-msgstr "Aggiungere"
+msgstr "Aggiungi"
 
 msgid "Add Alternatives"
 msgstr "Aggiungi alternative"
@@ -2193,7 +2201,7 @@ msgid "Add the current directory as a bookmark"
 msgstr "Aggiungi cartella attuale come segnalibro"
 
 msgid "Add the current service to the Volume Offsets list"
-msgstr "Aggiungere il servizio corrente all'elenco dei set con volume disattivato"
+msgstr "Aggiungi il servizio corrente all'elenco dei set con volume disattivato"
 
 msgid "Add title"
 msgstr "Aggiungi titolo"
@@ -2220,7 +2228,7 @@ msgid "Addons"
 msgstr "Componenti aggiuntivi"
 
 msgid "Addons "
-msgstr "Componenti aggiuntivi"
+msgstr "Componenti aggiuntivi "
 
 msgid "Address"
 msgstr "Indirizzo"
@@ -2244,7 +2252,7 @@ msgid "Adult Audience, Strong Violence 15+"
 msgstr "Pubblico adulto, violenza forte 15+"
 
 msgid "Adv. UnInstall"
-msgstr "Disinstalla"
+msgstr "Disinstalla Adv"
 
 msgid "Advanced"
 msgstr "Avanzato"
@@ -2313,7 +2321,7 @@ msgid "Algeria"
 msgstr "Algeria"
 
 msgid "Alias"
-msgstr "Pseudonimo:"
+msgstr "Pseudonimo"
 
 msgid "Alignment channel number"
 msgstr "Numero del canale di allineamento"
@@ -2725,7 +2733,7 @@ msgid "Aspect Ratio Actions"
 msgstr "Azioni per le proporzioni"
 
 msgid "Aspect Ratio: "
-msgstr "Rapporto proporzioni"
+msgstr "Rapporto proporzioni: "
 
 msgid "Aspect Ratio: n/a"
 msgstr "Rapporto proporzioni: n/a"
@@ -5030,7 +5038,7 @@ msgid "Control the InfoBar fading speed"
 msgstr "Velocità dissolvenza barra informazioni"
 
 msgid "Controlled by HDMI"
-msgstr "controllata da HDMI"
+msgstr "Controllata da HDMI"
 
 msgid "Convert EXT3 File System to EXT4"
 msgstr "Converti file system da ext3 a ext4"
@@ -18879,7 +18887,7 @@ msgid "TMDB Search"
 msgstr "Ricerca TMDB"
 
 msgid "TRANSLATOR_INFO"
-msgstr "Per correzione Traduzione opendroid2013@gmail.com"
+msgstr "Per correzioni alla traduzione opendroid2013@gmail.com"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "File TS troppo grande per ISO9660 livello 1!"
@@ -18900,10 +18908,10 @@ msgid "TV physical address report"
 msgstr "Rapporto indirizzo fisico TV"
 
 msgid "TXT PID"
-msgstr "TXT PID"
+msgstr "PID TXT"
 
 msgid "TXT Subtitles page & lang"
-msgstr "Pagina sottotitoli TXT & lang"
+msgstr "Pagina e lingua dei sottotitoli TXT"
 
 msgid "Table of content for collection"
 msgstr "Tabella contenuti per collezione"
@@ -19236,7 +19244,7 @@ msgid "The TV was switched to the recording service!\n"
 msgstr "La TV è passata al servizio di registrazione!\n"
 
 msgid "The URL to this image is not correct !!"
-msgstr "L'URL di questa immagine non è corretto !!"
+msgstr "L'URL di questa immagine non è corretto!!"
 
 msgid ""
 "The VideoMode plugin is not installed!\n"
@@ -19362,7 +19370,7 @@ msgstr "L'altezza dell'immagine. Quella di input sarà ridimensionata per raggiu
 
 #, python-format
 msgid "The installation of the default settings is finished. You can now continue configuring your %s %s by pressing the OK button on the remote control."
-msgstr "Il ripristino delle impostazioni di base è terminata. Configura il tuo %s %s premendo il tasto OK del tuo del tuo telecomando."
+msgstr "Il ripristino delle impostazioni di base è terminato. Configura il tuo %s %s premendo il tasto OK del tuo telecomando."
 
 msgid "The loopthrough setting is wrong."
 msgstr "Configurazione 'in cascata da' errata."
@@ -19398,7 +19406,7 @@ msgid "The setting 'Without query' is the same as 'Standard' without additional 
 msgstr "L'impostazione 'senza interrogazione' è la stessa di 'standard' senza ulteriore richiesta di conferma. Tutte le altre dipendenze (ad es. registrazioni, intervallo di tempo) rimangono persistenti."
 
 msgid "The setting 'without query' is the same as 'standard' without additional confirmation query. All other dependencies (e.g. recordings, time range) stay persist."
-msgstr "L'impostazione 'senza Query' è lo stesso di 'standard', senza richiesta di conferma supplementare. Tutte le altre dipendenze (ad esempio registrazioni, Intervallo di tempo) rimangono attive."
+msgstr "L'impostazione 'senza richiesta' è uguale a 'standard' senza ulteriore richiesta di conferma. Tutte le altre dipendenze (ad esempio registrazioni, intervallo di tempo) rimangono persistenti."
 
 #, python-format
 msgid ""
@@ -19496,7 +19504,7 @@ msgid "There was an error downloading the update list.  Please try again."
 msgstr "C’è stato une rrore durante il download degli aggiornamenti. Riprova nuovamente."
 
 msgid "There was an error downloading the updatelist. Please try again."
-msgstr "C’è stato une rrore durante il download degli aggiornamenti. Riprova nuovamente."
+msgstr "Si è verificato un errore durante il download dell'elenco degli aggiornamenti. Per favore riprova."
 
 #, python-format
 msgid "This %s %s cannot decode %s streams!"
@@ -19537,7 +19545,7 @@ msgid ""
 msgstr ""
 "Questa informazione è solo per gli sviluppatori.\n"
 "Per gli utenti normali non è pertinente.\n"
-"Non farti prendere dal panico per favore quando vedi i valori visualizzati che pensi che sembri sospetto!"
+"Non farti prendere dal panico quando vedi i valori che sembrano sospetti!"
 
 msgid "This is a workaround for some devices that wake up again after switching to standby. The wake up command's from other devices will be ignored for few seconds."
 msgstr "Questa è una soluzione alternativa per alcuni dispositivi che si riattivano dopo essere passati alla modalità standby. I comandi di riattivazione da altri dispositivi verranno ignorati per alcuni secondi."
@@ -19554,7 +19562,7 @@ msgid "This is the initial / default volume offset applied to any services added
 msgstr "Questo è l'offset del volume iniziale/predefinito applicato a tutti i servizi aggiunti all'elenco di regolazione del volume."
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr "Questo l’ordine in cui i comandi DiSEqC vengono inviati. L’ordine deve corrispondere esattamente a quello dei dispositivi fisici collegati al ricevitore."
+msgstr "Questo è l'ordine in cui i comandi DiSEqC vengono inviati all'antenna. L'ordine deve corrispondere esattamente all'ordine in cui sono disposti i dispositivi fisici lungo il cavo del segnale (a partire dal lato del ricevitore)."
 
 msgid "This menu offers options related managing the software on the %s %s."
 msgstr "Opzioni relative alla gestione del software del %s %s."
@@ -19925,13 +19933,13 @@ msgid "Time jump: Use normal fast forward for speeds"
 msgstr "Salti temporali: usa gli avanzamenti veloci standard"
 
 msgid "Time of Backup to start"
-msgstr "Ora di avvio del backup"
+msgstr "Tempo di avvio del backup"
 
 msgid "Time of info message (1-10sec):"
 msgstr "Tempo del messaggio informativo (1-10 secondi):"
 
 msgid "Time of info message:"
-msgstr "Ora del messaggio informativo:"
+msgstr "Tempo del messaggio informativo:"
 
 msgid "Time range:"
 msgstr "Intervallo di tempo:"
@@ -19980,7 +19988,7 @@ msgid "Time shift save recording (stop after current event)"
 msgstr "Salva come timeshift (stop dopo evento in corso)"
 
 msgid "Time shift saved to your hard disk drive!"
-msgstr "Timeshift salvato sul hard disk!"
+msgstr "Timeshift salvato sul disco rigido!"
 
 msgid "Time shift will get saved at end of event!"
 msgstr "Il timeshift verrà salvato a fine evento!"
@@ -20052,7 +20060,7 @@ msgid "Timer recording location"
 msgstr "Percorso registrazione timer"
 
 msgid "Timer sanity error"
-msgstr "Tipo timer"
+msgstr "Errore di integrità del timer"
 
 msgid "Timer selection"
 msgstr "Selezione timer"
@@ -20525,7 +20533,7 @@ msgid "Uganda"
 msgstr ""
 
 msgid "Uighur / Uyghur"
-msgstr ""
+msgstr "Uiguro / Uyguro"
 
 msgid "Ukraine"
 msgstr "Ucraina"
@@ -20644,7 +20652,7 @@ msgid "Unsupportet CPU"
 msgstr "CPU Non supportata"
 
 msgid "Until standby/restart"
-msgstr "fino allo standby o riavvio"
+msgstr "Fino allo standby o riavvio"
 
 msgid "Unused 0x22"
 msgstr "0x22 non utilizzato"
@@ -20683,7 +20691,7 @@ msgid "Up/Down buttons also for 'all up/down'"
 msgstr "Tasti Su/Giù anche per 'tutti su/giù'"
 
 msgid "Update"
-msgstr "Aggiorna"
+msgstr "Aggiorna sistema"
 
 msgid "Update completed."
 msgstr "Aggiornamento completato."
@@ -20857,7 +20865,7 @@ msgstr ""
 "Questa opzione legge tutte le modalità supportate dalla TV. Disattivala solo se desideri personalizzare la configurazione preferita."
 
 msgid "Use best / Controlled by HDMI"
-msgstr "usare migliore / controllato da HDMI"
+msgstr "Usa migliore / controllato da HDMI"
 
 msgid "Use circular LNB"
 msgstr "Usa LNB circolare"
@@ -20887,7 +20895,7 @@ msgid "Use interface"
 msgstr "Usa l'Interfaccia"
 
 msgid "Use key map *"
-msgstr "Usa keymap *"
+msgstr "Usa mappa dei tasti *"
 
 msgid "Use logarithmic steps"
 msgstr "Usa passi logaritmici"
@@ -21109,7 +21117,7 @@ msgid "Version: %s"
 msgstr "Versione: %s:"
 
 msgid "Versions Info"
-msgstr "Info Versione"
+msgstr "Informazioni Versione"
 
 msgid "Vertical"
 msgstr "Verticale"
@@ -21169,7 +21177,7 @@ msgid "Video Size: "
 msgstr "Dimensioni video: "
 
 msgid "Video Size: n/a"
-msgstr "Dimensione del video: n/a"
+msgstr "Dimensione video: n/a"
 
 msgid "Video Wizard"
 msgstr "Procedura guidata video"
@@ -21496,7 +21504,7 @@ msgid ""
 "Your receiver restarts in 10 seconds!\n"
 "Component: enigma2"
 msgstr ""
-"Siamo davvero dispiaciuti. Il ricevitore ha riscontrato un problema software e deve essere riavviato.\n"
+"Il ricevitore ha avuto un problema software e deve essere riavviato.\n"
 "Si prega di inviare il file di registro %senigma2_crash_xxxxxx.log a https://droidsat.org\n"
 "Il ricevitore si riavvierà in 10 secondi!\n"
 "Componente: enigma2"
@@ -21536,7 +21544,7 @@ msgstr "Procedura guidata di benvenuto"
 
 #, python-format
 msgid "Welcome to OPDBoot %s MultiBoot Plugin installation."
-msgstr "Benvenuto in OPDBoot %s Installazione del plug-in MultiBoot."
+msgstr "Benvenuto in OPDBoot %s Installazione del Plugin MultiBoot."
 
 msgid ""
 "Welcome to the Cutlist editor.\n"
@@ -21575,6 +21583,7 @@ msgstr ""
 "Benvenuto.\n"
 "\n"
 "Questa procedura guidata ti guiderà attraverso la configurazione di rete di base di %s %s.\n"
+"\n"
 "Premi OK per iniziare a configurare la rete"
 
 msgid "Welcome..."
@@ -21839,7 +21848,7 @@ msgid "White"
 msgstr "Bianco"
 
 msgid "Wide"
-msgstr "largo"
+msgstr "Largo"
 
 msgid "Width"
 msgstr "Larghezza"
@@ -21860,7 +21869,7 @@ msgid "Wireless network"
 msgstr "Rete wireless"
 
 msgid "Wireless network configuration..."
-msgstr "Configurazione della rete wireless ..."
+msgstr "Configurazione della rete wireless..."
 
 msgid ""
 "Wireless network connection setup.\n"
@@ -22008,7 +22017,7 @@ msgid "Yes, and delete this movie"
 msgstr "Sì, ed elimina questa registrazione"
 
 msgid "Yes, and don't ask again for this session"
-msgstr "Sì, e non chiedere mai più questa sessione"
+msgstr "Sì, e non chiedere più per questa sessione"
 
 msgid "Yes, backup my settings!"
 msgstr "Sì, fai il backup delle impostazioni!"
@@ -22384,7 +22393,7 @@ msgid "Zap + Exit"
 msgstr "Zap e esci"
 
 msgid "Zap and record"
-msgstr "Fai zapping e registra"
+msgstr "Zap e registra"
 
 msgid "Zap back to previously tuned service?"
 msgstr "Tornare al servizio precedentemente sintonizzato?"
@@ -22471,7 +22480,7 @@ msgid "[REC]"
 msgstr "[REC]"
 
 msgid "[Timeshift] Merging records failed!"
-msgstr "Timeshift: unione registrazioni fallita!"
+msgstr "[Timeshift] unione registrazioni fallita!"
 
 msgid "[Timeshift] Restarting time shift!"
 msgstr "[TimeShift] Riavvio timeshift!"
@@ -22568,13 +22577,13 @@ msgid "an internal error has occur"
 msgstr "si è verificato un errore interno"
 
 msgid "aqua"
-msgstr ""
+msgstr "acqua"
 
 msgid ""
 "are you sure you want to restore\n"
 "following backup:\n"
 msgstr ""
-"sei sicuro di ripristinare \n"
+"sei sicuro di ripristinare\n"
 "questi backup:\n"
 
 #, python-format
@@ -22589,10 +22598,10 @@ msgid "arts/culture (general)"
 msgstr "arte/cultura (generale)"
 
 msgid "arts/culture (without music, general)"
-msgstr "arti/cultura (non musica, generale)"
+msgstr "arte/cultura (senza musica, generale)"
 
 msgid "arts/culture magazine"
-msgstr "arti/cultura rivista"
+msgstr "giornale di arte/cultura"
 
 msgid "athletics"
 msgstr "atletica"
@@ -22609,10 +22618,10 @@ msgid "audio tracks"
 msgstr "tracce audio"
 
 msgid "auto deepstandby"
-msgstr "standby profondo automatico"
+msgstr "standby automatico profondo "
 
 msgid "auto standby"
-msgstr "sempre astandby automaticottivo"
+msgstr "standby automatico"
 
 msgid "automatic"
 msgstr "automatico"
@@ -22624,7 +22633,7 @@ msgid "back"
 msgstr "indietro"
 
 msgid "background image"
-msgstr "immagine nello sfondo"
+msgstr "immagine di sfondo"
 
 msgid "ballet"
 msgstr "balletto"
@@ -22646,13 +22655,13 @@ msgid "black"
 msgstr "nero"
 
 msgid "black & white"
-msgstr "bianco & nero"
+msgstr "bianco e nero"
 
 msgid "blue"
 msgstr "blu"
 
 msgid "broadcasting/press"
-msgstr "broadcasting/stampa"
+msgstr "radiodiffusione/stampa"
 
 #, python-format
 msgid "burn audio track (%s)"
@@ -22662,7 +22671,7 @@ msgid "by date"
 msgstr "per data"
 
 msgid "by hmmmdada"
-msgstr "di mmmmdada"
+msgstr "di hmmmdada"
 
 msgid "caid:"
 msgstr "caid:"
@@ -22706,13 +22715,13 @@ msgid "children's (general)"
 msgstr "bambini (generale)"
 
 msgid "children's/youth program (general)"
-msgstr "programmi per bambini e giovani "
+msgstr "programmi per bambini e giovani"
 
 msgid "clear /tmp"
 msgstr "rimozione pacchetti /tmp tar.gz bh.tgz ipk nab.tgz"
 
 msgid "clip overscan / letterbox borders"
-msgstr "clip overscan / letterbox borders"
+msgstr "ritaglia overscan / bordi letterbox"
 
 msgid "close share view"
 msgstr "visualizzazione condivisa chiusa"
@@ -22747,7 +22756,7 @@ msgid "create partition %s"
 msgstr "creare partizione %s"
 
 msgid "current affairs (general)"
-msgstr "affari correnti (generale)"
+msgstr "attualità (generale)"
 
 msgid "daily"
 msgstr "giornaliero"
@@ -22797,7 +22806,7 @@ msgid "documentary"
 msgstr "documentari"
 
 msgid "documentary (general)"
-msgstr "documentario (generale)"
+msgstr "documentari (generale)"
 
 msgid "done"
 msgstr "fatto"
@@ -22846,7 +22855,7 @@ msgid "enabled"
 msgstr "abilitato"
 
 msgid "end cut here"
-msgstr "Fine taglio"
+msgstr "fine taglio"
 
 msgid "enigma2 and network"
 msgstr "Enigma2 e rete"
@@ -22879,13 +22888,13 @@ msgid "execute cuts (requires MovieCut plugin)"
 msgstr "esegui tagli (richiede il plugin MovieCut)"
 
 msgid "exit DVD player or return to file browser"
-msgstr "Uscire dal Player DVD e tornare all'elenco file"
+msgstr "esci dal lettore DVD o torna all'elenco file"
 
 msgid "exit mounts setup menu"
 msgstr "esci dal menu di configurazione dei montaggi"
 
 msgid "exit networkadapter setup menu"
-msgstr "Uscire da menu configurazione interfaccia di rete"
+msgstr "esci dal menu di configurazione interfaccia di rete"
 
 #, python-format
 msgid "expected %s argument(s)"
@@ -22913,7 +22922,7 @@ msgid "ext4 - recommended for OPDBoot"
 msgstr "ext4 - raccomandato per OPDBoot"
 
 msgid "externally loopthrough to"
-msgstr "in cascata da"
+msgstr "esternamente in cascata a"
 
 msgid "failed"
 msgstr "fallito"
@@ -22922,10 +22931,10 @@ msgid "fashion"
 msgstr "moda"
 
 msgid "fast"
-msgstr "fast"
+msgstr "veloce"
 
 msgid "file already exists and use it"
-msgstr "il file esiste già utilizzalo"
+msgstr "il file esiste già, utilizzalo"
 
 msgid "file can not displayed - file not found"
 msgstr "Il file non può essere mostrato - file non trovato"
@@ -22934,10 +22943,10 @@ msgid "file exists, becomes upgrade"
 msgstr "il file esiste, diventa aggiornamento"
 
 msgid "fileformats (BMP, PNG, JPG, GIF)"
-msgstr "Formati file (BMP, PNG, JPG, GIF)"
+msgstr "formati file (BMP, PNG, JPG, GIF)"
 
 msgid "filename"
-msgstr "Nome file"
+msgstr "nome file"
 
 msgid "filesystem:"
 msgstr "filesystem:"
@@ -22949,13 +22958,13 @@ msgid "fine arts"
 msgstr "belle arti"
 
 msgid "fitness & health"
-msgstr "fitness & salute"
+msgstr "fitness e salute"
 
 msgid "flat alphabetic"
-msgstr "alfabetico uniforme"
+msgstr "alfabetico piatto"
 
 msgid "flat alphabetic reverse"
-msgstr "alfabetico uniforme inverso"
+msgstr "alfabetico piatto inverso"
 
 msgid "folk/traditional music"
 msgstr "folk/musica tradizionale"
@@ -22967,7 +22976,7 @@ msgid "foreign countries/expeditions"
 msgstr "paesi stranieri/spedizioni"
 
 msgid "forward to the next chapter"
-msgstr "passare al capitolo successivo"
+msgstr "passa al capitolo successivo"
 
 msgid "found"
 msgstr "trovato"
@@ -22985,7 +22994,7 @@ msgid "full"
 msgstr "pieno"
 
 msgid "further education"
-msgstr "perfezionamento"
+msgstr "istruzione ulteriore"
 
 msgid "game show/quiz/contest"
 msgstr "giochi/quiz/concorso"
@@ -23009,28 +23018,28 @@ msgid "goto now"
 msgstr "vai adesso"
 
 msgid "grab this frame as bitmap"
-msgstr "Grab dell'immagine come bitmap"
+msgstr "cattura questo fotogramma come bitmap"
 
 msgid "green"
-msgstr "Verde"
+msgstr "verde"
 
 msgid "h:mm"
-msgstr "O:min"
+msgstr "h:mm"
 
 msgid "h:mm:ss"
-msgstr "O:min:sec"
+msgstr "h:mm:ss"
 
 msgid "h:mm:ssAM/PM"
-msgstr "O:min:sec AM/PM"
+msgstr "h:mm:ssAM/PM"
 
 msgid "h:mm:ssam/pm"
-msgstr "O:min:sec am/pm"
+msgstr "h:mm:ssam/pm"
 
 msgid "h:mmAM/PM"
-msgstr "O:min AM/PM"
+msgstr "h:mmAM/PM"
 
 msgid "h:mmam/pm"
-msgstr "O:min am/pm"
+msgstr "h:mmam/pm"
 
 msgid "handicraft"
 msgstr "artigianato"
@@ -23045,22 +23054,22 @@ msgid "help..."
 msgstr "aiuto..."
 
 msgid "hh:mm"
-msgstr "OO:min"
+msgstr "hh:mm"
 
 msgid "hh:mm:ss"
-msgstr "OO:min:sec"
+msgstr "hh:mm:ss"
 
 msgid "hh:mm:ssAM/PM"
-msgstr "OO:min:sec AM/PM"
+msgstr "hh:mm:ssAM/PM"
 
 msgid "hh:mm:ssam/pm"
-msgstr "OO:min:sec am/pm"
+msgstr "hh:mm:ssam/pm"
 
 msgid "hh:mmAM/PM"
-msgstr "OO:mmAM/PM"
+msgstr "hh:mmAM/PM"
 
 msgid "hh:mmam/pm"
-msgstr "OO:mmam/pm"
+msgstr "hh:mmam/pm"
 
 msgid "hops:"
 msgstr "hops:"
@@ -23079,10 +23088,10 @@ msgid "increase uphop by 1"
 msgstr "incrementa uphop di 1"
 
 msgid "info"
-msgstr "info"
+msgstr "informazioni"
 
 msgid "info Install"
-msgstr "informazioni Installa"
+msgstr "informazioni Installazioni"
 
 msgid "information/education/school program"
 msgstr "informazione/educazione/programmi scolastici"
@@ -23091,13 +23100,13 @@ msgid "infotainment (general)"
 msgstr "infotainment (generale)"
 
 msgid "init module"
-msgstr "init modulo"
+msgstr "modulo inizializzazione"
 
 msgid "init modules"
-msgstr "inizializzazione moduli"
+msgstr "moduli inizializzazione"
 
 msgid "insert mark here"
-msgstr "inserire contrassegno"
+msgstr "inserisci marcatore qui"
 
 msgid "install extensions all feed"
 msgstr "installare estensioni tutti i feed"
@@ -23143,7 +23152,7 @@ msgid "jump back to the previous title"
 msgstr "vai al titolo precedente"
 
 msgid "jump forward to the next title"
-msgstr "vai a titolo successivo"
+msgstr "vai al titolo successivo"
 
 msgid "jump to chapter by number"
 msgstr "vai al capitolo per numerazione"
@@ -23158,10 +23167,10 @@ msgid "left"
 msgstr "sinistro"
 
 msgid "leisure hobbies (general)"
-msgstr "tempo libero hobby (generale)"
+msgstr "attività ricreative (generale)"
 
 msgid "length"
-msgstr "Durata"
+msgstr "durata"
 
 msgid "lime"
 msgstr "lime"
@@ -23179,10 +23188,10 @@ msgid "long"
 msgstr "lungo"
 
 msgid "loopthrough to"
-msgstr "in cascata da"
+msgstr "in cascata a"
 
-msgid "magazines//documentary"
-msgstr "riviste/reports/documentari"
+msgid "magazines/reports/documentary"
+msgstr "giornali/reports/documentari"
 
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
@@ -23219,16 +23228,16 @@ msgid "move"
 msgstr "sposta"
 
 msgid "move down to last entry"
-msgstr "andare all'ultima voce"
+msgstr "vai giù all'ultima voce"
 
 msgid "move down to next entry"
-msgstr "andare alla voce successiva"
+msgstr "vai giù alla voce successiva"
 
 msgid "move up to first entry"
-msgstr "spostare su alla voce iniziale"
+msgstr "vai su alla voce iniziale"
 
 msgid "move up to previous entry"
-msgstr "spostare su fino alla voce precedente"
+msgstr "vai su alla voce precedente"
 
 msgid "movie (general)"
 msgstr "film (generale)"
@@ -23240,7 +23249,7 @@ msgid "multi"
 msgstr "multi"
 
 msgid "multinorm"
-msgstr "multistandard"
+msgstr "multinorma"
 
 msgid "music (general)"
 msgstr "musica (generale)"
@@ -23261,7 +23270,7 @@ msgid "name"
 msgstr "nome"
 
 msgid "nature/animals/environment"
-msgstr "natura / animali / ambiente"
+msgstr "natura/animali/ambiente"
 
 msgid "new media"
 msgstr "nuovi media"
@@ -23270,16 +23279,16 @@ msgid "news (general)"
 msgstr "notizie (generale)"
 
 msgid "news magazine"
-msgstr "news magazine"
+msgstr "periodico d'informazione"
 
 msgid "news/current affairs (general)"
-msgstr "news/affari (generale)"
+msgstr "notizie/attualità (generale)"
 
 msgid "news/weather report"
-msgstr "news/meteo"
+msgstr "notizie/bollettino meteorologico"
 
 msgid "next channel page"
-msgstr "vai alla prossima pagina degli eventi"
+msgstr "pagina canale successivo"
 
 msgid "no"
 msgstr "no"
@@ -23312,7 +23321,7 @@ msgid "no resource manager"
 msgstr "nessun gestore di risorse"
 
 msgid "no storage devices found"
-msgstr "dispositivo di archiviazione non trovato"
+msgstr "nessun dispositivo di archiviazione trovato"
 
 msgid "none"
 msgstr "nessuno"
@@ -23355,7 +23364,7 @@ msgid "of a SINGLE layer medium used."
 msgstr "di DVD singolo strato utilizzato."
 
 msgid "off"
-msgstr "Off"
+msgstr "off"
 
 msgid "off or wpa2 on"
 msgstr "disattivata o wpa2 attiva"
@@ -23370,7 +23379,7 @@ msgid "olympic blue"
 msgstr "blu olimpico"
 
 msgid "on READ ONLY medium."
-msgstr "su supporto ottico A SOLA LETTURA."
+msgstr "su supporto di SOLA LETTURA."
 
 msgid "on how to restore the image"
 msgstr "su come ripristinare l’immagine"
@@ -23441,7 +23450,7 @@ msgid "pm"
 msgstr "pm"
 
 msgid "popular culture/traditional arts"
-msgstr "cultura popolare / arti tradizionali"
+msgstr "cultura popolare/arti tradizionali"
 
 msgid "positional arguments"
 msgstr "argomenti posizionali"
@@ -23450,7 +23459,7 @@ msgid "pre-school children's program"
 msgstr "Bambini in età prescolare"
 
 msgid "press color button or lame for exit"
-msgstr "premere il pulsante colorato per uscire"
+msgstr "premi il pulsante colorato per uscire"
 
 msgid "previous channel page"
 msgstr "pagina canale precedente"
@@ -23477,7 +23486,7 @@ msgid "reliable"
 msgstr "affidabile"
 
 msgid "reliable, retune"
-msgstr "affidabile, sintonizza"
+msgstr "affidabile, risintonizza"
 
 msgid "religion"
 msgstr "religione"
@@ -23492,10 +23501,10 @@ msgid "remove before this position"
 msgstr "rimuovi prima di questa posizione"
 
 msgid "remove current config"
-msgstr "rimuovere la configurazione corrente"
+msgstr "rimuovi la configurazione corrente"
 
 msgid "remove reboot from oscamsmartcard"
-msgstr "rimuovere il riavvio da oscamsmartcard"
+msgstr "rimuovi il riavvio da oscamsmartcard"
 
 msgid "remove this mark"
 msgstr "rimuovi contrassegno"
@@ -23507,10 +23516,10 @@ msgid "restoring satellites.xml not possible!"
 msgstr "ripristino di satellites.xml non possibile!"
 
 msgid "reverse by date"
-msgstr "invertire per data"
+msgstr "inverti per data"
 
 msgid "rewind to the previous chapter"
-msgstr "tornare al capitolo precedente"
+msgstr "torna al capitolo precedente"
 
 msgid "right"
 msgstr "destro"
@@ -23533,7 +23542,7 @@ msgid ""
 "but it's not possible to search for new TV channels\n"
 "or to configure tuner settings"
 msgstr ""
-"satellites.xml non trovato o corrotto!\n"
+"satellite.xml non trovato o corrotto!\n"
 "È possibile guardare la TV,\n"
 "ma non è possibile cercare nuovi canali TV\n"
 "configurare le impostazioni del sintonizzatore"
@@ -23545,22 +23554,22 @@ msgid "scan state"
 msgstr "stato ricerca"
 
 msgid "science fiction/fantasy/horror"
-msgstr "scienza/fantasia/horror"
+msgstr "fantascienza/fantasy/horror"
 
 msgid "search EPG..."
 msgstr "Ricerca EPG..."
 
 msgid "select CAId's"
-msgstr "selezionare CAId's"
+msgstr "seleziona CAId's"
 
 msgid "select menu entry"
-msgstr "selezionare voce menu"
+msgstr "seleziona voce menu"
 
 msgid "serious music/classic music"
 msgstr "musica seria/musica classica"
 
 msgid "serious/classical/religious/historical movie/drama"
-msgstr "Impegnata/Classica/Religiosa/Film storici/Teatro"
+msgstr "film/dramma serio/classico/religioso/storico"
 
 msgid "service PIN"
 msgstr "PIN servizio"
@@ -23575,10 +23584,10 @@ msgid "shell"
 msgstr "shell"
 
 msgid "show DVD main menu"
-msgstr "mostra il Menu principale DVD"
+msgstr "mostra menu principale del DVD"
 
 msgid "show EPG..."
-msgstr "mostra EPG ..."
+msgstr "mostra EPG..."
 
 msgid "show all cards"
 msgstr "mostra tutte le schede"
@@ -23626,7 +23635,7 @@ msgid "show picons in service list"
 msgstr "Mostra picon nell'elenco servizi"
 
 msgid "show program information..."
-msgstr "mostra informazioni programma ..."
+msgstr "mostra informazioni programma..."
 
 msgid "show program's version number and exit"
 msgstr "mostra il numero di versione del programma ed esci"
@@ -23635,10 +23644,10 @@ msgid "show this help message and exit"
 msgstr "mostra questo messaggio di aiuto ed esci"
 
 msgid "show/game show (general)"
-msgstr "show/game show (generale)"
+msgstr "spettacolo di giochi (generale)"
 
 msgid "shuffle"
-msgstr "shuffle"
+msgstr "mischia"
 
 msgid "simple"
 msgstr "semplice"
@@ -23654,25 +23663,25 @@ msgid "skip backward"
 msgstr "salta indietro"
 
 msgid "skip backward (enter time)"
-msgstr "salta indietro (inserire intervallo)"
+msgstr "salta indietro (inserisci l'ora)"
 
 msgid "skip forward"
 msgstr "salta avanti"
 
 msgid "skip forward (enter time)"
-msgstr "salta avanti (inserire intervallo)"
+msgstr "salta avanti (inserisci l'ora)"
 
 msgid "slow"
-msgstr "slow"
+msgstr "lento"
 
 msgid "soap/melodrama/folkloric"
 msgstr "soap/melodramma/folkloristico"
 
 msgid "social/political issues/economics (general)"
-msgstr "Sociale / politica / economia politica (generale)"
+msgstr "questioni sociali/politiche/economia (generale)"
 
 msgid "social/spiritual science"
-msgstr "scienza sociale / spirituale"
+msgstr "scienze sociali/spirituali"
 
 msgid "special (general)"
 msgstr "speciale (generale)"
@@ -23687,13 +23696,13 @@ msgid "sports (general)"
 msgstr "sport (generale)"
 
 msgid "sports magazine"
-msgstr "riviste sportive"
+msgstr "periodico sportivo"
 
 msgid "standard"
 msgstr "standard"
 
 msgid "start cut here"
-msgstr "qui INIZIO taglio"
+msgstr "inizia a tagliare qui"
 
 msgid "step size"
 msgstr "dimensione passo"
@@ -23705,7 +23714,7 @@ msgid "successful"
 msgstr "riuscito"
 
 msgid "switch 12 to 8 character display mode"
-msgstr "cambia la modalità caratteri display da 12 a 8"
+msgstr "passa dalla modalità di visualizzazione da 12 a 8 caratteri"
 
 msgid "switch Nand and SDcard"
 msgstr "commuta tra nand e card SD"
@@ -23726,7 +23735,7 @@ msgid "talk show"
 msgstr "talk show"
 
 msgid "team sports"
-msgstr "team sports"
+msgstr "sport di squadra"
 
 msgid "technology/natural science"
 msgstr "tecnologia/scienza naturale"
