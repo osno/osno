@@ -1,11 +1,10 @@
 # -*- coding: UTF-8 -*-
 
 from gettext import bindtextdomain, install, textdomain, translation
-from locale import Error as LocaleError, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MESSAGES, LC_MONETARY, LC_NUMERIC, LC_TIME, setlocale, getlocale
+from locale import Error as LocaleError, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MESSAGES, LC_MONETARY, LC_NUMERIC, LC_TIME, setlocale
 from os import environ, listdir
 from os.path import isdir
 from subprocess import Popen, PIPE
-from time import localtime, strftime, time
 
 from Tools.CountryCodes import setISO3166
 from Tools.Directories import SCOPE_CONFIG, SCOPE_LANGUAGE, fileReadLines, resolveFilename
@@ -13,7 +12,6 @@ from Tools.Directories import SCOPE_CONFIG, SCOPE_LANGUAGE, fileReadLines, resol
 MODULE_NAME = __name__.split(".")[-1]
 PACKAGER = "/usr/bin/opkg"
 PACKAGE_TEMPLATE = "enigma2-locale-%s"
-
 PERMANENT_LOCALES = ["it_IT", "de_DE", "en_US", "fr_FR"]
 
 languagePath = resolveFilename(SCOPE_LANGUAGE)
@@ -31,11 +29,6 @@ LANG_NATIVE = 2
 LANG_ENCODING = 3
 LANG_COUNTRYCODES = 4
 LANG_MAX = 4
-
-# In this code the following meanings are used:
-# 	Country: An official country as recognised by ISO, eg "AU" for Australia.
-# 	Language: An official language as recognised by ISO, eg "en" for English.
-# 	Locale: An official language as spoken in a country, eg "en_AU" for English (Australian).
 
 LANGUAGE_DATA = {
 	# DEVELOPER NOTE:
@@ -148,7 +141,7 @@ LANGUAGE_DATA = {
 	"ko": ("Korean", _("Korean"), "한국어", "UTF-8", ("KR",)),
 	"kr": ("Kanuri", _("Kanuri"), "Kanuri", "UTF-8", ()),
 	"ks": ("Kashmiri", _("Kashmiri"), "कश्मीरी / كشميري", "UTF-8", ("IN",)),
-	"ku": ("Kurdish", _("Kurdish"), "Kurdî / کوردی", "ISO-8859-15", ("TR",)),
+	"ku": ("Kurdish", _("Kurdish"), "Kurdî / کوردی", "ISO-8859-15", ("KU",)),
 	"kv": ("Komi", _("Komi"), "Коми кыв", "UTF-8", ()),
 	"kw": ("Cornish", _("Cornish"), "Kernewek", "UTF-8", ("GB",)),
 	"ky": ("Kirghiz / Kyrgyz", _("Kirghiz / Kyrgyz"), "Кыргызча, Кыргыз тили", "UTF-8", ("KG",)),
@@ -384,6 +377,7 @@ COUNTRY_DATA = {
 	"KN": ("KNA", "659", "Saint Kitts and Nevis", _("Saint Kitts and Nevis"), "Saint Kitts and Nevis"),
 	"KP": ("PRK", "408", "Korea, Democratic People's Republic of", _("Korea, Democratic People's Republic of"), "조선"),
 	"KR": ("KOR", "410", "Korea, Republic of", _("Korea, Republic of"), "한국"),
+	"KU": ("KUR", "369", "Kurdistan", _("Kurdistan"), "کوردستان"),
 	"KW": ("KWT", "414", "Kuwait", _("Kuwait"), "الكويت‎"),
 	"KY": ("CYM", "136", "Cayman Islands", _("Cayman Islands"), "Cayman Islands"),
 	"KZ": ("KAZ", "398", "Kazakhstan", _("Kazakhstan"), "Қазақстан"),
