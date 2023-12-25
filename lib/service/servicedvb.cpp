@@ -1362,6 +1362,8 @@ RESULT eDVBServicePlay::start()
 			packetsize = meta.m_packet_size;
 			scrambled = meta.m_scrambled;
 		}
+		else
+			scrambled = false; // Set scrambled to false if meta not exists
 		m_cue = new eCueSheet();
 		type = eDVBServicePMTHandler::playback;
 	}
@@ -2028,6 +2030,10 @@ int eDVBServicePlay::getInfo(int w)
 	case sTSID:
 		return ((const eServiceReferenceDVB&)m_reference).getTransportStreamID().get();
 	case sNamespace:
+		// use origiginal namespace
+		if (!m_reference.alternativeurl.empty()){
+			return ((const eServiceReferenceDVB&)eServiceReferenceDVB(m_reference.alternativeurl)).getDVBNamespace().get();
+		}
 		return ((const eServiceReferenceDVB&)m_reference).getDVBNamespace().get();
 	case sProvider:
 		if (!m_dvb_service)
@@ -2049,6 +2055,12 @@ std::string eDVBServicePlay::getInfoString(int w)
 	{
 	case sProvider:
 		if (!m_dvb_service) return "";
+		if(m_dvb_service->m_provider_name.empty() && !m_reference.alternativeurl.empty())
+		{
+			ePtr<eDVBService> sRelayServiceOrigSref;
+			eDVBDB::getInstance()->getService(eServiceReferenceDVB(m_reference.alternativeurl), sRelayServiceOrigSref);
+			m_dvb_service->m_provider_name = std::string(sRelayServiceOrigSref->m_provider_name);
+		}
 		return m_dvb_service->m_provider_name;
 	case sServiceref:
 		return m_reference.toString();
@@ -2074,6 +2086,10 @@ std::string eDVBServicePlay::getInfoString(int w)
 
 ePtr<iDVBTransponderData> eDVBServicePlay::getTransponderData()
 {
+	if(!m_reference.alternativeurl.empty())
+	{
+		return eStaticServiceDVBInformation().getTransponderData(eServiceReferenceDVB(m_reference.alternativeurl));
+	}
 	return eStaticServiceDVBInformation().getTransponderData(m_reference);
 }
 

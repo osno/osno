@@ -14,13 +14,13 @@
 #include <lib/gdi/glcddc.h>
 #include <lib/base/cfile.h>
 
-const char *OLED_PROC_1 = "/proc/stb/lcd/oled_brightness";
-const char *OLED_PROC_2 = "/proc/stb/fp/oled_brightness";
+const char *OLED_PROC_1 = "/proc/stb/lcd/oled_brightness"; //  NOSONAR
+const char *OLED_PROC_2 = "/proc/stb/fp/oled_brightness";  //  NOSONAR
 
-const char *VFD_scroll_delay_proc = "/proc/stb/lcd/scroll_delay";
-const char *VFD_initial_scroll_delay_proc = "/proc/stb/lcd/initial_scroll_delay";
-const char *VFD_final_scroll_delay_proc = "/proc/stb/lcd/final_scroll_delay";
-const char *VFD_scroll_repeats_proc = "/proc/stb/lcd/scroll_repeats";
+const char *VFD_scroll_delay_proc = "/proc/stb/lcd/scroll_delay"; //  NOSONAR
+const char *VFD_initial_scroll_delay_proc = "/proc/stb/lcd/initial_scroll_delay"; //  NOSONAR
+const char *VFD_final_scroll_delay_proc = "/proc/stb/lcd/final_scroll_delay"; //  NOSONAR
+const char *VFD_scroll_repeats_proc = "/proc/stb/lcd/scroll_repeats"; //  NOSONAR
 
 eLCD *eLCD::instance;
 
@@ -136,6 +136,11 @@ void eLCD::set_VFD_final_scroll_delay(int delay) const
 void eLCD::set_VFD_scroll_repeats(int delay) const
 {
 	CFile::writeInt(VFD_scroll_repeats_proc, delay);
+}
+
+void eLCD::setLCDMode(int mode) const
+{
+	CFile::writeInt("/proc/stb/lcd/mode", mode);
 }
 
 #if defined(HAVE_TEXTLCD) || defined(HAVE_7SEGMENT)
@@ -354,7 +359,7 @@ void eDBoxLCD::dumpLCD(bool png)
 	int lcd_width = res.width();
 	int lcd_hight = res.height();
 	ePtr<gPixmap> pixmap32;
-	pixmap32 = new gPixmap(eSize(lcd_width, lcd_hight), 32, gPixmap::accelAuto);
+	pixmap32 = new gPixmap(eSize(lcd_width, lcd_hight), 32, gPixmap::accelNever);
 	const uint8_t *srcptr = (uint8_t *)_buffer;
 	uint8_t *dstptr = (uint8_t *)pixmap32->surface->data;
 
@@ -414,11 +419,9 @@ void eDBoxLCD::dumpLCD(bool png)
 	break;
 	case 32:
 	{
-		srcptr += _stride / 4;
-		dstptr += pixmap32->surface->stride / 4;
 		for (int y = lcd_hight; y != 0; --y)
 		{
-			memcpy(dstptr, srcptr, lcd_width * bpp);
+			memcpy(dstptr, srcptr, lcd_width * pixmap32->surface->bypp);
 			srcptr += _stride;
 			dstptr += pixmap32->surface->stride;
 		}

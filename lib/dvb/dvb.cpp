@@ -463,8 +463,13 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		snprintf(filename, sizeof(filename), "/dev/misc/vtuner%d", vtunerid);
 		if (::access(filename, F_OK) < 0)
 		{
+			eDebug("[eDVBUsbAdapter] '%s' not found", filename);
 			snprintf(filename, sizeof(filename), "/dev/vtuner%d", vtunerid);
-			if (::access(filename, F_OK) < 0) break;
+			if (::access(filename, F_OK) < 0)
+			{
+				eDebug("[eDVBUsbAdapter] '%s' not found -> stop here!", filename);
+				break;
+			}
 		}
 		vtunerFd = open(filename, O_RDWR | O_CLOEXEC);
 		if (vtunerFd < 0)
@@ -1348,17 +1353,19 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 		if (i->m_channel_id == channelid)
 		{
 			ePtr<iDVBFrontend> fe;
-			i->m_channel->getFrontend(fe);
-			int slotid = fe->readFrontendData(iFrontendInformation_ENUMS::frontendNumber);
-			if (frontendPreferenceAllowsChannelUse(channelid,i->m_channel,simulate))
+			if (!i->m_channel->getFrontend(fe))
 			{
-				eDebugNoSimulate("[eDVBResourceManager] found shared channel.. i=%ld, frontend=%d (preferred=%d)",std::distance(active_channels.begin(), i),slotid,eDVBFrontend::getPreferredFrontend());
-				channel = i->m_channel;
-				return 0;
-			}
-			else
-			{
-				eDebugNoSimulate("[eDVBResourceManager] strict frontend preference policy, don't use shared channel.. i=%ld, frontend=%d (preferred=%d)",std::distance(active_channels.begin(), i),slotid,eDVBFrontend::getPreferredFrontend());
+				int slotid = fe->readFrontendData(iFrontendInformation_ENUMS::frontendNumber);
+				if (frontendPreferenceAllowsChannelUse(channelid,i->m_channel,simulate))
+				{
+					eDebugNoSimulate("[eDVBResourceManager] found shared channel.. i=%ld, frontend=%d (preferred=%d)",std::distance(active_channels.begin(), i),slotid,eDVBFrontend::getPreferredFrontend());
+					channel = i->m_channel;
+					return 0;
+				}
+				else
+				{
+					eDebugNoSimulate("[eDVBResourceManager] strict frontend preference policy, don't use shared channel.. i=%ld, frontend=%d (preferred=%d)",std::distance(active_channels.begin(), i),slotid,eDVBFrontend::getPreferredFrontend());
+				}
 			}
 		}
 	}
@@ -2223,7 +2230,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 			if (current_offset < i->second)
 			{
 				start = current_offset;
-				size = diff_upto(i->second, start, max);
+				size = align(diff_upto(i->second, start, max), blocksize);
 				//eDebug("[eDVBChannel] HIT, %lld < %lld < %lld, size: %zd", i->first, current_offset, i->second, size);
 				return;
 			}

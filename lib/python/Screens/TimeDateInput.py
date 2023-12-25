@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from Screens.Screen import Screen
 from Components.config import config, ConfigClock, ConfigDateTime, getConfigListEntry
 from Components.ActionMap import NumberActionMap
@@ -39,7 +38,7 @@ class TimeDateInput(Screen, ConfigListScreen):
 		if conf_date:
 			self.save_mask |= 2
 		else:
-			conf_date = ConfigDateTime(default=time.time(), formatstring=config.usage.date.full.value, increment=86400)
+			conf_date = ConfigDateTime(default=time.time(), formatstring=config.usage.date.dayfull.value, increment=86400)
 		self.timeinput_date = conf_date
 		self.timeinput_time = conf_time
 

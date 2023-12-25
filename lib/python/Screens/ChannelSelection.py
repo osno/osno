@@ -2,10 +2,10 @@ from os import listdir, remove, rename
 from os.path import join
 from time import localtime, strftime, time
 
-from enigma import eActionMap, eDVBDB, eEPGCache, eEnv, ePoint, eRCInput, eServiceCenter, eServiceReference, eServiceReferenceDVB, eTimer, getPrevAsciiCode, iPlayableService, iServiceInformation, loadPNG
+from enigma import eActionMap, eDBoxLCD, eDVBDB, eEPGCache, ePoint, eRCInput, eServiceCenter, eServiceReference, eServiceReferenceDVB, eTimer, getPrevAsciiCode, iPlayableService, iServiceInformation, loadPNG
 
 from RecordTimer import AFTEREVENT, RecordTimerEntry, TIMERTYPE
-from ServiceReference import ServiceReference, hdmiInServiceRef, serviceRefAppendPath, service_types_radio_ref, service_types_tv_ref
+from ServiceReference import ServiceReference, getStreamRelayRef, hdmiInServiceRef, serviceRefAppendPath, service_types_radio_ref, service_types_tv_ref
 from skin import getSkinFactor
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Button import Button
@@ -38,7 +38,7 @@ from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewEPGSelect
 from Screens.HelpMenu import HelpableScreen
 import Screens.InfoBar
-from Screens.InputBox import InputBox, PinInput
+from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
 from Screens.PictureInPicture import PictureInPicture
 from Screens.RdsDisplay import RassInteractive
@@ -482,7 +482,7 @@ class ChannelSelectionEdit:
 		})
 
 	def getMutableList(self, root=eServiceReference()):
-		if not self.mutableList is None:
+		if self.mutableList is not None:
 			return self.mutableList
 		serviceHandler = eServiceCenter.getInstance()
 		if not root.valid():
@@ -642,6 +642,19 @@ class ChannelSelectionEdit:
 		services = serviceHandler.list(provider.ref)
 		self.addBouquet(providerName, services and services.getContent("R", True))
 
+	def copyCurrentToStreamRelay(self):
+		provider = ServiceReference(self.getCurrentSelection())
+		serviceHandler = eServiceCenter.getInstance()
+		services = serviceHandler.list(provider.ref)
+		from Screens.InfoBarGenerics import streamrelay
+		streamrelay.toggle(self.session.nav, services and services.getContent("R", True))
+
+	def getRefsforProvider(self):
+		provider = ServiceReference(self.getCurrentSelection())
+		serviceHandler = eServiceCenter.getInstance()
+		services = serviceHandler.list(provider.ref)
+		return services and services.getContent("R", True)
+
 	def removeAlternativeServices(self):
 		cur_service = ServiceReference(self.getCurrentSelection())
 		end = self.atEnd()
@@ -694,7 +707,7 @@ class ChannelSelectionEdit:
 				direction = _("W")
 			else:
 				direction = _("E")
-			messageText = _("Are you sure to remove all %d.%d%s%s services?") % (unsigned_orbpos / 10, unsigned_orbpos % 10, u"\u00B0", direction)
+			messageText = _("Are you sure to remove all %d.%d%s%s services?") % (unsigned_orbpos / 10, unsigned_orbpos % 10, "\u00B0", direction)
 		self.session.openWithCallback(self.removeSatelliteServicesCallback, MessageBox, messageText)
 
 	def removeSatelliteServicesCallback(self, answer):
@@ -839,7 +852,7 @@ class ChannelSelectionEdit:
 
 	def addServiceToBouquet(self, dest, service=None):
 		mutableList = self.getMutableList(dest)
-		if not mutableList is None:
+		if mutableList is not None:
 			if service is None:  # Use current selected service.
 				service = self.servicelist.getCurrent()
 			if not mutableList.addService(service):
@@ -866,7 +879,7 @@ class ChannelSelectionEdit:
 			self.buildTitle()
 			print("[ChannelSelection] toggleMoveMode DEBUG: Setting title='%s'." % self.getTitle())
 			self.servicelist.resetRoot()
-			self.servicelist.l.setHideNumberMarker(config.usage.hide_number_markers.value)
+			self.servicelist.setHideNumberMarker(config.usage.hide_number_markers.value)
 			self.servicelist.setCurrent(self.servicelist.getCurrent())
 		else:
 			self.mutableList = self.getMutableList()
@@ -906,10 +919,10 @@ class ChannelSelectionEdit:
 		# the config.usage.hide_number_markers.value so when we are in "move mode"
 		# we need to force display of the markers here after l.setMode("MODE_TV")
 		# has run. If l.setMode("MODE_TV") were ever removed above,
-		# "self.servicelist.l.setHideNumberMarker(False)" could be moved
+		# "self.servicelist.setHideNumberMarker(False)" could be moved
 		# directly to the "else" clause of "def toggleMoveMode".
 		if self.movemode:
-			self.servicelist.l.setHideNumberMarker(False)
+			self.servicelist.setHideNumberMarker(False)
 		if close:
 			self.cancel()
 
@@ -969,9 +982,9 @@ class ChannelSelectionBase(Screen):
 
 	def applyKeyMap(self):
 		if config.usage.show_channel_jump_in_servicelist.value == "alpha":
-			self.numericalTextInput.setUseableChars(u"abcdefghijklmnopqrstuvwxyz1234567890")
+			self.numericalTextInput.setUseableChars("abcdefghijklmnopqrstuvwxyz1234567890")
 		else:
-			self.numericalTextInput.setUseableChars(u"1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+			self.numericalTextInput.setUseableChars("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 	def setTvMode(self):
 		self.mode = MODE_TV
@@ -1010,6 +1023,8 @@ class ChannelSelectionBase(Screen):
 					return _("Reception Lists")
 				if "ORDER BY name" in servicePath:
 					return _("All Services")
+			elif serviceName == "favourites" and not config.usage.multibouquet.value:  # Translate single bouquet favourites
+				return _("Favorites")
 			return serviceName
 
 		mode = _("TV") if self.mode == MODE_TV else _("Radio")
@@ -1029,8 +1044,8 @@ class ChannelSelectionBase(Screen):
 			EDIT_PIP: _("PiP")
 		}.get(self.function)
 		functionType = " [%s]" % functionType if functionType else ""
-		# self.setTitle("%s: %s%s" % (mode, title, functionType))
-		self.setTitle("%s (%s)%s" % (title, mode, functionType))
+		self.setTitle("%s - %s%s" % (mode, title, functionType))
+		#self.setTitle("%s (%s)%s" % (title, mode, functionType))
 		print("[ChannelSelection] buildTitle DEBUG: Setting title='%s'." % self.getTitle())
 
 	def getServiceName(self, serviceReference):
@@ -1085,7 +1100,7 @@ class ChannelSelectionBase(Screen):
 	def getBouquetNumOffset(self, bouquet):
 		if not config.usage.multibouquet.value:
 			return 0
-		str = bouquet.toString()
+		bStr = bouquet.toString()  # TODO Do we need this?
 		offset = 0
 		if "userbouquet." in bouquet.toCompareString():
 			serviceHandler = eServiceCenter.getInstance()
@@ -1536,7 +1551,10 @@ class ChannelContextMenu(Screen, HelpableScreen):
 		menu = []
 		menu.append(ChoiceEntryComponent(key="menu", text=(_("Settings..."), boundFunction(self.keySetup))))
 		if not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory | eServiceReference.isMarker)):
-			appendWhenValid(current, menu, (_("Show Transponder Information"), self.showServiceInformations), level=2)
+			if self.session.nav.currentlyPlayingServiceReference == current:
+				appendWhenValid(current, menu, (_("Show Service Information"), boundFunction(self.showServiceInformations, None)), level=2)
+			else:
+				appendWhenValid(current, menu, (_("Show Transponder Information"), boundFunction(self.showServiceInformations, current)), level=2)
 		if csel.bouquet_mark_edit == EDIT_OFF and not csel.entry_marked:
 			if not inBouquetRootList:
 				isPlayable = not (current_sel_flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
@@ -1559,6 +1577,14 @@ class ChannelContextMenu(Screen, HelpableScreen):
 							appendWhenValid(current, menu, (_("Unmark As Dedicated 3D Service"), self.removeDedicated3DFlag))
 						else:
 							appendWhenValid(current, menu, (_("Mark As Dedicated 3D Service"), self.addDedicated3DFlag))
+					if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
+						appendWhenValid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay))
+					else:
+						appendWhenValid(current, menu, (_("Play service with Stream Relay"), self.toggleStreamrelay))
+
+					if BoxInfo.getItem("HAVEINITCAM") and config.misc.autocamEnabled.value and Screens.InfoBar.InfoBar.instance.checkCrypt(current):
+						appendWhenValid(current, menu, (_("Define Softcam For This Service"), self.selectCam))
+
 					if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_HIDE_VBI:
 						appendWhenValid(current, menu, (_("Show VBI Line For This Service"), self.removeHideVBIFlag))
 					else:
@@ -1608,8 +1634,11 @@ class ChannelContextMenu(Screen, HelpableScreen):
 						else:
 							appendWhenValid(current, menu, (_("Remove Satellite Services"), self.removeSatelliteServices))
 					if haveBouquets:
-						if not self.inBouquet and not "PROVIDERS" in current_sel_path:
+						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							appendWhenValid(current, menu, (_("Copy To Bouquets"), self.copyCurrentToBouquetList))
+							appendWhenValid(current, menu, (_("Copy To Stream Relay"), self.copyCurrentToStreamRelay))
+							if BoxInfo.getItem("HAVEINITCAM") and config.misc.autocamEnabled.value:
+								appendWhenValid(current, menu, (_("Define Softcam For This Provider"), self.selectCamProvider))
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						appendWhenValid(current, menu, (_("Remove All New Found Flags"), self.removeAllNewFoundFlags))
 				if self.inBouquet:
@@ -1730,6 +1759,77 @@ class ChannelContextMenu(Screen, HelpableScreen):
 		if config.osd.threeDmode.value == "auto" and self.session.nav.currentlyPlayingServiceReference == self.csel.getCurrentSelection():
 			from Screens.VideoMode import applySettings  # This needs to be here as VideoMode has a circular import!
 			applySettings(value and "sidebyside" or config.osd.threeDmode.value)
+
+	def toggleStreamrelay(self):
+		from Screens.InfoBarGenerics import streamrelay
+		streamrelay.toggle(self.session.nav, self.csel.getCurrentSelection())
+		self.close()
+
+	def selectCamProvider(self):
+		def selectCamProvidercallback(answer):
+			if answer:
+				autocam.selectCams(services, answer)
+			self.close()
+		service = self.csel.getCurrentSelection()
+		if service:
+			name = service.getName()
+			services = self.csel.getRefsforProvider()
+			if services:
+				from Screens.InfoBarGenerics import autocam
+				cams = BoxInfo.getItem("Softcams")
+				if len(cams) > 2 and "None" in cams:
+					choiceList = []
+					currentcam = BoxInfo.getItem("CurrentSoftcam")
+					defaultcam = config.misc.autocamDefault.value
+					for idx, cam in enumerate(cams):
+						desc = cam
+						if cam == currentcam:
+							desc = f"{desc} ({_('Current')})"
+						if cam == defaultcam:
+							desc = f"{desc} ({_('Default')})"
+						if cam == "None":
+							desc = _("Remove")
+						choiceList.append((desc, cam))
+
+					if choiceList:
+						message = _("Select the Softcam for '%s'" % name)
+						self.session.openWithCallback(selectCamProvidercallback, MessageBox, message, list=choiceList)
+
+	def selectCam(self):
+		def selectCamcallback(answer):
+			if answer:
+				autocam.selectCam(self.session.nav, service, answer)
+			self.close()
+		service = self.csel.getCurrentSelection()
+		if service:
+			from Screens.InfoBarGenerics import autocam
+			cams = BoxInfo.getItem("Softcams")
+			if len(cams) > 2 and "None" in cams:
+				channelcam = autocam.getCam(service)
+				choiceList = []
+				currentcam = BoxInfo.getItem("CurrentSoftcam")
+				defaultcam = config.misc.autocamDefault.value
+				channelcamidx = -1
+				defaultcamidx = 0
+				for idx, cam in enumerate(cams):
+					desc = cam
+					if cam == currentcam:
+						desc = f"{desc} ({_('Current')})"
+						defaultcamidx = idx
+					if cam == defaultcam:
+						desc = f"{desc} ({_('Default')})"
+					if channelcam == cam:
+						channelcamidx = idx
+					if cam == "None":
+						desc = _("Remove")
+					choiceList.append((desc, cam))
+
+				if choiceList:
+					if channelcamidx == -1:
+						channelcamidx = defaultcamidx
+					name = self.getCurrentSelectionName()
+					message = _("Select the Softcam for '%s'" % name)
+					self.session.openWithCallback(selectCamcallback, MessageBox, message, list=choiceList, default=channelcamidx)
 
 	def addHideVBIFlag(self):
 		eDVBDB.getInstance().addFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
@@ -1932,11 +2032,9 @@ class ChannelContextMenu(Screen, HelpableScreen):
 		if int(xres) <= 720 or BoxInfo.getItem("model") != "blackbox7405":
 			if self.session.pipshown:
 				del self.session.pip
-				if BoxInfo.getItem("LCDMiniTVPiP") and int(config.lcd.modepip.value) >= 1:
+				if BoxInfo.getItem("LCDMiniTVPiP") and config.lcd.modepip.value >= 1:
 					print("[ChannelSelection] LCDMiniTV disable PiP.")
-					f = open("/proc/stb/lcd/mode", "w")
-					f.write(config.lcd.modeminitv.value)
-					f.close()
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.setAnimationMode(0)
 			self.session.pip.show()
@@ -1947,11 +2045,9 @@ class ChannelContextMenu(Screen, HelpableScreen):
 					self.session.pipshown = True
 					self.session.pip.servicePath = self.csel.getCurrentServicePath()
 					self.session.pip.servicePath[1] = currentBouquet
-					if BoxInfo.getItem("LCDMiniTVPiP") and int(config.lcd.modepip.value) >= 1:
+					if BoxInfo.getItem("LCDMiniTVPiP") and config.lcd.modepip.value >= 1:
 						print("[ChannelSelection] LCDMiniTV enable PiP.")
-						f = open("/proc/stb/lcd/mode", "w")
-						f.write(config.lcd.modepip.value)
-						f.close()
+						eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 						f = open("/proc/stb/vmpeg/1/dst_width", "w")
 						f.write("0")
 						f.close()
@@ -1965,11 +2061,9 @@ class ChannelContextMenu(Screen, HelpableScreen):
 				else:
 					self.session.pipshown = False
 					del self.session.pip
-					if BoxInfo.getItem("LCDMiniTV") and int(config.lcd.modepip.value) >= 1:
+					if BoxInfo.getItem("LCDMiniTV") and config.lcd.modepip.value >= 1:
 						print("[ChannelSelection] LCDMiniTV disable PiP.")
-						f = open("/proc/stb/lcd/mode", "w")
-						f.write(config.lcd.modeminitv.value)
-						f.close()
+						eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 					self.session.openWithCallback(self.close, MessageBox, _("Could not open Picture in Picture"), MessageBox.TYPE_ERROR)
 		else:
 			self.session.open(MessageBox, _("Your %s %s does not support PiP HD") % getBoxDisplayName(), type=MessageBox.TYPE_INFO, timeout=5)
@@ -1996,6 +2090,10 @@ class ChannelContextMenu(Screen, HelpableScreen):
 
 	def copyCurrentToBouquetList(self):
 		self.csel.copyCurrentToBouquetList()
+		self.close()
+
+	def copyCurrentToStreamRelay(self):
+		self.csel.copyCurrentToStreamRelay()
 		self.close()
 
 	def showHDMIInInputBox(self):
@@ -2201,7 +2299,12 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				info = service.info()
 				if info:
 					refstr = info.getInfoString(iServiceInformation.sServiceref)
-					self.servicelist.setPlayableIgnoreService(eServiceReference(refstr))
+					refstr, isStreamRelay = getStreamRelayRef(refstr)
+					ref = eServiceReference(refstr)
+					if isStreamRelay:
+						if not [timer for timer in self.session.nav.RecordTimer.timer_list if timer.state == 2 and refstr == timer.service_ref]:
+							ref.setAlternativeUrl(refstr)
+					self.servicelist.setPlayableIgnoreService(ref)
 
 	def __evServiceEnd(self):
 		self.servicelist.setPlayableIgnoreService(eServiceReference())
@@ -2368,6 +2471,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		elif ref is None or ref != nref:
 			Screens.InfoBar.InfoBar.instance.checkTimeshiftRunning(boundFunction(self.zapCheckTimeshiftCallback, enable_pipzap, preview_zap, nref))
 		elif not preview_zap:
+			self.lastroot.value = ""  # force save root
 			self.saveRoot()
 			self.saveChannel(nref)
 			config.servicelist.lastmode.save()
@@ -2382,6 +2486,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.new_service_played = True
 			self.session.nav.playService(nref)
 			if not preview_zap:
+				self.lastroot.value = ""  # force save root
 				self.saveRoot()
 				self.saveChannel(nref)
 				config.servicelist.lastmode.save()
@@ -2602,6 +2707,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				lastservice = eServiceReference(self.lastservice.value)
 				if lastservice.valid() and self.getCurrentSelection() != lastservice:
 					self.setCurrentSelection(lastservice)
+		elif self.revertMode == MODE_TV and self.mode == MODE_RADIO:
+			self.setModeTv()
+		elif self.revertMode == MODE_RADIO and self.mode == MODE_TV:
+			self.setModeRadio()
 		self.asciiOff()
 		if config.usage.servicelistpreview_mode.value:
 			self.zapBack()
@@ -2851,11 +2960,9 @@ class PiPZapSelection(ChannelSelection):
 					self.saveRoot()
 					self.saveChannel(ref)
 					self.setCurrentSelection(ref)
-					if BoxInfo.getItem("LCDMiniTVPiP") and int(config.lcd.modepip.value) >= 1:
+					if BoxInfo.getItem("LCDMiniTVPiP") and config.lcd.modepip.value >= 1:
 						print("[ChannelSelection] LCDMiniTV enable PiP.")
-						f = open("/proc/stb/lcd/mode", "w")
-						f.write(config.lcd.modepip.value)
-						f.close()
+						eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 						f = open("/proc/stb/vmpeg/1/dst_width", "w")
 						f.write("0")
 						f.close()
@@ -2870,11 +2977,9 @@ class PiPZapSelection(ChannelSelection):
 					self.pipzapfailed = True
 					self.session.pipshown = False
 					del self.session.pip
-					if BoxInfo.getItem("LCDMiniTVPiP") and int(config.lcd.modepip.value) >= 1:
-							print("[ChannelSelection] LCDMiniTV disable PiP.")
-							f = open("/proc/stb/lcd/mode", "w")
-							f.write(config.lcd.modeminitv.value)
-							f.close()
+					if BoxInfo.getItem("LCDMiniTVPiP") and config.lcd.modepip.value >= 1:
+						print("[ChannelSelection] LCDMiniTV disable PiP.")
+						eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 					self.close(None)
 
 	def cancel(self):
@@ -2882,11 +2987,9 @@ class PiPZapSelection(ChannelSelection):
 		if self.startservice and hasattr(self.session, "pip") and self.session.pip.getCurrentService() and self.startservice == self.session.pip.getCurrentService():
 			self.session.pipshown = False
 			del self.session.pip
-			if BoxInfo.getItem("LCDMiniTVPiP") and int(config.lcd.modepip.value) >= 1:
-					print("[ChannelSelection] LCDMiniTV disable PiP.")
-					f = open("/proc/stb/lcd/mode", "w")
-					f.write(config.lcd.modeminitv.value)
-					f.close()
+			if BoxInfo.getItem("LCDMiniTVPiP") and config.lcd.modepip.value >= 1:
+				print("[ChannelSelection] LCDMiniTV disable PiP.")
+				eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 		self.correctChannelNumber()
 		self.close(None)
 

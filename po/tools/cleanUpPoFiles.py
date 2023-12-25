@@ -1,6 +1,5 @@
 #!/usr/local/bin/python
 
-from __future__ import print_function
 
 """Cleans up PO translation files
 
@@ -40,10 +39,8 @@ import glob
 import polib
 import fnmatch
 import re
-import urllib
 import mmap
 import sys
-from operator import attrgetter
 
 scriptPath = os.path.dirname(os.path.abspath(__file__)) + os.path.sep
 
@@ -59,7 +56,7 @@ prefs = {
   'outputFinalStats': True,
   'processMaxEntries': 0,  # useful for testing; 0 will process all entries
   'include': ["*.xml", "*.py"],  # for files only
-  'exclude': ["*/\.*", codeBasePath + "/po/*"]  # for dirs and files
+  'exclude': [r"*/\.*", codeBasePath + "/po/*"]  # for dirs and files
 }
 
 # transform glob patterns to regular expressions

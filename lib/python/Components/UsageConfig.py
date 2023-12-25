@@ -828,10 +828,10 @@ def InitUsageConfig():
 	config.usage.messageYesPmt = ConfigYesNo(default=False)
 	config.usage.hide_zap_errors = ConfigYesNo(default=False)
 	config.usage.hide_ci_messages = ConfigYesNo(default=False)
-	config.usage.show_cryptoinfo = ConfigSelection(default="2", choices=[
-		("0", _("Off")),
-		("1", _("One line")),
-		("2", _("Two lines"))
+	config.usage.show_cryptoinfo = ConfigSelection(default=2, choices=[
+		(0, _("Off")),
+		(1, _("One line")),
+		(2, _("Two lines"))
 	])
 	config.usage.show_eit_nownext = ConfigYesNo(default=True)
 	config.usage.show_vcr_scart = ConfigYesNo(default=False)
@@ -1942,6 +1942,10 @@ def InitUsageConfig():
 	config.oscaminfo.intervall = ConfigSelectionNumber(min=1, max=600, stepwidth=1, default=10, wraparound=True)
 	BoxInfo.setItem("OScamInstalled", False)
 
+	config.misc.softcam_streamrelay_url = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
+	config.misc.softcam_streamrelay_port = ConfigInteger(default=17999, limits=(0, 65535))
+	config.misc.softcam_streamrelay_delay = ConfigSelectionNumber(min=0, max=2000, stepwidth=50, default=0, wraparound=True)
+
 	config.cccaminfo = ConfigSubsection()
 	config.cccaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.cccaminfo.serverNameLength = ConfigSelectionNumber(min=10, max=100, stepwidth=1, default=22, wraparound=True)
@@ -2099,7 +2103,7 @@ def updateChoices(sel, choices):
 	if choices:
 		defval = None
 		val = int(sel.value)
-		if not val in choices:
+		if val not in choices:
 			tmp = choices[:]
 			tmp.reverse()
 			for x in tmp:
@@ -2139,7 +2143,6 @@ def refreshServiceList(configElement=None):
 		servicelist = InfoBarInstance.servicelist
 		if servicelist:
 			servicelist.setMode()
-
 
 def patchTuxtxtConfFile(dummyConfigElement):
 	print("[UsageConfig] TuxTxt: Patching tuxtxt2.conf.")
