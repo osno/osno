@@ -42,7 +42,6 @@ def InitUsageConfig():
 	config.misc.remotecontrol_text_support = ConfigYesNo(default=True)
 
 	config.misc.extraopkgpackages = ConfigYesNo(default=False)
-	config.misc.opkgcleanmode = ConfigYesNo(default=False)
 	config.misc.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
 
 	config.misc.usegstplaybin3 = ConfigYesNo(default=False)
@@ -1599,7 +1598,7 @@ def InitUsageConfig():
 	languageChoiceList = [
 		("", _("None")),
 		("und", _("Undetermined")),
-		("orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ oth", _("Original")),
+		("orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth", _("Original")),
 		("ara", _("Arabic")),
 		("eus baq", _("Basque")),
 		("bul", _("Bulgarian")),
@@ -1614,7 +1613,7 @@ def InitUsageConfig():
 		("fin", _("Finnish")),
 		("fra fre", _("French")),
 		("deu ger", _("German")),
-		("ell gre", _("Greek")),
+		("ell gre grc", _("Greek")),
 		("heb", _("Hebrew")),
 		("hun", _("Hungarian")),
 		("ind", _("Indonesian")),
@@ -1624,11 +1623,11 @@ def InitUsageConfig():
 		("ltz", _("Luxembourgish")),
 		("nor", _("Norwegian")),
 		("pol", _("Polish")),
-		("por", _("Portuguese")),
-		("fas per", _("Persian")),
+		("por dub Dub DUB ud1", _("Portuguese")),
+		("fas per fa pes", _("Persian")),
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
-		("srp", _("Serbian")),
+		("srp scc", _("Serbian")),
 		("slk slo", _("Slovak")),
 		("slv", _("Slovenian")),
 		("spa", _("Spanish")),
