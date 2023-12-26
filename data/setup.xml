@@ -757,8 +757,7 @@
 	</setup>
 	<setup key="Softcam" title="Softcam Settings" showOpenWebif="1">
 		<item level="0" text="Select Softcam" description="Select a Softcam from the available list.">config.misc.softcams</item>
-		<item level="2" text="Show CCcam in extensions" description="Allows you to show/hide CCcam in extensions (BLUE button)." conditional="'cccam' in config.misc.softcams.value.lower()">config.cccaminfo.showInExtensions</item>
-		<item level="2" text="Show OScam in extensions" description="Allows you to show/hide OScam in extensions (BLUE button)." conditional="'oscam' in config.misc.softcams.value.lower()">config.oscaminfo.showInExtensions</item>
+		<item level="2" text="Show OScam/CCcam in Extension Menu" description="Allows you to show/hide OScam/CCcam in the Extension Menu screen (BLUE button).">config.softcam.showInExtensions</item>
 	</setup>
 	<setup key="SpecialFeatures" title="Special Features Settings">
 		<!-- This is just a placeholder, the 'specialfeatures' menu is currently disabled. -->
