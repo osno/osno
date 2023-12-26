@@ -122,7 +122,7 @@ class CamSetupCommon(Setup):
                         self.oldServiceRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
                         self.session.nav.stopService()
                 Processing.instance.setDescription(_("Restarting..."))
-                Processing.instance.showProgress(endless=True)
+#                Processing.instance.showProgress(endless=True)
 
 
 class CardserverSetup(CamSetupCommon):
@@ -154,7 +154,7 @@ class CardserverSetup(CamSetupCommon):
                         self.session.nav.playService(self.oldServiceRef, adjust=False)
                 self.saveAll()
                 updateSysSoftCam()
-                Processing.instance.hideProgress()
+#                Processing.instance.hideProgress()
 
         def saveDone(self):
                 self.restartDone()
@@ -242,7 +242,7 @@ class BluePanel(CamSetupCommon):
                         self.session.nav.playService(self.oldServiceRef, adjust=False)
                 self.saveAll()
                 updateSysSoftCam()
-                Processing.instance.hideProgress()
+#                Processing.instance.hideProgress()
 
         def updateButtons(self):
                 valid = config.misc.softcams.value and config.misc.softcams.value.lower() != "none"
