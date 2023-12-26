@@ -756,14 +756,17 @@
 		</if>
 	</setup>
 	<setup key="Softcam" title="Softcam Settings" showOpenWebif="1">
-		<item level="0" text="Select softcam" description="Select a softcam from the available list.">config.misc.softcams</item>
-		<item level="0" text="Select cardserver" description="Select a cardserver from the available list." conditional="config.misc.cardservers.value != ''">config.misc.cardservers</item>
-		<item level="0" text="Restart" description="Reset the selected devices and save changes of your config when the GREEN button is pressed.">config.misc.restarts</item>
+		<item level="0" text="Select Softcam" description="Select a Softcam from the available list.">config.misc.softcams</item>
 		<item level="2" text="Show CCcam in extensions" description="Allows you to show/hide CCcam in extensions (BLUE button)." conditional="'cccam' in config.misc.softcams.value.lower()">config.cccaminfo.showInExtensions</item>
 		<item level="2" text="Show OScam in extensions" description="Allows you to show/hide OScam in extensions (BLUE button)." conditional="'oscam' in config.misc.softcams.value.lower()">config.oscaminfo.showInExtensions</item>
 	</setup>
 	<setup key="SpecialFeatures" title="Special Features Settings">
 		<!-- This is just a placeholder, the 'specialfeatures' menu is currently disabled. -->
+	</setup>
+	<setup key="StreamRelay" title="Stream Relay Settings">
+		<item level="2" text="Stream Relay URL" description="IP address of the Stream Relay server used to descramble services that can only be decrypted via Stream Relay.">config.misc.softcam_streamrelay_url</item>
+		<item level="2" text="Stream Relay port" description="Port number for the Stream Relay server used to descramble services that can only be decrypted via Stream Relay.">config.misc.softcam_streamrelay_port</item>
+		<item level="2" text="Stream Relay switch delay" description="Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
 	</setup>
 	<setup key="Subtitle" title="Subtitle Settings" level="2" showOpenWebif="1">
 		<item level="2" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
