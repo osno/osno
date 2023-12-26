@@ -1,13 +1,11 @@
-from __future__ import print_function, division
 from Screens.Screen import Screen
 from Screens.Dish import Dishpip
 from enigma import ePoint, eSize, eRect, eServiceCenter, getBestPlayableServiceReference, eServiceReference, eTimer
 from Components.SystemInfo import BoxInfo
 from Components.VideoWindow import VideoWindow
-from Components.config import config, ConfigPosition, ConfigYesNo, ConfigSelection
+from Components.config import config, ConfigPosition, ConfigSelection
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
-from os import access, W_OK
 
 MAX_X = 720
 MAX_Y = 576
@@ -181,7 +179,8 @@ class PictureInPicture(Screen):
 	def playService(self, service):
 		if service is None:
 			return False
-		ref = self.resolveAlternatePipService(service)
+		from Screens.InfoBarGenerics import streamrelay
+		ref, isStreamRelay = streamrelay.streamrelayChecker(self.resolveAlternatePipService(service))
 		if ref:
 			if self.isPlayableForPipService(ref):
 				print("playing pip service", ref and ref.toString())

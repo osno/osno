@@ -1921,9 +1921,9 @@ def InitUsageConfig():
 		("bouquetlist", _("Bouquet List")),
 		("showmovies", _("Show Movies List")),
 		("record", _("Record - same as record button")),
-		("gotodatetime", _("Goto Date/Timer")),
-		("gotoprimetime", _("Goto Prime time")),
-		("setbasetime", _("Set Base time")),
+		("gotodatetime", _("Goto Date/Time")),
+		("gotoprimetime", _("Goto Prime Time")),
+		("setbasetime", _("Set Base Time")),
 		("epgsearch", _("EPG Search"))
 	]
 	config.epgselection.vertical_red = ConfigSelection(default="imdb", choices=choiceList)
@@ -1931,8 +1931,10 @@ def InitUsageConfig():
 	config.epgselection.vertical_yellow = ConfigSelection(default="epgsearch", choices=choiceList)
 	config.epgselection.vertical_blue = ConfigSelection(default="autotimer", choices=choiceList)
 
+	config.softcam = ConfigSubsection()
+	config.softcam.showInExtensions = ConfigYesNo(default=False)
+
 	config.oscaminfo = ConfigSubsection()
-	config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.oscaminfo.userdatafromconf = ConfigYesNo(default=True)
 	config.oscaminfo.autoupdate = ConfigYesNo(default=False)
 	config.oscaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
@@ -1947,7 +1949,6 @@ def InitUsageConfig():
 	config.misc.softcam_streamrelay_delay = ConfigSelectionNumber(min=0, max=2000, stepwidth=50, default=0, wraparound=True)
 
 	config.cccaminfo = ConfigSubsection()
-	config.cccaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.cccaminfo.serverNameLength = ConfigSelectionNumber(min=10, max=100, stepwidth=1, default=22, wraparound=True)
 	config.cccaminfo.name = ConfigText(default="Profile", fixed_size=False)
 	config.cccaminfo.ip = ConfigText(default="192.168.2.12", fixed_size=False)
