@@ -14,6 +14,7 @@ import NavigationInstance
 import ServiceReference
 from Screens.InfoBar import InfoBar, MoviePlayer
 from Components.SystemInfo import BoxInfo
+from Screens.InfoBarGenerics import streamrelay
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 
@@ -44,17 +45,22 @@ class Navigation:
 
 		self.RecordTimer = None
 		self.isRecordTimerImageStandard = False
+		self.isCurrentServiceStreamRelay = False
 		self.skipServiceReferenceReset = False
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_RECORDTIMER):
 			self.RecordTimer = p()
 			if self.RecordTimer:
 				break
+
+		self.PowerTimer = PowerTimer.PowerTimer()  # Init PowerTimer before RecordTimer.loadTimers
+
 		if not self.RecordTimer:
 			self.RecordTimer = RecordTimer.RecordTimer()
+			self.RecordTimer.loadTimers()  # call loadTimers after init of self.RecordTimer
 			self.isRecordTimerImageStandard = True
 
-		self.PowerTimer = None
-		self.PowerTimer = PowerTimer.PowerTimer()
+		self.PowerTimer.loadTimers()  # call loadTimers after init of self.PowerTimer
+
 		self.__wasTimerWakeup = False
 		self.__wasRecTimerWakeup = False
 		self.__wasPowerTimerWakeup = False
@@ -70,7 +76,7 @@ class Navigation:
 		#wakeup data
 		now = time()
 		try:
-			self.lastshutdowntime, self.wakeuptime, self.timertime, self.wakeuptyp, self.getstandby, self.recordtime, self.forcerecord = [int(n) for n in wakeupData.split(',')]
+			self.lastshutdowntime, self.wakeuptime, self.timertime, self.wakeuptyp, self.getstandby, self.recordtime, self.forcerecord = (int(n) for n in wakeupData.split(','))
 		except:
 			print("=" * 100)
 			print("[NAVIGATION] ERROR: can't read wakeup data")
@@ -273,7 +279,7 @@ class Navigation:
 		for x in self.record_event:
 			x(rec_service, event)
 
-	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True):
+	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False):
 		oldref = self.currentlyPlayingServiceOrGroup
 		if ref and oldref and ref == oldref and not forceRestart:
 			print("[Navigation] ignore request to play already running service(1)")
@@ -302,10 +308,13 @@ class Navigation:
 			return 0
 		from Components.ServiceEventTracker import InfoBarCount
 		InfoBarInstance = InfoBarCount == 1 and InfoBar.instance
+		isStreamRelay = False
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=adjust)):
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
 				playref = getBestPlayableServiceReference(ref, oldref)
+				if not ignoreStreamRelay:
+					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
 				print("[Navigation] playref", playref)
 				if playref and oldref and playref == oldref and not forceRestart:
 					print("[Navigation] ignore request to play already running service(2)")
@@ -313,13 +322,20 @@ class Navigation:
 				if not playref:
 					alternativeref = getBestPlayableServiceReference(ref, eServiceReference(), True)
 					self.stopService()
-					if alternativeref and self.pnav and self.pnav.playService(alternativeref):
-						print("[Navigation] Failed to start", alternativeref)
-						if oldref and "://" in oldref.getPath():
-							print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
-							self.retryServicePlayTimer = eTimer()
-							self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
-							self.retryServicePlayTimer.start(500, True)
+					if alternativeref and self.pnav:
+						self.currentlyPlayingServiceReference = alternativeref
+						self.currentlyPlayingServiceOrGroup = ref
+						if self.pnav.playService(alternativeref):
+							print("[Navigation] Failed to start: ", alternativeref.toString())
+							self.currentlyPlayingServiceReference = None
+							self.currentlyPlayingServiceOrGroup = None
+							if oldref and ("://" in oldref.getPath() or streamrelay.checkService(oldref)):
+								print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
+								self.retryServicePlayTimer = eTimer()
+								self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
+								self.retryServicePlayTimer.start(500, True)
+						else:
+							print("[Navigation] alternative ref as simulate: ", alternativeref.toString())
 					return 0
 				elif checkParentalControl and not parentalControl.isServicePlayable(playref, boundFunction(self.playService, checkParentalControl=False)):
 					if self.currentlyPlayingServiceOrGroup and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(self.currentlyPlayingServiceOrGroup, adjust):
@@ -328,21 +344,41 @@ class Navigation:
 			else:
 				playref = ref
 			if self.pnav:
+				if not BoxInfo.getItem("FCCactive"):
+					self.pnav.stopService()
+				else:
+					self.skipServiceReferenceReset = True
 				self.currentlyPlayingServiceReference = playref
+				if not ignoreStreamRelay:
+					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
+				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref
 				if InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(ref, adjust):
 					self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
-				self.skipServiceReferenceReset = True
-				if self.pnav.playService(playref):
+				#self.skipServiceReferenceReset = True
+
+				if config.misc.softcam_streamrelay_delay.value and self.isCurrentServiceStreamRelay:
+					self.skipServiceReferenceReset = False
+					self.isCurrentServiceStreamRelay = False
+					self.currentlyPlayingServiceReference = None
+					self.currentlyPlayingServiceOrGroup = None
+					print("[Navigation] Streamrelay was active -> delay the zap till tuner is freed")
+					self.retryServicePlayTimer = eTimer()
+					self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
+					self.retryServicePlayTimer.start(config.misc.softcam_streamrelay_delay.value, True)
+					return 0
+				elif self.pnav.playService(playref):
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
-					if oldref and "://" in oldref.getPath():
+					if oldref and ("://" in oldref.getPath() or streamrelay.checkService(oldref)):
 						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 						self.retryServicePlayTimer.start(500, True)
 				self.skipServiceReferenceReset = False
+				if isStreamRelay and not self.isCurrentServiceStreamRelay:
+					self.isCurrentServiceStreamRelay = True
 				return 0
 		elif oldref and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(oldref, adjust):
 			self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
@@ -370,10 +406,15 @@ class Navigation:
 		if ref:
 			if ref.flags & eServiceReference.isGroup:
 				ref = getBestPlayableServiceReference(ref, eServiceReference(), simulate)
+			if type != (pNavigation.isPseudoRecording | pNavigation.isFromEPGrefresh):
+				ref, isStreamRelay = streamrelay.streamrelayChecker(ref)
 			service = ref and self.pnav and self.pnav.recordService(ref, simulate, type)
 			if service is None:
 				print("record returned non-zero")
 		return service
+
+	def restartService(self):
+		self.playService(self.currentlyPlayingServiceOrGroup, forceRestart=True)
 
 	def stopRecordService(self, service):
 		ret = self.pnav and self.pnav.stopRecordService(service)
