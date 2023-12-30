@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Plugins.Extensions.OPDBoot.info import info
 from boxbranding import getMachineProcModel, getMachineBuild, getBoxType, getMachineName, getImageDistro, getMachineBrand, getImageFolder, getMachineRootFile, getImageArch  
 from Screens.Screen import Screen

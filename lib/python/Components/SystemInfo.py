@@ -10,6 +10,8 @@ from Tools.Directories import SCOPE_LIBDIR, SCOPE_SKINS, isPluginInstalled, file
 from Tools.MultiBoot import MultiBoot
 
 MODULE_NAME = __name__.split(".")[-1]
+SOFTCAM = "/etc/init.d/softcam"
+NOEMU = "/etc/enigma2/noemu"
 
 SystemInfo = {}
 
@@ -194,15 +196,6 @@ def countFrontpanelLEDs():
 	return numLeds
 
 
-def haveInitCam():
-	for cam in listdir("/etc/init.d"):
-		if cam.startswith("softcam.") and not cam.endswith("None"):
-			return True
-		elif cam.startswith("cardserver.") and not cam.endswith("None"):
-			return True
-	return False
-
-
 def getRCFile(ext):
 	filename = resolveFilename(SCOPE_SKINS, pathjoin("hardware", "%s.%s" % (BoxInfo.getItem("rcname"), ext)))
 	if not isfile(filename):
@@ -222,10 +215,73 @@ def getModuleLayout():
 	return None
 
 
+def hasInitCam():
+	for cam in listdir("/etc/init.d"):
+		if cam.startswith("softcam.") and not cam.endswith("None"):
+			return True
+	return False
+
+
+def hasInitCardServer():
+	for cam in listdir("/etc/init.d"):
+		if cam.startswith("cardserver.") and not cam.endswith("None"):
+			return True
+	return False
+
+
+def hasSoftcamEmu():
+	if isfile(NOEMU):
+		return False
+	else:
+		return len(glob("/etc/*.emu")) > 0
+
+
+def hasSoftcam():
+	if not isfile(NOEMU):
+		for cam in listdir("/etc/init.d"):
+			if (cam.startswith('softcam.') or cam.startswith('cardserver.')) and not cam.endswith('None'):
+				return True
+	return False
+
+
+def getSysSoftcam():
+	currentsyscam = ""
+	if isfile(SOFTCAM) and islink(SOFTCAM) and not readlink(SOFTCAM).lower().endswith("none"):
+		try:
+			syscam = readlink(SOFTCAM).replace("softcam.", "")
+			for cam in ("oscam", "ncam", "cccam"):
+				if syscam.lower().startswith(cam):
+					return cam
+		except OSError:
+			pass
+	return currentsyscam
+
+
+def getCurrentSoftcam():
+	cam = "None"
+	if islink(SOFTCAM):
+		try:
+			cam = readlink(SOFTCAM).replace("softcam.", "")
+		except OSError:
+			pass
+	return cam
+
+
+def getSoftcams():
+	cams = sorted([cam.replace("softcam.", "") for cam in listdir("/etc/init.d") if cam.startswith("softcam.")])
+	if "None" in cams:
+		cams.remove("None")
+		cams.insert(0, "None")
+	return cams
+
+
 def updateSysSoftCam():
 	BoxInfo.setItem("ShowOscamInfo", getSysSoftcam() in ("oscam", "ncam"), False)
 	BoxInfo.setItem("ShowCCCamInfo", getSysSoftcam() in ("cccam",), False)
 	BoxInfo.setItem("HasSoftcamEmu", hasSoftcamEmu(), False)
+	BoxInfo.setItem("Softcams", getSoftcams(), False)
+	BoxInfo.setItem("CurrentSoftcam", getCurrentSoftcam(), False)
+
 
 def getBoxName():
 	box = MACHINEBUILD
@@ -302,7 +358,7 @@ BoxInfo.setItem("CanNotDoSimultaneousTranscodeAndPIP", MODEL in ("vusolo4k", "gb
 BoxInfo.setItem("canRecovery", MODEL in ("hd51", "vs1500", "h7", "8100s") and ("disk.img", "mmcblk0p1") or MODEL in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "mmcblk1p1") or MODEL in ("gbmv200", "sf8008", "sf8008m", "sx988", "ip8", "ustym4kpro", "ustym4kottpremium", "ustym4ks2ottx", "beyonwizv2", "viper4k", "og2ott4k", "sx88v2", "sx888") and ("usb_update.bin", "none"))
 BoxInfo.setItem("CanUse3DModeChoices", fileExists("/proc/stb/fb/3dmode_choices") and True or False)
 #BoxInfo.setItem("ChipsetString", getChipsetString(), immutable=True)
-BoxInfo.setItem("CIHelper", fileExists("/usr/bin/cihelper"))
+BoxInfo.setItem("CIPlusHelper", exists("/usr/bin/ciplushelper"))
 BoxInfo.setItem("DeepstandbySupport", MODEL != 'dm800')
 BoxInfo.setItem("DefaultDisplayBrightness", MACHINEBUILD in ("dm900", "dm920") and 8 or 5)
 BoxInfo.setItem("FBLCDDisplay", fileCheck("/proc/stb/fb/sd_detach"))
@@ -324,7 +380,8 @@ BoxInfo.setItem("HasSDswap", MODEL in ("h9", "i55plus") and pathExists("/dev/mmc
 BoxInfo.setItem("HaveCISSL", fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem"))
 BoxInfo.setItem("HAVEEDIDDECODE", fileCheck("/proc/stb/hdmi/raw_edid") and fileCheck("/usr/bin/edid-decode"))
 BoxInfo.setItem("HaveID", fileCheck("/etc/.id"))
-BoxInfo.setItem("HAVEINITCAM", haveInitCam())
+BoxInfo.setItem("HAVEINITCAM", hasInitCam())
+BoxInfo.setItem("HAVEINITCARDSERVER", hasInitCardServer())
 BoxInfo.setItem("HaveTouchSensor", MACHINEBUILD in ("dm520", "dm525", "dm900", "dm920"))
 BoxInfo.setItem("HDMICEC", fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
 BoxInfo.setItem("HDMIin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
@@ -356,6 +413,7 @@ BoxInfo.setItem("PowerLed2", fileExists("/proc/stb/power/powerled2"))
 BoxInfo.setItem("RecoveryMode", fileCheck("/proc/stb/fp/boot_mode") or MODEL in ("dreamone", "dreamtwo"))
 BoxInfo.setItem("Satfinder", isPluginInstalled("Satfinder"))
 BoxInfo.setItem("SmallFlash", BoxInfo.getItem("smallflash"))
+BoxInfo.setItem("SoftCam", hasSoftcam())
 BoxInfo.setItem("StandbyPowerLed", fileExists("/proc/stb/power/standbyled"))
 BoxInfo.setItem("STi", SOC_FAMILY.startswith("sti"))
 BoxInfo.setItem("SuspendPowerLed", fileExists("/proc/stb/power/suspendled"))
@@ -391,3 +449,4 @@ SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 for cislot in range(0, SystemInfo["CommonInterface"]):
 	SystemInfo["CI%dSupportsHighBitrates" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_tsclk" % cislot)
 	SystemInfo["CI%dRelevantPidsRoutingSupport" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_relevant_pids_routing" % cislot)
+updateSysSoftCam()

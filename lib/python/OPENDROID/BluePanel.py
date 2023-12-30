@@ -228,6 +228,8 @@ class BluePanel(CamSetupCommon):
                 if config.misc.softcams.value != self.camctrl.current():
                         self.showProcess(True)
                         self.camctrl.switch(config.misc.softcams.value, self.saveDone)
+                else:
+                        self.saveDone()
 
         def keyRestart(self):
                 self.showProcess(True)
@@ -253,8 +255,8 @@ class BluePanel(CamSetupCommon):
         def softcamInfo(self):
                 ppanelFilename = "/etc/ppanels/%s.xml" % config.misc.softcams.value
                 if "oscam" in config.misc.softcams.value.lower():  # and isfile('/usr/lib/enigma2/python/Screens/OScamInfo.py'):
-                        from Screens.OScamInfo import OscamInfoMenu
-                        self.session.open(OscamInfoMenu)
+                        from Screens.OScamInfo import OSCamInfo
+                        self.session.open(OSCamInfo)
                 elif "cccam" in config.misc.softcams.value.lower():  # and isfile('/usr/lib/enigma2/python/Screens/CCcamInfo.py'):
                         from Screens.CCcamInfo import CCcamInfoMain
                         self.session.open(CCcamInfoMain)
@@ -398,84 +400,3 @@ class AutocamSetup(Setup, CamSetupHelper):
                 self.close()
 
 
-class StreamRelaySetup(Setup, CamSetupHelper):
-        def __init__(self, session):
-                self.serviceitems = []
-                self.services = streamrelay.data.copy()
-                Setup.__init__(self, session=session, setup="StreamRelay")
-                self["key_yellow"] = StaticText()
-                self["key_blue"] = StaticText()
-                self["addActions"] = HelpableActionMap(self, ["ColorActions"], {
-                        "yellow": (self.keyAddService, _("Play service with Stream Relay"))
-                        }, prio=0, description=_("Stream Relay Setup Actions"))
-                self["removeActions"] = HelpableActionMap(self, ["ColorActions"], {
-                        "blue": (self.keyRemoveService, _("Play service without Stream Relay"))
-                        }, prio=0, description=_("Stream Relay Setup Actions"))
-                self["removeActions"].setEnabled(False)
-
-        def layoutFinished(self):
-                Setup.layoutFinished(self)
-                self.createItems()
-
-        def createItems(self):
-                self.serviceitems = []
-                for serviceref in self.services:
-                        service = ServiceReference(serviceref)
-                        orbPos, orbPosText = self.getOrbPos(serviceref)
-                        self.serviceitems.append((f"{service and service.getServiceName() or serviceref} / {orbPosText}", NoSave(ConfigNothing()), serviceref, orbPos))
-                if self.serviceitems:
-                        self.serviceitems.sort(key=self.sortService)
-                        self.serviceitems.insert(0, ("**************************",))
-                self.createSetup()
-
-        def createSetup(self):
-                Setup.createSetup(self, appendItems=self.serviceitems)
-
-        def selectionChanged(self):
-                self.updateButtons()
-                Setup.selectionChanged(self)
-
-        def updateButtons(self):
-                if self.services and isinstance(self.getCurrentItem(), ConfigNothing):
-                        self["removeActions"].setEnabled(True)
-                        self["key_blue"].setText(_("Remove"))
-                else:
-                        self["removeActions"].setEnabled(False)
-                        self["key_blue"].setText("")
-                self["key_yellow"].setText(_("Add service"))
-
-        def keySelect(self):
-                if not isinstance(self.getCurrentItem(), ConfigNothing):
-                        Setup.keySelect(self)
-
-        def keyMenu(self):
-                if not isinstance(self.getCurrentItem(), ConfigNothing):
-                        Setup.keyMenu(self)
-
-        def keyRemoveService(self):
-                currentItem = self.getCurrentItem()
-                if currentItem:
-                        serviceref = self["config"].getCurrent()[2]
-                        self.services.remove(serviceref)
-                        index = self["config"].getCurrentIndex()
-                        self.createItems()
-                        self["config"].setCurrentIndex(index)
-
-        def keyAddService(self):
-                def keyAddServiceCallback(*result):
-                        if result:
-                                service = ServiceReference(result[0])
-                                serviceref = service.ref.toCompareString()
-                                if serviceref not in self.services:
-                                        self.services.append(serviceref)
-                                        self.createItems()
-                                        self["config"].setCurrentIndex(2)
-
-                from Screens.ChannelSelection import SimpleChannelSelection  # This must be here to avoid a boot loop!
-                self.session.openWithCallback(keyAddServiceCallback, SimpleChannelSelection, _("Select"), currentBouquet=False)
-
-        def keySave(self):
-                if streamrelay.data != self.services:
-                        streamrelay.data = self.services
-                streamrelay.data = self.services
-                Setup.keySave(self)
