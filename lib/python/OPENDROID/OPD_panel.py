@@ -10,6 +10,7 @@ from enigma import *
 from Screens.Standby import *
 from Screens.LogManager import *
 from Screens.MessageBox import MessageBox
+from Screens.BluePanel import BluePanel
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 import six
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
@@ -108,7 +109,6 @@ timer.timeout.get().append(timerEvent)
 timer.startLongTimer(1)
 
 from OPENDROID.HddSetup import *
-from OPENDROID.BluePanel import *
 from Screens.CronTimer import *
 from OPENDROID.ScriptRunner import *
 from OPENDROID.MountManager import *

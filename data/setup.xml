@@ -26,6 +26,10 @@
 		<item level="1" text="Enable BT Audio" description="This Option allows you to switch Audio to BT Speakers." requires="CanBTAudio">config.av.btaudio</item>
 		<item level="1" text="General BT Audio delay" description="This option configures the general audio delay for BT Speakers." requires="CanBTAudioDelay">config.av.btaudiodelay</item>
 	</setup>
+	<setup key="AutoCam" title="AutoCam Settings">
+		<item level="0" text="Use AutoCam" description="When set to 'Yes' a specific Softcam can be assigned to each encrypted service.">config.misc.autocamEnabled</item>
+		<item level="0" text="Select AutoCam default Softcam" description="Select a Softcam from the available list as the default for AutoCam." conditional="config.misc.autocamEnabled.value">self.autocamDefault</item>
+	</setup>
 	<setup key="AutoLanguage" title="Auto Language Settings" level="1" showOpenWebif="1">
 		<item level="1" text="Audio language selection 1" description="Configure the first audio language (highest priority).">config.autolanguage.audio_autoselect1</item>
 		<item level="1" text="Audio language selection 2" description="Configure the second audio language.">config.autolanguage.audio_autoselect2</item>
@@ -46,6 +50,9 @@
 		<item level="1" text="EPG language selection 1" description="Configure the primary EPG language.">config.autolanguage.audio_epglanguage</item>
 		<item level="1" text="EPG language selection 2" description="Configure the secondary EPG language.">config.autolanguage.audio_epglanguage_alternative</item>
 	</setup>
+	<setup key="Cardserver" title="Cardserver Settings" showOpenWebif="1">
+		<item level="0" text="Select cardserver" description="Select the cardserver to be used from the list of available cardservers.">config.misc.cardservers</item>
+	</setup>
 	<setup key="CCcamLineEdit" title="CCcam Line Editor">
 		<item level="0" text="Protocol" description="Select the softcam protocol.">config.cccamlineedit.protocol</item>
 		<item level="0" text="Domain" description="Edit the CCcam/NewCamd server hostname.">config.cccamlineedit.domain</item>
@@ -60,6 +67,12 @@
 		<item level="0" text="Username" description="Edit the username.">config.cccaminfo.username</item>
 		<item level="0" text="Password" description="Edit the password.">config.cccaminfo.password</item>
 		<item level="0" text="Port" description="Edit the remote CCCam port.">config.cccaminfo.port</item>
+	</setup>
+	<setup key="CiSelection" title="Common Interface">
+		<item level="0" text="Common Settings"></item>
+		<item level="0" text="CI+ Helper*" description="Select 'Enable' to start the CI+ helper." requires="CIPlusHelper">config.cimisc.cihelperenabled</item>
+		<item level="0" text="DVB CI Delay" description="Set DVB CI delay." requires="CommonInterfaceCIDelay">config.cimisc.dvbCiDelay</item>
+		<item level="0" text="CI Boot Delay" description="Set CI Boot delay.">config.cimisc.bootDelay</item>
 	</setup>
 	<setup key="ChannelSelection" title="Channel Selection Settings" showOpenWebif="1">
 		<item level="0" text="Include CI assignment" description="Set CI assignment for detection of available services.">config.misc.use_ci_assignment</item>

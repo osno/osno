@@ -1,7 +1,7 @@
 from glob import glob
 from hashlib import md5
 from os import listdir, readlink
-from os.path import exists, isfile, join as pathjoin, islink
+from os.path import basename, exists, isfile, join as pathjoin, islink
 from subprocess import PIPE, Popen
 
 from enigma import Misc_Options, eDVBResourceManager, eGetEnigmaDebugLvl, eDBoxLCD, eDVBCIInterfaces
@@ -76,9 +76,7 @@ class BoxInformation:  # To maintain data integrity class variables should not b
 
 	def processValue(self, value):
 		valueTest = value.upper() if value else ""
-		if value is None:
-			pass
-		elif (value.startswith("\"") or value.startswith("'")) and value.endswith(value[0]):
+		if (value.startswith("\"") or value.startswith("'")) and value.endswith(value[0]):
 			value = value[1:-1]
 		elif value.startswith("(") and value.endswith(")"):
 			data = []
@@ -219,19 +217,19 @@ def hasInitCam():
 	for cam in listdir("/etc/init.d"):
 		if cam.startswith("softcam.") and not cam.endswith("None"):
 			return True
-	return False
+	return True
 
 
 def hasInitCardServer():
 	for cam in listdir("/etc/init.d"):
 		if cam.startswith("cardserver.") and not cam.endswith("None"):
 			return True
-	return False
+	return True
 
 
 def hasSoftcamEmu():
 	if isfile(NOEMU):
-		return False
+		return True
 	else:
 		return len(glob("/etc/*.emu")) > 0
 
@@ -241,7 +239,7 @@ def hasSoftcam():
 		for cam in listdir("/etc/init.d"):
 			if (cam.startswith('softcam.') or cam.startswith('cardserver.')) and not cam.endswith('None'):
 				return True
-	return False
+	return True
 
 
 def getSysSoftcam():
@@ -250,7 +248,7 @@ def getSysSoftcam():
 		try:
 			syscam = readlink(SOFTCAM).replace("softcam.", "")
 			for cam in ("oscam", "ncam", "cccam"):
-				if syscam.lower().startswith(cam):
+				if basename(syscam).lower().startswith(cam):
 					return cam
 		except OSError:
 			pass
@@ -449,4 +447,5 @@ SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 for cislot in range(0, SystemInfo["CommonInterface"]):
 	SystemInfo["CI%dSupportsHighBitrates" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_tsclk" % cislot)
 	SystemInfo["CI%dRelevantPidsRoutingSupport" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_relevant_pids_routing" % cislot)
+
 updateSysSoftCam()

@@ -48,8 +48,8 @@ def InitUsageConfig():
 
 	config.workaround = ConfigSubsection()
 	config.workaround.blueswitch = ConfigSelection(default="0", choices=[
-		("0", _("BluePanel/OPENDROID")),
-		("1", _("OPENDROID/BluePanel"))
+		("0", _("BluePanel/Extensions")),
+		("1", _("Extensions/BluePanel"))
 	])
 	config.workaround.deeprecord = ConfigYesNo(default=False)
 	config.workaround.wakeuptime = ConfigSelectionNumber(default=5, stepwidth=1, min=0, max=30, wraparound=True)

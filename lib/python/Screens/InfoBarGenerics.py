@@ -14,7 +14,7 @@ from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iS
 from keyids import KEYFLAGS, KEYIDNAMES, KEYIDS
 from RecordTimer import AFTEREVENT, RecordTimer, RecordTimerEntry, findSafeRecordPath, parseEvent
 from ServiceReference import ServiceReference, getStreamRelayRef, isPlayableForCur, hdmiInServiceRef
-from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap, NumberActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Components.AVSwitch import iAVSwitch
 from Components.config import ConfigBoolean, ConfigClock, config, configfile
 from Components.Harddisk import findMountPoint, harddiskmanager
@@ -1186,7 +1186,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				FLAG_HIDE_VBI = 512
 				return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & FLAG_HIDE_VBI and True
 			else:
-				return ".hidvbi." in servicepath.lower()
+				return ".hidevbi." in servicepath.lower()
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
 		return info and info.getInfo(iServiceInformation.sHideVBI) == 1
@@ -3289,6 +3289,7 @@ class InfoBarExtensions:
 
 		if config.plisettings.ColouredButtons.value:
 			self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions", {
+				"extensions": (self.bluekey_ex, _("Show extensions...")),
 				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
 				"openTimerList": (self.showTimerList, _("Show the list of timers.")),
@@ -3300,6 +3301,7 @@ class InfoBarExtensions:
 			}, prio=1, description=_("Extension Actions")) # lower priority
 		else:
 			self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions", {
+				"extensions": (self.bluekey_ex, _("view extensions...")),
 				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 				"showDreamPlex": (self.showDreamPlex, _("Show the DreamPlex player...")),
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
@@ -3310,12 +3312,18 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getOsd3DSetup, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getOScamInfo, type=InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension=self.getSoftcamSetup, type=InfoBarExtensions.EXTENSION_LIST)
 		if config.usage.show_restart_network_extensionslist.getValue() is True:
 			self.addExtension(extension=self.getRestartNetwork, type=InfoBarExtensions.EXTENSION_LIST)
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
 			p(self)
 
+	def bluekey_ex(self):
+		if config.workaround.blueswitch.value == "1":
+			self.quickmenuStart()
+		else:
+			self.showExtensionSelection()
 
 	def SelectopenEventView(self):
 		try:
@@ -3369,7 +3377,7 @@ class InfoBarExtensions:
 			return []
 
 	def getOSname(self):
-		return _("OScam Info")
+		return _("OSCam Info")
 
 	def getOScamInfo(self):
 		if pathExists('/usr/bin/'):
@@ -3445,18 +3453,16 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def showPluginBrowser(self):
-#		from Screens.PluginBrowser import PluginBrowser
-#		self.session.open(PluginBrowser)
-		from OPENDROID.BluePanel import BluePanel
-		self.session.open(BluePanel)
+		from Screens.PluginBrowser import PluginBrowser
+		self.session.open(PluginBrowser)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
 		self.session.open(CCcamInfoMain)
 
 	def openOScamInfo(self):
-		from Screens.OScamInfo import OscamInfoMenu
-		self.session.open(OscamInfoMenu)
+		from Screens.OScamInfo import OSCamInfo
+		self.session.open(OSCamInfo)
 
 	def showTimerList(self):
 		self.session.open(RecordTimerOverview)
@@ -3469,6 +3475,9 @@ class InfoBarExtensions:
 		from Screens.Setup import Setup
 		self.session.open(Setup, "OSD3D")
 
+	def openSoftcamSetup(self):
+		from Screens.BluePanel import BluePanel
+		self.session.open(BluePanel)
 
 	def openRestartNetwork(self):
 		try:
