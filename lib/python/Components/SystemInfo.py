@@ -284,7 +284,7 @@ def updateSysSoftCam():
 def getBoxName():
 	box = MACHINEBUILD
 	machinename = DISPLAYMODEL.lower()
-	if box in ('uniboxhd1', 'uniboxhd2', 'uniboxhd3'):
+	if box in ("uniboxhd1", "uniboxhd2", "uniboxhd3"):
 		box = "ventonhdx"
 	elif box == "odinm6":
 		box = machinename
@@ -296,17 +296,17 @@ def getBoxName():
 		box = "miraclebox-twin"
 	elif box == "xp1000" and machinename == "sf8 hd":
 		box = "sf8"
-	elif box.startswith('et') and box not in ('et8000', 'et8500', 'et8500s', 'et10000'):
-		box = box[0:3] + 'x00'
+	elif box.startswith("et") and box not in ("et8000", "et8500", "et8500s", "et10000"):
+		box = f"{box[0:3]}x00"
 	elif box == "odinm9":
 		box = "maram9"
-	elif box.startswith('sf8008m'):
+	elif box.startswith("sf8008m"):
 		box = "sf8008m"
-	elif box.startswith('sf8008'):
+	elif box.startswith("sf8008"):
 		box = "sf8008"
-	elif box.startswith('ustym4kpro'):
+	elif box.startswith("ustym4kpro"):
 		box = "ustym4kpro"
-	elif box.startswith('twinboxlcdci'):
+	elif box.startswith("twinboxlcdci"):
 		box = "twinboxlcd"
 	elif box == "sfx6018":
 		box = "sfx6008"
