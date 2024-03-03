@@ -54,14 +54,14 @@ class ConsoleItem:
 			callback(data, retVal, self.extraArgs)
 
 
-class Console(object):
+class Console:
 	"""
 		Console by default will work with strings on callback.
 		If binary data required class shoud be initialized with Console(binary=True)
 	"""
 
 	def __init__(self, binary=False):
-		# Still called appContainers because Network.py, SoftwareTools.py
+		# Still called appContainers because Network.py
 		# and WirelessLan/Wlan.py accesses it to know if there's still
 		# stuff running.
 		self.appContainers = {}

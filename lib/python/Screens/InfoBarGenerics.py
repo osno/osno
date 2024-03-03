@@ -36,6 +36,7 @@ from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import ChannelSelection, PiPZapSelection, BouquetSelector, SilentBouquetSelector, EpgBouquetSelector, service_types_tv
 from Screens.ChoiceBox import ChoiceBox
+from Screens.DateTimeInput import InstantRecordingEndTime
 from Screens.Dish import Dish
 from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewEPGSelect, EventViewSimple
@@ -1909,7 +1910,7 @@ class InfoBarSimpleEventView:
 		self["EventViewActions"] = HelpableActionMap(self, "InfobarEPGActions", {
 			"showEventInfo": (self.openEventView, _("show event details")),
 			"InfoPressed": (self.openEventView, _("show event details")),
-			"showInfobarOrEpgWhenInfobarAlreadyVisible": self.showEventInfoWhenNotVisible,
+			"showInfoBarOrEpgWhenInfobarAlreadyVisible": self.showEventInfoWhenNotVisible,
 		}, prio=0, description=_("InfoBar Event View Actions"))
 
 	def openEventView(self, simple=False):
@@ -3234,7 +3235,7 @@ class InfoBarTimeshiftState(InfoBarPVRState):
 		if config.usage.enableVodMode.value:
 			if name==True and self.isSeekable() and url.endswith(tuple(ext)):
 				InfoBarTimeshift.ptsSeekPointerSetCurrentPos(self)
-				if config.timeshift.showinfobar.value:
+				if config.timeshift.showInfoBar.value:
 					self["TimeshiftSeekPointerActions"].setEnabled(True)
 				self.pvrStateDialog.show()
 		if not self.isSeekable():
@@ -3981,7 +3982,7 @@ class InfoBarInstantRecord:
 			InfoBarTimeshift.saveTimeshiftEventPopup(self)
 		elif answer[1].startswith("pts_livebuffer") is True:
 			InfoBarTimeshift.SaveTimeshift(self, timeshiftfile=answer[1])
-		elif answer[1] == "downloadvod":
+		elif answer[1] != "downloadvod":
 			self.saveTimeshiftEventPopupActive = False
 			name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
 			url = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getPath()
@@ -4059,20 +4060,26 @@ class InfoBarInstantRecord:
 			self.session.open(MessageBox, "%s\n\n%s" % (_("Path '%s' missing!") % pirr, _("No HDD found or HDD not initialized!")), MessageBox.TYPE_ERROR)
 			return
 		if isStandardInfoBar(self):
-			commonVOD = ((_("Download (remember to switch to a channel DVB-S2/T/T2/C)"), "downloadvod"), (_("Add recording (stop after current event)"), "event"))
-			commonRecord = ((_("Add recording (stop after current event)"), "event"),
-				(_("Add recording (indefinitely)"), "indefinitely"),
-				(_("Add recording (enter recording duration)"), "manualduration"),
-				(_("Add recording (enter recording end time)"), "manualendtime"),)
-
-			commonTimeshift = ((_("Time shift save recording (stop after current event)"), "savetimeshift"),
-				(_("Time shift save recording (Select event)"), "savetimeshiftEvent"),)
+			commonVOD = [
+				(_("Download (remember to switch to a channel DVB-S2/T/T2/C)"), "downloadvod"),
+				(_("Add recording (stop after current event)"), "event")
+			]
+			commonRecord = [
+				(_("Add recording (Stop after current event)"), "event"),
+				(_("Add recording (Indefinitely - 24 hours)"), "indefinitely"),
+				(_("Add recording (Enter recording duration)"), "manualduration"),
+				(_("Add recording (Enter recording end time)"), "manualendtime")
+			]
+			commonTimeshift = [
+				(_("Time shift save recording (Stop after current event)"), "savetimeshift"),
+				(_("Time shift save recording (Select event)"), "savetimeshiftEvent")
+			]
 		else:
-			commonRecord  = ()
-			commonVOD = ()
-			commonTimeshift = ()
+			commonRecord = []
+			commonVOD = []
+			commonTimeshift = []
 		if self.isInstantRecordRunning():
-			title = f"{_('A recording is currently running.')}\n\n{_('What do you want to do?')}"
+			title = _("A recording is currently running.\nWhat do you want to do?")
 			choiceList = [
 				(_("Stop recording"), "stop")
 			] + commonRecord + [
@@ -4084,17 +4091,17 @@ class InfoBarInstantRecord:
 		elif self.session.nav.getCurrentlyPlayingServiceReference():
 			name = self.session.nav.getCurrentlyPlayingServiceReference().toString().startswith("4097:")
 			if name == True:
-				title = _("Start recording?")
+				title = _("Start instant recording?")
 				choiceList = commonVOD
+				if self.isTimerRecordRunning():
+					choiceList.append((_("Stop timer recording"), "timer"))
 			else:
-				title = _("Start recording?")
+				title = _("Start instant recording?")
 				choiceList = commonRecord
-
 				if self.isTimerRecordRunning():
 					choiceList.append((_("Stop timer recording"), "timer"))
 			if isStandardInfoBar(self) and self.timeshiftEnabled():
 				choiceList.extend(commonTimeshift)
-
 			if isStandardInfoBar(self):
 				choiceList.append((_("Do not record"), "no"))
 		if choiceList:

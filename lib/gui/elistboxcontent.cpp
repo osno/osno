@@ -922,12 +922,14 @@ static void clearRegionHelper(gPainter &painter, eListboxStyle *local_style, con
 	{
 		if (local_style->is_set.background_color)
 			painter.setBackgroundColor(local_style->m_background_color);
+		/*
 		if (local_style->m_gradient_set[0] && cursorValid)
 		{
 			painter.setGradient(local_style->m_gradient_colors[0], local_style->m_gradient_direction[0], local_style->m_gradient_alphablend[0]);
 			painter.drawRectangle(eRect(offset, size));
 			return;
 		}
+		*/
 		if (local_style->m_background && cursorValid)
 		{
 			int x = offset.x();
@@ -964,12 +966,14 @@ static void clearRegionSelectedHelper(gPainter &painter, eListboxStyle *local_st
 			painter.blit(local_style->m_background, ePoint(x, y), eRect(), local_style->is_set.transparent_background ? gPainter::BT_ALPHATEST : 0);
 			return;
 		}
+		/*
 		else if (local_style->m_gradient_set[1] && cursorValid)
 		{
 			painter.setGradient(local_style->m_gradient_colors[1], local_style->m_gradient_direction[1], local_style->m_gradient_alphablend[1]);
 			painter.drawRectangle(eRect(offset, size));
 			return;
 		}
+		*/
 	}
 	if (clear)
 		painter.clear();
@@ -1681,9 +1685,20 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 				eRect rect(x, y, width, height);
 				painter.clip(rect);
 				{
-					gRegion rc(rect);
 					bool mustClear = (selected && pbackColorSelected) || (!selected && pbackColor);
-					clearRegion(painter, style, local_style, pforeColor, pforeColorSelected, pbackColor, pbackColorSelected, selected, marked, rc, sel_clip, offs, itemRect.size(), cursorValid, mustClear, orientation);
+					if (radius && mustClear)
+					{
+						painter.setRadius(radius, edges);
+						uint32_t color = PyLong_AsUnsignedLongMask(selected ? pbackColorSelected : pbackColor);
+						painter.setBackgroundColor(gRGB(color));
+						painter.drawRectangle(rect);
+					}
+					else 
+					{
+						gRegion rc(rect);
+						clearRegion(painter, style, local_style, pforeColor, pforeColorSelected, pbackColor, pbackColorSelected, selected, marked, rc, sel_clip, offs, itemRect.size(), cursorValid, mustClear, orientation);
+					}
+
 				}
 
 				// border

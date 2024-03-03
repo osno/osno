@@ -181,6 +181,9 @@ class ConfigListScreen:
 				"close": (self.closeRecursive, _("Cancel any changed settings and exit all menus")),
 				"save": (self.keySave, _("Save all changed settings and exit"))
 			}, prio=1, description=_("Common Setup Actions"))
+			self.actionMaps = ["fullUIActions"]
+		else:
+			self.actionMaps = []
 		if "key_menu" not in self:
 			self["key_menu"] = StaticText(_("MENU"))
 		if "key_text" not in self:
@@ -234,6 +237,14 @@ class ConfigListScreen:
 			"showVirtualKeyboard": (self.keyText, _("Display the virtual keyboard for data entry"))
 		}, prio=1, description=_("Common Setup Actions"))
 		self["virtualKeyBoardActions"].setEnabled(False)
+		self.actionMaps.extend([
+			"configActions",
+			"navigationActions",
+			"menuConfigActions",
+			"charConfigActions",
+			"editConfigActions",
+			"virtualKeyBoardActions"
+		])
 		# Temporary support for legacy code and plugins that hasn't yet been updated (next 4 lines).
 		# All code should be updated to allow a better UI experience for users.  This patch code
 		# forces course control over the edit buttons instead of individual button control that is
@@ -249,7 +260,7 @@ class ConfigListScreen:
 		self.onSave = []
 		self.onExecBegin.append(self.showHelpWindow)
 		self.onExecEnd.append(self.hideHelpWindow)
-		self.onLayoutFinish.append(self.noNativeKeys)  # self.layoutFinished is already in use!
+		self.onLayoutFinish.append(self.disableNativeActionMaps)  # self.layoutFinished is already in use!
 		self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
 	def setCancelMessage(self, msg):
@@ -274,8 +285,19 @@ class ConfigListScreen:
 		for callback in self.onChangedEntry:
 			callback()
 
-	def noNativeKeys(self):
+	def disableNativeActionMaps(self):
 		self["config"].enableAutoNavigation(False)
+
+	def suspendAllActionMaps(self):
+		self.actionMapStates = []
+		for actionMap in self.actionMaps:
+			self.actionMapStates.append(self[actionMap].getEnabled())
+			self[actionMap].setEnabled(False)
+
+	def resumeAllActionMaps(self):
+		if hasattr(self, "actionMapStates"):
+			for index, actionMap in enumerate(self.actionMaps):
+				self[actionMap].setEnabled(self.actionMapStates[index])
 
 	def handleInputHelpers(self):
 		currConfig = self["config"].getCurrent()
@@ -340,33 +362,28 @@ class ConfigListScreen:
 		self.keySelect()
 
 	def keyText(self):
-		self.session.openWithCallback(self.keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
+		def keyTextCallback(callback=None):
+			if callback is not None:
+				prev = str(self.getCurrentValue())
+				self["config"].getCurrent()[1].setValue(callback)
+				self["config"].invalidateCurrent()
+				if callback != prev:
+					self.entryChanged()
 
-	def keyTextCallback(self, callback=None):
-		if callback is not None:
-			prev = str(self.getCurrentValue())
-			self["config"].getCurrent()[1].setValue(callback)
-			self["config"].invalidateCurrent()
-			if callback != prev:
-				self.entryChanged()
+		self.session.openWithCallback(keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
 
 	def keyMenu(self):
+		def keyMenuCallback(answer):
+			if answer:
+				prev = str(self.getCurrentValue())
+				self["config"].getCurrent()[1].setValue(answer[1])
+				self["config"].invalidateCurrent()
+				if answer[1] != prev:
+					self.entryChanged()
+
 		currConfig = self["config"].getCurrent()
 		if currConfig and currConfig[1].enabled and hasattr(currConfig[1], "description"):
-			self.session.openWithCallback(
-				self.keyMenuCallback, ChoiceBox, title=currConfig[0],
-				list=list(zip(currConfig[1].description, currConfig[1].choices)),
-				selection=currConfig[1].getIndex(),
-				keys=[]
-			)
-
-	def keyMenuCallback(self, answer):
-		if answer:
-			prev = str(self.getCurrentValue())
-			self["config"].getCurrent()[1].setValue(answer[1])
-			self["config"].invalidateCurrent()
-			if answer[1] != prev:
-				self.entryChanged()
+			self.session.openWithCallback(keyMenuCallback, ChoiceBox, text="", choiceList=list(zip(currConfig[1].description, currConfig[1].choices)), selection=currConfig[1].getIndex(), buttonList=[], windowTitle=currConfig[0])
 
 	def keyTop(self):
 		self["config"].goTop()

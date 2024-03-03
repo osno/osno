@@ -714,7 +714,7 @@ class SecConfigure:
 		self.update()
 
 
-class NIM(object):
+class NIM:
 	def __init__(self, slot, nimtype, description, has_outputs=True, internally_connectable=None, multi_type=None, frontend_id=None, i2c=None, is_empty=False, input_name=None, supports_blind_scan=False, is_fbc=None, number_of_slots=0):
 		if not multi_type:
 			multi_type = {}
@@ -968,7 +968,9 @@ class NimManager:
 		self.atscList = []
 		self.enumerateNIMs()
 		self.readTransponders()
+		self.firstRun = True
 		InitNimManager(self)  # init config stuff
+		self.firstRun = False
 
 	def getConfiguredSats(self):
 		return self.sec.getConfiguredSats()
@@ -1095,7 +1097,7 @@ class NimManager:
 					if not exists("/etc/enigma2/lamedb"):
 						print("[NimManager] /etc/enigma2/lamedb not found")
 						return None
-					f = open("/etc/enigma2/lamedb", "r")
+					f = open("/etc/enigma2/lamedb")
 					lamedb = f.readlines()
 					f.close()
 
@@ -1768,7 +1770,7 @@ def InitNimManager(nimmgr, update_slots=None):
 
 	unicablelnbproducts = {}
 	unicablematrixproducts = {}
-	with open(eEnv.resolve("${datadir}/enigma2/unicable.xml"), 'r') as fd:
+	with open(eEnv.resolve("${datadir}/enigma2/unicable.xml")) as fd:
 		doc = xml.etree.ElementTree.parse(fd)
 	root = doc.getroot()
 
@@ -1911,7 +1913,7 @@ def InitNimManager(nimmgr, update_slots=None):
 	advanced_satlist_choices = nimmgr.satList + [
 		(3601, _("All satellites 1 (USALS)"), 1), (3602, _("All satellites 2 (USALS)"), 1),
 		(3603, _("All satellites 3 (USALS)"), 1), (3604, _("All satellites 4 (USALS)"), 1), (3605, _("Selecting satellites 1 (USALS)"), 1), (3606, _("Selecting satellites 2 (USALS)"), 1)]
-	advanced_lnb_choices = [("0", _("not configured"))] + [(str(y), "LNB " + str(y)) for y in list(range(1, (maxFixedLnbPositions + 1)))]
+	advanced_lnb_choices = [("0", _("Not configured"))] + [(str(y), "LNB " + str(y)) for y in list(range(1, (maxFixedLnbPositions + 1)))]
 	advanced_voltage_choices = [("polarization", _("Polarization")), ("13V", _("13 V")), ("18V", _("18 V"))]
 	advanced_tonemode_choices = [("band", _("Band")), ("on", _("On")), ("off", _("Off"))]
 	advanced_lnb_toneburst_choices = [("none", _("None")), ("A", _("A")), ("B", _("B"))]
@@ -2012,8 +2014,9 @@ def InitNimManager(nimmgr, update_slots=None):
 					sectionDict[manufacturer] = tmp
 					if defaultProduct and defaultProduct in products_valide:
 						tmp.product.value = defaultProduct
-						if defaultSlot and len(tmp.vco[defaultProduct]) >= int(defaultSlot):
-							tmp.scr[defaultProduct].value = str(defaultSlot)
+						# default scr needs to be fixed
+						#if defaultSlot and len(tmp.vco[defaultProduct]) >= int(defaultSlot):
+						#	tmp.scr[defaultProduct].value = str(defaultSlot)
 
 			print("[NimManager] MATRIX")
 			section.unicableMatrix = ConfigSubDict()
@@ -2050,7 +2053,7 @@ def InitNimManager(nimmgr, update_slots=None):
 
 			nim.advanced.unicableconnected = ConfigYesNo(default=False)
 			nim.advanced.unicableconnectedTo = ConfigSelection([(str(id), nimmgr.getNimDescription(id)) for id in nimmgr.getNimListOfType("DVB-S") if id != x])
-			if nim.advanced.unicableconnected.value == True and nim.advanced.unicableconnectedTo.value != nim.advanced.unicableconnectedTo.saved_value:
+			if nim.advanced.unicableconnected.value is True and nim.advanced.unicableconnectedTo.value != nim.advanced.unicableconnectedTo.saved_value:
 				from Tools import Notifications
 				from Screens.MessageBox import MessageBox
 				nim.advanced.unicableconnected.value = False
@@ -2134,7 +2137,7 @@ def InitNimManager(nimmgr, update_slots=None):
 			sat = 192
 			oldlnbval = None
 			rootDefaults.update({"slotnr": None})
-			if slot.isFBCTuner() and not slot.isFBCFirstRoot():
+			if not nimmgr.firstRun and slot.isFBCTuner() and not slot.isFBCFirstRoot():
 				rootConfigId = slot.getFBCRootId(nimmgr.nim_slots)
 				rootConfig = config.Nims[rootConfigId].dvbs
 				if rootConfig.configMode.value == "advanced":
@@ -2194,7 +2197,7 @@ def InitNimManager(nimmgr, update_slots=None):
 				tmp.userSatellitesList = ConfigText('[]')
 				tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
 				lnbnum = maxFixedLnbPositions + x - 3600
-				lnb = ConfigSelection([("0", _("not configured")), (str(lnbnum), "LNB %d" % (lnbnum))], "0")
+				lnb = ConfigSelection([("0", _("Not configured")), (str(lnbnum), "LNB %d" % (lnbnum))], "0")
 				lnb.slot_id = slot_id
 				lnb.addNotifier(configLNBChanged, initial_call=False)
 				tmp.lnb = lnb
@@ -2429,12 +2432,12 @@ def InitNimManager(nimmgr, update_slots=None):
 				eDVBResourceManager.getInstance().setFrontendType(slot.frontend_id, slot.getType())
 			system = configElement.getText()
 			if exists("/proc/stb/frontend/%d/mode" % fe_id):
-				cur_type = int(open("/proc/stb/frontend/%d/mode" % fe_id, "r").read())
+				cur_type = int(open("/proc/stb/frontend/%d/mode" % fe_id).read())
 				if cur_type != int(configElement.value):
 					print("[NimManager]tunerTypeChanged feid %d from %d to mode %d" % (fe_id, cur_type, int(configElement.value)))
 
 					try:
-						oldvalue = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "r").readline()
+						oldvalue = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout").readline()
 						with open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "w") as fd:
 							fd.write("0")
 					except OSError:

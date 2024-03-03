@@ -37,7 +37,14 @@ def IconCheck(session=None, **kwargs):
 
 class IconCheckPoller:
 	def __init__(self):
+		self.symbolNetwork = exists("/proc/stb/lcd/symbol_network")
+		self.symbolUsb = exists("/proc/stb/lcd/symbol_usb")
+		self.lcdMode = config.lcd.mode.value
+		config.lcd.mode.addNotifier(self.setLCDmode)
 		self.timer = eTimer()
+
+	def setLCDmode(self, configElement):
+		self.lcdMode = configElement.value
 
 	def start(self):
 		if self.iconcheck not in self.timer.callback:
@@ -50,34 +57,30 @@ class IconCheckPoller:
 		self.timer.stop()
 
 	def iconcheck(self):
-		try:
-			threads.deferToThread(self.jobTask)
-		except:
-			pass
-		self.timer.startLongTimer(30)
+		threads.deferToThread(self.jobTask)
 
 	def jobTask(self):
-		linkState = 0
-		if exists("/sys/class/net/wlan0/operstate"):
-			linkState = fileReadLine("/sys/class/net/wlan0/operstate")
-			if linkState != "down":
-				linkState = fileReadLine("/sys/class/net/wlan0/carrier")
-		elif exists("/sys/class/net/eth0/operstate"):
-			linkState = fileReadLine("/sys/class/net/eth0/operstate")
-			if linkState != "down":
-				linkState = fileReadLine("/sys/class/net/eth0/carrier")
-		linkState = linkState[:1]
-		if exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "1":
+		if self.symbolNetwork and self.lcdMode:
+			linkState = "0"
+			if exists("/sys/class/net/wlan0/operstate"):
+				linkState = fileReadLine("/sys/class/net/wlan0/operstate")
+				if linkState != "down":
+					linkState = fileReadLine("/sys/class/net/wlan0/carrier")
+			elif exists("/sys/class/net/eth0/operstate"):
+				linkState = fileReadLine("/sys/class/net/eth0/operstate")
+				if linkState != "down":
+					linkState = fileReadLine("/sys/class/net/eth0/carrier")
 			fileWriteLine("/proc/stb/lcd/symbol_network", linkState)
-		elif exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "0":
-			fileWriteLine("/proc/stb/lcd/symbol_network", "0")
-		USBState = 0
-		for bus in busses():
-			devices = bus.devices
-			for dev in devices:
-				if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor != 3034 and dev.idVendor > 0:
-					USBState = 1
-		if exists("/proc/stb/lcd/symbol_usb"):
+		if self.symbolUsb:
+			USBState = 0
+			try:
+				for bus in busses():
+					devices = bus.devices
+					for dev in devices:
+						if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor != 3034 and dev.idVendor > 0:
+							USBState = 1
+			except Exception as err:
+				print("[IconCheckPoller] Error get USB devices!  (%s)" % str(err))
 			fileWriteLine("/proc/stb/lcd/symbol_usb", USBState)
 		self.timer.startLongTimer(30)
 
@@ -163,7 +166,7 @@ class LCD:
 		self.dimBrightness = value
 
 	def setDimDelay(self, value):
-		self.dimDelay = int(value)
+		self.dimDelay = value
 
 	def setContrast(self, value):
 		value *= 63
@@ -242,20 +245,6 @@ class LCD:
 	def setLEDBlinkingTime(self, value):
 		eDBoxLCD.getInstance().setLED(value, 2)
 
-	def setLCDMiniTVMode(self, value):
-		if exists("/proc/stb/lcd/mode"):
-			print("[Lcd] setLCDMiniTVMode='%s'." % value)
-			fileWriteLine("/proc/stb/lcd/mode", value)
-
-	def setLCDMiniTVPIPMode(self, value):
-		print("[Lcd] setLCDMiniTVPIPMode='%s'." % value)
-		# DEBUG: Should this be doing something?
-
-	def setLCDMiniTVFPS(self, value):
-		if exists("/proc/stb/lcd/fps"):
-			print("[Lcd] setLCDMiniTVFPS='%s'." % value)
-			fileWriteLine("/proc/stb/lcd/fps", value)
-
 
 def leaveStandby():
 	config.lcd.bright.apply()
@@ -291,8 +280,8 @@ def InitLcd():
 		ilcd = LCD()
 		if can_lcdmodechecking:
 			def setLCDModeMinitTV(configElement):
-				print("[Lcd] setLCDModeMinitTV='%s'." % configElement.value)
-				fileWriteLine("/proc/stb/lcd/mode", configElement.value)
+				print(f"[Lcd] setLCDModeMinitTV='{configElement.value}'.")
+				eDBoxLCD.getInstance().setLCDMode(configElement.value)
 
 			def setMiniTVFPS(configElement):
 				print("[Lcd] setMiniTVFPS='%s'." % configElement.value)
@@ -301,18 +290,18 @@ def InitLcd():
 			def setLCDModePiP(configElement):
 				pass  # DEBUG: Should this be doing something?
 
-			config.lcd.modepip = ConfigSelection(choices={
-				"0": _("Off"),
-				"5": _("PiP"),
-				"7": _("PiP with OSD")
-			}, default="0")
+			config.lcd.modepip = ConfigSelection(default=0, choices=[
+				(0, _("Off")),
+				(5, _("PiP")),
+				(7, _("PiP with OSD"))
+			])
 			config.lcd.modepip.addNotifier(setLCDModePiP)
-			config.lcd.modeminitv = ConfigSelection(choices={
-				"0": _("normal"),
-				"1": _("MiniTV"),
-				"2": _("OSD"),
-				"3": _("MiniTV with OSD")
-			}, default="0")
+			config.lcd.modeminitv = ConfigSelection(default=0, choices=[
+				(0, _("normal")),
+				(1, _("MiniTV")),
+				(2, _("OSD")),
+				(3, _("MiniTV with OSD"))
+			])
 			config.lcd.fpsminitv = ConfigSlider(default=30, limits=(0, 30))
 			config.lcd.modeminitv.addNotifier(setLCDModeMinitTV)
 			config.lcd.fpsminitv.addNotifier(setMiniTVFPS)
@@ -320,19 +309,13 @@ def InitLcd():
 			config.lcd.modeminitv = ConfigNothing()
 			config.lcd.screenshot = ConfigNothing()
 			config.lcd.fpsminitv = ConfigNothing()
-		config.lcd.scroll_speed = ConfigSelection(choices=[
-			("500", _("slow")),
-			("300", _("normal")),
-			("100", _("fast"))
-		], default="300")
-		config.lcd.scroll_delay = ConfigSelection(choices=[
-			("10000", "10 %s" % _("Seconds")),
-			("20000", "20 %s" % _("Seconds")),
-			("30000", "30 %s" % _("Seconds")),
-			("60000", "1 %s" % _("Minute")),
-			("300000", "5 %s" % _("Minutes")),
-			("noscrolling", _("Off"))
-		], default="10000")
+		config.lcd.scrollSpeed = ConfigSelection(choices=[
+			(500, _("slow")),
+			(300, _("normal")),
+			(100, _("fast"))
+		], default=300)
+		delayChoices = [(x, _("%d Seconds") % x) for x in (10, 20, 30, 40, 50)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3, 5, 10, 15)] + [(0, _("Off"))]
+		config.lcd.scrollDelay = ConfigSelection(default=10, choices=delayChoices)
 
 		def setLCDbright(configElement):
 			ilcd.setBright(configElement.value)
@@ -355,15 +338,6 @@ def InitLcd():
 		def setLCDflipped(configElement):
 			ilcd.setFlipped(configElement.value)
 
-		def setLCDminitvmode(configElement):
-			ilcd.setLCDMiniTVMode(configElement.value)
-
-		def setLCDminitvpipmode(configElement):
-			ilcd.setLCDMiniTVPIPMode(configElement.value)
-
-		def setLCDminitvfps(configElement):
-			ilcd.setLCDMiniTVFPS(configElement.value)
-
 		def setLEDnormalstate(configElement):
 			ilcd.setLEDNormalState(configElement.value)
 
@@ -372,18 +346,6 @@ def InitLcd():
 
 		def setLEDblinkingtime(configElement):
 			ilcd.setLEDBlinkingTime(configElement.value)
-
-		def setPowerLEDstate(configElement):
-			fileWriteLine("/proc/stb/power/powerled", "on" if configElement.value else "off")
-
-		def setPowerLEDstate2(configElement):
-			fileWriteLine("/proc/stb/power/powerled2", "on" if configElement.value else "off")
-
-		def setPowerLEDstanbystate(configElement):
-			fileWriteLine("/proc/stb/power/standbyled", "on" if configElement.value else "off")
-
-		def setPowerLEDdeepstanbystate(configElement):
-			fileWriteLine("/proc/stb/power/suspendled", "on" if configElement.value else "off")
 
 		def setLedPowerColor(configElement):
 			fileWriteLine("/proc/stb/fp/ledpowercolor", configElement.value)
@@ -434,18 +396,6 @@ def InitLcd():
 			("1", _("8 character"))
 		], default="0")
 		config.usage.vfd_xcorevfd.addNotifier(setXcoreVFD)
-		config.usage.lcd_powerled = ConfigOnOff(default=True)
-		if exists("/proc/stb/power/powerled"):
-			config.usage.lcd_powerled.addNotifier(setPowerLEDstate)
-		config.usage.lcd_powerled2 = ConfigOnOff(default=True)
-		if exists("/proc/stb/power/powerled2"):
-			config.usage.lcd_powerled2.addNotifier(setPowerLEDstate2)
-		config.usage.lcd_standbypowerled = ConfigOnOff(default=True)
-		if exists("/proc/stb/power/standbyled"):
-			config.usage.lcd_standbypowerled.addNotifier(setPowerLEDstanbystate)
-		config.usage.lcd_deepstandbypowerled = ConfigOnOff(default=True)
-		if exists("/proc/stb/power/suspendled"):
-			config.usage.lcd_deepstandbypowerled.addNotifier(setPowerLEDdeepstanbystate)
 
 		choices = [("0", _("off")), ("1", _("blue"))] if MACHINEBUILD == "dual" else [("0", _("Off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))]
 
@@ -498,17 +448,8 @@ def InitLcd():
 
 		config.lcd.dimbright.addNotifier(setLCDdimbright)
 		config.lcd.dimbright.apply = lambda: setLCDdimbright(config.lcd.dimbright)
-		config.lcd.dimdelay = ConfigSelection(choices=[
-			("5", "5 %s" % _("Seconds")),
-			("10", "10 %s" % _("Seconds")),
-			("15", "15 %s" % _("Seconds")),
-			("20", "20 %s" % _("Seconds")),
-			("30", "30 %s" % _("Seconds")),
-			("60", "1 %s" % _("Minute")),
-			("120", "2 %s" % _("Minutes")),
-			("300", "5 %s" % _("Minutes")),
-			("0", _("Off"))
-		], default="0")
+		delayChoices = [(x, _("%d Seconds") % x) for x in (5, 10, 15, 20, 30)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3, 5, 10)] + [(0, _("Off"))]
+		config.lcd.dimdelay = ConfigSelection(default=0, choices=delayChoices)
 		config.lcd.dimdelay.addNotifier(setLCDdimdelay)
 		config.lcd.standby.addNotifier(setLCDstandbybright)
 		config.lcd.standby.apply = lambda: setLCDstandbybright(config.lcd.standby)
@@ -527,32 +468,24 @@ def InitLcd():
 				try:
 					InfoBarInstance = InfoBar.instance
 					InfoBarInstance and InfoBarInstance.session.open(dummyScreen)
-				except:
+				except Exception:
 					pass
 
 			config.lcd.showTv = ConfigYesNo(default=False)
 			config.lcd.showTv.addNotifier(lcdLiveTvChanged)
 
-		if BoxInfo.getItem("LCDMiniTV") and config.misc.boxtype.value not in ('gbquad', 'gbquadplus', 'gbquad4k', 'gbue4k'):
-			config.lcd.minitvmode = ConfigSelection([("0", _("normal")), ("1", _("MiniTV")), ("2", _("OSD")), ("3", _("MiniTV with OSD"))], "0")
-			config.lcd.minitvmode.addNotifier(setLCDminitvmode)
-			config.lcd.minitvpipmode = ConfigSelection([("0", _("Off")), ("5", _("PiP")), ("7", _("PiP with OSD"))], "0")
-			config.lcd.minitvpipmode.addNotifier(setLCDminitvpipmode)
-			config.lcd.minitvfps = ConfigSlider(default=30, limits=(0, 30))
-			config.lcd.minitvfps.addNotifier(setLCDminitvfps)
-
 		if BoxInfo.getItem("VFD_scroll_repeats"):
 			def scroll_repeats(el):
-				eDBoxLCD.getInstance().set_VFD_scroll_repeats(int(el.value))
-			choicelist = [("0", _("None")), ("1", _("1x")), ("2", _("2x")), ("3", _("3x")), ("4", _("4x")), ("500", _("Continues"))]
-			config.usage.vfd_scroll_repeats = ConfigSelection(default="3", choices=choicelist)
+				eDBoxLCD.getInstance().set_VFD_scroll_repeats(el.value)
+			choicelist = [(0, _("None")), (1, _("1x")), (2, _("2x")), (3, _("3x")), (4, _("4x")), (500, _("Continues"))]
+			config.usage.vfd_scroll_repeats = ConfigSelection(default=3, choices=choicelist)
 			config.usage.vfd_scroll_repeats.addNotifier(scroll_repeats, immediate_feedback=False)
 		else:
 			config.usage.vfd_scroll_repeats = ConfigNothing()
 
 		if BoxInfo.getItem("VFD_scroll_delay"):
 			def scroll_delay(el):
-				eDBoxLCD.getInstance().set_VFD_scroll_delay(int(el.value))
+				eDBoxLCD.getInstance().set_VFD_scroll_delay(el.value)
 			config.usage.vfd_scroll_delay = ConfigSlider(default=150, increment=10, limits=(0, 500))
 			config.usage.vfd_scroll_delay.addNotifier(scroll_delay, immediate_feedback=False)
 			config.lcd.hdd = ConfigYesNo(default=True)
@@ -562,32 +495,20 @@ def InitLcd():
 
 		if BoxInfo.getItem("VFD_initial_scroll_delay"):
 			def initial_scroll_delay(el):
-				eDBoxLCD.getInstance().set_VFD_initial_scroll_delay(int(el.value))
+				eDBoxLCD.getInstance().set_VFD_initial_scroll_delay(el.value)
 
-			config.usage.vfd_initial_scroll_delay = ConfigSelection(choices=[
-				("3000", "3 %s" % _("Seconds")),
-				("5000", "5 %s" % _("Seconds")),
-				("10000", "10 %s" % _("Seconds")),
-				("20000", "20 %s" % _("Seconds")),
-				("30000", "30 %s" % _("Seconds")),
-				("0", _("No delay"))
-			], default="10000")
+			delayChoices = [(x * 1000, _("%d Seconds") % x) for x in (3, 5, 10, 20, 30)] + [(0, _("No delay"))]
+			config.usage.vfd_initial_scroll_delay = ConfigSelection(default=10000, choices=delayChoices)
 			config.usage.vfd_initial_scroll_delay.addNotifier(initial_scroll_delay, immediate_feedback=False)
 		else:
 			config.usage.vfd_initial_scroll_delay = ConfigNothing()
 
 		if BoxInfo.getItem("VFD_final_scroll_delay"):
 			def final_scroll_delay(el):
-				eDBoxLCD.getInstance().set_VFD_final_scroll_delay(int(el.value))
+				eDBoxLCD.getInstance().set_VFD_final_scroll_delay(el.value)
 
-			config.usage.vfd_final_scroll_delay = ConfigSelection(choices=[
-				("3000", "3 %s" % _("Seconds")),
-				("5000", "5 %s" % _("Seconds")),
-				("10000", "10 %s" % _("Seconds")),
-				("20000", "20 %s" % _("Seconds")),
-				("30000", "30 %s" % _("Seconds")),
-				("0", _("No delay"))
-			], default="10000")
+			delayChoices = [(x * 1000, _("%d Seconds") % x) for x in (3, 5, 10, 20, 30)] + [(0, _("No delay"))]
+			config.usage.vfd_final_scroll_delay = ConfigSelection(default=10000, choices=delayChoices)
 			config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback=False)
 		else:
 			config.usage.vfd_final_scroll_delay = ConfigNothing()
@@ -663,19 +584,13 @@ def InitLcd():
 		config.lcd.fblcddisplay = ConfigNothing()
 		config.lcd.mode = ConfigNothing()
 		config.lcd.hdd = ConfigNothing()
-		config.lcd.scroll_speed = ConfigSelection(choices=[
-			("500", _("slow")),
-			("300", _("normal")),
-			("100", _("fast"))
-		], default="300")
-		config.lcd.scroll_delay = ConfigSelection(choices=[
-			("10000", "10 %s" % _("Seconds")),
-			("20000", "20 %s" % _("Seconds")),
-			("30000", "30 %s" % _("Seconds")),
-			("60000", "1 %s" % _("Minute")),
-			("300000", "5 %s" % _("Minutes")),
-			("noscrolling", _("Off"))
-		], default="10000")
+		config.lcd.scrollSpeed = ConfigSelection(choices=[
+			(500, _("slow")),
+			(300, _("normal")),
+			(100, _("fast"))
+		], default=300)
+		delayChoices = [(x, _("%d Seconds") % x) for x in (10, 20, 30, 40, 50)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3, 5, 10, 15)] + [(0, _("Off"))]
+		config.lcd.scrollDelay = ConfigSelection(default=10, choices=delayChoices)
 		config.lcd.showoutputresolution = ConfigNothing()
 		config.lcd.ledbrightness = ConfigNothing()
 		config.lcd.ledbrightness.apply = lambda: doNothing()
@@ -684,7 +599,30 @@ def InitLcd():
 		config.lcd.ledbrightnessdeepstandby = ConfigNothing()
 		config.lcd.ledbrightnessdeepstandby.apply = lambda: doNothing()
 		config.lcd.ledblinkingtime = ConfigNothing()
-		config.usage.lcd_standbypowerled = ConfigNothing()
-		config.usage.lcd_deepstandbypowerled = ConfigNothing()
+
+	def setPowerLEDstate(configElement):
+		fileWriteLine("/proc/stb/power/powerled", "on" if configElement.value else "off")
+
+	def setPowerLEDstate2(configElement):
+		fileWriteLine("/proc/stb/power/powerled2", "on" if configElement.value else "off")
+
+	def setPowerLEDstanbystate(configElement):
+		fileWriteLine("/proc/stb/power/standbyled", "on" if configElement.value else "off")
+
+	def setPowerLEDdeepstanbystate(configElement):
+		fileWriteLine("/proc/stb/power/suspendled", "on" if configElement.value else "off")
+
+	if BoxInfo.getItem("PowerLed"):
+		config.usage.lcd_powerled = ConfigOnOff(default=True)
+		config.usage.lcd_powerled.addNotifier(setPowerLEDstate)
+	if BoxInfo.getItem("PowerLed2"):
+		config.usage.lcd_powerled2 = ConfigOnOff(default=True)
+		config.usage.lcd_powerled2.addNotifier(setPowerLEDstate2)
+	if BoxInfo.getItem("StandbyPowerLed"):
+		config.usage.lcd_standbypowerled = ConfigOnOff(default=True)
+		config.usage.lcd_standbypowerled.addNotifier(setPowerLEDstanbystate)
+	if BoxInfo.getItem("SuspendPowerLed"):
+		config.usage.lcd_deepstandbypowerled = ConfigOnOff(default=True)
+		config.usage.lcd_deepstandbypowerled.addNotifier(setPowerLEDdeepstanbystate)
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)

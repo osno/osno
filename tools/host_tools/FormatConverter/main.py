@@ -1,6 +1,5 @@
 #!/usr/bin/python
-from __future__ import print_function
-import os
+from os import system
 
 from datasource import genericdatasource
 from satxml import satxml
@@ -21,10 +20,10 @@ for source in datasources:
 	source.setDatasources(datasources)
 
 while True:
-	os.system("/usr/bin/clear")
+	system("/usr/bin/clear")
 	list = []
 	for index in list(range(len(datasources))):
-		list.append(datasources[index].getName() + (" (%d sats)" % len(datasources[index].transponderlist.keys())))
+		list.append(datasources[index].getName() + f" ({len(datasources[index].transponderlist.keys())} sats)")
 	index = inputChoices(list, "q", "quit")
 	if index is None:
 		break

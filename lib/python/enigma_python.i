@@ -45,6 +45,7 @@ is usually caused by not marking PSignals as immutable.
 #include <lib/base/modelinformation.h>
 #include <lib/base/e2avahi.h>
 #include <lib/base/internetcheck.h>
+#include <lib/base/profile.h>
 #include <lib/driver/rc.h>
 #include <lib/driver/rcinput_swig.h>
 #include <lib/service/event.h>
@@ -120,6 +121,7 @@ is usually caused by not marking PSignals as immutable.
 #include <lib/gdi/picload.h>
 #include <lib/dvb/fcc.h>
 #include <lib/gdi/accel.h>
+#include <include/hardwaredb.h>
 %}
 
 %feature("ref")   iObject "$this->AddRef(); /* eDebug(\"AddRef (%s:%d)!\", __FILE__, __LINE__); */ "
@@ -482,6 +484,35 @@ void setACCELDebug(int enable)
 }
 %}
 
+PyObject *getDeviceDB();
+%{
+PyObject *getDeviceDB()
+{
+	ePyObject result = PyDict_New();
+	for (const auto & [ key, value ] : HardwareDB) {
+		PutToDict(result, key.c_str(), value.c_str());
+	}
+    return result;
+}
+%}
+
+void eProfileDone();
+%{
+void eProfileDone()
+{
+	eProfile::getInstance().close();
+}
+%}
+
+void eProfileWrite(const char*);
+%{
+void eProfileWrite(const char* checkPoint)
+{
+	eProfile::getInstance().write(checkPoint);
+}
+%}
+
+
 /************** temp *****************/
 
 	/* need a better place for this, i agree. */
@@ -506,6 +537,7 @@ extern void setAnimation_current_listbox(int a);
 extern void pauseInit(void);
 extern void resumeInit(void);
 extern int checkInternetAccess(const char* host, int timeout = 3);
+extern int getVFDSymbolsPoll();
 %}
 
 extern void addFont(const char *filename, const char *alias, int scale_factor, int is_replacement, int renderflags = 0);
@@ -528,6 +560,7 @@ extern void setAnimation_current_listbox(int a);
 extern void pauseInit(void);
 extern void resumeInit(void);
 extern int checkInternetAccess(const char* host, int timeout = 3);
+extern int getVFDSymbolsPoll();
 
 %include <lib/python/python_console.i>
 %include <lib/python/python_base.i>
