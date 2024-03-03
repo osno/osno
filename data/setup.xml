@@ -54,7 +54,7 @@
 		<item level="0" text="Select cardserver" description="Select the cardserver to be used from the list of available cardservers.">config.misc.cardservers</item>
 	</setup>
 	<setup key="CCcamLineEdit" title="CCcam Line Editor">
-		<item level="0" text="Protocol" description="Select the softcam protocol.">config.cccamlineedit.protocol</item>
+		<item level="0" text="Protocol" description="Select the Softcam protocol.">config.cccamlineedit.protocol</item>
 		<item level="0" text="Domain" description="Edit the CCcam/NewCamd server hostname.">config.cccamlineedit.domain</item>
 		<item level="0" text="Port" description="Edit the CCcam/NewCamd server port.">config.cccamlineedit.port</item>
 		<item level="0" text="Username" description="Edit the username.">config.cccamlineedit.username</item>
@@ -85,7 +85,7 @@
 		<item level="1" text="Channel list on mode change" description="Select 'Yes' to show the channel list after switching between Radio and TV modes.">config.usage.show_servicelist</item>
 		<item level="1" text="Channel list cursor behavior" description="Configure the cursor behavior in the channel selection list. When opening the channel selection list you can remain on the current service or already select up/down and you are able to revert the B+/B- buttons.">config.usage.servicelist_cursor_behavior</item>
 		<item level="1" text="Enable multiple bouquets" description="Services may be grouped in bouquets. When enabled, you can use more than one bouquet.">config.usage.multibouquet</item>
-		<item level="2" text="Enable unlinked bouquets" description="When enabled, Enigma2 will load unlinked bouquets. This means that bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded">config.misc.load_unlinked_userbouquets</item>
+		<item level="2" text="Load unlinked user bouquets" description="Select 'Yes' to enable the loading of unlinked user bouquets. That is, user bouquets that are not included in the bouquets.tv or bouquets.radio files will be loaded. This allows you to, for example, create bouquets that do not conflict with, or get replaced by, bouquets that came from settings packages.">config.misc.load_unlinked_userbouquets</item>
 		<item level="1" text="Hide number markers" description="When enabled, number markers will be hidden.">config.usage.hide_number_markers</item>
 		<item level="1" text="Enable panic button" description="When enabled, pressing '0' will zap you to the first channel in your first bouquet and delete your zap-history.">config.usage.panicbutton</item>
 		<item level="1" text="Panic channel" description="Pressing the panic button will zap you to this channel number in your first bouquet.">config.usage.panicchannel</item>
@@ -106,10 +106,10 @@
 		<item level="1" text="Show columns" description="Configure if and how wide the service name column will be shown in the channel selection list." requires="!config.usage.servicelist_twolines">config.usage.servicelist_column</item>
 		<item level="1" text="Number of rows" description="This allows you change the number of rows shown." requires="config.usage.servicelist_twolines">config.usage.serviceitems_per_page_twolines</item>
 		<item level="1" text="Number of rows" description="This allows you change the number of rows shown." requires="!config.usage.servicelist_twolines">config.usage.serviceitems_per_page</item>
-		<item level="1" text="Service number font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size">config.usage.servicenum_fontsize</item>
-		<item level="1" text="Service name font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size">config.usage.servicename_fontsize</item>
-		<item level="1" text="Service info font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size">config.usage.serviceinfo_fontsize</item>
-		<item level="1" text="Progress info font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size">config.usage.progressinfo_fontsize</item>
+		<item level="1" text="Service number font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.usage.servicenum_fontsize</item>
+		<item level="1" text="Service name font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.usage.servicename_fontsize</item>
+		<item level="1" text="Service info font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.usage.serviceinfo_fontsize</item>
+		<item level="1" text="Progress info font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.usage.progressinfo_fontsize</item>
 		<item level="1" text="Zap mode" description="Setup how to control the channel changing." requires="ZapMode">config.misc.zapmode</item>
 		<item level="2" text="Channel zap delay mode" description="Setup delay mode to zap to channels.">config.usage.numzaptimeoutmode</item>
 		<item level="2" text="Channel zap delay first button" description="User defined delay when you press the first button to zap to the channel." requires="config.usage.numzaptimeoutmode" value="userdefined">config.usage.numzaptimeout1</item>
@@ -137,7 +137,7 @@
 		<item level="0" text="Status of the display during operation" description="With this option you can switch off the display during operation." requires="Power4x7On">config.usage.lcd_power4x7on</item>
 		<item level="0" text="Status of the display in standby mode" description="With this option you can switch off the display in Standby Mode." requires="Power4x7Standby">config.usage.lcd_power4x7standby</item>
 		<item level="0" text="Status of the display in deep standby" description="With this option you can switch off the display in Deep Standby Mode." requires="Power4x7Suspend">config.usage.lcd_power4x7suspend</item>
-		<item level="0" text="Show in Standby" description="This option allows you choose how to display the Time or nothing in Standby" requires="7segment">config.usage.show_in_standby</item>
+		<item level="0" text="Show in Standby" description="This option allows you choose if the display shows the time or nothing in Standby." requires="7segment">config.usage.show_in_standby</item>
 		<item level="2" text="Initial scroll delay" description="Delay in milliseconds before start of scrolling text on display." requires="VFD_initial_scroll_delay">config.usage.vfd_initial_scroll_delay</item>
 		<item level="2" text="Final scroll delay" description="Delay in milliseconds after finish scrolling text on display." requires="VFD_final_scroll_delay">config.usage.vfd_final_scroll_delay</item>
 		<item level="1" text="Repeat Display Message" description="If the text is too long to be displayed on the front panel, it will be repeated (number of times)." requires="VFD_scroll_repeats">config.usage.vfd_scroll_repeats</item>
@@ -147,9 +147,9 @@
 			<item level="1" text="Time for next LCD scrolling" description="If the text is too long to be displayed on the front panel, it will be repeated (number of times).">config.usage.lcd_scroll_delay</item>
 		</if>
 		<if requires="LCDMiniTV">
-			<item level="1" text="Show MiniTV in the Front Display" description="You can Display MiniTV with or without OSD Menu">config.lcd.modeminitv</item>
-			<item level="1" text="Show PiP in the Front Display" description="You can Display PiP with or without OSD Menu">config.lcd.modepip</item>
-			<item level="1" text="Set Framerate for MiniTV" description="Lower Framerate save CPU Time">config.lcd.fpsminitv</item>
+			<item level="1" text="Show MiniTV in the Front Display" description="You can Display MiniTV with or without OSD Menu.">config.lcd.modeminitv</item>
+			<item level="1" text="Show PiP in the Front Display" description="You can Display PiP with or without OSD Menu." requires="PIPAvailable">config.lcd.modepip</item>
+			<item level="1" text="Set Framerate for MiniTV" description="Lower Framerate saves CPU Time.">config.lcd.fpsminitv</item>
 		</if>
 		<item level="1" text="REC Symbol in use" description="Enable blinking rec symbol on the LCD Display">config.usage.blinking_rec_symbol_during_recording</item>
 		<item level="1" text="REC Symbol in Standby" description="In the Standby Record on the LCD Display">config.usage.blinking_display_clock_during_recording</item>

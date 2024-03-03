@@ -1,7 +1,7 @@
 from glob import glob
 from os.path import splitext
 
-from Tools.Profile import profile
+from enigma import eProfileWrite
 
 # workaround for required config entry dependencies.
 import Screens.MovieSelection
@@ -15,12 +15,12 @@ from Components.SystemInfo import BoxInfo, getBoxDisplayName
 from Tools.Directories import fileExists
 from Screens.ButtonSetup import InfoBarButtonSetup
 
-profile("LOAD:enigma")
 import enigma
+eProfileWrite("LOAD:enigma")
 
 boxtype = BoxInfo.getItem("machinebuild")
 
-profile("LOAD:InfoBarGenerics")
+eProfileWrite("LOAD:InfoBarGenerics")
 from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, InfoBarRedButton, InfoBarTimerButton, InfoBarVmodeButton, \
 	InfoBarEPG, InfoBarSeek, InfoBarInstantRecord, InfoBarResolutionSelection, InfoBarAspectSelection, \
@@ -30,15 +30,14 @@ from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, \
 	InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarZoom, InfoBarSleepTimer, InfoBarOpenOnTopHelper, InfoBarHandleBsod, \
 	InfoBarHdmi, setResumePoint, delResumePoint
-from Screens.ButtonSetup import InfoBarButtonSetup
 
-profile("LOAD:InitBar_Components")
+eProfileWrite("LOAD:InitBar_Components")
 from Components.ActionMap import HelpableActionMap
 from Components.Timeshift import InfoBarTimeshift
 from Components.config import config
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 
-profile("LOAD:HelpableScreen")
+eProfileWrite("LOAD:HelpableScreen")
 from Screens.HelpMenu import HelpableScreen
 
 
@@ -245,14 +244,14 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			self.lastservice = enigma.eServiceReference(config.movielist.curentlyplayingservice.value)
 		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, defaultRef, timeshiftEnabled=self.timeshiftEnabled())
 
-	def movieSelected(self, service):
+	def movieSelected(self, service, fromMovieSelection=True):
 		ref = self.lastservice
 		del self.lastservice
 		if service is None:
 			if ref and not self.session.nav.getCurrentlyPlayingServiceOrGroup():
 				self.session.nav.playService(ref)
 		else:
-			self.session.open(MoviePlayer, service, slist=self.servicelist, lastservice=ref)
+			self.session.open(MoviePlayer, service, slist=self.servicelist, lastservice=ref, fromMovieSelection=fromMovieSelection)
 
 	def showMediaPlayer(self):
 		try:
@@ -275,8 +274,8 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.session.open(SleepTimerButton)
 
 	def openTimerList(self):
-		from Screens.TimerEdit import TimerEditList
-		self.session.open(TimerEditList)
+		from Screens.Timers import RecordTimerOverview
+		self.session.open(RecordTimerOverview)
 
 	def openPowerTimerList(self):
 		from Screens.Timers import PowerTimerOverview
@@ -498,9 +497,10 @@ class MoviePlayer(InfoBarAspectSelection, InfoBarSimpleEventView, InfoBarBase, I
 
 	instance = None
 
-	def __init__(self, session, service, slist=None, lastservice=None):
+	def __init__(self, session, service, slist=None, lastservice=None, fromMovieSelection=True):
 		Screen.__init__(self, session)
 		self.pts_pvrStateDialog = ""
+		self.fromMovieSelection = fromMovieSelection
 
 		self["key_yellow"] = Label()
 		self["key_blue"] = Label()
@@ -581,35 +581,40 @@ class MoviePlayer(InfoBarAspectSelection, InfoBarSimpleEventView, InfoBarBase, I
 
 	def __onClose(self):
 		MoviePlayer.instance = None
-		from Screens.MovieSelection import playlist
-		del playlist[:]
+		if self.fromMovieSelection:
+			from Screens.MovieSelection import playlist
+			del playlist[:]
 		Screens.InfoBar.InfoBar.instance.callServiceStarted()
 		self.session.nav.playService(self.lastservice)
-		config.usage.last_movie_played.value = self.cur_service.toString()
-		config.usage.last_movie_played.save()
+		if self.fromMovieSelection:
+			config.usage.last_movie_played.value = self.cur_service.toString()
+			config.usage.last_movie_played.save()
 
 	def handleLeave(self, how):
 		self.is_closing = True
-		if how == "ask":
-			if config.usage.setup_level.index < 2: # -expert
-				list = (
-					(_("Yes"), "quit"),
-					(_("No"), "continue")
-				)
-			else:
-				list = (
-					(_("Yes"), "quit"),
-					(_("Yes, returning to movie list"), "movielist"),
-					(_("Yes, and delete this movie"), "quitanddelete"),
-					(_("Yes, delete this movie and return to movie list"), "deleteandmovielist"),
-					(_("No"), "continue"),
-					(_("No, but restart from begin"), "restart")
-				)
+		if self.fromMovieSelection:
+			if how == "ask":
+				if config.usage.setup_level.index < 2:  # -expert
+					list = (
+						(_("Yes"), "quit"),
+						(_("No"), "continue")
+					)
+				else:
+					list = (
+						(_("Yes"), "quit"),
+						(_("Yes, returning to movie list"), "movielist"),
+						(_("Yes, and delete this movie"), "quitanddelete"),
+						(_("Yes, delete this movie and return to movie list"), "deleteandmovielist"),
+						(_("No"), "continue"),
+						(_("No, but restart from begin"), "restart")
+					)
 
-			from Screens.ChoiceBox import ChoiceBox
-			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
+				from Screens.ChoiceBox import ChoiceBox
+				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
+			else:
+				self.leavePlayerConfirmed([True, how])
 		else:
-			self.leavePlayerConfirmed([True, how])
+			self.close()
 
 	def leavePlayer(self):
 		setResumePoint(self.session)
@@ -648,10 +653,11 @@ class MoviePlayer(InfoBarAspectSelection, InfoBarSimpleEventView, InfoBarBase, I
 			self.leavePlayerConfirmed((True, "deleteandmovielistconfirmed"))
 
 	def movielistAgain(self):
-		from Screens.MovieSelection import playlist
-		del playlist[:]
-		self.session.nav.playService(self.lastservice)
-		self.leavePlayerConfirmed((True, "movielist"))
+		if self.fromMovieSelection:
+			from Screens.MovieSelection import playlist
+			del playlist[:]
+			self.session.nav.playService(self.lastservice)
+			self.leavePlayerConfirmed((True, "movielist"))
 
 	def leavePlayerConfirmed(self, answer):
 		answer = answer and answer[1]
@@ -835,12 +841,15 @@ class MoviePlayer(InfoBarAspectSelection, InfoBarSimpleEventView, InfoBarBase, I
 		pass
 
 	def showMovies(self):
-		ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		if ref and ':0:/' not in ref.toString():
-			self.playingservice = ref  # movie list may change the currently playing
+		if self.fromMovieSelection:
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref and ':0:/' not in ref.toString():
+				self.playingservice = ref  # movie list may change the currently playing
+			else:
+				self.playingservice = enigma.eServiceReference(config.movielist.curentlyplayingservice.value)
+			self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, ref)
 		else:
-			self.playingservice = enigma.eServiceReference(config.movielist.curentlyplayingservice.value)
-		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, ref)
+			self.close()
 
 	def movieSelected(self, service):
 		if service is not None:
