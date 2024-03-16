@@ -53,7 +53,6 @@ from Screens.ScreenSaver import ScreenSaver
 from Screens.Setup import Setup
 import Screens.Standby
 from Screens.Standby import Standby, TryQuitMainloop
-from Screens.TimeDateInput import TimeDateInput
 from Screens.Timers import RecordTimerEdit, RecordTimerOverview
 from Screens.UnhandledKey import UnhandledKey
 from Tools.Directories import SCOPE_VOD
@@ -380,7 +379,7 @@ class InfoBarAutoCam:
 						return
 					self.switchCam(cam)
 					self.currentCam = cam
-					BoxInfo.setItem("CurrentSoftcam", cam, False)
+					BoxInfo.setMutableItem("CurrentSoftcam", cam)
 
 	def switchCam(self, new):
 		deamonSocket = socket(AF_UNIX, SOCK_STREAM)
@@ -2618,7 +2617,7 @@ class InfoBarSeek:
 		if isStandardInfoBar(self) and self.timeshiftEnabled():
 			pass
 		elif not self.isSeekable():
-			BoxInfo.setItem("SeekStatePlay", False)
+			BoxInfo.setMutableItem("SeekStatePlay", False)
 			if exists("/proc/stb/lcd/symbol_hdd"):
 				f = open("/proc/stb/lcd/symbol_hdd", "w")
 				f.write("0")
@@ -2648,7 +2647,7 @@ class InfoBarSeek:
 			if self.activity >= 100:
 				self.activity = 0
 
-			BoxInfo.setItem("SeekStatePlay", True)
+			BoxInfo.setMutableItem("SeekStatePlay", True)
 			if exists("/proc/stb/lcd/symbol_hdd"):
 				if config.lcd.hdd.value:
 					file = open("/proc/stb/lcd/symbol_hdd", "w")
@@ -2665,7 +2664,7 @@ class InfoBarSeek:
 			hdd = 0
 			self.seekAction = 0
 
-		BoxInfo.setItem("SeekStatePlay", True)
+		BoxInfo.setMutableItem("SeekStatePlay", True)
 		if exists("/proc/stb/lcd/symbol_hdd"):
 			if config.lcd.hdd.value:
 				file = open("/proc/stb/lcd/symbol_hdd", "w")
@@ -2769,7 +2768,7 @@ class InfoBarSeek:
 				self.unPauseService()
 
 	def pauseService(self):
-		BoxInfo.setItem("StatePlayPause", True)
+		BoxInfo.setMutableItem("StatePlayPause", True)
 		if self.seekstate != self.SEEK_STATE_EOF:
 			self.lastseekstate = self.seekstate
 		self.setSeekState(self.SEEK_STATE_PAUSE)
@@ -2782,7 +2781,7 @@ class InfoBarSeek:
 		#self.playpauseService()
 
 	def unPauseService(self):
-		BoxInfo.setItem("StatePlayPause", False)
+		BoxInfo.setMutableItem("StatePlayPause", False)
 		if self.seekstate == self.SEEK_STATE_PLAY:
 			if self.seekAction != 0:
 				self.playpauseService()

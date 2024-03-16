@@ -535,8 +535,11 @@ class MultiBootClass():
 
 	def deriveSlotInfo(self, path):  # Part of analyzeSlot() within getSlotImageList().
 		info = {}
+		statusfile = "var/lib/opkg/status"
+		if exists(pathjoin(path, "var/lib/dpkg/status")):
+			statusfile = "var/lib/dpkg/status"
 		try:
-			date = datetime.fromtimestamp(stat(pathjoin(path, "var/lib/opkg/status")).st_mtime).strftime("%Y%m%d")
+			date = datetime.fromtimestamp(stat(pathjoin(path, statusfile)).st_mtime).strftime("%Y%m%d")
 			if date.startswith("1970"):
 				date = datetime.fromtimestamp(stat(pathjoin(path, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y%m%d")
 			date = max(date, datetime.fromtimestamp(stat(pathjoin(path, "usr/bin/enigma2")).st_mtime).strftime("%Y%m%d"))
@@ -544,7 +547,7 @@ class MultiBootClass():
 			date = "00000000"
 		info["compiledate"] = date
 		lines = fileReadLines(pathjoin(path, "etc/issue"), source=MODULE_NAME)
-		if lines and "vuplus" not in lines[0]:
+		if lines and "vuplus" not in lines[0] and len(lines) >= 2:
 			data = lines[-2].strip()[:-6].split()
 			info["distro"] = " ".join(data[:-1])
 			info["displaydistro"] = {

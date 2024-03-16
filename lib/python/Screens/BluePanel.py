@@ -97,9 +97,9 @@ class CamSetupCommon(Setup):
 		}, prio=0, description=_("Softcam Actions"))
 		self["restartActions"].setEnabled(False)
 
-	def updateRestartButton(self, canrestart):
-		self["key_yellow"].setText(_("Restart") if canrestart else "")
-		self["restartActions"].setEnabled(canrestart)
+	def updateRestartButton(self, camrestart):
+		self["key_yellow"].setText(_("Restart") if camrestart else "")
+		self["restartActions"].setEnabled(camrestart)
 
 	def keyRestart(self):  # This function needs to overwrite
 		pass
@@ -293,7 +293,7 @@ class AutocamSetup(Setup, CamSetupHelper):
 				self.camitems.insert(0, ("**************************",))
 		self.createSetup()
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		Setup.createSetup(self, appendItems=self.camitems)
 
 	def selectionChanged(self):
@@ -392,7 +392,7 @@ class StreamRelaySetup(Setup, CamSetupHelper):
 			self.serviceitems.insert(0, ("**************************",))
 		self.createSetup()
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		Setup.createSetup(self, appendItems=self.serviceitems)
 
 	def selectionChanged(self):

@@ -1,8 +1,8 @@
-import os
+from os.path import exists
 from time import time
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService, eDBoxLCD
 
-from Components.ActionMap import ActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.AVSwitch import AVSwitch
 from Components.config import config
 from Components.Console import Console
@@ -14,9 +14,9 @@ from Components.SystemInfo import BoxInfo, getBoxDisplayName
 from Components.Task import job_manager
 from GlobalActions import globalActionMap
 import Screens.InfoBar
-from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
-from Tools.Directories import mediaFilesInUse
+from Screens.MessageBox import MessageBox, MessageBoxSummary
+from Screens.Screen import Screen, ScreenSummary
+from Tools.Directories import fileWriteLine, mediaFilesInUse
 import Tools.Notifications
 
 
@@ -99,20 +99,15 @@ class TVstate:  # load in Navigation
 
 
 def setLCDModeMinitTV(value):
-	try:
-		f = open("/proc/stb/lcd/mode", "w")
-		f.write(value)
-		f.close()
-	except OSError:
-		pass
+	eDBoxLCD.getInstance().setLCDMode(value)
 
 
 class Standby2(Screen):
 	def Power(self):
 		print("[Standby] leave standby")
-		BoxInfo.setItem("StandbyState", False)
+		BoxInfo.setMutableItem("StandbyState", False)
 
-		if os.path.exists("/usr/script/StandbyLeave.sh"):
+		if exists("/usr/script/StandbyLeave.sh"):
 			Console().ePopen("/usr/script/StandbyLeave.sh &")
 
 		if BoxInfo.getItem("hdmistandbymode") == 1:
@@ -174,12 +169,12 @@ class Standby2(Screen):
 		self.avswitch = AVSwitch()
 
 		print("[Standby] enter standby")
-		BoxInfo.setItem("StandbyState", True)
+		BoxInfo.setMutableItem("StandbyState", True)
 
-		if os.path.exists("/usr/script/StandbyEnter.sh"):
+		if exists("/usr/script/StandbyEnter.sh"):
 			Console().ePopen("/usr/script/StandbyEnter.sh &")
 
-		self["actions"] = ActionMap(["StandbyActions"],
+		self["actions"] = HelpableActionMap(self, ["StandbyActions"],
 		{
 			"power": self.Power_make,
 			"power_break": self.Power_break,
@@ -200,7 +195,7 @@ class Standby2(Screen):
 
 		if BoxInfo.getItem("Display") and BoxInfo.getItem("LCDMiniTV"):
 			# set LCDminiTV off
-			setLCDModeMinitTV("0")
+			setLCDModeMinitTV(0)
 
 		self.paused_service = None
 		self.prev_running_service = None
@@ -319,7 +314,7 @@ class StandbySummary(Screen):
 
 class QuitMainloopScreen(Screen):
 	def __init__(self, session, retvalue=QUIT_SHUTDOWN):
-		self.skin = """<screen name="QuitMainloopScreen" position="fill" flags="wfNoBorder">
+		self.skin = """<screen name="QuitMainloopScreen" position="fill" flags="wfNoBorder" resolution="1280,720">
 			<ePixmap pixmap="icons/input_info.png" position="c-27,c-60" size="53,53" alphatest="on" />
 			<widget name="text" position="center,c+5" size="720,100" font="Regular;22" halign="center" />
 		</screen>"""
@@ -407,7 +402,9 @@ class TryQuitMainloop(MessageBox):
 				self.connected = True
 				self.onShow.append(self.__onShow)
 				self.onHide.append(self.__onHide)
+				self.isMessageBox = True
 				return
+		self.isMessageBox = False
 		self.skin = """<screen position="1310,0" size="0,0"/>"""
 		Screen.__init__(self, session)
 		self.close(True)
@@ -444,7 +441,7 @@ class TryQuitMainloop(MessageBox):
 			if BoxInfo.getItem("Display") and BoxInfo.getItem("LCDMiniTV"):
 				# set LCDminiTV off / fix a deep-standby-crash on some boxes / gb4k
 				print("[Standby] LCDminiTV off")
-				setLCDModeMinitTV("0")
+				setLCDModeMinitTV(0)
 
 			if BoxInfo.getItem("machinebuild") in ("vusolo4k", "pulse4k"):  # Workaround for white display flash.
 				eDBoxLCD.getInstance().setLCDBrightness(0)
@@ -461,5 +458,5 @@ class TryQuitMainloop(MessageBox):
 		global inTryQuitMainloop
 		inTryQuitMainloop = False
 
-	def createSummary(self):  # Suppress the normal MessageBox ScreenSummary screen.
-		return None
+	def createSummary(self):
+		return MessageBoxSummary if self.isMessageBox else ScreenSummary

@@ -9,17 +9,17 @@ from enigma import Misc_Options, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIG
 
 from keyids import KEYIDS
 from skin import parameters
-from Components.About import about
 from Components.config import ConfigBoolean, ConfigClock, ConfigDirectory, ConfigDictionarySet, ConfigFloat, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigSelectionNumber, ConfigPassword, ConfigSelection, ConfigSet, ConfigSlider, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config
 from Components.Harddisk import harddiskmanager
-from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_TIMESHIFT, SCOPE_VOD, SCOPE_SYSETC, defaultRecordingLocation, isPluginInstalled, fileContains, resolveFilename
+#from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_TIMESHIFT, SCOPE_VOD, SCOPE_SYSETC, defaultRecordingLocation, isPluginInstalled, fileContains, resolveFilename
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo
-from Tools.HardwareInfo import HardwareInfo
+from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT,SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename
 from Components.AVSwitch import iAVSwitch
 
 DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")
+MODULE_NAME = __name__.split(".")[-1]
 
 
 def InitUsageConfig():
@@ -38,7 +38,7 @@ def InitUsageConfig():
 	config.misc.SettingsVersion.value = [1, 1]
 	config.misc.SettingsVersion.save_forced = True
 	config.misc.SettingsVersion.save()
-	config.misc.useNTPminutes = ConfigSelection(default="30", choices=[("30", _("%d Minutes") % 30), ("60", _("%d Hour") % 1), ("1440", _("%d Hours") % 24)])
+	config.misc.useNTPminutes = ConfigSelection(default=30, choices=[(30, _("%d Minutes") % 30), (60, _("%d Hour") % 1), (1440, _("%d Hours") % 24)])
 	config.misc.remotecontrol_text_support = ConfigYesNo(default=True)
 
 	config.misc.extraopkgpackages = ConfigYesNo(default=False)
@@ -139,27 +139,35 @@ def InitUsageConfig():
 	config.usage.use_pig = ConfigYesNo(default=False)
 	config.usage.update_available = NoSave(ConfigYesNo(default=False))
 	config.misc.ecm_info = ConfigYesNo(default=False)
-	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
+	choices = [
 		("dhcp-router", _("Router / Gateway")),
-		("custom", _("Static IP / Custom")),
-		("google", _("Google DNS")),
-		("cloudflare", _("Cloudflare DNS")),
-		("quad9", _("Quad9 DNS")),
-		("opendns-familyshield", _("OpenDNS FamilyShield")),
-		("opendns-home", _("OpenDNS Home"))
-	])
+		("custom", _("Static IP / Custom"))
+	]
+	fileDom = fileReadXML(resolveFilename(SCOPE_SKINS, "dnsservers.xml"), source=MODULE_NAME)
+	for dns in fileDom.findall("dnsserver"):
+		if dns.get("key", ""):
+			choices.append((dns.get("key"), _(dns.get("title"))))
 
+	config.usage.dns = ConfigSelection(default="dhcp-router", choices=choices)
+	config.usage.dnsMode = ConfigSelection(default=0, choices=[
+		(0, _("Prefer IPv4")),
+		(1, _("Prefer IPv6")),
+		(2, _("IPv4 only")),
+		(3, _("IPv6 only"))
+	])
+	config.usage.dnsSuffix = ConfigText(default="")
+	config.usage.dnsRotate = ConfigYesNo(default=False)
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)
 	config.usage.subnetwork_terrestrial = ConfigYesNo(default=True)
 
 	def correctInvalidEPGDataChange(configElement):
-		eServiceEvent.setUTF8CorrectMode(int(configElement.value))
+		eServiceEvent.setUTF8CorrectMode(configElement.value)
 
-	config.usage.correct_invalid_epgdata = ConfigSelection(default="1", choices=[
-		("0", _("Disabled")),
-		("1", _("Enabled")),
-		("2", _("Debug"))
+	config.usage.correct_invalid_epgdata = ConfigSelection(default=1, choices=[
+		(0, _("Disabled")),
+		(1, _("Enabled")),
+		(2, _("Debug"))
 	])
 	config.usage.correct_invalid_epgdata.addNotifier(correctInvalidEPGDataChange)
 
@@ -301,9 +309,9 @@ def InitUsageConfig():
 
 	def showsecondinfobarChanged(configElement):
 		if config.usage.show_second_infobar.value != "INFOBAREPG":
-			BoxInfo.setItem("InfoBarEpg", True)
+			BoxInfo.setMutableItem("InfoBarEpg", True)
 		else:
-			BoxInfo.setItem("InfoBarEpg", False)
+			BoxInfo.setMutableItem("InfoBarEpg", False)
 	config.usage.show_second_infobar.addNotifier(showsecondinfobarChanged, immediate_feedback=True)
 	config.usage.infobar_frontend_source = ConfigSelection(default="tuner", choices=[
 		("settings", _("Settings")),
@@ -1168,6 +1176,12 @@ def InitUsageConfig():
 	config.epg.opentv = ConfigYesNo(default=True)
 	config.epg.saveepg = ConfigYesNo(default=True)
 
+	def showEPGChanged(configElement):
+		from enigma import eEPGCache
+		eEPGCache.getInstance().setSave(configElement.value)
+
+	config.epg.saveepg.addNotifier(showEPGChanged, immediate_feedback=False, initial_call=False)
+
 	config.misc.showradiopic = ConfigYesNo(default=True)
 	config.misc.bootvideo = ConfigYesNo(default=True)
 
@@ -1189,12 +1203,12 @@ def InitUsageConfig():
 		if not config.epg.opentv.value:
 			mask &= ~eEPGCache.OPENTV
 		eEPGCache.getInstance().setEpgSources(mask)
-	config.epg.eit.addNotifier(EpgSettingsChanged)
-	config.epg.mhw.addNotifier(EpgSettingsChanged)
-	config.epg.freesat.addNotifier(EpgSettingsChanged)
-	config.epg.viasat.addNotifier(EpgSettingsChanged)
-	config.epg.netmed.addNotifier(EpgSettingsChanged)
-	config.epg.virgin.addNotifier(EpgSettingsChanged)
+	config.epg.eit.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.mhw.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.freesat.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.viasat.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.netmed.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.virgin.addNotifier(EpgSettingsChanged, initial_call=False)
 	config.epg.opentv.addNotifier(EpgSettingsChanged)
 
 	config.epg.maxdays = ConfigSelectionNumber(min=1, max=365, stepwidth=1, default=7, wraparound=True)
@@ -1224,6 +1238,12 @@ def InitUsageConfig():
 	config.epg.cachesavesched.addNotifier(EpgCacheSaveSchedChanged, immediate_feedback=False)
 	config.epg.cacheloadtimer = ConfigSelectionNumber(default=24, stepwidth=1, min=1, max=24, wraparound=True)
 	config.epg.cachesavetimer = ConfigSelectionNumber(default=24, stepwidth=1, min=1, max=24, wraparound=True)
+
+	def debugEPGhanged(configElement):
+		from enigma import eEPGCache
+		eEPGCache.getInstance().setDebug(configElement.value)
+
+	config.crash.debugEPG.addNotifier(debugEPGhanged, immediate_feedback=False, initial_call=False)
 
 	if BoxInfo.getItem("AmlogicFamily"):
 		limits = [int(x) for x in iAVSwitch.getWindowsAxis().split()]
@@ -1286,6 +1306,10 @@ def InitUsageConfig():
 				if partition.mountpoint != "/":
 					hddchoises.append((partition.mountpoint, path))
 		config.misc.epgcachepath.setChoices(hddchoises)
+		if config.misc.epgcachepath.saved_value and config.misc.epgcachepath.saved_value != config.misc.epgcachepath.value and config.misc.epgcachepath.saved_value in [x[0] for x in hddchoises]:
+			print(f"[UsageConfig] epgcachepath changed from '{config.misc.epgcachepath.value}' to '{config.misc.epgcachepath.saved_value}'")
+			eEPGCache.getInstance().setCacheFile("")
+			config.misc.epgcachepath.value = config.misc.epgcachepath.saved_value
 
 	harddiskmanager.on_partition_list_change.append(partitionListChanged)
 
@@ -1326,13 +1350,13 @@ def InitUsageConfig():
 		keymapchoices.append((DEFAULTKEYMAP, KM.get("xml")))
 
 	config.usage.keymap = ConfigSelection(default=DEFAULTKEYMAP, choices=keymapchoices)
-	config.usage.keytrans = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
 	config.usage.keymap_usermod = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keymap_usermod.xml"))
 
 	config.network = ConfigSubsection()
 	if BoxInfo.getItem("WakeOnLAN"):
 		def wakeOnLANChanged(configElement):
-			open(BoxInfo.getItem("WakeOnLAN"), "w").write(BoxInfo.getItem("WakeOnLANType")[configElement.value])
+			with open(BoxInfo.getItem("WakeOnLAN"), "w") as fd:
+				fd.write(BoxInfo.getItem("WakeOnLANType")[configElement.value])
 		config.network.wol = ConfigYesNo(default=False)
 		config.network.wol.addNotifier(wakeOnLANChanged)
 	config.network.AFP_autostart = ConfigYesNo(default=False)
@@ -1512,9 +1536,10 @@ def InitUsageConfig():
 
 	if BoxInfo.getItem("ZapMode"):
 		def setZapmode(el):
-			open(BoxInfo.getItem("ZapMode"), "w").write(el.value)
+			with open(BoxInfo.getItem("ZapMode"), "w") as fd:
+				fd.write(el.value)
 		config.misc.zapmode = ConfigSelection(default="mute", choices=[
-			("mute", _("Black screen")),
+			("mute", _("Black Screen")),
 			("hold", _("Hold screen")),
 			("mutetilllock", _("Black screen till locked")),
 			("holdtilllock", _("Hold till locked"))
@@ -1524,6 +1549,11 @@ def InitUsageConfig():
 	config.usage.historymode = ConfigSelection(default="1", choices=[
 		("0", _("Just zap")),
 		("1", _("Show menu"))
+	])
+
+	config.usage.zapHistorySort = ConfigSelection(default=0, choices=[
+		(0, _("Most recent first")),
+		(1, _("Most recent last"))
 	])
 
 	config.subtitles = ConfigSubsection()
@@ -1985,14 +2015,12 @@ def InitUsageConfig():
 	config.pluginbrowser.src = ConfigYesNo(default=False)
 
 	def setForceLNBPowerChanged(configElement):
-		f = open("/proc/stb/frontend/fbc/force_lnbon", "w")
-		f.write("on" if configElement.value else "off")
-		f.close()
+		with open("/proc/stb/frontend/fbc/force_lnbon", "w") as fd:
+			fd.write("on" if configElement.value else "off")
 
 	def setForceToneBurstChanged(configElement):
-		f = open("/proc/stb/frontend/fbc/force_toneburst", "w")
-		f.write("enable" if configElement.value else "disable")
-		f.close()
+		with open("/proc/stb/frontend/fbc/force_toneburst", "w") as fd:
+			fd.write("enable" if configElement.value else "disable")
 
 	config.tunermisc = ConfigSubsection()
 	if BoxInfo.getItem("ForceLNBPowerChanged"):
