@@ -1,21 +1,29 @@
 from enigma import eTimer
+from enigma import iPlayableService, iServiceInformation, eServiceReference
 from os import listdir, readlink
 from os.path import exists, isfile, islink, join, split as pathsplit
 from socket import socket, AF_UNIX, SOCK_STREAM
 from twisted.internet.reactor import callInThread
 from Components.ActionMap import HelpableActionMap
-from Components.config import ConfigNothing, ConfigSelection, NoSave, config
+from Components.ActionMap import ActionMap
+from Components.config import ConfigNothing, ConfigSelection, NoSave, config, getConfigListEntry, ConfigAction, ConfigElement
 from Components.ScrollLabel import ScrollLabel
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_GUISKIN, fileExists
 from Components.Sources.StaticText import StaticText
+from Components.config import ConfigSubsection, ConfigSelection
 from Components.SystemInfo import updateSysSoftCam, BoxInfo
+from Components.Label import Label
+from Components.ConfigList import ConfigListScreen
 from Screens.InfoBarGenerics import autocam, streamrelay
 from Screens.OScamInfo import OSCamInfo
 from Screens.Processing import Processing
 from Screens.Setup import Setup
+from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
+from Screens.MessageBox import MessageBox
 from ServiceReference import ServiceReference
 from Tools.Directories import isPluginInstalled
 from Tools.GetEcmInfo import GetEcmInfo
-
 
 class CamControl:
 	'''CAM convention is that a softlink named /etc/init.c/softcam.* points
@@ -101,10 +109,10 @@ class CamSetupCommon(Setup):
 		self["key_yellow"].setText(_("Restart") if camrestart else "")
 		self["restartActions"].setEnabled(camrestart)
 
-	def keyRestart(self):  # This function needs to overwrite
+	def keyRestart(self):
 		pass
 
-	def updateButtons(self):  # This function needs to overwrite
+	def updateButtons(self):
 		pass
 
 	def selectionChanged(self):
@@ -159,77 +167,160 @@ class CardserverSetup(CamSetupCommon):
 		self.close()
 
 
-class BluePanel(CamSetupCommon):
+class BluePanel(Screen, ConfigListScreen):
+	skin = """
+	<screen name="BluePanel" position="center,center" size="560,450" >
+		<widget name="config" position="5,10" size="550,90" />
+		<widget name="info" position="5,100" size="550,300" font="Fixed;18" />
+		<ePixmap name="red" position="0,410" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap name="green" position="140,410" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<widget objectTypes="key_red,StaticText" source="key_red" render="Label" position="0,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label"  position="420,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1"/>
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Pixmap" pixmap="skin_default/buttons/blue.png"  position="420,410" zPosition="1" size="140,40" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>"""
+
 	def __init__(self, session):
-		self.servicetype = "softcam"
-		self.camctrl = CamControl(self.servicetype)
+		Screen.__init__(self, session)
+
+		self.setTitle(_("Softcam setup"))
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "CiSelectionActions"],
+			{
+				"cancel": self.cancel,
+				"green": self.save,
+				"yellow": self.restartSoftcam,
+				"red": self.cancel,
+				"blue": self.softcamInfo,
+			}, -1)
+
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
+
+		self.softcam = CamControl('softcam')
+		softcams = self.softcam.getList()
+		defaultsoftcam = self.softcam.current()
 		self.ecminfo = GetEcmInfo()
-		softcams = self.camctrl.getList()
-		defaultsoftcam = self.camctrl.current()
-		if not softcams:
-			softcams = [("", _("None"))]
-			defaultsoftcam = ""
-		config.misc.softcams = ConfigSelection(default=defaultsoftcam, choices=softcams)
-		if self.camctrl.notFound:
-			print("[SoftcamSetup] current: '%s' not found" % self.camctrl.notFound)
-			config.misc.softcams.value = "None"
-			config.misc.softcams.save()
-		CamSetupCommon.__init__(self, session=session, setup="Softcam")
-		self["key_blue"] = StaticText()
-		self["infoActions"] = HelpableActionMap(self, ["ColorActions"], {
-			"blue": (self.softcamInfo, _("Display oscam information."))
-		}, prio=0, description=_("Softcam Actions"))
-		self["infoActions"].setEnabled(False)
 		(newEcmFound, ecmInfo) = self.ecminfo.getEcm()
 		self["info"] = ScrollLabel("".join(ecmInfo))
 		self.EcmInfoPollTimer = eTimer()
 		self.EcmInfoPollTimer.callback.append(self.setEcmInfo)
 		self.EcmInfoPollTimer.start(1000)
-		self.onShown.append(self.updateButtons)
+		try:
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			videosize = str(info.getInfo(iServiceInformation.sVideoWidth)) + 'x' + str(info.getInfo(iServiceInformation.sVideoHeight))
+			aspect = info.getInfo(iServiceInformation.sAspect)
+			if aspect in (1, 2, 5, 6, 9, 10, 13, 14):
+				aspect = '4:3'
+			else:
+				aspect = '16:9'
+				provider = info.getInfoString(iServiceInformation.sProvider)
+				chname = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
+				self['lb_provider'] = Label(_('Provider: ') + provider)
+				self['lb_channel'] = Label(_('Name: ') + chname)
+				self['lb_aspectratio'] = Label(_('Aspect Ratio: ') + aspect)
+				self['lb_videosize'] = Label(_('Video Size: ') + videosize)
+		except:
+			self['lb_provider'] = Label(_('Provider: n/a'))
+			self['lb_channel'] = Label(_('Name: n/a'))
+			self['lb_aspectratio'] = Label(_('Aspect Ratio: n/a'))
+			self['lb_videosize'] = Label(_('Video Size: n/a'))
+		softcams = self.softcam.getList()
+		self.softcams = ConfigSelection(choices=softcams)
+		self.softcams.value = self.softcam.current()
 
-	def keySave(self):
-		if config.misc.softcams.value != self.camctrl.current():
-			self.showProcess(True)
-			self.camctrl.switch(config.misc.softcams.value, self.saveDone)
+		self.softcams_text = _("Select Softcam")
+		self.list.append(getConfigListEntry(self.softcams_text, self.softcams))
+
+		self.list.append(getConfigListEntry(_("Restart softcam"), ConfigAction(self.restart, "s")))
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText(_("Restart"))
+		self["key_blue"] = StaticText()
+		self.onShown.append(self.blueButton)
+
+	def changedEntry(self):
+		if self["config"].getCurrent()[0] == self.softcams_text:
+			self.blueButton()
+
+	def blueButton(self):
+		if self.softcams.value and self.softcams.value.lower() != "none":
+			self["key_blue"].setText(_("Info"))
 		else:
-			self.saveDone()
-
-	def keyRestart(self):
-		self.showProcess(True)
-		self.camctrl.restart(self.restartDone)
-
-	def saveDone(self):
-		self.restartDone()
-		self.close()
-
-	def restartDone(self):
-		if self.oldServiceRef:
-			self.session.nav.playService(self.oldServiceRef, adjust=False)
-		self.saveAll()
-		updateSysSoftCam()
-		Processing.instance.hideProgress()
-
-	def updateButtons(self):
-		valid = config.misc.softcams.value and config.misc.softcams.value.lower() != "none"
-		self["key_blue"].setText(_("Info") if valid else "")
-		self["infoActions"].setEnabled(valid)
-		self.updateRestartButton(valid)
-
-	def softcamInfo(self):
-		ppanelFilename = "/etc/ppanels/%s.xml" % config.misc.softcams.value
-		if "oscam" in config.misc.softcams.value.lower():
-			self.session.open(OSCamInfo)
-		elif "cccam" in config.misc.softcams.value.lower():  # and isfile('/usr/lib/enigma2/python/Screens/CCcamInfo.py'):
-			from Screens.CCcamInfo import CCcamInfoMain
-			self.session.open(CCcamInfoMain)
-		elif isfile(ppanelFilename) and isPluginInstalled("PPanel"):
-			from Plugins.Extensions.PPanel.ppanel import PPanel
-			self.session.open(PPanel, name="%s PPanel" % config.misc.softcams.value, node=None, filename=ppanelFilename, deletenode=None)
+			self["key_blue"].setText("")
 
 	def setEcmInfo(self):
 		(newEcmFound, ecmInfo) = self.ecminfo.getEcm()
 		if newEcmFound:
 			self["info"].setText("".join(ecmInfo))
+
+	def softcamInfo(self):
+		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
+		if "oscam" in self.softcams.value.lower():
+			from Screens.OScamInfo import OscamInfoMenu
+			self.session.open(OscamInfoMenu)
+		elif "cccam" in self.softcams.value.lower():
+			from Screens.CCcamInfo import CCcamInfoMain
+			self.session.open(CCcamInfoMain)
+		elif "ncam" in self.softcams.value.lower():
+			from Screens.OScamInfo import OscamInfoMenu
+			self.session.open(OscamInfoMenu)
+		elif os.path.isfile(ppanelFileName):
+			from Plugins.Extensions.PPanel.ppanel import PPanel
+			self.session.open(PPanel, name=self.softcams.value + ' PPanel', node=None, filename=ppanelFileName, deletenode=None)
+		else:
+			return 0
+
+	def restart(self, what):
+		self.what = what
+		if "s" in what:
+			msg = _("Please wait, restarting softcam.")
+			self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
+			self.activityTimer = eTimer()
+			self.activityTimer.timeout.get().append(self.doStop)
+			self.activityTimer.start(100, False)
+
+	def doStop(self):
+		self.activityTimer.stop()
+		if "s" in self.what:
+			self.softcam.restart('stop')
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		self.session.nav.stopService()
+		self.activityTimer = eTimer()
+		self.activityTimer.timeout.get().append(self.doStart)
+		self.activityTimer.start(1000, False)
+
+	def doStart(self):
+		self.activityTimer.stop()
+		del self.activityTimer
+		if "s" in self.what:
+			updateSysSoftCam
+			self.softcam.switch(self.softcams.value, self.save)
+			self.softcam.restart('restart')
+		if self.mbox:
+			self.mbox.close()
+		self.close()
+		self.session.nav.playService(self.oldref, adjust=False)
+		updateSysSoftCam()
+
+	def restartSoftcam(self):
+		self.restart("s")
+
+	def save(self):
+		what = ''
+		if self.softcams.value != self.softcam.current():
+			what = 's'
+		if what:
+			self.restart(what)
+		else:
+			self.close()
+
+	def cancel(self):
+		self.close()
 
 
 class CamSetupHelper:

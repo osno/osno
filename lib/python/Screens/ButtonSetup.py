@@ -257,7 +257,7 @@ def getButtonSetupFunctions():
 	if BoxInfo.getItem("ci"):
 		ButtonSetupFunctions.append((_("CI (Common Interface) Setup"), "Module/Screens.Ci/CiSelection", textSetup))
 	if BoxInfo.getItem("SoftCam"):
-		ButtonSetupFunctions.append((_("Softcam Setup"), "Module/Screens.SoftcamSetup/SoftcamSetup", textSetup))
+		ButtonSetupFunctions.append((_("Softcam Setup"), "Module/Screens.BluePanel/BluePanel", textSetup))
 	ButtonSetupFunctions.append((_("Videosetup"), "Module/Screens.VideoMode/VideoSetup", textSetup))
 	ButtonSetupFunctions.append((_("Tuner Configuration"), "Module/Screens.Satconfig/NimSelection", textScanning))
 	ButtonSetupFunctions.append((_("Manual Scan"), "Module/Screens.ScanSetup/ScanSetup", textScanning))
