@@ -151,20 +151,22 @@
 			<item level="1" text="Show PiP in the Front Display" description="You can Display PiP with or without OSD Menu." requires="PIPAvailable">config.lcd.modepip</item>
 			<item level="1" text="Set Framerate for MiniTV" description="Lower Framerate saves CPU Time.">config.lcd.fpsminitv</item>
 		</if>
-		<item level="1" text="REC Symbol in use" description="Enable blinking rec symbol on the LCD Display">config.usage.blinking_rec_symbol_during_recording</item>
-		<item level="1" text="REC Symbol in Standby" description="In the Standby Record on the LCD Display">config.usage.blinking_display_clock_during_recording</item>
+		<if requires="LCDSKINSetup">
+			<item level="1" text="REC Symbol in use" description="Enable blinking rec symbol on the LCD Display.">config.usage.blinking_rec_symbol_during_recording</item>
+			<item level="1" text="REC Symbol in Standby" description="Enable blinking rec symbol on the LCD Display in Standby.">config.usage.blinking_display_clock_during_recording</item>
+		</if>
 		<item level="1" text="switch 12 to 8 character display mode" description="12, show Latin-1 characters except for greek and cyrillic, switch to 8 if needed." requires="XcoreVFD">config.usage.vfd_xcorevfd</item>
 		<item level="1" text="Show Display Icons" description="Allows you to enable/disable displaying icons on the front panel.">config.lcd.mode</item>
 		<if requires="ConfigDisplay">
 			<item level="1" text="Show time remaining/elapsed" description="This option allows you choose how to display remaining time, or elapsed time, or both.">config.usage.swap_time_remaining_on_vfd</item>
 			<item level="1" text="Show transponder remaining/elapsed as" description="This option allows you choose how to display the remaining/elapsed time for live tv.">config.usage.swap_time_display_on_vfd</item>
 			<item level="1" text="Show Media playback Remaining/Elapsed as" description="This option allows you choose how to display the remaining/elapsed time for media playback.">config.usage.swap_media_time_display_on_vfd</item>
-			<item level="0" text="Show time elapsed as positive" description="This option allows you choose how to display elapsed time as + or -">config.usage.elapsed_time_positive_vfd</item>
+			<item level="0" text="Show time elapsed as positive" description="This option allows you to choose how to display elapsed time, as + or -.">config.usage.elapsed_time_positive_vfd</item>
 			<item level="0" text="Power On Display" description="This option allows you to Power Off the display.">config.lcd.power</item>
-			<item level="0" text="Show HDMI-Output Res" description="Show HDMI Output Resolution">config.lcd.showoutputresolution</item>
-			<item level="0" text="Show HDD progress" description="Disable the HDD Process on VFD">config.lcd.hdd</item>
-			<item level="1" text="Scrolling speed (software renderer)" description="Set the scrolling speed of text on the front display, this is used by software renderer in some skins.">config.lcd.scroll_speed</item>
-			<item level="1" text="Scrolling delay (software renderer)" description="Set the delay time between repeated loops, this is used by software renderer in some skins.">config.lcd.scroll_delay</item>
+			<item level="0" text="Show HDMI-Output Res" description="Show HDMI Output Resolution.">config.lcd.showoutputresolution</item>
+			<item level="0" text="Show HDD progress" description="Disable the HDD Process on VFD.">config.lcd.hdd</item>
+			<item level="1" text="Scrolling speed (software renderer)" description="Set the scrolling speed of text on the front display, this is used by software renderer in some skins.">config.lcd.scrollSpeed</item>
+			<item level="1" text="Scrolling delay (software renderer)" description="Set the delay time between repeated loops, this is used by software renderer in some skins.">config.lcd.scrollDelay</item>
 		</if>
 		<item level="0" text="Date style" description="Choose the front panel display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits.  ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin." requires="config.usage.date.enabled_display">config.usage.date.display</item>
 		<item level="0" text="Time style" description="Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin." requires="config.usage.time.enabled_display">config.usage.time.display</item>
@@ -190,7 +192,7 @@
 		<item level="2" text="Enable Netmed EPG" description="Use Netmed EPG information when it is available.">config.epg.netmed</item>
 		<item level="2" text="Enable Virgin EPG" description="Use Virgin EPG information when it is available.">config.epg.virgin</item>
 		<item level="2" text="Enable OpenTV EPG" description="Use OpenTV EPG. Requires tuning to specific transponder to absorb EPG.">config.epg.opentv</item>
-		<item level="2" text="Maximum number of days in EPG" description="Use for load only x days in EPG">config.epg.maxdays</item>
+		<item level="2" text="Maximum number of days in EPG" description="Use for load only x days in EPG.">config.epg.maxdays</item>
 		<item level="2" text="Keep EPG history (in minutes)" description="Choose how much EPG history, if any, to keep in the EPG cache. This historic data can be browsed in any of the EPG views. This can be useful when you need information about an event which has recently finished.">config.epg.histminutes</item>
 		<item level="2" text="Include EIT in http streams" description="When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG.">config.streaming.stream_eit</item>
 		<item level="2" text="Include AIT in http streams" description="When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV.">config.streaming.stream_ait</item>
