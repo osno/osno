@@ -52,7 +52,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		<widget source="key_help" render="Label" position="e-100,e-50" size="90,40" backgroundColor="key_back" font="Regular;20" conditional="key_help" foregroundColor="key_text" halign="center" valign="center">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="setupimage" position="0,0" size="0,0" alphatest="blend" conditional="setupimage" transparent="1" />
+		<widget name="Image" position="0,0" size="0,0" alphatest="blend" conditional="Image" transparent="1" />
 		<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
 	</screen>"""
 
