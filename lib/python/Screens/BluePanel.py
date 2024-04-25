@@ -41,7 +41,7 @@ class CamControl:
 				if target:
 					self.notFound = target
 					print(f"[CamControl] wrong target '{target}' set to None")
-					self.switch("None", None)  # wrong link target set to None
+					self.switch("None", None)
 
 	def getList(self):
 		result = []
@@ -90,8 +90,10 @@ class CamControl:
 		self.callbackTimer.stop()
 		if self.deamonSocket:
 			self.deamonSocket.close()
-		if self.callback:
+		if self.deamonSocket.fileno() == -1:
 			self.callback()
+			print("Callback:", self.callback)
+			print("Type:", type(self.callback))
 
 
 class CamSetupCommon(Setup):
@@ -176,17 +178,13 @@ class BluePanel(Screen, ConfigListScreen):
 		<ePixmap name="green" position="140,410" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<widget objectTypes="key_red,StaticText" source="key_red" render="Label" position="0,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label"  position="420,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1"/>
-		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Pixmap" pixmap="skin_default/buttons/blue.png"  position="420,410" zPosition="1" size="140,40" transparent="1" alphatest="on">
-			<convert type="ConditionalShowHide"/>
-		</widget>
+		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" position="280,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label" position="420,410" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1"/>
 	</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
 		self.setTitle(_("Softcam setup"))
-
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "CiSelectionActions"],
 			{
 				"cancel": self.cancel,
@@ -195,10 +193,8 @@ class BluePanel(Screen, ConfigListScreen):
 				"red": self.cancel,
 				"blue": self.softcamInfo,
 			}, -1)
-
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
-
 		self.softcam = CamControl('softcam')
 		softcams = self.softcam.getList()
 		defaultsoftcam = self.softcam.current()
@@ -231,12 +227,9 @@ class BluePanel(Screen, ConfigListScreen):
 		softcams = self.softcam.getList()
 		self.softcams = ConfigSelection(choices=softcams)
 		self.softcams.value = self.softcam.current()
-
 		self.softcams_text = _("Select Softcam")
 		self.list.append(getConfigListEntry(self.softcams_text, self.softcams))
-
 		self.list.append(getConfigListEntry(_("Restart softcam"), ConfigAction(self.restart, "s")))
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText(_("Restart"))
@@ -321,7 +314,6 @@ class BluePanel(Screen, ConfigListScreen):
 
 	def cancel(self):
 		self.close()
-
 
 class CamSetupHelper:
 	def getOrbPos(self, sref):
