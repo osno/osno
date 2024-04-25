@@ -15,7 +15,7 @@ from Components.SystemInfo import updateSysSoftCam, BoxInfo
 from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Screens.InfoBarGenerics import autocam, streamrelay
-from Screens.OScamInfo import OSCamInfo
+from Screens.OScamInfo import OscamInfo
 from Screens.Processing import Processing
 from Screens.Setup import Setup
 from Screens.Screen import Screen
