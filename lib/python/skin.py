@@ -133,6 +133,9 @@ def InitSkins():
 		gMainDC.getInstance().setResolution(resolution[0], resolution[1])
 		getDesktop(GUI_SKIN_ID).resize(eSize(resolution[0], resolution[1]))
 	runCallbacks = True
+	styleFileName = resolveFilename(SCOPE_SKINS, pathjoin(dirname(currentPrimarySkin), "styles.xml"))
+	if isfile(styleFileName):
+		loadStyles(styleFileName)
 
 
 # Method to load a skin XML file into the skin data structures.
@@ -180,6 +183,21 @@ def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), scree
 		return True
 	return False
 
+
+def loadStyles(styleFileName):
+	print(f"[Skin] Loading XML templates from '{styleFileName}'.")
+	domStyles = fileReadXML(styleFileName, source=MODULE_NAME)
+	if domStyles is not None:
+		for template in domStyles.findall("template"):
+			component = template.get("component")
+			name = template.get("name")
+			if component and name:
+				if component in componentTemplates:
+					componentTemplates[component][name] = template
+				else:
+					componentTemplates[component] = {name: template}
+		if config.crash.debugScreens.value:
+			print(f"[Skin] DEBUG componentTemplates '{componentTemplates}'.")
 
 def reloadSkins():
 	global colors, domScreens, fonts, menus, parameters, setups, switchPixmap
@@ -253,7 +271,7 @@ def parseOptions(options, attribute, value, default):
 			skinError(f"The '{attribute}' value '{value}' is invalid, acceptable options are '{optionList}'")
 			value = default
 	else:
-		skinError("The '%s' parser is not correctly initialized")
+		skinError(f"The '{attribute}' parser is not correctly initialized")
 		value = default
 	return value
 
@@ -385,8 +403,8 @@ def parseFont(value, scale=((1, 1), (1, 1))):
 		try:
 			size = int(size)
 		except ValueError:
+			val = size.replace("f", f"{getSkinFactor()}")
 			try:
-				val = size.replace("f", f"{getSkinFactor()}")
 				size = int(eval(val))
 			except Exception as err:
 				print(f"[Skin] Error ({type(err).__name__} - {err}): Font size in '{value}', evaluated to '{val}', can't be processed!")
@@ -586,6 +604,14 @@ def parseRadius(value):
 def parseSize(value, scale, object=None, desktop=None):
 	return eSize(*parseValuePair(value, scale, object, desktop))
 
+
+def parseTabWidth(value, default):
+	if value and value.isdigit():
+		return int(value)
+	options = {
+		"auto": -1
+	}
+	return options.get(value, default)
 
 def parseValuePair(value, scale, object=None, desktop=None, size=None):
 	if value in variables:
@@ -1147,6 +1173,9 @@ class AttributeParser:
 	def spacingColor(self, value):
 		self.guiObject.setSpacingColor(parseColor(value, 0x00000000))
 
+	def tabWidth(self, value):
+		self.guiObject.setTabWidth(parseTabWidth(value, -1))
+
 	def text(self, value):
 		if value:
 			value = _(value)
@@ -1160,11 +1189,11 @@ class AttributeParser:
 
 	def textOffset(self, value):
 		self.textPadding(value)
-		attribDeprecationWarning("textOffset", "textPadding")
+		attribDeprecationWarning("textOffset", "padding")
 
 	def textPadding(self, value):
-		leftPadding, topPadding, rightPadding, bottomPadding = parsePadding("textPadding", value)
-		self.guiObject.setTextPadding(eRect(self.applyHorizontalScale(leftPadding), self.applyVerticalScale(topPadding), self.applyHorizontalScale(rightPadding), self.applyVerticalScale(bottomPadding)))
+		self.padding(value)
+		attribDeprecationWarning("textPadding", "padding")
 
 	def title(self, value):
 		if value:
@@ -1593,7 +1622,7 @@ class SkinContextVertical(SkinContext):
 			left = self.x
 			p = pos.split(",")
 			if len(p) == 2 and p[1] in ("top", "bottom") and p[0].isdigit():
-				left = int(int(p[0]) * self.scale[0][0] / self.scale[0][1])
+				left += int(int(p[0]) * self.scale[0][0] / self.scale[0][1])
 				pos = p[1]
 			if pos == "bottom":
 				pos = (left, self.y + self.h - height)
@@ -1637,7 +1666,7 @@ class SkinContextHorizontal(SkinContext):
 			top = self.y
 			p = pos.split(",")
 			if len(p) == 2 and p[0] in ("left", "right") and p[1].isdigit():
-				top = int(int(p[1]) * self.scale[0][0] / self.scale[0][1])
+				top += int(int(p[1]) * self.scale[0][0] / self.scale[0][1])
 				pos = p[0]
 			if pos == "left":
 				pos = (self.x, top)
@@ -1783,6 +1812,14 @@ def readSkin(screen, skin, names, desktop):
 				raise SkinError(f"Component with name '{widgetName}' was not found in skin of screen '{myName}'")
 			# assert screen[widgetName] is not Source
 			collectAttributes(attributes, widget, context, skinPath, ignore=("name",))
+			for widgetTemplate in widget.findall("template"):
+				widgetTemplateComponent = widgetTemplate.get("component")
+				widgetTemplateName = widgetTemplate.get("name")
+				if widgetTemplateComponent and widgetTemplateName:
+					if widgetTemplateComponent in componentTemplates:
+						componentTemplates[widgetTemplateComponent][widgetTemplateName] = widgetTemplateComponent
+					else:
+						componentTemplates[widgetTemplateComponent] = {widgetTemplateName: widgetTemplateComponent}
 		elif widgetSource:
 			# print(f"[Skin] DEBUG: Widget source='{widgetSource}'.")
 			while True:  # Get corresponding source until we found a non-obsolete source.
@@ -1983,25 +2020,35 @@ def findSkinScreen(names):
 def findWidgets(name):
 	widgetSet = set()
 	element, path = domScreens.get(name, (None, None))
-	if element:
+	if element is not None:
 		widgets = element.findall("widget")
-		if widgets:
+		if widgets is not None:
 			for widget in widgets:
 				name = widget.get("name")
-				if name:
+				if name is not None:
 					widgetSet.add(name)
 				source = widget.get("source")
-				if source:
+				if source is not None:
 					widgetSet.add(source)
 		panels = element.findall("panel")
-		if panels:
+		if panels is not None:
 			for panel in panels:
 				name = panel.get("name")
-				if name:
+				if name is not None:
 					widgetSet.update(findWidgets(name))
 	return widgetSet
 
 
+def getcomponentTemplate(component, name):
+	if component in componentTemplates and componentTemplates[component][name]:
+		return componentTemplates[component][name]
+	return None
+
+
+def getcomponentTemplateNames(component):
+	if component in componentTemplates:
+		return list(componentTemplates[component].keys())
+	return None
 # This method emulates the C++ methods available to get Scrollbar style elements.
 #
 def getScrollLabelStyle(element):

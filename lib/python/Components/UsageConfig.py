@@ -1969,6 +1969,7 @@ def InitUsageConfig():
 
 	config.oscaminfo = ConfigSubsection()
 	config.oscaminfo.userDataFromConf = ConfigYesNo(default=True)
+	config.oscaminfo.intervall = ConfigSelectionNumber(min=1, max=600, stepwidth=1, default=10, wraparound=True)
 	config.oscaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
 	config.oscaminfo.password = ConfigPassword(default="password", fixed_size=False)
 	config.oscaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
