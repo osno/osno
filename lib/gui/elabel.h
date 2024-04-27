@@ -30,16 +30,16 @@ public:
 	void setShadowColor(const gRGB &col);
 	void setShadowOffset(const ePoint &offset) { m_shadow_offset = offset; }
 	void setBorderColor(const gRGB &col) override { setTextBorderColor(col); } // WILL BE CHANGED !!!!
-	void setBorderWidth(int size) override { setTextBorderWidth(size); }		  // WILL BE CHANGED !!!!
+	void setBorderWidth(int width) override { setTextBorderWidth(width); } // WILL BE CHANGED !!!!
 	void setTextBorderColor(const gRGB &col);
-	void setTextBorderWidth(int size) { m_text_border_width = size; }
+	void setTextBorderWidth(int width) { m_text_border_width = width; }
 	void setWrap(int wrap);
 	void setNoWrap(int nowrap) { setWrap((nowrap == 1) ? 0 : 1); } // DEPRECATED
 	void clearForegroundColor();
 	int getWrap() const { return m_wrap; }
 	int getNoWrap() const { return (m_wrap == 0) ? 1 : 0; } // DEPRECATED
-	void setTextPadding(const eRect &padding) { m_padding = padding; }
 	void setAlphatest(int alphatest);
+	void setTabWidth(int width);
 
 	eSize calculateSize();
 	static eSize calculateTextSize(gFont *font, const std::string &string, eSize targetSize, bool nowrap = false);
@@ -57,10 +57,10 @@ private:
 	int m_have_shadow_color = 0;
 	gRGB m_foreground_color, m_shadow_color, m_text_border_color;
 	ePoint m_shadow_offset;
-	eRect m_padding = eRect(0, 0, 0, 0);
 	int m_text_border_width = 0;
 	int m_wrap = 1;
 	bool m_blend = false;
+	int m_tab_width = -1;
 
 	enum eLabelEvent
 	{

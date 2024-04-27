@@ -83,12 +83,13 @@ struct eListboxStyleSetted
 	bool zoom_move_content : 1;
 	bool scrollbarforegroundgradient : 1;
 	bool scrollbarbackgroundgradient : 1;
+	bool background_color_rows : 1;
 };
 
 struct eListboxStyle
 {
 	ePtr<gPixmap> m_background, m_selection, m_overlay;
-	gRGB m_background_color, m_background_color_selected, m_foreground_color, m_foreground_color_selected, m_border_color, m_scollbarborder_color, m_scrollbarforeground_color, m_scrollbarbackground_color, m_spacing_color;
+	gRGB m_background_color, m_background_color_selected, m_background_color_rows, m_foreground_color, m_foreground_color_selected, m_border_color, m_scollbarborder_color, m_scrollbarforeground_color, m_scrollbarbackground_color, m_spacing_color;
 	int m_max_columns;
 	int m_max_rows;
 	float m_selection_zoom;
@@ -284,6 +285,7 @@ public:
 	void setBackgroundColorSelected(const gRGB &col);
 	void setForegroundColor(const gRGB &col);
 	void setForegroundColorSelected(const gRGB &col);
+	void setBackgroundColorRows(const gRGB &col);
 
 	void setSpacingColor(const gRGB &col);
 	void clearSpacingColor() { m_style.is_set.spacing_color = 0; }
@@ -294,7 +296,10 @@ public:
 	void clearForegroundColorSelected() { m_style.is_set.foreground_color_selected = 0; }
 
 	void setBorderColor(const gRGB &col) override { m_style.m_border_color = col; }
-	void setBorderWidth(int size) override;
+	void setBorderWidth(int width) override;
+
+	void setWidgetBorderColor(const gRGB &col) override { setBorderColor(col); }
+	void setWidgetBorderWidth(int width) override { setBorderWidth(width); }
 
 	void setBackgroundPixmap(ePtr<gPixmap> &pm) { m_style.m_background = pm; }
 	void setSelectionPixmap(ePtr<gPixmap> &pm) { m_style.m_selection = pm; }
@@ -315,8 +320,10 @@ public:
 	void setHeaderFont(gFont *font) { m_style.m_headerfont = font; }
 	void setVAlign(int align) { m_style.m_valign = align; }
 	void setHAlign(int align) { m_style.m_halign = align; }
-	void setTextPadding(const eRect &padding) { m_style.m_text_padding = padding; }
 	void setUseVTIWorkaround(void) { m_style.is_set.use_vti_workaround = 1; }
+
+	void setPadding(const eRect &padding) override { m_style.m_text_padding = padding; }
+	eRect getPadding() override { return m_style.m_text_padding; }
 
 	void setScrollbarBorderColor(const gRGB &col);
 	void setScrollbarForegroundColor(gRGB &col);
@@ -419,6 +426,48 @@ public:
 	gFont *getEntryFont() { return m_style.m_font; }
 	gFont *getValueFont() { return m_style.m_valuefont; }
 	gFont *getHeaderFont() { return m_style.m_headerfont; }
+	int getItemsPerPage() { 
+		if (m_orientation == orHorizontal)
+			return m_max_columns;
+		else if (m_orientation == orGrid)
+			return m_max_columns * m_max_rows;
+		else	
+			return m_max_rows;
+		}
+
+	int getCurrentPage()
+	{
+		if (m_content)
+		{
+			int max = 0;
+			if (m_orientation == orGrid)
+				max = m_max_columns * m_max_rows;
+			else
+				max = (m_orientation == orHorizontal) ? m_max_columns : m_max_rows;
+			if (max > 0)
+			{
+				return (m_content->cursorGet() / max) + 1;
+			}
+		}
+		return 0;
+	}
+
+	int getPageCount()
+	{ 
+		if (m_content)
+		{
+			int max = 0;
+			if (m_orientation == orGrid)
+				max = m_max_columns * m_max_rows;
+			else
+				max = (m_orientation == orHorizontal) ? m_max_columns : m_max_rows;
+			if (max > 0)
+			{
+				return (int)std::ceil((float)m_content->size() / (float)max);
+			}
+		}
+		return 0;
+	}
 
 #ifndef SWIG
 	struct eListboxStyle *getLocalStyle(void);
