@@ -35,6 +35,13 @@ import time
 from locale import format_string
 import six
 
+MODULE_NAME = __name__.split(".")[-1]
+
+DISPLAY_BRAND = BoxInfo.getItem("displaybrand")
+DISPLAY_MODEL = BoxInfo.getItem("displaymodel")
+MACHINE_BUILD = BoxInfo.getItem("machinebuild")
+MODEL = BoxInfo.getItem("model")
+
 SIGN = u"\u00B0"
 
 
@@ -312,30 +319,6 @@ class About(Screen):
 		AboutText += _("Enigma2 debug level:\t%s") % eGetEnigmaDebugLvl() + "\n"
 		if getMachineBuild() not in ('vuduo4k','osmio4k','vuzero4k','sf5008','et13000','et1x000','hd51','hd52','vusolo4k','vuuno4k','vuuno4kse','vuultimo4k','sf4008','dm820','dm7080','dm900','dm920', 'gb7252', 'dags7252', 'vs1500','xc7439','8100s','u5','u5pvr','u52','u53','u54','u55','u56','u51','sf8008'):
 			AboutText += _("Installed:\t\t%s") % about.getFlashDateString() + "\n"
-#		AboutText += _("Network:")
-#		eth0 = about.getIfConfig('eth0')
-#		eth1 = about.getIfConfig('eth1')
-#		ra0 = about.getIfConfig('ra0')
-#		wlan0 = about.getIfConfig('wlan0')
-#		wlan1 = about.getIfConfig('wlan1')
-#		if 'addr' in eth0:
-#			for x in about.GetIPsFromNetworkInterfaces():
-#				AboutText += "\t" + x[0] + ": " + x[1] + " (" + netspeed() + ")\n"
-#		elif 'addr' in eth1:
-#			for x in about.GetIPsFromNetworkInterfaces():
-#				AboutText += "\t" + x[0] + ": " + x[1] + " (" + netspeed_eth1() + ")\n"
-#		elif 'addr' in eth0:
-#			for x in about.GetIPsFromNetworkInterfaces():
-#				AboutText += "\t" + x[0] + ": " + x[1] + " (~" + netspeed_ra0() + ")\n"
-#		elif 'addr' in eth0:
-#			for x in about.GetIPsFromNetworkInterfaces():
-#				AboutText += "\t" + x[0] + ": " + x[1] + " (~" + netspeed_wlan0() + ")\n"
-#		elif 'addr' in eth1:
-#			for x in about.GetIPsFromNetworkInterfaces():
-#				AboutText += "\t" + x[0] + ": " + x[1] + " (~" + netspeed_wlan1() + ")\n"
-#		else:
-#			for x in about.GetIPsFromNetworkInterfaces():
-#				AboutText += "\t" + x[0] + ": " + x[1] + "\n"
 
 		fp_version = getFPVersion()
 		if fp_version is None:
@@ -357,16 +340,7 @@ class About(Screen):
 			f = open('/proc/stb/sensors/temp/value', 'r')
 			tempinfo = f.read()
 			f.close()
-#		elif path.exists('/sys/devices/virtual/thermal/thermal_zone0/temp'):
-#			if getBoxDisplayName() in ('mutant51', 'ax51', 'zgemmah7'):
-#				tempinfo = ""
-#			else:
-#				f = open('/sys/devices/virtual/thermal/thermal_zone0/temp', 'r')
-#				tempinfo = f.read()
-#				tempinfo = tempinfo[:-4]
-#				f.close()
 		if tempinfo and int(tempinfo.replace('\n', '')) > 0:
-#			mark = str('\xc2\xb0')
 			AboutText += _("System temperature:\t%s") % tempinfo.replace('\n', '').replace(' ', '') + SIGN + "C\n"
 
 		tempinfo = ""
@@ -399,12 +373,10 @@ class About(Screen):
 			except:
 				tempinfo = ""
 		if tempinfo and int(tempinfo.replace('\n', '')) > 0:
-#			mark = str('\xc2\xb0')
 			AboutText += ("Processor temperature:\t%s") % tempinfo.replace('\n', '').replace(' ', '') + SIGN + "C\n"
 		AboutLcdText = AboutText.replace('\t', ' ')
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
-#		self["key_red"] = Button(_("Devices"))
 		self["key_yellow"] = Button(_("Memory Info"))
 		self["key_info"] = StaticText(_("Contact Info"))
 		self["key_blue"] = Button(_("%s ") % getMachineName() + _("picture"))
@@ -1189,7 +1161,6 @@ class AboutSummary(Screen):
 		elif path.exists('/proc/stb/fp/temp_sensor'):
 			tempinfo = open('/proc/stb/fp/temp_sensor', 'r').read()
 		if tempinfo and int(tempinfo.replace('\n', '')) > 0:
-#			mark = str('\xc2\xb0')
 			AboutText += _("System temperature:\t%s") % tempinfo.replace('\n', '').replace(' ', '') + SIGN + "C\n"
 
 		self["AboutText"] = StaticText(AboutText)
