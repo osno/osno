@@ -240,7 +240,6 @@ class About(Screen):
 					for lines in temp:
 						lisp = lines.split(': ')
 						if lisp[0].startswith('cpu MHz'):
-							#cpuMHz = "   (" +  lisp[1].replace('\n', '') + " MHz)"
 							cpuMHz = "   (" +  str(int(float(lisp[1].replace('\n', '')))) + " MHz)"
 							break
 				except:
@@ -1289,6 +1288,7 @@ class CommitInfo(Screen):
 		self.setTitle(_("Latest Commits"))
 		self.skinName = ["CommitInfo", "About"]
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
+		self["HintText"] = Label(_("Press up/down to scroll through the selected log\n\nPress left/right to see different log types"))
 		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
@@ -1309,6 +1309,7 @@ class CommitInfo(Screen):
 			#("opendroid-Team", "enigma2", "opendroid-Team Enigma2", "7.3", "github"),
 			("opendroid-Team", "enigma2", "opendroid-Team Enigma2", "master", "github"),
 			("stein17", "Skins-for-openOPD", "stein17 Skins-for-openOPD",   "python3", "github"),
+			("formiano", "GlamourAuraSky-skin", "GlamourAuraSky-skin",   "main", "github"),
 			#("oe-alliance", "oe-alliance-core", "OE Alliance Core", "5.0", "github"),
 			("oe-alliance", "oe-alliance-core", "OE Alliance Core", "5.3", "github"),
 			("oe-alliance", "oe-alliance-plugins", "OE Alliance Plugins", "master", "github"),
