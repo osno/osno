@@ -31,7 +31,6 @@ import time
 from os import path, popen, system
 from re import search
 from datetime import datetime
-import time
 from locale import format_string
 import six
 
@@ -268,7 +267,7 @@ class About(Screen):
 		AboutText += _("OPD Version:\tV%s") % getImageVersion() + " Build " + getImageBuild() + " based on " + getOEVersion() + "\n"
 		AboutText += _("Kernel (Box):\t%s") % about.getKernelVersionString() + " (" + getBoxType() + ")" + "\n"
 		imagestarted = ""
-		bootname = ''
+		bootname = ""
 		if path.exists('/boot/bootname'):
 			f = open('/boot/bootname', 'r')
 			bootname = f.readline().split('=')[1]
@@ -281,7 +280,12 @@ class About(Screen):
 				image = slotCode - 4 if slotCode > 4 else slotCode - 1
 				device = _("SDcard slot %s%s") % (image, "  -  %s" % device if device else "")
 			else:
-				device = _("eMMC slot %s%s") % (slotCode, "  -  %s" % device if device else "")
+				if BoxInfo.getItem("HasKexecMultiboot"):
+					device = MultiBoot.bootSlots[slotCode]["device"]
+				if "mmcblk" in device:
+					device = _("eMMC slot %s%s") % (slotCode, f"  -  {device}" if device else "")
+				else:
+					device = _("USB slot %s%s") % (slotCode, f"  -  {device}" if device else "")
 			AboutText += _("Hardware MultiBoot device:\t%s") % _("STARTUP_") + str(slotCode) + "  " + device + "\n"
 
 		if path.isfile("/etc/issue"):
