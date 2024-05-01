@@ -41,6 +41,9 @@ DISPLAY_MODEL = BoxInfo.getItem("displaymodel")
 MACHINE_BUILD = BoxInfo.getItem("machinebuild")
 MODEL = BoxInfo.getItem("model")
 
+API_GITHUB = 0
+API_GITLAB = 1
+
 SIGN = u"\u00B0"
 
 
