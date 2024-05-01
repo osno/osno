@@ -1307,17 +1307,22 @@ class CommitInfo(Screen):
 
 		self["key_red"] = Button(_("Cancel"))
 
+		try:
+			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
+		except:
+			branch = ""
+		branch_e2plugins = "?sha=python3"
+
 		self.project = 0
 		self.projects = [
-			#("opendroid-Team",  "enigma2", "opendroid-Team Enigma2", "7.1", "github"),
-			#("opendroid-Team", "enigma2", "opendroid-Team Enigma2", "7.3", "github"),
-			("opendroid-Team", "enigma2", "opendroid-Team Enigma2", "master", "github"),
-			("stein17", "Skins-for-openOPD", "stein17 Skins-for-openOPD",   "python3", "github"),
-			("formiano", "GlamourAuraSky-skin", "GlamourAuraSky-skin",   "main", "github"),
-			#("oe-alliance", "oe-alliance-core", "OE Alliance Core", "5.0", "github"),
-			("oe-alliance", "oe-alliance-core", "OE Alliance Core", "5.3", "github"),
-			("oe-alliance", "oe-alliance-plugins", "OE Alliance Plugins", "master", "github"),
-			("oe-alliance", "enigma2-plugins", "OE Alliance Enigma2 Plugins", "master", "github")
+			("https://api.github.com/repos/opendroid-Team/enigma2/commits" + branch, "Enigma2", API_GITHUB),
+			("https://api.github.com/repos/oe-alliance/oe-alliance-core/commits" + branch, "5.3", API_GITHUB),
+			("https://api.github.com/repos/oe-alliance/oe-alliance-plugins/commits" + branch, "master", API_GITHUB),
+			("https://api.github.com/repos/oe-alliance/aio-grab/commits", "Aio Grab", API_GITHUB),
+			("https://api.github.com/repos/openpli/enigma2-plugin-extensions-epgimport/commits", "Plugin EPGImport", API_GITHUB),
+			("https://api.github.com/repos/formiano/GlamourAuraSky-skin/commits" + branch, "main", API_GITHUB),
+			("https://api.github.com/repos/oe-alliance/OpenWebif/commits", "OpenWebif", API_GITHUB),
+#			("https://api.github.com/repos/oe-alliance/oe-alliance-settings/commits" + branch, "master", API_GITHUB),
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
@@ -1325,58 +1330,43 @@ class CommitInfo(Screen):
 		self.Timer.start(50, True)
 
 	def readGithubCommitLogs(self):
-		if self.projects[self.project][4] == "github":
-			url = 'https://api.github.com/repos/%s/%s/commits?sha=%s' % (self.projects[self.project][0], self.projects[self.project][1], self.projects[self.project][3])
-		if self.projects[self.project][4] == "gitlab":
-			url1 = 'https://gitlab.com/api/v4/projects/%s' % (self.projects[self.project][0])
-			url2 = '%2F'
-			url3 = '%s/repository/commits?ref_name=%s' % (self.projects[self.project][1], self.projects[self.project][3])
-			url = url1 + url2 + url3
+		url = self.projects[self.project][0]
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
 		from urllib.request import urlopen
-		if self.projects[self.project][4] == "github":
+		try:
+			commitlog += 80 * '-' + '\n'
+			commitlog += url.split('/')[-2] + '\n'
+			commitlog += 80 * '-' + '\n'
 			try:
-				commitlog += 80 * '-' + '\n'
-				commitlog += self.projects[self.project][2] + ' - ' + self.projects[self.project][1] + ' - branch ' + self.projects[self.project][3] + '\n'
-				commitlog += 'URL: https://github.com/' + self.projects[self.project][0] + '/' + self.projects[self.project][1] + '/tree/' + self.projects[self.project][3] + '\n'
-				commitlog += 80 * '-' + '\n'
-				for c in loads(urlopen(url, timeout=5).read()):
+				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
+				from ssl import _create_unverified_context
+				log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
+			except:
+				log = loads(urlopen(url, timeout=5).read())
+
+			if self.projects[self.project][2] == API_GITHUB:
+				for c in log:
 					creator = c['commit']['author']['name']
 					title = c['commit']['message']
 					date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
-					if title.startswith("Merge "):
-						pass
-					else:
-						commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
-				commitlog = six.ensure_str(commitlog)
-				self.cachedProjects[self.projects[self.project][2]] = commitlog
-			except:
-				commitlog += _("Currently the commit log cannot be retrieved - please try later again")
-		if self.projects[self.project][4] == "gitlab":
-			try:
-				commitlog += 80 * '-' + '\n'
-				commitlog += self.projects[self.project][2] + ' - ' + self.projects[self.project][1] + ' - branch ' + self.projects[self.project][3] + '\n'
-				commitlog += 'URL: https://gitlab.com/' + self.projects[self.project][0] + '/' + self.projects[self.project][1] + '/tree/' + self.projects[self.project][3] + '\n'
-				commitlog += 80 * '-' + '\n'
-				for c in loads(urlopen(url, timeout=5).read()):
+					commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
+			elif self.projects[self.project][2] == API_GITLAB:
+				for c in log:
 					creator = c['author_name']
-					title = c['message']
-					date = datetime.strptime(c['committed_date'], '%Y-%m-%dT%H:%M:%S.000+02:00').strftime('%x %X')
-					if title.startswith("Merge "):
-						pass
-					else:
-						commitlog += date + ' ' + creator + '\n' + title + '\n'
-				commitlog = six.ensure_str(commitlog)
-				self.cachedProjects[self.projects[self.project][2]] = commitlog
-			except:
-				commitlog += _("Currently the commit log cannot be retrieved - please try later again")
+					title = c['title']
+					date = datetime.strptime(c['committed_date'], '%Y-%m-%dT%H:%M:%S.000%z').strftime('%x %X')
+					commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
+
+			self.cachedProjects[self.projects[self.project][1]] = commitlog
+		except Exception as e:
+			commitlog += _("Currently the commit log cannot be retrieved - please try later again.")
 		self["AboutScrollLabel"].setText(commitlog)
 
 	def updateCommitLogs(self):
-		if self.projects[self.project][2] in self.cachedProjects:
-			self["AboutScrollLabel"].setText(self.cachedProjects[self.projects[self.project][2]])
+		if self.projects[self.project][1] in self.cachedProjects:
+			self["AboutScrollLabel"].setText(self.cachedProjects[self.projects[self.project][1]])
 		else:
 			self["AboutScrollLabel"].setText(_("Please wait"))
 			self.Timer.start(50, True)
