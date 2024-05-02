@@ -1278,9 +1278,9 @@ class TranslationInfo(Screen):
 		linfo += _("MIME Version") + ":" + infomap.get("MIME-Version", "") + "\n"
 		linfo += "\n"
 		linfo += _("POT-Creation Date") + ":" + infomap.get("POT-Creation-Date", "") + "\n"
-		linfo += _("Revision Date") + ":" + infomap.get("PO-Revision-Date", "") + "\n"
+		linfo += _("PO-Revision Date") + ":" + infomap.get("PO-Revision-Date", "") + "\n"
 		linfo += "\n"
-		linfo += _("Generator") + ":" + infomap.get("X-Generator", "") + "\n"
+		linfo += _("X-Generator") + ":" + infomap.get("X-Generator", "") + "\n"
 
 		if infomap.get("Report-Msgid-Bugs-To", "") != "":
 			linfo += _("Report Msgid Bugs To") + ":" + infomap.get("Report-Msgid-Bugs-To", "") + "\n"

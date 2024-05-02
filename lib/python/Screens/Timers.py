@@ -1,14 +1,13 @@
 from datetime import datetime
-from functools import cmp_to_key
 from os import stat, statvfs
 from time import localtime, mktime, strftime, time
 
-from enigma import BT_SCALE, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eEPGCache, eLabel, eListbox, eListboxPythonMultiContent, eServiceReference, eSize, eTimer, getBestPlayableServiceReference, iRecordableServicePtr
+from enigma import BT_SCALE, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eEPGCache, eLabel, eListbox, eListboxPythonMultiContent, eSize, eTimer
 
 from PowerTimer import AFTEREVENT as POWER_AFTEREVENT, PowerTimerEntry, TIMERTYPE as POWER_TIMERTYPE
-from RecordTimer import AFTEREVENT as RECORD_AFTEREVENT, RecordTimerEntry, TIMERTYPE as RECORD_TIMERTYPE, createRecordTimerEntry, parseEvent
+from RecordTimer import AFTEREVENT as RECORD_AFTEREVENT, RecordTimerEntry, TIMERTYPE as RECORD_TIMERTYPE, parseEvent
 from ServiceReference import ServiceReference
-from skin import parseBoolean, parseColor, parseFont, parseInteger
+from skin import parseBoolean, parseFont, parseInteger
 from timer import TimerEntry
 from Components.ActionMap import HelpableActionMap
 from Components.config import ConfigClock, ConfigDateTime, ConfigIP, ConfigSelection, ConfigSubDict, ConfigText, ConfigYesNo, config
@@ -460,6 +459,9 @@ class RecordTimerList(TimerListBase):
 		else:
 			state = TIMER_STATES.get(TimerEntry.StateEnded)
 			stateIcon = self.iconDone
+		if timer.failed:
+			state = TIMER_STATES.get(TimerEntry.StateFailed)
+			stateIcon = self.iconFailed
 		leftOffset = self.indent + self.iconWidth + self.iconMargin
 		res = [None]
 		if repeatIcon:
@@ -490,7 +492,7 @@ class RecordTimerList(TimerListBase):
 			direction = "W"
 		else:
 			direction = "E"
-		return ("%d.%d%s%s") % (op // 10, op % 10, u"\u00B0", direction)
+		return ("%d.%d%s%s") % (op // 10, op % 10, "\u00B0", direction)
 
 
 class TimerOverviewBase(Screen, HelpableScreen):
@@ -587,7 +589,7 @@ class TimerOverviewBase(Screen, HelpableScreen):
 		pass
 
 	def cleanupTimers(self):
-		self.session.openWithCallback(self.cleanupTimersCallback, MessageBox, _("Clean up and remove all completed timers?"))
+		self.session.openWithCallback(self.cleanupTimersCallback, MessageBox, _("Clean up and remove all completed timers?"), windowTitle=self.getTitle())
 
 	def cleanupTimersCallback(self, answer):
 		if answer:
@@ -674,19 +676,14 @@ class PowerTimerOverview(TimerOverviewBase):
 		self.session.nav.PowerTimer.on_state_change.remove(self.onStateChange)
 
 	def loadTimerList(self):
-		def cmp(a, b):  # Helper function to move finished timers to end of list.
-			return (a > b) - (a < b)
-
-		def eolCompare(x, y):
-			if x[0].state != y[0].state and x[0].state == TimerEntry.StateEnded or y[0].state == TimerEntry.StateEnded:
-				return cmp(x[0].state, y[0].state)
-			return cmp(x[0].begin, y[0].begin)
+		def condition(element):
+			return element[0].state == TimerEntry.StateEnded, element[0].begin
 
 		timerList = []
 		timerList.extend([(timer, False) for timer in self.session.nav.PowerTimer.timer_list])
 		timerList.extend([(timer, True) for timer in self.session.nav.PowerTimer.processed_timers])
 		if config.usage.timerlist_finished_timer_position.index:  # End of list.
-			timerList.sort(key=cmp_to_key(eolCompare))
+			timerList.sort(key=condition)
 		else:
 			timerList.sort(key=lambda x: x[0].begin)
 		self["timerlist"].setList(timerList)
@@ -725,7 +722,7 @@ class PowerTimerOverview(TimerOverviewBase):
 				callback("", "", "", "", "")
 		showCleanup = False
 		for item in self["timerlist"].getList():
-			if not item[0].disabled and item[1] == True:
+			if not item[0].disabled and item[1] is True:
 				showCleanup = True
 				break
 		if showCleanup:
@@ -755,7 +752,7 @@ class PowerTimerOverview(TimerOverviewBase):
 
 	def deleteTimer(self):
 		if self["timerlist"].getCurrent():
-			self.session.openWithCallback(self.deleteTimerCallback, MessageBox, _("Do you really want to delete this timer?"), default=False)
+			self.session.openWithCallback(self.deleteTimerCallback, MessageBox, _("Do you really want to delete this timer?"), default=False, windowTitle=self.getTitle())
 
 	def deleteTimerCallback(self, answer):
 		if answer:
@@ -815,7 +812,7 @@ class PowerTimerOverview(TimerOverviewBase):
 			self.reloadTimerList()
 
 	def cleanupTimers(self):
-		self.session.openWithCallback(self.cleanupTimersCallback, MessageBox, _("Clean up (delete) all completed timers?"))
+		self.session.openWithCallback(self.cleanupTimersCallback, MessageBox, _("Clean up (delete) all completed timers?"), windowTitle=self.getTitle())
 
 	def cleanupTimersCallback(self, answer):
 		if answer:
@@ -845,19 +842,14 @@ class RecordTimerOverview(TimerOverviewBase):
 		self.session.nav.RecordTimer.on_state_change.remove(self.onStateChange)
 
 	def loadTimerList(self):
-		def cmp(a, b):  # Helper function to move finished timers to end of list.
-			return (a > b) - (a < b)
-
-		def endCompare(x, y):
-			if x[0].state != y[0].state and x[0].state == TimerEntry.StateEnded or y[0].state == TimerEntry.StateEnded:
-				return cmp(x[0].state, y[0].state)
-			return cmp(x[0].begin, y[0].begin)
+		def condition(element):
+			return element[0].state == TimerEntry.StateEnded, element[0].begin
 
 		timerList = []
 		timerList.extend([(timer, False) for timer in self.session.nav.RecordTimer.timer_list])
 		timerList.extend([(timer, True) for timer in self.session.nav.RecordTimer.processed_timers])
 		if config.usage.timerlist_finished_timer_position.index:  # End of list.
-			timerList.sort(key=cmp_to_key(endCompare))
+			timerList.sort(key=condition)
 		else:
 			timerList.sort(key=lambda x: x[0].begin)
 		self["timerlist"].setList(timerList)
@@ -923,7 +915,7 @@ class RecordTimerOverview(TimerOverviewBase):
 				callback("", "", "", "", "")
 		showCleanup = False
 		for item in self["timerlist"].getList():
-			if not item[0].disabled and item[1] == True:
+			if not item[0].disabled and item[1] is True:
 				showCleanup = True
 				break
 		if showCleanup:
@@ -970,7 +962,7 @@ class RecordTimerOverview(TimerOverviewBase):
 		timer = self["timerlist"].getCurrent()
 		if timer:
 			message = _("Do you really want to stop and delete the timer '%s'?") if timer.state == TimerEntry.StateRunning else _("Do you really want to delete '%s'?")
-			self.session.openWithCallback(self.deleteTimerCallback, MessageBox, message % timer.name)
+			self.session.openWithCallback(self.deleteTimerCallback, MessageBox, message % timer.name, windowTitle=self.getTitle())
 
 	def deleteTimerCallback(self, answer):
 		if answer:
@@ -1121,7 +1113,7 @@ class ConflictTimerOverview(TimerOverviewBase):
 		timer = self["timerlist"].getCurrent()
 		if timer:
 			message = _("Do you really want to stop and delete the timer '%s'?") if timer.state == TimerEntry.StateRunning else _("Do you really want to delete '%s'?")
-			self.session.openWithCallback(self.deleteTimerCallback, MessageBox, message % timer.name)
+			self.session.openWithCallback(self.deleteTimerCallback, MessageBox, message % timer.name, windowTitle=self.getTitle())
 
 	def deleteTimerCallback(self, answer):
 		if answer:
@@ -1292,7 +1284,7 @@ class PowerTimerEdit(Setup):
 
 	def keyCancel(self):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, self.cancelMsg, default=False, type=MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, self.cancelMsg, default=False, type=MessageBox.TYPE_YESNO, windowTitle=self.getTitle())
 		else:
 			self.close((False,))
 
@@ -1418,7 +1410,7 @@ class RecordTimerEdit(Setup):
 			weekday = DAY_LIST[int(strftime("%u", localtime(self.timer.begin))) - 1]
 			days[weekday] = True
 		self.timerName = ConfigText(default=self.timer.name.replace("\x86", "").replace("\x87", ""), visible_width=50, fixed_size=False)
-		self.timerDescription = ConfigText(default=self.timer.description.replace("\x8a", " "), visible_width=50, fixed_size=False)
+		self.timerDescription = ConfigText(default=self.timer.description.replace("\x8a", " ").replace("\n", " "), visible_width=50, fixed_size=False)
 		self.timerType = ConfigSelection(default=RECORDTIMER_TYPES.get(self.timer.justplay + 2 * self.timer.always_zap, "record"), choices=[
 			(RECORDTIMER_TYPES.get(RECORD_TIMERTYPE.RECORD), RECORDTIMER_TYPE_NAMES.get(RECORD_TIMERTYPE.RECORD)),
 			(RECORDTIMER_TYPES.get(RECORD_TIMERTYPE.ZAP), RECORDTIMER_TYPE_NAMES.get(RECORD_TIMERTYPE.ZAP)),
@@ -1514,7 +1506,7 @@ class RecordTimerEdit(Setup):
 
 	def keyCancel(self):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, self.cancelMsg, default=False, type=MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, self.cancelMsg, default=False, type=MessageBox.TYPE_YESNO, windowTitle=self.getTitle())
 		else:
 			self.close((False,))
 
@@ -1527,8 +1519,14 @@ class RecordTimerEdit(Setup):
 		self.close((False,))
 
 	def keySave(self, result=None):
+		def keySaveCallback(answer):
+			if answer:
+				self.getChannels()
+			else:
+				self.close((False,))
+
 		if not self.timerServiceReference.isRecordable():
-			self.session.openWithCallback(self.getLocation, MessageBox, _("Error: A location to save the recording has not been selected!"), MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(keySaveCallback, MessageBox, "%s\n\n%s" % (_("Error: The selected service can't be recorded!"), _("Do you want to select another service?")), MessageBox.TYPE_YESNO, default=False, typeIcon=MessageBox.TYPE_ERROR, windowTitle=self.getTitle())
 			return
 		for callback in onRecordTimerSave:
 			callback(self)
@@ -1542,7 +1540,7 @@ class RecordTimerEdit(Setup):
 			self.timerMarginAfter.value = 0
 		if self.timerEndTime.value == self.timerStartTime.value and self.timerAfterEvent.value != "nothing":
 			self.timerAfterEvent.value = "nothing"
-			self.session.open(MessageBox, _("Difference between timer begin and end must be equal or greater than %d minutes.\nEnd Action was disabled !") % 1, MessageBox.TYPE_INFO, timeout=30)
+			self.session.open(MessageBox, _("Difference between timer begin and end must be equal or greater than %d minutes.\nEnd Action was disabled !") % 1, MessageBox.TYPE_INFO, timeout=30, windowTitle=self.getTitle())
 		self.timer.resetRepeated()
 		if self.timerRepeat.value == "once":
 			startDate = self.timerStartDate.value
@@ -1579,12 +1577,11 @@ class RecordTimerEdit(Setup):
 			# self.timer.end = self.getTimeStamp(startDate, self.timerEndTime.value)
 		marginBefore = self.timerMarginBefore.value * 60
 		eventBegin = self.getTimeStamp(startDate, self.timerStartTime.value)
+		startDate += 86400 if self.timerEndTime.value < self.timerStartTime.value else 0  # If endTime is less than startTime then add 1 day to the startDate.
 		eventEnd = self.getTimeStamp(startDate, self.timerEndTime.value)
 		if self.timerType.value == "zap" and not self.timerHasEndTime.value:
 			eventEnd = eventBegin + 1
 		marginAfter = self.timerMarginAfter.value * 60
-		if eventEnd < eventBegin:  # If eventEnd is less than eventBegin then add 1 day to the eventEnd time.
-			eventEnd += 86400
 		self.timer.begin = eventBegin - marginBefore
 		self.timer.end = eventEnd + marginAfter
 		self.timer.marginBefore = marginBefore

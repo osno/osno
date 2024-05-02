@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -8,12 +7,11 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Harddisk import harddiskmanager
 from Components.Console import Console
 from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
-import six
 
 
 class MediumToolbox(Screen):
 	skin = """
-		<screen name="MediumToolbox" position="center,center"  size="560,445" title="Medium toolbox" >
+		<screen name="MediumToolbox" position="center,center"  size="560,445" title="Medium toolbox" resolution="1280,720">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -82,7 +80,8 @@ class MediumToolbox(Screen):
 		self.update()
 
 	def mediainfoCB(self, mediuminfo, retval, extra_args):
-		mediuminfo = six.ensure_str(mediuminfo)
+		if isinstance(mediuminfo, bytes):
+			mediuminfo = mediuminfo.decode()
 		formatted_capacity = 0
 		read_capacity = 0
 		capacity = 0
