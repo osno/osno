@@ -301,10 +301,16 @@ def InitUsageConfig():
 		("3", _("2nd InfoBar ECM"))
 	])
 	config.usage.second_infobar_timeout = ConfigSelection(default="5", choices=choiceList)
-	config.usage.show_infobar_subservices = ConfigSelection(default=1, choices=[
+	config.usage.showInfoBarSubservices = ConfigSelection(default=1, choices=[
 		(0, _("Off")),
 		(1, _("If EPG available")),
 		(2, _("Always"))
+	])
+	config.usage.subservice = ConfigSelection(default=3, choices=[
+		(0, _("No, show the RecordTimer Overview")),
+		(1, _("No, show the Plugin Browser")),
+		(2, _("Yes, show RecordTimer if unavailable")),
+		(3, _("Yes, show Plugin Browser if unavailable"))
 	])
 
 	def showsecondinfobarChanged(configElement):

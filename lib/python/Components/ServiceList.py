@@ -9,6 +9,10 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
 
 
+def InitServiceListSettings():
+	pass
+
+
 def refreshServiceList(configElement=None):
 	from Screens.InfoBar import InfoBar
 	InfoBarInstance = InfoBar.instance
@@ -21,6 +25,7 @@ def refreshServiceList(configElement=None):
 class ServiceList(GUIComponent):
 	MODE_NORMAL = 0
 	MODE_FAVOURITES = 1
+	MODE_ALL = 2
 
 	def __init__(self, serviceList):
 		self.serviceList = serviceList
@@ -69,7 +74,7 @@ class ServiceList(GUIComponent):
 		self.progressBarWidth = 52
 		self.fieldMargins = 10
 		self.itemsDistances = 8
-		self.listMarginRight = 25 #scrollbar is fixed 20 + 5 Extra marge
+		self.listMarginRight = 25  # scrollbar is fixed 20 + 5 Extra marge
 		self.listMarginLeft = 5
 
 		self.onSelectionChanged = []
@@ -213,7 +218,7 @@ class ServiceList(GUIComponent):
 		return rc
 
 	def connectSelChanged(self, fnc):
-		if not fnc in self.onSelectionChanged:
+		if fnc not in self.onSelectionChanged:
 			self.onSelectionChanged.append(fnc)
 
 	def disconnectSelChanged(self, fnc):
@@ -287,18 +292,6 @@ class ServiceList(GUIComponent):
 
 	def atEnd(self):
 		return self.instance.atEnd()
-
-	def moveUp(self):
-		self.instance.moveSelection(self.instance.moveUp)
-
-	def moveDown(self):
-		self.instance.moveSelection(self.instance.moveDown)
-
-	def moveTop(self):
-		self.instance.moveSelection(self.instance.moveTop)
-
-	def moveEnd(self):
-		self.instance.moveSelection(self.instance.moveEnd)
 
 	def moveToChar(self, char):
 		# TODO fill with life
@@ -431,7 +424,8 @@ class ServiceList(GUIComponent):
 		self.l.setCurrentMarked(state)
 
 	def setMode(self, mode):
-		self.mode = mode
+		if mode == self.MODE_ALL:  # Mode all is not supported in legacy mode
+			self.mode = self.MODE_NORMAL
 		self.setItemsPerPage()
 		self.l.setItemHeight(self.ItemHeight)
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex)
@@ -516,3 +510,55 @@ class ServiceList(GUIComponent):
 	def selectionEnabled(self, enabled):
 		if self.instance is not None:
 			self.instance.setSelectionEnable(enabled)
+
+	def setHideNumberMarker(self, value):
+		self.l.setHideNumberMarker(value)
+
+	# Navigation Actions
+	def goTop(self):
+		self.instance.goTop()
+
+	def goPageUp(self):
+		self.instance.goPageUp()
+
+	def goLineUp(self):
+		self.instance.goLineUp()
+
+	def goFirst(self):
+		self.instance.goFirst()
+
+	def goLeft(self):
+		self.instance.goLeft()
+
+	def goRight(self):
+		self.instance.goRight()
+
+	def goLast(self):
+		self.instance.goLast()
+
+	def goLineDown(self):
+		self.instance.goLineDown()
+
+	def goPageDown(self):
+		self.instance.goPageDown()
+
+	def goBottom(self):
+		self.instance.goBottom()
+
+	# Old method names. This methods should be found and removed from all code.
+	#
+	def moveUp(self):
+		self.instance.goLineUp()
+
+	def moveDown(self):
+		self.instance.goLineDown()
+
+	def moveTop(self):
+		self.instance.goTop()
+
+	def moveEnd(self):
+		self.instance.goBottom()
+
+
+class ServiceListLegacy(ServiceList):
+	pass
