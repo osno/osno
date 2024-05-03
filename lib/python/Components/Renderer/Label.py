@@ -1,17 +1,14 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from Components.VariableText import VariableText
-from Components.Renderer.Renderer import Renderer
-
 from enigma import eLabel
+from Components.Renderer.Renderer import Renderer
+from Components.VariableText import VariableText
 
 
 class Label(VariableText, Renderer):
+	GUI_WIDGET = eLabel
+
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
-
-	GUI_WIDGET = eLabel
 
 	def connect(self, source):
 		if (source):

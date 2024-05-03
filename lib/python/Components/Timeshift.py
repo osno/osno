@@ -8,7 +8,7 @@ from enigma import eBackgroundFileEraser, eEPGCache, eServiceCenter, eServiceRef
 from RecordTimer import AFTEREVENT, RecordTimerEntry, parseEvent
 from ServiceReference import ServiceReference
 from timer import TimerEntry
-from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import BoxInfo
@@ -66,16 +66,16 @@ class InfoBarTimeshift:
 			"seekdef:7": (boundFunction(self.seekdef, 7), _("Seek")),
 			"seekdef:9": (boundFunction(self.seekdef, 9), _("Seek"))
 		}, prio=1)
-		self["TimeshiftActivateActions"] = ActionMap(["InfobarTimeshiftActivateActions"], {
+		self["TimeshiftActivateActions"] = HelpableActionMap(self, ["InfobarTimeshiftActivateActions"], {
 			"timeshiftActivateEnd": self.activateTimeshiftEnd,  # Something like "rewind key".
 			"timeshiftActivateEndAndPause": self.activateTimeshiftEndAndPause  # Something like "pause key".
 		}, prio=-1)  # Priority over record.
-		self["TimeshiftSeekPointerActions"] = ActionMap(["InfobarTimeshiftSeekPointerActions"], {
+		self["TimeshiftSeekPointerActions"] = HelpableActionMap(self, ["InfobarTimeshiftSeekPointerActions"], {
 			"SeekPointerOK": self.ptsSeekPointerOK,
 			"SeekPointerLeft": self.ptsSeekPointerLeft,
 			"SeekPointerRight": self.ptsSeekPointerRight
 		}, prio=-1)
-		self["TimeshiftFileActions"] = ActionMap(["InfobarTimeshiftActions"], {
+		self["TimeshiftFileActions"] = HelpableActionMap(self, ["InfobarTimeshiftActions"], {
 			"jumpPreviousFile": self.__evSOFjump,
 			"jumpNextFile": self.__evEOF
 		}, prio=-1)  # Priority over history.
@@ -623,7 +623,7 @@ class InfoBarTimeshift:
 					statinfo = stat("%s%s" % (config.timeshift.path.value, filename))
 					if statinfo.st_mtime < (time() - 5.0):
 						# Get Event Info from meta file
-						readmetafile = open("%s%s.meta" % (config.timeshift.path.value, filename), "r")
+						readmetafile = open("%s%s.meta" % (config.timeshift.path.value, filename))
 						servicerefname = readmetafile.readline()[0:-1]
 						eventname = readmetafile.readline()[0:-1]
 						description = readmetafile.readline()[0:-1]
@@ -711,7 +711,7 @@ class InfoBarTimeshift:
 					self.ptsCreateEITFile(fullname)
 				elif timeshiftfile.startswith("pts_livebuffer"):
 					# Save stored time shift by creating hardlink to ts file.
-					readmetafile = open("%s%s.meta" % (config.timeshift.path.value, timeshiftfile), "r")
+					readmetafile = open("%s%s.meta" % (config.timeshift.path.value, timeshiftfile))
 					servicerefname = readmetafile.readline()[0:-1]
 					eventname = readmetafile.readline()[0:-1]
 					description = readmetafile.readline()[0:-1]
@@ -791,7 +791,7 @@ class InfoBarTimeshift:
 						copy_file = copy_file + "." + str(randomint)
 						# Get Event Info from meta file
 						if exists("%s.ts.meta" % fullname):
-							readmetafile = open("%s.ts.meta" % fullname, "r")
+							readmetafile = open("%s.ts.meta" % fullname)
 							servicerefname = readmetafile.readline()[0:-1]
 							eventname = readmetafile.readline()[0:-1]
 							readmetafile.close()
@@ -1085,6 +1085,18 @@ class InfoBarTimeshift:
 				# Create EIT File
 				self.ptsCreateEITFile("%spts_livebuffer_%s" % (config.timeshift.path.value, self.pts_eventcount))
 
+				# Autorecord
+				if config.timeshift.autorecord.value:
+					try:
+						fullname = getRecordingFilename("%s - %s - %s" % (strftime("%Y%m%d %H%M", localtime(self.pts_starttime)), self.pts_curevent_station, self.pts_curevent_name), config.usage.default_path.value)
+						link("%s%s" % (config.timeshift.path.value, filename), "%s.ts" % fullname)
+						# Create a Meta File
+						metafile = open("%s.ts.meta" % fullname, "w")
+						metafile.write("%s\n%s\n%s\n%i\nautosaved\n" % (self.pts_curevent_servicerefname, self.pts_curevent_name.replace("\n", ""), self.pts_curevent_description.replace("\n", ""), int(self.pts_starttime)))
+						metafile.close()
+					except Exception as errormsg:
+						print(f"[Timeshift] autorecord Error: '{errormsg}'")
+
 	def ptsRecordCurrentEvent(self):
 		recording = RecordTimerEntry(ServiceReference(self.session.nav.getCurrentlyPlayingServiceOrGroup()), time(), self.pts_curevent_end, self.pts_curevent_name, self.pts_curevent_description, self.pts_curevent_eventid, afterEvent=AFTEREVENT.AUTO, justplay=False, always_zap=False, dirname=config.usage.default_path.value)
 		recording.dontSave = True
@@ -1106,7 +1118,7 @@ class InfoBarTimeshift:
 		for filename in filelist:
 			if filename.endswith(".meta"):
 				# Get Event Info from meta file.
-				readmetafile = open("%s%s" % (config.usage.default_path.value, filename), "r")
+				readmetafile = open("%s%s" % (config.usage.default_path.value, filename))
 				servicerefname = readmetafile.readline()[0:-1]
 				eventname = readmetafile.readline()[0:-1]
 				eventtitle = readmetafile.readline()[0:-1]
@@ -1154,7 +1166,7 @@ class InfoBarTimeshift:
 		if fileExists(filename, "r"):
 			if fileExists("%s.meta" % filename, "r"):
 				# Get Event Info from meta file.
-				readmetafile = open(filename + ".meta", "r")
+				readmetafile = open(filename + ".meta")
 				servicerefname = readmetafile.readline()[0:-1]
 				eventname = readmetafile.readline()[0:-1]
 				readmetafile.close()

@@ -3,14 +3,14 @@ from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 
 import hashlib
-from distutils import spawn
+from shutil import which
 
 
-class FSBLCheckerBase(object):
+class FSBLCheckerBase:
 	def getCurrentHash(self):
 		data = None
 		try:
-			with open("/dev/mtd0", 'r') as mtd0:
+			with open("/dev/mtd0") as mtd0:
 				data = mtd0.read(self.BL_SIZE)
 				if data:
 					h = hashlib.sha256()
@@ -41,7 +41,7 @@ class FSBLUpdater(Console):
 	CHECKER_LUT = {
 		"dm900": FSBLCheckerDM900
 	}
-	FLASH_FSBL_BINARY = spawn.find_executable("flash-fsbl")
+	FLASH_FSBL_BINARY = which("flash-fsbl")
 
 	@staticmethod
 	def isUpdateRequired(boxtype):

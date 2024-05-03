@@ -34,3 +34,63 @@ translate = ngettext("%d Digit", "%d Digits", 1) % 1
 translate = ngettext("%d Event", "%d Events", 1) % 1
 translate = ngettext("%d Pixel", "%d Pixels", 1) % 1
 translate = ngettext("%d Pixel wide", "%d Pixels wide", 1) % 1
+
+# f-string harvester workaround
+# version 0.23 of xgetext should fix this issue
+translate = _("Do you want to replace:")
+translate = _("Please wait while the feeds are reset (cleared and reloaded)...")
+translate = _("Current Status:")
+translate = _("PPanel")
+translate = _("Shellscript")
+translate = _("Hotkey Settings")
+translate = _("Panic to")
+translate = _("Zap to")
+translate = _("ButtonSetup")
+translate = _("Hotkey")
+translate = _("Are you sure to remove this entry?")
+translate = _("N/A")
+translate = _("Unknown")
+translate = _("Network storage on")
+translate = _("Client")
+translate = _("Reception Settings")
+
+translate = _("Do you want to remove:")
+translate = _("Do you want to install:")
+translate = _("Do you want to update:")
+translate = _("Do you want to replace:")
+translate = _("Reception Settings")
+
+translate = _("Configuring")
+translate = _("Downloading")
+translate = _("Installing")
+translate = _("User defined")
+translate = _("ClientIP")
+translate = _("Transcode")
+translate = _("Channel")
+translate = _("(TV)")
+translate = _("(Radio)")
+translate = _("(PiP)")
+translate = _("Tuner")
+translate = _("Current")
+
+translate = _("No log files found so debug logs are unavailable!")
+
+translate = _("Locale")
+translate = _("Language")
+
+translate = _("Preferred tuner DVB-S")
+translate = _("Preferred tuner DVB-S for recordings")
+translate = _("Preferred tuner DVB-T")
+translate = _("Preferred tuner DVB-T for recordings")
+translate = _("Preferred tuner DVB-C")
+translate = _("Preferred tuner DVB-C for recordings")
+translate = _("When enabled, this setting has more weight than 'Preferred tuner'.")
+translate = _("When enabled, this setting has more weight than 'Preferred tuner for recordings'.")
+translate = _("Preferred tuner ATSC")
+translate = _("Preferred tuner ATSC for recordings")
+
+# temporary text
+translate = _("Choose the Display Skin and press GREEN to activate the skin.")
+translate = _("Choose the OSD Skin and press GREEN to activate the skin.")
+translate = _("Select Display Skin")
+translate = _("Select Skin")

@@ -28,7 +28,7 @@ config.pic.textcolor = ConfigSelection(default="#0038FF48", choices=[("#00000000
 
 class picshow(Screen):
 	skin = """
-		<screen name="picshow" position="center,center" size="560,440" title="Picture player" >
+		<screen name="picshow" position="center,center" size="560,440" title="Picture player" resolution="1280,720">
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -63,7 +63,7 @@ class picshow(Screen):
 		if not pathExists(currDir):
 			currDir = "/"
 
-		self.filelist = FileList(currDir, matchingPattern="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
+		self.filelist = FileList(currDir, matchingPattern=r"(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 		self["filelist"] = self.filelist
 		self["filelist"].onSelectionChanged.append(self.selectionChanged)
 
@@ -147,7 +147,7 @@ class Pic_Setup(Setup):
 
 class Pic_Exif(Screen):
 	skin = """
-		<screen name="Pic_Exif" position="center,center" size="560,360" title="Info" >
+		<screen name="Pic_Exif" position="center,center" size="560,360" title="Info" resolution="1280,720">
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget source="menu" render="Listbox" position="5,50" size="550,310" scrollbarMode="showOnDemand" selectionDisabled="1" >
@@ -207,8 +207,8 @@ class Pic_Thumb(Screen):
 
 		self.size_w = getDesktop(0).size().width()
 		self.size_h = getDesktop(0).size().height()
-		self.thumbsX = self.size_w / (self.spaceX + self.picX)  # thumbnails in X
-		self.thumbsY = self.size_h / (self.spaceY + self.picY)  # thumbnails in Y
+		self.thumbsX = self.size_w // (self.spaceX + self.picX)  # thumbnails in X
+		self.thumbsY = self.size_h // (self.spaceY + self.picY)  # thumbnails in Y
 		self.thumbsC = int(self.thumbsX * self.thumbsY)  # all thumbnails
 
 		self.positionlist = []
@@ -216,7 +216,7 @@ class Pic_Thumb(Screen):
 
 		posX = -1
 		for x in range(self.thumbsC):
-			posY = x / self.thumbsX
+			posY = x // self.thumbsX
 			posX += 1
 			if posX >= self.thumbsX:
 				posX = 0
@@ -511,7 +511,7 @@ class Pic_Full_View(Screen):
 
 	def slidePic(self):
 		print("slide to next Picture index=%s" % str(self.lastindex))
-		if config.pic.loop.value == False and self.lastindex == self.maxentry:
+		if config.pic.loop.value is False and self.lastindex == self.maxentry:
 			self.PlayPause()
 		self.shownow = True
 		self.ShowPicture()

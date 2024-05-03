@@ -915,7 +915,8 @@ class AttributeParser:
 				errors.append(flag)
 		if errors:
 			errorList = "', '".join(errors)
-			print(f"[Skin] Error: Attribute 'flags' with value '%s' has invalid element(s) '{errorList}'!")
+			print(f"[Skin] Error: Attribute 'flags' with value '{value}' has invalid element(s) '{errorList}'!")
+			# print(f"[Skin] Error: Attribute 'flags' with value '{value}' has invalid element(s) '{"', '".join(errors)}'!")
 
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
