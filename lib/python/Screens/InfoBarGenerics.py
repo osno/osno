@@ -16,7 +16,7 @@ from keyids import KEYFLAGS, KEYIDNAMES, KEYIDS
 from RecordTimer import AFTEREVENT, RecordTimer, RecordTimerEntry, findSafeRecordPath, parseEvent
 from ServiceReference import ServiceReference, getStreamRelayRef, hdmiInServiceRef, isPlayableForCur
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
-from Components.AVSwitch import iAVSwitch
+from Components.AVSwitch import avSwitch
 from Components.config import ConfigBoolean, ConfigClock, ConfigSelection, config, configfile
 from Components.Harddisk import findMountPoint, harddiskmanager
 from Components.Input import Input
@@ -2970,7 +2970,7 @@ class InfoBarSeek:
 			self.doEofInternal(False)
 
 	def doEofInternal(self, playing):
-		pass		# Defined in subclasses
+		pass
 
 	def __evSOF(self):
 		self.setSeekState(self.SEEK_STATE_PLAY)
@@ -3140,7 +3140,7 @@ class InfoBarExtensions:
 		self.list = []
 		if config.plisettings.ColouredButtons.value:
 			self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions", {
-				"extensions": (self.bluekey_ex, _("Show extensions...")),
+#				"extensions": (self.bluekey_ex, _("Show extensions...")),
 				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
 				"openTimerList": (self.showTimerList, _("Show the list of timers.")),
@@ -3152,7 +3152,7 @@ class InfoBarExtensions:
 			}, prio=1, description=_("Extension Actions")) # lower priority
 		else:
 			self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions", {
-				"extensions": (self.bluekey_ex, _("view extensions...")),
+#				"extensions": (self.bluekey_ex, _("view extensions...")),
 				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 				"showDreamPlex": (self.showDreamPlex, _("Show the DreamPlex player...")),
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
@@ -3165,15 +3165,9 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getSoftcamSetup, type=InfoBarExtensions.EXTENSION_LIST)
 		if config.usage.show_restart_network_extensionslist.getValue() is True:
 			self.addExtension(extension=self.getRestartNetwork, type=InfoBarExtensions.EXTENSION_LIST)
-
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
 			p(self)
 
-	def bluekey_ex(self):
-		if config.workaround.blueswitch.value:
-			self.quickmenuStart()
-		else:
-			self.showExtensionSelection()
 
 	def SelectopenEventView(self):
 		try:
@@ -3935,37 +3929,8 @@ class InfoBarAudioSelection:
 		}, prio=0, description=_("Audio Actions"))
 
 	def yellow_key(self):
-		if not hasattr(self, "LongButtonPressed"):
-			self.LongButtonPressed = False
-		global AUDIO
-		if not self.LongButtonPressed:
-			if config.plugins.OPDBoot_yellowkey.list.value == '0':
-				from Screens.AudioSelection import AudioSelection
-				self.session.openWithCallback(self.audioSelected, AudioSelection, infobar=self)
-			elif config.plugins.OPDBoot_yellowkey.list.value == '2':
-				AUDIO = True
-				ToggleVideo()
-			elif config.plugins.OPDBoot_yellowkey.list.value == '3':
-				self.startTeletext()
-			else:
-				try:
-					self.startTimeshift()
-				except:
-					pass
-		else:
-			if config.plugins.OPDBoot_yellowkey.listLong.value == '0':
-				from Screens.AudioSelection import AudioSelection
-				self.session.openWithCallback(self.audioSelected, AudioSelection, infobar=self)
-			elif config.plugins.OPDBoot_yellowkey.listLong.value == '2':
-				AUDIO = True
-				ToggleVideo()
-			elif config.plugins.OPDBoot_yellowkey.listLong.value == '3':
-				self.startTeletext()
-			else:
-				try:
-					self.startTimeshift()
-				except:
-					pass
+		from Screens.AudioSelection import AudioSelection
+		self.session.openWithCallback(self.audioSelected, AudioSelection, infobar=self)
 
 	def audioSelection(self):
 		from Screens.AudioSelection import AudioSelection

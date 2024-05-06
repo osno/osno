@@ -405,13 +405,16 @@ class FlashImage(Screen, HelpableScreen):
 		print("[FlashOnline] Current image slot is '%s'." % currentSlotCode)
 		choices = []
 		default = 0
+		currentMsg = "  -  %s" % _("Current")
+		slotMsg = _("Slot '%s' %s: %s%s")
 		for index, slotCode in enumerate(sorted(imageDictionary.keys(), key=lambda x: (not x.isnumeric(), int(x) if x.isnumeric() else x))):
 			print("[FlashOnline] Image Slot '%s': %s." % (slotCode, str(imageDictionary[slotCode])))
+			slotType = "eMMC" if "mmcblk" in imageDictionary[slotCode]["device"] else "USB"
+			current = ""
 			if slotCode == currentSlotCode:
-				choices.append((_("Slot '%s':  %s  -  Current") % (slotCode, imageDictionary[slotCode]["imagename"]), (slotCode, True)))
+				current = currentMsg
 				default = index
-			else:
-				choices.append((_("Slot '%s':  %s") % (slotCode, imageDictionary[slotCode]["imagename"]), (slotCode, True)))
+			choices.append((slotMsg % (slotCode, slotType, imageDictionary[slotCode]["imagename"], current), (slotCode, True)))
 		choices.append((_("No, don't flash this image"), False))
 		self.session.openWithCallback(self.checkMedia, MessageBox, _("Do you want to flash the image '%s'?") % self.imageName, list=choices, default=default, windowTitle=self.getTitle())
 
@@ -419,7 +422,7 @@ class FlashImage(Screen, HelpableScreen):
 		if choice:
 			def findMedia(paths):
 				def availableSpace(path):
-					if not "/mmc" in path and isdir(path) and access(path, W_OK):
+					if "/mmc" not in path and isdir(path) and access(path, W_OK):
 						try:
 							fs = statvfs(path)
 							return (fs.f_bavail * fs.f_frsize) / (1 << 20)
