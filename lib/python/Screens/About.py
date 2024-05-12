@@ -908,6 +908,26 @@ class SystemNetworkInfo(Screen):
 				netspeed += line
 			return str(netspeed)
 
+		def nameserver():
+			nameserver = ""
+			v4 = 0
+			v6 = 0
+			ns4 = ""
+			ns6 = ""
+			datei = open("/etc/resolv.conf", "r")
+			for line in datei.readlines():
+				line = line.strip()
+				if "nameserver" in line:
+					if line.count(".") == 3:
+						v4 = v4 + 1
+						ns4 += str(v4) + ".IPv4 Nameserver" + ":" + line.strip().replace("nameserver ", "")
+					if line.count(":") > 1 and line.count(":") < 8:
+						v6 = v6 + 1
+						ns6 += str(v6) + ".IPv6 Nameserver" + ":" + line.strip().replace("nameserver ", "")
+			nameserver = ns4 + ns6
+			datei.close()
+			return nameserver.strip()
+
 		def domain():
 			domain = ""
 			for line in open('/etc/resolv.conf', 'r'):
@@ -938,6 +958,7 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += '{:<35}'.format(_('Interface:')) + "\t" + " /dev/" + eth0['ifname'] + "\n"
 			self.AboutText += '{:<45}'.format(_("IP:")) + "\t" + eth0['addr'] + "\n"
 			self.AboutText += '{:<45}'.format(_("Gateway:")) + "\t" + gateway() + "\n"
+			self.AboutText += '{:<45}'.format(_("Nameserver:")) + "\t" + nameserver() + "\n"
 			if 'netmask' in eth0:
 				self.AboutText += '{:<35}'.format(_("Netmask:")) + "\t" + eth0['netmask'] + "\n"
 			if 'hwaddr' in eth0:
@@ -952,6 +973,7 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += '{:<35}'.format(_('Interface:')) + "\t" + " /dev/" + eth1['ifname'] + "\n"
 			self.AboutText += '{:<45}'.format(_("IP:")) + "\t" + eth1['addr'] + "\n"
 			self.AboutText += '{:<45}'.format(_("Gateway:")) + "\t" + gateway() + "\n"
+			self.AboutText += '{:<45}'.format(_("Nameserver:")) + "\t" + nameserver() + "\n"
 			if 'netmask' in eth1:
 				self.AboutText += '{:<35}'.format(_("Netmask:")) + "\t" + eth1['netmask'] + "\n"
 			if 'hwaddr' in eth1:
@@ -966,6 +988,7 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += '{:<35}'.format(_('Interface:')) + "\t" + " /dev/" + ra0['ifname'] + "\n"
 			self.AboutText += '{:<45}'.format(_("IP:")) + "\t" + ra0['addr'] + "\n"
 			self.AboutText += '{:<45}'.format(_("Gateway:")) + "\t" + gateway() + "\n"
+			self.AboutText += '{:<45}'.format(_("Nameserver:")) + "\t" + nameserver() + "\n"
 			if 'netmask' in ra0:
 				self.AboutText += '{:<35}'.format(_("Netmask:")) + "\t" + ra0['netmask'] + "\n"
 			if 'hwaddr' in ra0:
@@ -979,6 +1002,7 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += '{:<35}'.format(_('Interface:')) + "\t" + " /dev/" + wlan0['ifname'] + "\n"
 			self.AboutText += '{:<45}'.format(_("IP:")) + "\t" + wlan0['addr'] + "\n"
 			self.AboutText += '{:<45}'.format(_("Gateway:")) + "\t" + gateway() + "\n"
+			self.AboutText += '{:<45}'.format(_("Nameserver:")) + "\t" + nameserver() + "\n"
 			if 'netmask' in wlan0:
 				self.AboutText += '{:<35}'.format(_("Netmask:")) + "\t" + wlan0['netmask'] + "\n"
 			if 'hwaddr' in wlan0:
@@ -992,13 +1016,13 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += '{:<35}'.format(_('Interface:')) + "\t" + " /dev/" + wlan1['ifname'] + "\n"
 			self.AboutText += '{:<45}'.format(_("IP:")) + "\t" + wlan1['addr'] + "\n"
 			self.AboutText += '{:<45}'.format(_("Gateway:")) + "\t" + gateway() + "\n"
+			self.AboutText += '{:<45}'.format(_("Nameserver:")) + "\t" + nameserver() + "\n"
 			if 'netmask' in wlan1:
 				self.AboutText += '{:<35}'.format(_("Netmask:")) + "\t" + wlan1['netmask'] + "\n"
 			if 'hwaddr' in wlan1:
 				self.AboutText += '{:<35}'.format(_("MAC:")) + "\t" + wlan1['hwaddr'] + "\n"
 				self.AboutText += '{:<35}'.format(_("Domain:")) + "\t" + domain() + "\n"
 			self.iface = 'wlan1'
-
 		rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
 		self.AboutText += "\n" + '{:<35}'.format(_("Bytes received:")) + "\t" + rx_bytes + "\n"
 		self.AboutText += '{:<35}'.format(_("Bytes sent:")) + "\t" + tx_bytes + "\n"
@@ -1038,15 +1062,12 @@ class SystemNetworkInfo(Screen):
 						quality = str(status[self.iface]["quality"])
 						if "quality" in self:
 							self.AboutText += '{:<35}'.format(_('Link Quality:')) + '\t' + quality + '\n'
-
 						channel = str(status[self.iface]["channel"])
 						if "channel" in self:
 							self.AboutText += '{:<35}'.format(_('Channel:')) + '\t' + channel + '\n'
-
 						frequency = status[self.iface]["frequency"]
 						if "frequency" in self:
 							self.AboutText += '{:<35}'.format(_('Frequency:')) + '\t' + frequency + '\n'
-
 						frequency_norm = status[self.iface]["frequency_norm"]
 						if frequency_norm is not None:
 							self.AboutText += '{:<35}'.format(_('Frequency Norm:')) + '\t' + frequency_norm + '\n'
@@ -1061,7 +1082,6 @@ class SystemNetworkInfo(Screen):
 						signal = str(status[self.iface]["signal"]) + " dBm"
 						if "signal" in self:
 							self.AboutText += '{:<35}'.format(_('Signal Strength:')) + '\t' + signal + '\n'
-
 						if status[self.iface]["encryption"] == "off":
 							if accesspoint == "Not-Associated":
 								encryption = _("Disabled")
@@ -1071,11 +1091,9 @@ class SystemNetworkInfo(Screen):
 							encryption = _("Enabled")
 						if "enc" in self:
 							self.AboutText += '{:<35}'.format(_('Encryption:')) + '\t' + encryption + '\n'
-
 						encryption_type = status[self.iface]["encryption_type"]
 						if "encryption_type" in self:
 							self.AboutText += '{:<35}'.format(_('Encryption Type:')) + '\t' + encryption_type.upper() + '\n'
-
 						if status[self.iface]["essid"] == "off" or status[self.iface]["accesspoint"] == "Not-Associated" or status[self.iface]["accesspoint"] is False:
 							self.LinkState = False
 							self["statuspic"].setPixmapNum(1)
