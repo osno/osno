@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 from Components.GUIComponent import GUIComponent
 from Screens.Screen import Screen
 from Screens.AudioSelection import AudioSelection
@@ -28,16 +25,17 @@ def to_unsigned(x):
 	return x & 0xFFFFFFFF
 
 
-def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4):
+def ServiceInfoListEntry(a, b="", valueType=TYPE_TEXT, param=4, altColor=False):
+	print("b:", b)
 	if not isinstance(b, str):
 		if valueType == TYPE_VALUE_HEX:
 			b = ("%0" + str(param) + "X") % to_unsigned(b)
 		elif valueType == TYPE_VALUE_FREQ:
-			b = "%s MHz" % (b / 1000)
+			b = "%s MHz" % (b // 1000)
 		elif valueType == TYPE_VALUE_FREQ_FLOAT:
-			b = "%.3f MHz" % (b / 1000.0)
+			b = "%.3f MHz" % (b // 1000.0)
 		elif valueType == TYPE_VALUE_BITRATE:
-			b = "%s KSymbols/s" % (b / 1000)
+			b = "%s KSymbols/s" % (b // 1000)
 		elif valueType == TYPE_VALUE_HEX_DEC:
 			b = ("%0" + str(param) + "X (%d)") % (to_unsigned(b), b)
 		elif valueType == TYPE_VALUE_ORBIT_DEC:
@@ -367,35 +365,34 @@ class ServiceInfo(Screen):
 
 	def ShowECMInformation(self):
 		if self.info:
-			from Components.Converter.PliExtraInfo import caid_data
+			from Tools.GetEcmInfo import getCaidData, GetEcmInfo
+			ecmData = GetEcmInfo().getEcmData()
 			self["Title"].text = _("Service info - ECM Info")
 			self["key_yellow"].text = self["yellow"].text = _("Service & PIDs")
 			tlist = []
-			for caid in sorted(set(self.info.getInfoObject(iServiceInformation.sCAIDPIDs)), key=lambda x: (x[0], x[1])):
-				CaIdDescription = _("Undefined")
-				extra_info = ""
+			for caID in sorted(set(self.info.getInfoObject(iServiceInformation.sCAIDPIDs)), key=lambda x: (x[0], x[1])):
+				description = _("Undefined")
+				extrainfo = ""
 				provid = ""
-				for caid_entry in caid_data:
-					if int(caid_entry[0], 16) <= caid[0] <= int(caid_entry[1], 16):
-						CaIdDescription = caid_entry[2]
+				for caidEntry in getCaidData():
+					if int(caidEntry[0], 16) <= caID[0] <= int(caidEntry[1], 16):
+						description = caidEntry[2]
 						break
-				if caid[2]:
-					if CaIdDescription == "Seca":
-						provid = ",".join([caid[2][i:i + 4] for i in list(range(0, len(caid[2]), 30))])
-					if CaIdDescription == "Nagra":
-						provid = caid[2][-4:]
-					if CaIdDescription == "Via":
-						provid = caid[2][-6:]
+				if caID[2]:
+					if description == "Seca":
+						provid = ",".join([caID[2][y:y + 4] for y in range(len(caID[2]), 30)])
+					elif description == "Nagra":
+						provid = caID[2][-4:]
+					elif description == "Via":
+						provid = caID[2][-6:]
 					if provid:
-						extra_info = "provid=%s" % provid
+						extrainfo = f" provid={provid}"
 					else:
-						extra_info = "extra=%s" % caid[2]
-				from Tools.GetEcmInfo import GetEcmInfo
-				ecmdata = GetEcmInfo().getEcmData()
-				left = "ECMPid %04X (%d)" % (caid[1], caid[1])
-				right = "%04X-%s %s" % (caid[0], CaIdDescription, extra_info)
+						extrainfo = f" extra={caID[2]}"
+				left = "ECMPid %04X (%d)" % (caID[1], caID[1])
+				right = "%04X-%s %s" % (caID[0], description, extrainfo)
 				altColor = False
-				if caid[0] == int(ecmdata[1], 16) and (caid[1] == int(ecmdata[3], 16) or str(int(ecmdata[2], 16)) in provid):
+				if caID[0] == int(ecmData[1], 16) and (caID[1] == int(ecmData[3], 16) or str(int(ecmData[2], 16)) in provid):
 					right = "%s (%s)" % (right, _("active"))
 					altColor = True
 				tlist.append(ServiceInfoListEntry(left, right))
