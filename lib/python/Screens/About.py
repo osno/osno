@@ -324,7 +324,7 @@ class About(Screen):
 		AboutText += _("E2 (re)starts:\t%s\n") % config.misc.startCounter.value
 		AboutText += _("Enigma2 debug level:\t%s") % eGetEnigmaDebugLvl() + "\n"
 		if getMachineBuild() not in ('vuduo4k','osmio4k','vuzero4k','sf5008','et13000','et1x000','hd51','hd52','vusolo4k','vuuno4k','vuuno4kse','vuultimo4k','sf4008','dm820','dm7080','dm900','dm920', 'gb7252', 'dags7252', 'vs1500','xc7439','8100s','u5','u5pvr','u52','u53','u54','u55','u56','u51','sf8008'):
-			AboutText += _("Installed:\t\t%s") % about.getFlashDateString() + "\n"
+			AboutText += _("Installed:\t%s") % about.getFlashDateString() + "\n"
 
 		fp_version = getFPVersion()
 		if fp_version is None:
@@ -865,11 +865,9 @@ class SystemNetworkInfo(Screen):
 		self["statuspic"] = MultiPixmap()
 		self["statuspic"].setPixmapNum(1)
 		self["statuspic"].show()
-
 		self.iface = None
 		self.createscreen()
 		self.iStatus = None
-
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
@@ -879,14 +877,12 @@ class SystemNetworkInfo(Screen):
 			self.resetList()
 			self.onClose.append(self.cleanup)
 		self.updateStatusbar()
-
-		self["key_red"] = StaticText(_("Close"))
-
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "DirectionActions"],
+		self["key_red"] = Label(_("Cancel"))
+		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"],
 			{
-				"cancel": self.close,
+				"cancel": self.cancel,
+				"red": self.cancel,
 				"ok": self.close,
-				"red": self.close,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
 			})
@@ -1026,7 +1022,6 @@ class SystemNetworkInfo(Screen):
 		rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
 		self.AboutText += "\n" + '{:<35}'.format(_("Bytes received:")) + "\t" + rx_bytes + "\n"
 		self.AboutText += '{:<35}'.format(_("Bytes sent:")) + "\t" + tx_bytes + "\n"
-
 		hostname = open('/proc/sys/kernel/hostname').read()
 		self.AboutText += "\n" + '{:<35}'.format(_("Hostname:")) + "\t" + hostname + "\n"
 		self["AboutScrollLabel"] = ScrollLabel(self.AboutText)
@@ -1103,8 +1098,8 @@ class SystemNetworkInfo(Screen):
 							iNetwork.checkNetworkState(self.checkNetworkCB)
 						self["AboutScrollLabel"].setText(self.AboutText)
 
-	def exit(self):
-		self.close(True)
+	def cancel(self):
+		self.close()
 
 	def updateStatusbar(self):
 		self["IFtext"].setText(_("Network:"))

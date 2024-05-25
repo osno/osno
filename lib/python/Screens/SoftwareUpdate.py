@@ -14,7 +14,6 @@ from Components.Slider import Slider
 from Components.SystemInfo import BoxInfo, getBoxDisplayName
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -23,7 +22,7 @@ from Tools.Directories import SCOPE_GUISKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 
 
-class SoftwareUpdate(Screen, HelpableScreen, ProtectedScreen):
+class SoftwareUpdate(Screen, ProtectedScreen):
 	FEED_UNKNOWN = 0
 	FEED_DISABLED = 1
 	FEED_UNSTABLE = 2
@@ -94,8 +93,7 @@ class SoftwareUpdate(Screen, HelpableScreen, ProtectedScreen):
 	]
 
 	def __init__(self, session, *args):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		ProtectedScreen.__init__(self)
 		Screen.setTitle(self, _("Software Update"))
 		self.onCheckTrafficLight = []
@@ -212,7 +210,7 @@ class SoftwareUpdate(Screen, HelpableScreen, ProtectedScreen):
 			if message:
 				self["feedmessage"].setText(_(message))
 		except Exception as err:
-			print("[SoftwareUpdate] Error: Unable to get server status!  (%s)" % str(err))
+			print(f"[SoftwareUpdate] Error: Unable to get server status!  ({str(err)})")
 			self["feedstatus_off"].show()
 		for callback in self.onCheckTrafficLight:
 			callback()
@@ -240,7 +238,7 @@ class SoftwareUpdate(Screen, HelpableScreen, ProtectedScreen):
 					for fetched in fetchedList:
 						oldVer = fetched[1] if fetched[1] else _("Current version unknown")
 						newVer = fetched[2] if fetched[2] else _("Updated version unknown")
-						self.updateList.append((fetched[0], fetched[1], "%s  ->  %s" % (oldVer, newVer), "upgradeable", upgradeablePng, divPng))
+						self.updateList.append((fetched[0], fetched[1], f"{oldVer}  ->  {newVer}", "upgradeable", upgradeablePng, divPng))
 					if self.updateList:
 						self.updateList.sort(key=lambda x: x[0])  # Sort by package name.
 						self["list"].setList(self.updateList)
@@ -251,7 +249,7 @@ class SoftwareUpdate(Screen, HelpableScreen, ProtectedScreen):
 				else:
 					self.setStatus("error")
 				self.packageCount = len(self.updateList)
-				print("[SoftwareUpdate] %d packages available for update." % self.packageCount)
+				print(f"[SoftwareUpdate] {self.packageCount} packages available for update.")
 				self["package_count"].setText(str(self.packageCount))
 				for callback in self.onCheckTrafficLight:
 					callback()
@@ -299,7 +297,7 @@ class SoftwareUpdate(Screen, HelpableScreen, ProtectedScreen):
 		if self.packageCount <= updateLimit:
 			self.keyUpdateCallback(2)
 		else:
-			print("[SoftwareUpdate] Warning: There are %d packages available, more than the %d maximum recommended, for an update!" % (self.packageCount, updateLimit))
+			print(f"[SoftwareUpdate] Warning: There are {self.packageCount} packages available, more than the {updateLimit} maximum recommended, for an update!")
 			message = [
 				_("Warning: There are %d update packages!") % self.packageCount,
 				_("There is a risk that your %s %s will not boot or may malfunction after such a large on-line update.") % getBoxDisplayName(),
@@ -400,7 +398,7 @@ class SoftwareUpdateSummary(ScreenSummary):
 		self["value"].setText("%s %s" % (self.parent["package_text"].getText(), self.parent["package_count"].getText()))
 
 
-class RunSoftwareUpdate(Screen, HelpableScreen):
+class RunSoftwareUpdate(Screen):
 	skin = """
 	<screen name="RunSoftwareUpdate" position="center,center" size="720,435" resolution="1280,720">
 		<widget name="update" position="10,10" size="700,400" font="Regular;20" halign="center" transparent="1" valign="center" />
@@ -408,8 +406,7 @@ class RunSoftwareUpdate(Screen, HelpableScreen):
 	</screen>"""
 
 	def __init__(self, session, *args):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.setTitle(_("Software Update"))
 		self.onTimerTick = []
 		self["update"] = ScrollLabel(_("Software update starting, please wait.\n\n"))

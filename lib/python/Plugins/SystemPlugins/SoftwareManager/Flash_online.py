@@ -18,7 +18,6 @@ from Components.ProgressBar import ProgressBar
 from Components.SystemInfo import BoxInfo, getBoxDisplayName
 from Components.Sources.StaticText import StaticText
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
-from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.MultiBootManager import MultiBootManager
 from Screens.Screen import Screen
@@ -66,7 +65,7 @@ def my_requests(url):
 	response.close()
 	return link
 
-class FlashOnline(Screen, HelpableScreen):
+class FlashOnline(Screen):
 	skin = """
 	<screen name="FlashOnline" title="Flash Online" position="center,center" size="900,485" resolution="1280,720">
 		<widget name="list" position="0,0" size="e,400" scrollbarMode="showOnDemand" />
@@ -89,8 +88,7 @@ class FlashOnline(Screen, HelpableScreen):
 	</screen>"""
 
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.skinName = ["FlashOnline"]
 		self.imageFeed = "OpenDROID"
 		self.setTitle(_("FlashOnline - %s Images") % self.imageFeed)
@@ -341,7 +339,7 @@ class FlashOnline(Screen, HelpableScreen):
 				self["description"].setText(_("Location: %s") % currentSelection[1][:currentSelection[1].rfind(sep) + 1])
 
 
-class FlashImage(Screen, HelpableScreen):
+class FlashImage(Screen):
 	skin = """
 	<screen name="FlashImage" title="Flash Image" position="center,center" size="640,225" resolution="1280,720">
 		<widget name="header" position="0,0" size="e,50" font="Regular;35" valign="center" />
@@ -350,8 +348,7 @@ class FlashImage(Screen, HelpableScreen):
 	</screen>"""
 
 	def __init__(self, session, imageName, source):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.imageName = imageName
 		self.source = source
 		self.setTitle(_("Flash Image"))

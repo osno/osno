@@ -5,7 +5,6 @@ from Components.SystemInfo import BoxInfo, getBoxDisplayName
 from Components.Task import job_manager
 from Components.Sources.Progress import Progress
 from Components.Sources.StaticText import StaticText
-from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBarGenerics import InfoBarNotifications
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -13,7 +12,7 @@ from Screens.Standby import QUIT_SHUTDOWN, Standby, TryQuitMainloop, inStandby, 
 from Tools.Notifications import AddNotification, AddNotificationWithCallback, notifications
 
 
-class TaskView(Screen, HelpableScreen, ConfigListScreen, InfoBarNotifications):
+class TaskView(Screen, ConfigListScreen, InfoBarNotifications):
 	skin = """
 	<screen name="TaskList" title="Task List" position="center,center" size="930,255" resolution="1280,720">
 		<widget source="name" render="Label" position="0,0" size="930,35" font="Regular;25" />
@@ -45,8 +44,7 @@ class TaskView(Screen, HelpableScreen, ConfigListScreen, InfoBarNotifications):
 	</screen>"""
 
 	def __init__(self, session, job, parent=None, cancelable=True, backgroundable=True, afterEventChangeable=True, afterEvent="nothing"):
-		Screen.__init__(self, session, parent)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, parent, enableHelp=True)
 		self.config = []
 		ConfigListScreen.__init__(self, self.config)
 		InfoBarNotifications.__init__(self)
@@ -76,7 +74,7 @@ class TaskView(Screen, HelpableScreen, ConfigListScreen, InfoBarNotifications):
 		self["backgroundActions"] = HelpableActionMap(self, ["ColorActions"], {
 			"green": (self.keyBackground, _("Continue to run the task in the background"))
 		}, prio=0, description=_("Task View Actions"))
-		self["backgroundActions"].setEnabled(cancelable)
+		self["backgroundActions"].setEnabled(backgroundable)
 		self["cancelActions"] = HelpableActionMap(self, ["ColorActions"], {
 			"yellow": (self.keyCancelTask, _("Cancel the task"))
 		}, prio=0, description=_("Task View Actions"))
@@ -106,7 +104,7 @@ class TaskView(Screen, HelpableScreen, ConfigListScreen, InfoBarNotifications):
 			("deepstandby", shutdownString)
 		])
 		self.job.afterEvent = self.setting.afterEvent.value
-		self["config"].setList([(_("After event"), self.setting.afterEvent, _("Select an action to perform when the task has completed."))])
+		self["config"].setList([(_("After event"), self.setting.afterEvent, _("Select an action to perform when the task has completed."))] if afterEventChangeable else [])
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.closed)
 		self.job.state_changed.append(self.stateChanged)
@@ -114,7 +112,7 @@ class TaskView(Screen, HelpableScreen, ConfigListScreen, InfoBarNotifications):
 		self.stateChanged()
 
 	def layoutFinished(self):
-		self["config"].instance.enableAutoNavigation(False)
+		self["config"].enableAutoNavigation(False)
 
 	def closed(self):
 		self.job.state_changed.remove(self.stateChanged)

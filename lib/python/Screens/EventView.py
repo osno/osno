@@ -1,12 +1,11 @@
-from time import localtime, mktime, time, strftime
+from time import localtime, strftime
 
-from enigma import eEPGCache, ePoint, eTimer, eServiceReference
+from enigma import eEPGCache, eTimer, eServiceReference
 
-from RecordTimer import AFTEREVENT, RecordTimerEntry, parseEvent
+from RecordTimer import RecordTimerEntry, parseEvent
 from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.Label import Label
-from Components.MenuList import MenuList
 from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
@@ -16,7 +15,6 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
-from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
 from Screens.TimerEntry import TimerEntry
 from Tools.BoundFunction import boundFunction
@@ -42,6 +40,8 @@ class EventViewBase:
 		self["Event"] = Event()
 		self["epg_description"] = ScrollLabel()
 		self["FullDescription"] = ScrollLabel()
+		self["key_menu"] = StaticText(_("MENU"))
+		self["key_info"] = StaticText(_("INFO"))
 		self["key_red"] = StaticText("")
 		self["summary_description"] = StaticText()
 		self["datetime"] = Label()
@@ -225,7 +225,7 @@ class EventViewBase:
 		results = epgcache.search(("NB", 100, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, serviceRef, id))
 		if results:
 			similar = [_("Similar broadcasts:")]
-			timeFormat = "%s, %s" % (config.usage.date.long.value, config.usage.time.short.value)
+			timeFormat = "%s, %s" % (config.usage.date.dayshort.value, config.usage.time.short.value)
 			for result in sorted(results, key=lambda x: x[1]):
 				similar.append("%s  -  %s" % (strftime(timeFormat, localtime(result[1])), result[0]))
 			self["epg_description"].setText("%s\n\n%s" % (self["epg_description"].getText(), "\n".join(similar)))
@@ -259,20 +259,18 @@ class EventViewBase:
 		plugin(session=self.session, service=self.serviceRef, event=self.event, eventName=self.event.getEventName())
 
 
-class EventViewSimple(Screen, HelpableScreen, EventViewBase):
+class EventViewSimple(Screen, EventViewBase):
 	def __init__(self, session, event, serviceRef, callback=None, similarEPGCB=None, singleEPGCB=None, multiEPGCB=None, skin="EventViewSimple"):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		EventViewBase.__init__(self, event, serviceRef, callback=callback, similarEPGCB=similarEPGCB)
 		self.setTitle(_("Event View"))
 		self.skinName = [skin, "EventView"]
 		self.keyGreenAction = self.NO_ACTION
 
 
-class EventViewEPGSelect(Screen, HelpableScreen, EventViewBase):
+class EventViewEPGSelect(Screen, EventViewBase):
 	def __init__(self, session, event, serviceRef, callback=None, singleEPGCB=None, multiEPGCB=None, similarEPGCB=None, skinName=None):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		EventViewBase.__init__(self, event, serviceRef, callback=callback, similarEPGCB=similarEPGCB)
 		self.keyGreenAction = self.ADD_TIMER
 		self["red"] = Pixmap()  # DEBUG: Are these backgrounds still required?
@@ -308,10 +306,9 @@ class EventViewEPGSelect(Screen, HelpableScreen, EventViewBase):
 				self.skinName = skinName + self.skinName
 
 
-class EventViewMovieEvent(Screen, HelpableScreen):
+class EventViewMovieEvent(Screen):
 	def __init__(self, session, name=None, ext_desc=None, dur=None):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.screentitle = _("Event View")
 		self.skinName = "EventView"
 		self.duration = ""

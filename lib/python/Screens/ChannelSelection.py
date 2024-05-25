@@ -8,6 +8,7 @@ from RecordTimer import AFTEREVENT, RecordTimerEntry, TIMERTYPE
 from ServiceReference import ServiceReference, getStreamRelayRef, hdmiInServiceRef, serviceRefAppendPath, service_types_radio_ref, service_types_tv_ref
 from skin import getSkinFactor
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
+from Components.Button import Button
 from Components.ChoiceList import ChoiceEntryComponent, ChoiceList
 from Components.config import ConfigSubsection, ConfigText, ConfigYesNo, config, configfile
 from Components.Input import Input
@@ -35,7 +36,6 @@ from Screens.ButtonSetup import ButtonSetupActionMap, InfoBarButtonSetup, getBut
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewEPGSelect
-from Screens.HelpMenu import HelpableScreen
 import Screens.InfoBar
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
@@ -123,21 +123,18 @@ def parseNextEvent(list, isZapTimer=False):  # IanSav: This is only used in once
 		eit = list[0]
 		return begin, end, name, description, eit
 	return False
-# IanSav: These two are almost identical and can be combined to reduce toe code size with almost no cost!
-# JB: These 2 functions can probably go later and be a child function inside of doInstantTimer.
 
 
-class ChannelSelectionBase(Screen, HelpableScreen):
+class ChannelSelectionBase(Screen):
 	def __init__(self, session):
 		def digitHelp():
 			return _("LCN style QuickSelect entry selection") if config.usage.show_channel_jump_in_servicelist.value == "quick" else _("SMS style QuickSelect entry selection")
 
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
-		self["key_red"] = StaticText(_("All Services"))
-		self["key_green"] = StaticText(_("Reception Lists"))
-		self["key_yellow"] = StaticText(_("Providers"))
-		self["key_blue"] = StaticText(_("Bouquets"))
+		Screen.__init__(self, session, enableHelp=True)
+		self["key_red"] = Button(_("All Services"))
+		self["key_green"] = Button(_("Reception Lists"))
+		self["key_yellow"] = Button(_("Providers"))
+		self["key_blue"] = Button(_("Bouquets"))
 		self["list"] = ServiceListLegacy(self) if config.channelSelection.style.value == "" else ServiceList(self)
 		self.servicelist = self["list"]
 		self.numericalTextInput = NumericalTextInput(handleTimeout=False)
@@ -1215,14 +1212,13 @@ class ChannelSelectionEdit:
 			self.cancel()
 
 
-class ChannelContextMenu(Screen, HelpableScreen):
+class ChannelContextMenu(Screen):
 	def __init__(self, session, csel):
 		def appendWhenValid(current, menu, args, level=0, key="bullet"):
 			if current and current.valid() and level <= config.usage.setup_level.index:
 				menu.append(ChoiceEntryComponent(key, args))
 
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.setTitle(_("Channel Selection Context Menu"))
 		# raise Exception("[ChannelSelection] We need a better summary screen here!")
 		self.csel = csel
@@ -1285,7 +1281,7 @@ class ChannelContextMenu(Screen, HelpableScreen):
 				appendWhenValid(current, menu, (_("Show Service Information"), boundFunction(self.showServiceInformations, None)), level=2)
 			else:
 				appendWhenValid(current, menu, (_("Show Transponder Information"), boundFunction(self.showServiceInformations, current)), level=2)
-		if self.subservices:
+		if self.subservices and current_root != subservices_tv_ref:
 			appendWhenValid(current, menu, (_("Show Subservices Of Active Service"), self.showSubservices), key="4")
 		if csel.bouquet_mark_edit == EDIT_OFF and not csel.entry_marked:
 			if not inBouquetRootList:
@@ -1326,22 +1322,23 @@ class ChannelContextMenu(Screen, HelpableScreen):
 						appendWhenValid(current, menu, (_("Don't Center DVB Subs On This Service"), self.removeCenterDVBSubsFlag))
 					else:
 						appendWhenValid(current, menu, (_("Center DVB Subs On This Service"), self.addCenterDVBSubsFlag))
-					if haveBouquets:
-						bouquets = self.csel.getBouquetList()
-						if bouquets is None:
-							bouquetCnt = 0
+					if current_root != subservices_tv_ref:
+						if haveBouquets:
+							bouquets = self.csel.getBouquetList()
+							if bouquets is None:
+								bouquetCnt = 0
+							else:
+								bouquetCnt = len(bouquets)
+							if not self.inBouquet or bouquetCnt > 1:
+								appendWhenValid(current, menu, (_("Add Service To Bouquet"), self.addServiceToBouquetSelected), key="5")
+								self.addFunction = self.addServiceToBouquetSelected
+							if not self.inBouquet:
+								appendWhenValid(current, menu, (_("Remove Entry"), self.removeEntry), key="8")
+								self.removeFunction = self.removeSatelliteService
 						else:
-							bouquetCnt = len(bouquets)
-						if not self.inBouquet or bouquetCnt > 1:
-							appendWhenValid(current, menu, (_("Add Service To Bouquet"), self.addServiceToBouquetSelected), key="5")
-							self.addFunction = self.addServiceToBouquetSelected
-						if not self.inBouquet:
-							appendWhenValid(current, menu, (_("Remove Entry"), self.removeEntry), key="8")
-							self.removeFunction = self.removeSatelliteService
-					else:
-						if not self.inBouquet:
-							appendWhenValid(current, menu, (_("Add Service To Favorites"), self.addServiceToBouquetSelected), key="5")
-							self.addFunction = self.addServiceToBouquetSelected
+							if not self.inBouquet:
+								appendWhenValid(current, menu, (_("Add Service To Favorites"), self.addServiceToBouquetSelected), key="5")
+								self.addFunction = self.addServiceToBouquetSelected
 					if BoxInfo.getItem("PIPAvailable"):
 						if not self.parentalControlEnabled or parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
 							if self.csel.dopipzap:
@@ -2754,6 +2751,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.correctChannelNumber()
 		self.editMode = False
 		self.protectContextMenu = True
+		self["key_green"].setText(_("Reception Lists"))
 		self.close(None)
 
 	def zapBack(self):
@@ -3031,8 +3029,6 @@ class RadioInfoBar(Screen):
 
 
 class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, InfoBarBase, SelectionEventInfo):
-	ALLOW_SUSPEND = True
-
 	def __init__(self, session, infobar):
 		ChannelSelectionBase.__init__(self, session)
 		InfoBarBase.__init__(self)
@@ -3223,10 +3219,9 @@ class SimpleChannelSelection(ChannelSelectionBase):
 		self.showFavourites()
 
 
-class BouquetSelector(Screen, HelpableScreen):
+class BouquetSelector(Screen):
 	def __init__(self, session, bouquets, selectedFunc, enableWrapAround=None):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.setTitle(_("Bouquet Selector"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Select"))
@@ -3272,7 +3267,7 @@ class EpgBouquetSelector(EPGBouquetSelector):
 	pass
 
 
-class HistoryZapSelector(Screen, HelpableScreen):
+class HistoryZapSelector(Screen):
 	# HISTORY_SPACER = 0
 	# HISTORY_MARKER = 1
 	# HISTORY_SERVICE_NAME = 2
@@ -3283,8 +3278,7 @@ class HistoryZapSelector(Screen, HelpableScreen):
 	HISTORY_SERVICE_REFERENCE = 7
 
 	def __init__(self, session, serviceReferences, markedItem=0, selectedItem=0):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		Screen.__init__(self, session, enableHelp=True)
 		self.setTitle(_("History Zap"))
 		serviceHandler = eServiceCenter.getInstance()
 		historyList = []

@@ -15,7 +15,6 @@ config.misc.installwizard.channellistdownloaded = ConfigBoolean(default=False)
 
 
 class InstallWizard(Screen, ConfigListScreen):
-
 	STATE_UPDATE = 0
 	STATE_CHOISE_CHANNELLIST = 1
 	INSTALL_PLUGINS = 2
