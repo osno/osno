@@ -15,7 +15,7 @@ from Components.Harddisk import harddiskmanager
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo
-from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT,SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename
+from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT,SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename, fileWriteLine
 from Components.AVSwitch import iAVSwitch
 
 DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")
@@ -106,10 +106,9 @@ def InitUsageConfig():
 	config.usage.screen_saver = ConfigSelection(default="0", choices=[(0, _("Disabled"))] + [(x, _("%d Seconds") % x) for x in (5, 30)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 5, 10, 15, 20, 30, 45, 60)])
 	config.usage.informationExtraSpacing = ConfigYesNo(False)
 
-	# settings for servicemp3 and handling from cue sheet file.
-	config.usage.useVideoCuesheet = ConfigYesNo(default=True)  # use marker for video media file
-	config.usage.useAudioCuesheet = ConfigYesNo(default=True)  # use marker for audio media file
-	config.usage.useChapterInfo = ConfigYesNo(default=True)  # show chapter positions (gst >= 1 and supported media files)
+	config.usage.useVideoCuesheet = ConfigYesNo(default=True)
+	config.usage.useAudioCuesheet = ConfigYesNo(default=True)
+	config.usage.useChapterInfo = ConfigYesNo(default=True)
 
 	config.usage.shutdownOK = ConfigBoolean(default=True)
 	config.usage.shutdownNOK_action = ConfigSelection(default="normal", choices=[
@@ -1363,8 +1362,8 @@ def InitUsageConfig():
 	config.network = ConfigSubsection()
 	if BoxInfo.getItem("WakeOnLAN"):
 		def wakeOnLANChanged(configElement):
-			with open(BoxInfo.getItem("WakeOnLAN"), "w") as fd:
-				fd.write(BoxInfo.getItem("WakeOnLANType")[configElement.value])
+			fileWriteLine(BoxInfo.getItem("WakeOnLAN"), BoxInfo.getItem("WakeOnLANType")[configElement.value], source=MODULE_NAME)
+
 		config.network.wol = ConfigYesNo(default=False)
 		config.network.wol.addNotifier(wakeOnLANChanged)
 	config.network.AFP_autostart = ConfigYesNo(default=False)
@@ -1544,8 +1543,8 @@ def InitUsageConfig():
 
 	if BoxInfo.getItem("ZapMode"):
 		def setZapmode(el):
-			with open(BoxInfo.getItem("ZapMode"), "w") as fd:
-				fd.write(el.value)
+			fileWriteLine(BoxInfo.getItem("ZapMode"), el.value, source=MODULE_NAME)
+
 		config.misc.zapmode = ConfigSelection(default="mute", choices=[
 			("mute", _("Black Screen")),
 			("hold", _("Hold screen")),
@@ -2024,12 +2023,10 @@ def InitUsageConfig():
 	config.pluginbrowser.src = ConfigYesNo(default=False)
 
 	def setForceLNBPowerChanged(configElement):
-		with open("/proc/stb/frontend/fbc/force_lnbon", "w") as fd:
-			fd.write("on" if configElement.value else "off")
+		fileWriteLine("/proc/stb/frontend/fbc/force_lnbon", "on" if configElement.value else "off", source=MODULE_NAME)
 
 	def setForceToneBurstChanged(configElement):
-		with open("/proc/stb/frontend/fbc/force_toneburst", "w") as fd:
-			fd.write("enable" if configElement.value else "disable")
+		fileWriteLine("/proc/stb/frontend/fbc/force_toneburst", "enable" if configElement.value else "disable", source=MODULE_NAME)
 
 	config.tunermisc = ConfigSubsection()
 	if BoxInfo.getItem("ForceLNBPowerChanged"):

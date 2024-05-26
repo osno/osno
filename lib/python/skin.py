@@ -48,6 +48,7 @@ switchPixmap = {}  # Dictionary of switch images.
 windowStyles = {}  # Dictionary of window styles for each screen ID.
 resolutions = {}  # Dictionary of screen resolutions for each screen ID.
 scrollLabelStyle = {}  # Dictionary of scrollLabel widget defaults.
+componentTemplates = {}  # Dictionary of template data for each component.
 constantWidgets = {}
 layouts = {}
 variables = {}
@@ -1321,7 +1322,7 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 		for screen in tag.findall("screen"):
 			key = screen.attrib.get("key")
 			image = screen.attrib.get("image")
-			if key and image:
+			if key and image is not None:
 				screens[key] = image
 				# print(f"[Skin] DEBUG: Screen key='{key}', image='{image}'.")
 			else:
@@ -1330,7 +1331,7 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 		for menu in tag.findall("menu"):
 			key = menu.attrib.get("key")
 			image = menu.attrib.get("image")
-			if key and image:
+			if key and image is not None:
 				menus[key] = image
 				# print(f"[Skin] DEBUG: Menu key='{key}', image='{image}'.")
 			else:
@@ -1339,7 +1340,7 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 		for setup in tag.findall("setup"):
 			key = setup.attrib.get("key")
 			image = setup.attrib.get("image")
-			if key and image:
+			if key and image is not None:
 				setups[key] = image
 				# print(f"[Skin] DEBUG: Setup key='{key}', image='{image}'.")
 			else:
@@ -1608,6 +1609,12 @@ class SkinContextStack(SkinContext):
 		return (SizeTuple(pos), SizeTuple(size))
 
 class SkinContextVertical(SkinContext):
+	def __init__(self, parent=None, pos=None, size=None, font=None):
+		super().__init__(parent, pos, size, font)
+		self.by = self.h + self.y
+		self.bh = self.h
+		self.bottomCount = 0
+
 	def parse(self, pos, size, font):
 		if size in variables:
 			size = variables[size]
@@ -1626,7 +1633,11 @@ class SkinContextVertical(SkinContext):
 				left += int(int(p[0]) * self.scale[0][0] / self.scale[0][1])
 				pos = p[1]
 			if pos == "bottom":
-				pos = (left, self.y + self.h - height)
+				if self.bottomCount:
+					self.by -= self.spacing
+				self.bottomCount += 1
+				self.by = self.by - height
+				pos = (left, self.by)
 				size = (width, height)
 				self.h -= (height + self.spacing)
 			elif pos == "top":
@@ -1649,8 +1660,9 @@ class SkinContextVertical(SkinContext):
 class SkinContextHorizontal(SkinContext):
 	def __init__(self, parent=None, pos=None, size=None, font=None):
 		super().__init__(parent, pos, size, font)
-		self.rx = self.w
+		self.rx = self.w + self.x
 		self.rw = self.w
+		self.rightCount = 0
 
 	def parse(self, pos, size, font):
 		if size in variables:
@@ -1675,9 +1687,10 @@ class SkinContextHorizontal(SkinContext):
 				self.x += (width + self.spacing)
 				self.w -= (width + self.spacing)
 			elif pos == "right":
-				if self.rw != self.rx:
+				if self.rightCount:
 					self.rx -= self.spacing
-				self.rx = self.rx - width
+				self.rightCount += 1
+				self.rx -= width
 				pos = (self.rx, top)
 				size = (width, height)
 				self.w -= (width + self.spacing)

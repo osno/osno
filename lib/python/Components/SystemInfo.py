@@ -339,7 +339,7 @@ BoxInfo.setItem("canRecovery", MODEL in ("hd51", "vs1500", "h7", "8100s") and ("
 BoxInfo.setItem("CanUse3DModeChoices", fileExists("/proc/stb/fb/3dmode_choices") and True or False)
 #BoxInfo.setItem("ChipsetString", getChipsetString(), immutable=True)
 BoxInfo.setItem("CIPlusHelper", exists("/usr/bin/ciplushelper"))
-BoxInfo.setItem("DeepstandbySupport", MODEL != 'dm800')
+BoxInfo.setItem("DeepstandbySupport", MODEL != "dm800")
 BoxInfo.setItem("DefaultDisplayBrightness", MACHINEBUILD in ("dm900", "dm920") and 8 or 5)
 BoxInfo.setItem("FBLCDDisplay", fileCheck("/proc/stb/fb/sd_detach"))
 BoxInfo.setItem("Fan", fileCheck("/proc/stb/fp/fan"))
