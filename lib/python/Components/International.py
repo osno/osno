@@ -521,7 +521,6 @@ class International:
 		self.initInternational()
 
 	def initInternational(self):
-		print("[International] Initializing locales/languages.")
 		self.availablePackages = self.getAvailablePackages(update=True)
 		self.installedPackages = self.getInstalledPackages(update=True)
 		self.installedDirectories = self.getInstalledDirectories(update=True)
@@ -542,7 +541,8 @@ class International:
 				self.languageList.append(language)
 			count = len(packageLocales)
 			if self.debugMode:
-				print(f"[International] Package '{package}' supports {count} locale{'' if count == 1 else 's'} '{"', '".join(packageLocales)}'.")
+				packageLocalesList = "', '".join(packageLocales)
+				print(f"[International] Package '{package}' supports {count} locale{'' if count == 1 else 's'} '{packageLocalesList}'.")
 		self.localeList.sort()
 		self.languageList.sort()
 
@@ -594,17 +594,30 @@ class International:
 			except OSError as err:
 				print(f"[International] getInstalledPackages Error {err.errno}: {err.strerror} ('{command[0]}')")
 			if self.debugMode:
-				print(f"[International] There are {len(installedPackages)} installed locale/language packages '{"', '".join(installedPackages)}'.")
+				installedPackagesList = "', '".join(installedPackages)
+				print(f"[International] There are {len(installedPackages)} installed locale/language packages '{installedPackagesList}'.")
 		else:
 			installedPackages = self.installedPackages
 		return installedPackages
+
+	def updateInstalledPackages(self, packages):  # This should only be used by LocaleSelection.py or other code that changes the installed locales/languages.
+		templateLength = len(self.LOCALE_TEMPLATE % "")
+		packages = [x[templateLength:] for x in packages]
+		if packages[0] in self.installedPackages:
+			for package in packages:
+				self.installedPackages.remove(package)
+		else:
+			for package in packages:
+				self.installedPackages.append(package)
+			self.installedPackages = sorted(self.installedPackages)
 
 	def getInstalledDirectories(self, update=False):  # Adapt language directory entries to match the package format.
 		if update:
 			global languagePath
 			installedDirectories = sorted(listdir(languagePath)) if isdir(languagePath) else []
 			if self.debugMode:
-				print(f"[International] There are {len(installedDirectories)} installed locale/language directories '{"', '".join(installedDirectories)}'.")
+				installedDirectoriesList = "', '".join(installedDirectories)
+				print(f"[International] There are {len(installedDirectories)} installed locale/language directories '{installedDirectoriesList}'.")
 		else:
 			installedDirectories = self.installedDirectories
 		return installedDirectories
@@ -737,7 +750,7 @@ class International:
 		locales.sort()
 		packages = sorted(self.installedPackages)
 		for locale in locales:
-			for package in packages[:]:
+			for package in packages:
 				if locale in self.packageLocales[package]:
 					packages.remove(package)
 		return packages

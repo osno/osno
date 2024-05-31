@@ -1660,7 +1660,7 @@ def InitUsageConfig():
 		("ltz", _("Luxembourgish")),
 		("nor", _("Norwegian")),
 		("pol", _("Polish")),
-		("por dub Dub DUB ud1", _("Portuguese")),
+		("por dub Dub DUB ud1 LEG", _("Portuguese")),
 		("fas per fa pes", _("Persian")),
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
@@ -1905,11 +1905,11 @@ def InitUsageConfig():
 
 	choiceList = [
 		("24minus", _("-24 Hours")),
-		("prevpage", _("Previous page")),
-		("prevbouquet", _("Previous bouquet")),
+		("prevpage", _("Previous Page")),
+		("prevbouquet", _("Previous Bouquet")),
 		("24plus", _("+24 Hours")),
-		("nextpage", _("Next page")),
-		("nextbouquet", _("Next bouquet")),
+		("nextpage", _("Next Page")),
+		("nextbouquet", _("Next Bouquet")),
 		("autotimer", _("AutoTimer")),
 		("timer", _("Add/Remove Timer")),
 		("imdb", _("IMDb Search")),
@@ -1917,7 +1917,7 @@ def InitUsageConfig():
 		("bouquetlist", _("Bouquet List")),
 		("showmovies", _("Show Movies List")),
 		("record", _("Record - same as record button")),
-		("gotodatetime", _("Goto Date/Timer")),
+		("gotodatetime", _("Goto Date/Time")),
 		("epgsearch", _("EPG Search"))
 	]
 	config.epgselection.graph_red = ConfigSelection(default="imdb", choices=choiceList)
