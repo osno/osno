@@ -18,8 +18,8 @@ from Components.SystemInfo import BoxInfo
 from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT,SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename, fileWriteLine
 from Components.AVSwitch import iAVSwitch
 
-DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")
 MODULE_NAME = __name__.split(".")[-1]
+DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")
 
 
 def InitUsageConfig():

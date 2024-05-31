@@ -1,11 +1,10 @@
-from __future__ import print_function
-from Screens.Screen import Screen
-from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
-from Components.Sources.List import List
+from Components.ActionMap import HelpableActionMap
 from Components.config import config
-from Screens.InfoBar import InfoBar
 from Components.PluginComponent import plugins
+from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
+from Screens.InfoBar import InfoBar
+from Screens.Screen import Screen
 
 
 def isExtension_installed(pname):
@@ -13,14 +12,13 @@ def isExtension_installed(pname):
 		for plugin in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU]):
 			if plugin.name == pname:
 				return True
-				break
 	except:
 		return False
 
 
 class BoxPortal(Screen):
 	skin = """
-		<screen name="Extension" position="center,center" size="250,200" title="Extension">
+		<screen name="Extension" position="center,center" size="250,200" title="Extension" resolution="1280,720">
 		<widget source="menu" render="Listbox" zPosition="1" transparent="1" position="0,0" size="250,200" scrollbarMode="showOnDemand" >
 			<convert type="StringList" />
 		</widget>
@@ -29,10 +27,9 @@ class BoxPortal(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
+		self["shortcuts"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions"],
 		{
 			"ok": self.okbuttonClick,
-			"back": self.exit,
 			"cancel": self.exit,
 			"red": self.exit,
 			"green": self.exit,

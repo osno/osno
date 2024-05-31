@@ -1311,6 +1311,8 @@ class InfoBarNumberZap:
 		if number == 0:
 			if isinstance(self, InfoBarPiP) and self.pipHandles0Action():
 				self.pipDoHandle0Action()
+			elif self.servicelist.history and self.servicelist.isSubservices():
+				self.servicelist.setHistoryPath()
 			elif len(self.servicelist.history) > 1 or config.usage.panicbutton.value:
 				self.checkTimeshiftRunning(self.recallPrevService)
 		else:
@@ -1736,6 +1738,12 @@ class InfoBarChannelSelection:
 		if self.timeshiftEnabled() and self.isSeekable():
 			self["SeekActionsPTS"].setEnabled(True)
 
+	def volumeUp(self):
+		VolumeControl.instance.volUp()
+
+	def volumeDown(self):
+		VolumeControl.instance.volDown()
+
 
 class InfoBarMenu:
 	""" Handles a menu action, to open the (main) menu """
@@ -2048,10 +2056,9 @@ class InfoBarEPG:
 	def openBouquetEPG(self, bouquet=None, bouquets=None):
 		if bouquet:
 			self.StartBouquet = bouquet
-		elif bouquets:  # Current service not found in any bouquet so add all services
+		elif bouquets and not self.servicelist.isSubservices():  # Current service not found in any bouquet so add all services
 			root = self.servicelist.getRoot()
-			if root != subservices_tv_ref:
-				bouquets.insert(0, (self.servicelist.getServiceName(root), root))
+			bouquets.insert(0, (self.servicelist.getServiceName(root), root))
 		self.dlg_stack.append(self.session.openWithCallback(self.closed, EPGSelection, None, zapFunc=self.zapToService, EPGtype=self.EPGtype, StartBouquet=self.StartBouquet, StartRef=self.StartRef, bouquets=bouquets))
 
 	def closed(self, ret=False):
@@ -4180,7 +4187,7 @@ class InfoBarAspectSelection:
 			aspectSwitchList = []
 			if config.av.aspectswitch.enabled.value:
 				for aspect in range(5):
-					aspectSwitchList.append((iAVSwitch.ASPECT_SWITCH_MSG[aspect], str(aspect + 100)))
+					aspectSwitchList.append((avSwitch.ASPECT_SWITCH_MSG[aspect], str(aspect + 100)))
 				aspectSwitchList.append(("--", ""))
 			aspectList = [
 				(_("Resolution"), "resolution"),
@@ -4195,7 +4202,7 @@ class InfoBarAspectSelection:
 				(_("16:9 Letterbox"), "6")
 			]
 		keys = ["green", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-		aspect = iAVSwitch.getAspectRatioSetting()
+		aspect = avSwitch.getAspectRatioSetting()
 		selection = 0
 		for item in range(len(aspectList)):
 			if aspectList[item][1] == aspect:
@@ -4211,7 +4218,7 @@ class InfoBarAspectSelection:
 				elif aspect[1] == "resolution":
 					self.ExGreen_toggleGreen()
 				else:
-					iAVSwitch.setAspectRatio(int(aspect[1]))
+					avSwitch.setAspectRatio(int(aspect[1]))
 					self.ExGreen_doHide()
 		else:
 			self.ExGreen_doHide()
@@ -4232,7 +4239,7 @@ class InfoBarResolutionSelection:
 		resList.append((_("Video: ") + "%dx%d@%gHz" % (xRes, yRes, fps), ""))
 		resList.append(("--", ""))
 		# Do we need a new sorting with this way here or should we disable some choices?
-		videoModes = iAVSwitch.readPreferredModes(readOnly=True)
+		videoModes = avSwitch.readPreferredModes(readOnly=True)
 		videoModes = [x.replace("pal ", "").replace("ntsc ", "") for x in videoModes]  # Do we need this?
 		for videoMode in videoModes:
 			video = videoMode
@@ -4257,7 +4264,7 @@ class InfoBarResolutionSelection:
 				if videoMode[1] == "exit" or videoMode[1] == "" or videoMode[1] == "auto":
 					self.ExGreen_toggleGreen()
 				if videoMode[1] != "auto":
-					iAVSwitch.setVideoModeDirect(videoMode[1])
+					avSwitch.setVideoModeDirect(videoMode[1])
 					self.ExGreen_doHide()
 		else:
 			self.ExGreen_doHide()
@@ -4773,7 +4780,6 @@ class InfoBarServiceErrorPopupSupport:
 				error = None
 			else:
 				self.last_error = error
-
 			error = {
 				eDVBServicePMTHandler.eventNoResources: _("No free tuner!"),
 				eDVBServicePMTHandler.eventTuneFailed: _("Tune failed!"),
@@ -4786,7 +4792,6 @@ class InfoBarServiceErrorPopupSupport:
 				eDVBServicePMTHandler.eventEOF: None,
 				eDVBServicePMTHandler.eventMisconfiguration: _("Service unavailable!\nCheck tuner configuration!"),
 			}.get(error)  # this returns None when the key not exist in the dict
-
 			if error and not config.usage.hide_zap_errors.value:
 				self.closeNotificationInstantiateDialog()
 				if hasattr(self, "dishDialog") and not self.dishDialog.dishState():
@@ -4797,7 +4802,6 @@ class InfoBarZoom:
 	def __init__(self):
 		self.zoomrate = 0
 		self.zoomin = 1
-
 		self["ZoomActions"] = HelpableActionMap(self, "InfobarZoomActions", {
 			"ZoomInOut": (self.ZoomInOut, _("Zoom In/Out TV...")),
 			"ZoomOff": (self.ZoomOff, _("Zoom Off...")),
@@ -4809,12 +4813,10 @@ class InfoBarZoom:
 			self.zoomin = 0
 		elif self.zoomrate < -9:
 			self.zoomin = 1
-
 		if self.zoomin == 1:
 			self.zoomrate += 1
 		else:
 			self.zoomrate -= 1
-
 		if self.zoomrate < 0:
 			zoomval = abs(self.zoomrate) + 10
 		else:
