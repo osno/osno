@@ -23,12 +23,14 @@ const char *proc_policy43 = "/sys/class/video/screen_mode";
 const char *proc_videomode = "/sys/class/display/mode";
 const char *proc_videoaspect_r = "/sys/class/video/screen_mode";
 const char *proc_videoaspect_w = "/sys/class/video/screen_mode";
+const char *proc_osd_alpha = "/sys/class/graphics/fb0/osd_plane_alpha";
 #else
 const char *proc_policy169 = "/proc/stb/video/policy2";
 const char *proc_policy43 = "/proc/stb/video/policy";
 const char *proc_videomode = "/proc/stb/video/videomode";
 const char *proc_videoaspect_r = "/proc/stb/vmpeg/0/aspect";
 const char *proc_videoaspect_w = "/proc/stb/video/aspect";
+const char *proc_osd_alpha = "/proc/stb/video/alpha";
 #endif
 const char *proc_videomode_50 = "/proc/stb/video/videomode_50hz";
 const char *proc_videomode_60 = "/proc/stb/video/videomode_60hz";
