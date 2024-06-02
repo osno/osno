@@ -53,8 +53,10 @@ eAVControl::eAVControl()
 
 #ifdef DREAMNEXTGEN
 	m_b_has_proc_videomode_24 = true;
+	m_b_has_proc_osd_alpha = true;
 #else
 	m_b_has_proc_videomode_24 = (access(proc_videomode_24, W_OK) == 0);
+	m_b_has_proc_osd_alpha = (access(proc_osd_alpha, W_OK) == 0);
 #endif
 
 	m_videomode_choices = readAvailableModes();
@@ -656,5 +658,15 @@ void eAVControl::setVideoSize(int top, int left, int width, int height, int flag
 	if (flags & FLAGS_DEBUG)
 		eDebug("[%s] %s: T:%d L:%d W:%d H:%d", __MODULE__, "setVideoSize", top, left, width, height);
 }
+
+void eAVControl::setOSDAlpha(int alpha, int flags) const
+{
+#ifdef DREAMNEXTGEN
+	CFile::writeIntHex(proc_osd_alpha, alpha, __MODULE__, flags);
+#else
+	CFile::writeInt(proc_osd_alpha, alpha, __MODULE__, flags);
+#endif
+}
+
 
 eAutoInitP0<eAVControl> init_avcontrol(eAutoInitNumbers::rc, "AVControl Driver");

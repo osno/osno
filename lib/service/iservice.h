@@ -176,6 +176,7 @@ public:
 	eServiceReference(const std::string &string);
 	std::string toString() const;
 	std::string toCompareString() const;
+	std::string toReferenceString() const;
 #ifndef SWIG
 	operator bool() const
 	{
@@ -412,6 +413,7 @@ public:
 		sCenterDVBSubs,
 
 		sGamma,
+		sVideoInfo,
 
 		sUser = 0x100
 	};
