@@ -698,22 +698,15 @@ enigma.eProfileWrite("ClientMode")
 import Components.ClientMode
 Components.ClientMode.InitClientMode()
 
-# Initialize the country, language and locale data.
-#
-config.osd = ConfigSubsection()
-
 defaultLocale = {
 	"Atto.TV": "pt_BR",
 	"Zgemma": "en_US",
 	"Beyonwiz": "en_AU"
 }.get(DISPLAYBRAND, "it_IT")
 config.misc.locale = ConfigText(default=defaultLocale)
+config.misc.locale.addNotifier(localeNotifier)
 config.misc.language = ConfigText(default=international.getLanguage(defaultLocale))
 config.misc.country = ConfigText(default=international.getCountry(defaultLocale))
-config.osd.language = ConfigText(default=defaultLocale)
-config.osd.language.addNotifier(localeNotifier)
-# TODO
-# config.misc.locale.addNotifier(localeNotifier)
 
 # These entries should be moved back to UsageConfig.py when it is safe to bring UsageConfig init to this location in StartEnigma2.py.
 #
@@ -843,6 +836,7 @@ enigma.eProfileWrite("InitSkins")
 from skin import InitSkins
 InitSkins()
 
+enigma.eProfileWrite("InitServiceList")
 from Components.ServiceList import InitServiceListSettings
 InitServiceListSettings()
 
