@@ -8,7 +8,6 @@ from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Components.Sources.List import List
 from Components.VideoWindow import VideoWindow
 
-from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarCueSheetSupport
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen

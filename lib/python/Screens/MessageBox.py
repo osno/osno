@@ -3,6 +3,7 @@ from enigma import eTimer
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
+from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Pixmap import MultiPixmap
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen, ScreenSummary
@@ -31,7 +32,7 @@ class MessageBox(Screen):
 	}
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, list=None, default=True, closeOnAnyKey=False, enableInput=True, msgBoxID=None, typeIcon=None, timeoutDefault=None, windowTitle=None, skinName=None, close_on_any_key=False, enable_input=True, timeout_default=None, title=None, picon=None, skin_name=None, simple=None):
-		Screen.__init__(self, session, mandatoryWidgets=["icon", "list", "text"], enableHelp=True)
+		Screen.__init__(self, session)
 		self.text = text
 		self["text"] = Label(text)
 		self.type = type
@@ -83,6 +84,18 @@ class MessageBox(Screen):
 		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
 		if typeIcon:
 			self["icon"] = MultiPixmap()
+			self["QuestionPixmap"] = Pixmap()
+			self["QuestionPixmap"].hide()
+			self["InfoPixmap"] = Pixmap()
+			self["InfoPixmap"].hide()
+			self["ErrorPixmap"] = Pixmap()
+			self["ErrorPixmap"].hide()
+			if typeIcon == self.TYPE_YESNO:
+				self["QuestionPixmap"].show()
+			elif typeIcon == self.TYPE_INFO or typeIcon == self.TYPE_WARNING:
+				self["InfoPixmap"].show()
+			elif typeIcon == self.TYPE_ERROR:
+				self["ErrorPixmap"].show()
 		if timeout_default is not None:  # Process legacy timeout_default argument.
 			timeoutDefault = timeout_default
 		self.timeoutDefault = timeoutDefault

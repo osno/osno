@@ -41,7 +41,7 @@ PLUGIN_CATEGORIES = {
 	"display": _("Display Skin"),
 	"drivers": _("Driver"),
 	"extensions": _("Extension"),
-	"extraopkg": _("Development"),
+	"extraopkgpackages": _("Development"),
 	"kernel": _("Kernel"),
 	"m2k": _("M2k"),
 	"picons": _("Picon"),

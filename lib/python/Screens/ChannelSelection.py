@@ -1276,12 +1276,12 @@ class ChannelContextMenu(Screen):
 		self.parentalControlEnabled = config.ParentalControl.servicepinactive.value
 		menu = []
 		menu.append(ChoiceEntryComponent(key="menu", text=(_("Settings"), boundFunction(self.keySetup))))
-		if not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory | eServiceReference.isMarker)):
+		if self.session.nav.currentlyPlayingServiceReference and not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory | eServiceReference.isMarker)):
 			if self.session.nav.currentlyPlayingServiceReference == current:
 				appendWhenValid(current, menu, (_("Show Service Information"), boundFunction(self.showServiceInformations, None)), level=2)
 			else:
 				appendWhenValid(current, menu, (_("Show Transponder Information"), boundFunction(self.showServiceInformations, current)), level=2)
-		if self.subservices and current_root != subservices_tv_ref:
+		if self.subservices and not csel.isSubservices():
 			appendWhenValid(current, menu, (_("Show Subservices Of Active Service"), self.showSubservices), key="4")
 		if csel.bouquet_mark_edit == EDIT_OFF and not csel.entry_marked:
 			if not inBouquetRootList:
@@ -1322,7 +1322,7 @@ class ChannelContextMenu(Screen):
 						appendWhenValid(current, menu, (_("Don't Center DVB Subs On This Service"), self.removeCenterDVBSubsFlag))
 					else:
 						appendWhenValid(current, menu, (_("Center DVB Subs On This Service"), self.addCenterDVBSubsFlag))
-					if current_root != subservices_tv_ref:
+					if not csel.isSubservices():
 						if haveBouquets:
 							bouquets = self.csel.getBouquetList()
 							if bouquets is None:
@@ -1380,20 +1380,20 @@ class ChannelContextMenu(Screen):
 				if current_root and (f"flags == {FLAG_SERVICE_NEW_FOUND}") in current_root.getPath():
 					appendWhenValid(current, menu, (_("Remove New Found Flag"), self.removeNewFoundFlag))
 			else:
-					if self.parentalControlEnabled:
-						if parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
-							appendWhenValid(current, menu, (_("Add Bouquet To Parental Protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())))
-						else:
-							appendWhenValid(current, menu, (_("Remove Bouquet From Parental Protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())))
-					menu.append(ChoiceEntryComponent(key="1", text=(_("Add Bouquet"), self.showBouquetInputBox)))
-					appendWhenValid(current, menu, (_("Rename Entry"), self.renameEntry), key="2")
-					appendWhenValid(current, menu, (_("Remove Entry"), self.removeEntry), key="8")
-					self.removeFunction = self.removeBouquet
-					for file in listdir("/etc/enigma2/"):
-						if file.startswith("userbouquet") and file.endswith(".del"):
-							appendWhenValid(current, menu, (_("Purge Deleted User Bouquets"), self.purgeDeletedBouquets))
-							appendWhenValid(current, menu, (_("Restore Deleted User Bouquets"), self.restoreDeletedBouquets))
-							break
+				if self.parentalControlEnabled:
+					if parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
+						appendWhenValid(current, menu, (_("Add Bouquet To Parental Protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())))
+					else:
+						appendWhenValid(current, menu, (_("Remove Bouquet From Parental Protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())))
+				menu.append(ChoiceEntryComponent(key="1", text=(_("Add Bouquet"), self.showBouquetInputBox)))
+				appendWhenValid(current, menu, (_("Rename Entry"), self.renameEntry), key="2")
+				appendWhenValid(current, menu, (_("Remove Entry"), self.removeEntry), key="8")
+				self.removeFunction = self.removeBouquet
+				for file in listdir("/etc/enigma2/"):
+					if file.startswith("userbouquet") and file.endswith(".del"):
+						appendWhenValid(current, menu, (_("Purge Deleted User Bouquets"), self.purgeDeletedBouquets))
+						appendWhenValid(current, menu, (_("Restore Deleted User Bouquets"), self.restoreDeletedBouquets))
+						break
 		if self.inBouquet:  # Current list is editable?
 			if csel.bouquet_mark_edit == EDIT_OFF:
 				if csel.movemode:
@@ -2345,6 +2345,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.restoreRoot()
 		lastservice = eServiceReference(self.lastservice.value)
 		if lastservice.valid():
+			if self.isSubservices():
+				self.enterSubservices(lastservice)
 			self.setCurrentSelection(lastservice)
 
 	def toogleTvRadio(self):
@@ -2388,7 +2390,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		if lastservice.valid():
 			if self.isSubservices():
 				self.zap(ref=lastservice)
-				self.fillVirtualSubservices()
+				self.enterSubservices()
 			else:
 				self.zap()
 
@@ -2554,27 +2556,28 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		return ret
 
 	def addToHistory(self, ref):
-		if self.delhistpoint is not None:
-			x = self.delhistpoint
-			while x <= len(self.history) - 1:
-				del self.history[x]
-		self.delhistpoint = None
-		if self.servicePath is not None:
-			tmp = self.servicePath[:]
-			tmp.append(ref)
-			self.history.append(tmp)
-			hlen = len(self.history)
-			x = 0
-			while x < hlen - 1:
-				if self.history[x][-1] == ref:
+		if not self.isSubservices():
+			if self.delhistpoint is not None:
+				x = self.delhistpoint
+				while x <= len(self.history) - 1:
 					del self.history[x]
+			self.delhistpoint = None
+			if self.servicePath is not None:
+				tmp = self.servicePath[:]
+				tmp.append(ref)
+				self.history.append(tmp)
+				hlen = len(self.history)
+				x = 0
+				while x < hlen - 1:
+					if self.history[x][-1] == ref:
+						del self.history[x]
+						hlen -= 1
+					else:
+						x += 1
+				if hlen > HISTORY_SIZE:
+					del self.history[0]
 					hlen -= 1
-				else:
-					x += 1
-			if hlen > HISTORY_SIZE:
-				del self.history[0]
-				hlen -= 1
-			self.history_pos = hlen - 1
+				self.history_pos = hlen - 1
 
 	def historyBack(self):
 		hlen = len(self.history)

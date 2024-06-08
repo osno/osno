@@ -79,7 +79,11 @@ def InitUsageConfig():
 		("small", _("Small")),
 		("large", _("Large"))
 	])
-	config.usage.sort_extensionslist = ConfigYesNo(default=False)
+	config.usage.sortExtensionslist = ConfigSelection(default="", choices=[
+		("alpha", _("Alphabetical")),
+		("", _("Default")),
+		("user", _("User defined"))
+	])
 	config.usage.show_restart_network_extensionslist = ConfigYesNo(default=True)
 	config.usage.sort_pluginlist = ConfigYesNo(default=True)
 	config.usage.helpSortOrder = ConfigSelection(default="headings+alphabetic", choices=[
@@ -833,14 +837,6 @@ def InitUsageConfig():
 	config.usage.hide_zap_errors = ConfigYesNo(default=True)
 	config.usage.enableVodMode = ConfigYesNo(default=True)
 	config.misc.use_ci_assignment = ConfigYesNo(default=True)
-	config.usage.messageNoResources = ConfigYesNo(default=True)
-	config.usage.messageTuneFailed = ConfigYesNo(default=True)
-	config.usage.messageNoPAT = ConfigYesNo(default=True)
-	config.usage.messageNoPATEntry = ConfigYesNo(default=True)
-	config.usage.messageNoPMT = ConfigYesNo(default=True)
-	config.usage.dsemudmessages = ConfigYesNo(default=True)
-	config.usage.messageYesPmt = ConfigYesNo(default=False)
-	config.usage.hide_zap_errors = ConfigYesNo(default=False)
 	config.usage.hide_ci_messages = ConfigYesNo(default=False)
 	config.usage.show_cryptoinfo = ConfigSelection(default=2, choices=[
 		(0, _("Off")),
@@ -856,6 +852,7 @@ def InitUsageConfig():
 		("(1920, 1080)", "1920x1080")
 	])
 	config.usage.enable_delivery_system_workaround = ConfigYesNo(default=False)
+
 	config.usage.date = ConfigSubsection()
 	config.usage.date.enabled = NoSave(ConfigBoolean(default=False))
 	config.usage.date.enabled_display = NoSave(ConfigBoolean(default=False))
@@ -1377,13 +1374,11 @@ def InitUsageConfig():
 	config.seek.withjumps_avoid_zero = ConfigYesNo(default=True)
 
 	config.crash = ConfigSubsection()
-	#// handle python crashes
 	config.crash.bsodpython = ConfigYesNo(default=True)
 	config.crash.bsodpython_ready = NoSave(ConfigYesNo(default=False))
 	choiceList = [("0", _("Never"))] + [(str(x), str(x)) for x in range(1, 11)]
 	config.crash.bsodhide = ConfigSelection(default="1", choices=choiceList)
 	config.crash.bsodmax = ConfigSelection(default="3", choices=choiceList)
-	#//
 
 	config.crash.enabledebug = ConfigYesNo(default=False)
 	config.crash.debugMultiBoot = ConfigYesNo(default=False)
@@ -1714,16 +1709,9 @@ def InitUsageConfig():
 	config.logmanager.usersendcopy = ConfigYesNo(default=True)
 	config.logmanager.path = ConfigText(default="/")
 	config.logmanager.additionalinfo = NoSave(ConfigText(default=""))
-	config.logmanager.sentfiles = ConfigLocations(default=None)
+	config.logmanager.sentfiles = ConfigLocations(default=[])
 
 	config.plisettings = ConfigSubsection()
-	#config.plisettings.Subservice = ConfigYesNo(default = True)
-	config.plisettings.Subservice = ConfigSelection(default="3", choices=[
-		("0", _("No, show always the timer list")),
-		("1", _("No, show always the plugin browser")),
-		("2", _("Yes, but if not available show the timer list")),
-		("3", _("Yes, but if not available show the plugin browser"))
-	])
 	config.plisettings.ColouredButtons = ConfigYesNo(default=False)
 	config.plisettings.InfoBarEpg_mode = ConfigSelection(default="0", choices=[
 		("0", _("As plugin in extended bar")),
@@ -2144,14 +2132,6 @@ def preferredInstantRecordPath():
 def defaultMoviePath():
 	return defaultRecordingLocation(config.usage.default_path.value)
 
-
-def refreshServiceList(configElement=None):
-	from Screens.InfoBar import InfoBar
-	InfoBarInstance = InfoBar.instance
-	if InfoBarInstance is not None:
-		servicelist = InfoBarInstance.servicelist
-		if servicelist:
-			servicelist.setMode()
 
 def patchTuxtxtConfFile(dummyConfigElement):
 	print("[UsageConfig] TuxTxt: Patching tuxtxt2.conf.")

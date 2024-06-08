@@ -21,6 +21,7 @@ REMOVE = "/bin/rm"
 PREFIX = "MultiBoot_"
 COMMAND_FILE = "cmdline.txt"
 DUAL_BOOT_FILE = "/dev/block/by-name/flag"
+DREAM_BOOT_FILE = "/data/bootconfig.txt"
 STARTUP_FILE = "STARTUP"
 STARTUP_ONCE = "STARTUP_ONCE"
 STARTUP_TEMPLATE = "STARTUP_*"
@@ -95,6 +96,12 @@ class MultiBootClass():
 				print("MultiBoot] Unable to interpret dual boot file '%s' data!  (%s)" % (DUAL_BOOT_FILE, err))
 		else:
 			self.bootSlot, self.bootCode = self.loadCurrentSlotAndBootCodes()
+		if exists(DREAM_BOOT_FILE):
+			with open(DREAM_BOOT_FILE, "r") as fd:
+				lines = fd.readlines()
+				for line in lines:
+					if line.startswith("default="):
+						self.bootSlot = str(int(line.strip().split("=")[1]) + 1)
 
 	def loadBootDevice(self):
 		bootDeviceList = BOOT_DEVICE_LIST_VUPLUS if fileHas("/proc/cmdline", "kexec=1") else BOOT_DEVICE_LIST
@@ -414,6 +421,7 @@ class MultiBootClass():
 			rootDir = self.bootSlots[self.slotCode].get("rootsubdir")
 			imageDir = pathjoin(self.tempDir, rootDir) if rootDir else self.tempDir
 			infoFile = pathjoin(imageDir, "usr/lib/enigma.info")
+			infoFile1 = pathjoin(imageDir, "etc/image-version")
 			if isfile(infoFile):
 				info = self.readSlotInfo(infoFile)
 				compileDate = str(info.get("compiledate"))
@@ -424,6 +432,17 @@ class MultiBootClass():
 				self.imageList[self.slotCode]["detection"] = "Found an enigma information file"
 				self.imageList[self.slotCode]["imagename"] = "%s %s%s (%s)" % (info.get("displaydistro", info.get("distro")), info.get("imgversion"), revision, compileDate)
 				self.imageList[self.slotCode]["imagelogname"] = "%s %s%s (%s)" % (info.get("displaydistro", info.get("distro")), info.get("imgversion"), revision, compileDate)
+				self.imageList[self.slotCode]["status"] = "active"
+			elif isfile(infoFile1):
+				info = self.readSlotInfo(infoFile1)
+				compileDate = self.getCompiledate(imageDir)
+				compileDate = "%s-%s-%s" % (compileDate[0:4], compileDate[4:6], compileDate[6:8])
+				imgversion = str(info.get("version"))
+				if "." not in imgversion:
+					imgversion = "%s.%s" % (int(imgversion[0:2]), int(imgversion[3:5]))
+				self.imageList[self.slotCode]["detection"] = "Found an image version file"
+				self.imageList[self.slotCode]["imagename"] = "%s %s (%s)" % (info.get("creator").split()[0], imgversion, compileDate)
+				self.imageList[self.slotCode]["imagelogname"] = "%s %s (%s)" % (info.get("creator").split()[0], imgversion, compileDate)
 				self.imageList[self.slotCode]["status"] = "active"
 			elif isfile(pathjoin(imageDir, "usr/bin/enigma2")):
 				info = self.deriveSlotInfo(imageDir)
@@ -484,7 +503,7 @@ class MultiBootClass():
 			else:
 				data.append(line)
 		data.append("")
-		result = md5(bytearray("\n".join(data), "UTF-8", errors="ignore")).hexdigest()
+		result = md5(bytearray("\n".join(data), "UTF-8", errors="ignore")).hexdigest()  # NOSONAR
 		return value != result
 
 	def processValue(self, value):  # Part of readSlotInfo() within analyzeSlot() within getSlotImageList().
@@ -533,8 +552,7 @@ class MultiBootClass():
 				pass
 		return value
 
-	def deriveSlotInfo(self, path):  # Part of analyzeSlot() within getSlotImageList().
-		info = {}
+	def getCompiledate(self, path):
 		statusfile = "var/lib/opkg/status"
 		if exists(pathjoin(path, "var/lib/dpkg/status")):
 			statusfile = "var/lib/dpkg/status"
@@ -545,7 +563,11 @@ class MultiBootClass():
 			date = max(date, datetime.fromtimestamp(stat(pathjoin(path, "usr/bin/enigma2")).st_mtime).strftime("%Y%m%d"))
 		except OSError as err:
 			date = "00000000"
-		info["compiledate"] = date
+		return date
+
+	def deriveSlotInfo(self, path):  # Part of analyzeSlot() within getSlotImageList().
+		info = {}
+		info["compiledate"] = self.getCompiledate(path)
 		lines = fileReadLines(pathjoin(path, "etc/issue"), source=MODULE_NAME)
 		if lines and "vuplus" not in lines[0] and len(lines) >= 2:
 			data = lines[-2].strip()[:-6].split()
@@ -593,11 +615,32 @@ class MultiBootClass():
 				target = STARTUP_FILE
 			else:
 				target = STARTUP_ONCE if startup == STARTUP_RECOVERY else STARTUP_FILE
-			copyfile(pathjoin(self.tempDir, startup), pathjoin(self.tempDir, target))
+			if exists(DREAM_BOOT_FILE) and startup == STARTUP_RECOVERY:
+				pass
+			else:
+				copyfile(pathjoin(self.tempDir, startup), pathjoin(self.tempDir, target))
 			if exists(DUAL_BOOT_FILE):
 				slot = self.slotCode if self.slotCode.isdecimal() else "0"
 				with open(DUAL_BOOT_FILE, "wb") as fd:
 					fd.write(pack("B", int(slot)))
+			if exists(DREAM_BOOT_FILE):
+				if self.slotCode == "R":
+					cmd_count = 0
+					with open(DREAM_BOOT_FILE, "r") as fd:
+						lines = fd.readlines()
+						for line in lines:
+							if line.startswith("cmd="):
+								cmd_count += 1
+					self.slotCode = str(cmd_count)
+				slot = int(self.slotCode) - 1
+				with open(DREAM_BOOT_FILE, "r+") as fd:
+					lines = fd.readlines()
+					fd.seek(0)
+					for line in lines:
+						if line.startswith("default="):
+							line = f"default={slot}\n"
+						fd.write(line)
+					fd.truncate()
 			if self.debugMode:
 				print("[MultiBoot] Installing '%s' as '%s'." % (startup, target))
 			self.console.ePopen([UMOUNT, UMOUNT, self.tempDir], self.bootDeviceUnmounted)

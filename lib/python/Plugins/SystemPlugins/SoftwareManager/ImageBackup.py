@@ -30,7 +30,6 @@ USEP = "_________________________________________________"
 
 
 class ImageBackup(Screen):
-
 	skin = """
 	<screen name="Image Backup" position="center,center" size="750,900" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel name="b" position="0,0" size="750,700" backgroundColor="#00ffffff" zPosition="-2" />
