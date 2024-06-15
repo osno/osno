@@ -3187,7 +3187,7 @@ class InfoBarExtensions:
 		self.list = []
 		if config.plisettings.ColouredButtons.value:
 			self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions", {
-#				"extensions": (self.bluekey_ex, _("Show extensions...")),
+				"extensions": (self.bluekey_ex, _("Show extensions...")),
 				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
 				"openTimerList": (self.showTimerList, _("Show the list of timers.")),
@@ -3199,7 +3199,7 @@ class InfoBarExtensions:
 			}, prio=1, description=_("Extension Actions")) # lower priority
 		else:
 			self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions", {
-#				"extensions": (self.bluekey_ex, _("view extensions...")),
+				"extensions": (self.bluekey_ex, _("view extensions...")),
 				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 				"showDreamPlex": (self.showDreamPlex, _("Show the DreamPlex player...")),
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
@@ -3215,6 +3215,21 @@ class InfoBarExtensions:
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
 			p(self)
 
+	def bluekey_ex(self):
+		if config.workaround.blueswitch.value:
+			self.BluePanel()
+		else:
+			self.showExtensionSelection()
+
+	def BluePanel(self):
+		try:
+			if self.session.pipshown:
+				self.showExtensionSelection()
+				return
+		except Exception:
+			print("[INFOBARGENERICS] BluePanel: error pipshow, starting Blue Panel")
+		from Screens.BluePanel import BluePanel
+		self.session.open(BluePanel)
 
 	def SelectopenEventView(self):
 		try:

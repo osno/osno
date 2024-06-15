@@ -27,7 +27,7 @@ BUTTON_SETUP_KEYS = [
 	(_("Yellow"), "yellow", ""),
 	(_("Yellow"), "yellow_long", ""),
 	(_("Blue"), "blue", "Module/Screens.BluePanel/BluePanel"),
-	(_("Blue"), "blue_long", ""),
+	(_("Blue"), "blue_long", "Infobar/showExtensionSelection"),
 	(_("Info (EPG)"), "info", "Infobar/InfoPressed/1"),
 	(_("Info (EPG)"), "info_long", "Infobar/showEventInfoPlugins/1"),
 	(_("Epg/Guide"), "epg", "Infobar/EPGPressed/1"),
