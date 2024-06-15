@@ -5,7 +5,7 @@
 
 setup_git() {
   git config --global user.email "bot@formianodicastellone@hotmail.it"
-  git config --global user.name "formiano-bot"
+  git config --global user.name "opendroid-bot"
 }
 
 commit_files() {
