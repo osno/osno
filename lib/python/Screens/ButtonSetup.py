@@ -278,6 +278,7 @@ def getButtonSetupFunctions():
 	for plugin in plugins.getPluginsForMenu("system"):
 		if plugin[2]:
 			ButtonSetupFunctions.append((plugin[0], "MenuPlugin/system/" + plugin[2], textSetup))
+	ButtonSetupFunctions.append((_("Power menu"), "Menu/shutdown", textPower))
 	ButtonSetupFunctions.append((_("Standby"), "Module/Screens.Standby/Standby", textPower))
 	ButtonSetupFunctions.append((_("Restart"), "Module/Screens.Standby/TryQuitMainloop/2", textPower))
 	ButtonSetupFunctions.append((_("Restart enigma"), "Module/Screens.Standby/TryQuitMainloop/3", textPower))
