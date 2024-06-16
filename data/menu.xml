@@ -234,7 +234,7 @@ self.session.open(UsbFormat)
 	<item weight="20" level="1" text="VCR scart" key="scart_switch" configcondition="config.usage.show_vcr_scart" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
 	<item weight="10" level="1" text="Plugins" key="plugin_selection"><screen module="PluginBrowser" screen="PluginBrowser" /></item>
 	<!-- Menu / Standby Restart -->
-	<menu key="standby_restart_list" level="0" text="Standby / Restart" weight="99">
+	<menu key="shutdown" level="0" text="Standby / Restart" weight="99">
 		<item key="deep_standby" level="0" text="Deep Standby" weight="0" requires="DeepstandbySupport">
 			<code>
 from Screens.MessageBox import MessageBox
