@@ -603,6 +603,7 @@
 		<item level="0" text="Show Display packages" description="Select 'Yes' to show LCD skin packages in the Download Plugins screen.">config.pluginfilter.display</item>
 		<item level="0" text="Show Picon packages" description="Select 'Yes' to show picon packages in the Download Plugins screen.">config.pluginfilter.picons</item>
 		<item level="0" text="Show Setting packages" description="Select 'Yes' to show settings packages in the Download Plugins screen.">config.pluginfilter.settings</item>
+		<item level="0" text="Show Subscription packages" description="Select 'Yes' to show subscription packages in the Download Plugins screen.">config.pluginfilter.subscription</item>
 		<item level="0" text="Show M2k packages" description="Select 'Yes' to show m2k packages in the Download Plugins screen.">config.pluginfilter.m2k</item>
 		<item level="0" text="Show Web Link packages" description="Select 'Yes' to show web link packages in the Download Plugins screen.">config.pluginfilter.weblinks</item>
 		<item level="0" text="Show OpenPLi packages" description="Select 'Yes' to show OpenPLi packages in the Download Plugins screen.">config.pluginfilter.pli</item>
@@ -806,6 +807,12 @@
 		<item level="2" text="Stream Relay switch delay" description="Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
 	</setup>
 	<setup key="Subtitle" title="Subtitle Settings" level="2" showOpenWebif="1">
+		<if requires="AISubs">
+			<item level="2" text="AI-Powered translation enabled" description="Enable AI-Powered translation for all teletext and DVB subtitles.">config.subtitles.ai_enabled</item>
+			<item level="2" text="AI-Powered translation language" description="Configure the AI-Powered translation language.">config.subtitles.ai_translate_to</item>
+			<item level="2" text="AI-Powered translation subscription code" description="Enter your subscription code, the unified code for trial is 15.">config.subtitles.ai_subscription_code</item>
+			<item level="2" text="AI-Powered translation color" description="Configure the color of the AI-Powered translations.">config.subtitles.ai_subtitle_colors</item>
+		</if>
 		<item level="2" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
 		<item level="2" text="Use original teletext position" description="When enabled, teletext subtitles will be displayed at their original position.">config.subtitles.ttx_subtitle_original_position</item>
 		<item level="2" text="Rewrap subtitles" description="When enabled, reformat subtitles to match the width of the screen.">config.subtitles.subtitle_rewrap</item>
