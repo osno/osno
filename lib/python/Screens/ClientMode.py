@@ -1,8 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
-from __future__ import absolute_import
-
 from Components.config import config, configfile, ConfigSelection, ConfigSubList, ConfigSubsection
 from Screens.MessageBox import MessageBox
 from Screens.Setup import Setup
@@ -100,7 +95,7 @@ class ClientModeScreen(Setup):
 				config.clientmode.serverAddressType.value = "domain"
 			else:
 				config.clientmode.serverAddressType.value = self.addressType.value
-				
+
 		if self.addressType.value == "peer":
 			return self.peer.value
 		elif self.addressType.value == "ip":
