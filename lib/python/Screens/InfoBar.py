@@ -570,9 +570,9 @@ class MoviePlayer(InfoBarAspectSelection, InfoBarSimpleEventView, InfoBarBase, I
 
 	def doButtonsCheck(self):
 		if config.plisettings.ColouredButtons.value:
-			self["key_yellow"].setText(_("Extensions"))
-			self["key_green"].setText(_("Green Panel"))
-		self["key_blue"].setText(_("Blue Panel"))
+			self["key_yellow"].setText(_("Search"))
+			self["key_green"].setText(_("Timers"))
+		self["key_blue"].setText(_("Extensions"))
 
 	def __onClose(self):
 		MoviePlayer.instance = None
