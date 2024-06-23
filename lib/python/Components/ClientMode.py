@@ -1,15 +1,14 @@
-from __future__ import absolute_import
-
-from Components.config import ConfigClock, ConfigInteger, ConfigIP, ConfigSelection, ConfigSubList, ConfigSubsection, ConfigText, ConfigYesNo, config
+from Components.config import ConfigClock, ConfigInteger, ConfigIP, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, config
 from Components.SystemInfo import SystemInfo
+
 
 def InitClientMode():
 	config.clientmode = ConfigSubsection()
 	config.clientmode.enabled = ConfigYesNo(default=False)
 
 	def clientModeChanged(configElement):
-		SystemInfo["ClientModeEnabled"] = configElement.value == True
-		SystemInfo["ClientModeDisabled"] = configElement.value != True
+		SystemInfo["ClientModeEnabled"] = configElement.value is True
+		SystemInfo["ClientModeDisabled"] = configElement.value is not True
 
 	config.clientmode.enabled.addNotifier(clientModeChanged)
 	config.clientmode.serverAddressType = ConfigSelection(default="ip", choices=[("ip", _("IP")), ("domain", _("Domain"))])
