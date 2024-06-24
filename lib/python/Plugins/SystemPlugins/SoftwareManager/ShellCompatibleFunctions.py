@@ -6,10 +6,10 @@ import shutil
 import os
 
 # MANDATORY_RIGHTS contains commands to ensure correct rights for certain files
-MANDATORY_RIGHTS = "chown -R root:root /home/root /etc/auto.network /etc/default/dropbear /etc/dropbear ; chmod 600 /etc/auto.network /etc/dropbear/* /home/root/.ssh/* ; chmod 700 /home/root /home/root/.ssh"
+MANDATORY_RIGHTS = "chown -R root:root /home/root /etc/auto.network /etc/default/dropbear /etc/dropbear ; chmod 600 /etc/auto.network /etc/dropbear/* /home/root/.ssh/* ; chmod 700 /home/root /home/root/.ssh ; exit 0"
 
 # BLACKLISTED lists all files/folders that MUST NOT be backed up or restored in order for the image to work properly
-BLACKLISTED = ['home/root/.cache', 'etc/passwd', 'etc/shadow', 'etc/group', 'etc/samba/distro', 'etc/samba/smb.conf', 'home/root/FastRestore.log']
+BLACKLISTED = ['home/root/.cache', 'etc/passwd', 'etc/shadow', 'etc/group', 'etc/samba/distro', 'etc/samba/smb.conf', 'home/root/FastRestore.log', 'etc/enigma2/profile']
 
 IMAGE_INSTALL = ['opendroid-base', 'enigma2-plugin-settings-defaultsat', 'run-postinsts']
 
@@ -192,7 +192,7 @@ def restoreUserDB():
 def listpkg(type="installed"):
 	pkgs = []
 	ret = []
-	for line in open(INSTALLEDPACKAGES, 'r'):
+	for line in open(INSTALLEDPACKAGES):
 		if line.startswith('Package:'):
 			package = line.split(":", 1)[1].strip()
 			version = ''
@@ -224,7 +224,7 @@ def listpkg(type="installed"):
 				ret.append(package['package'])
 		elif type == "user":
 			if not package['autoinstalled']:
-				if not package['package'] in IMAGE_INSTALL:
+				if package['package'] not in IMAGE_INSTALL:
 					ret.append(package['package'])
 
 	return sorted(ret)

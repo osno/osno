@@ -133,7 +133,7 @@ class IPKGMenu(Screen):
 	def fill_list(self):
 		flist = []
 		self.path = "/etc/opkg/"
-		if (exists(self.path) == False):
+		if (exists(self.path) is False):
 			self.entry = False
 			return
 		for file in listdir(self.path):
@@ -144,7 +144,7 @@ class IPKGMenu(Screen):
 		self["filelist"].l.setList(flist)
 
 	def KeyOk(self):
-		if (self.exe == False) and (self.entry == True):
+		if (self.exe is False) and (self.entry is True):
 			self.sel = self["filelist"].getCurrent()
 			self.val = self.path + self.sel
 			self.session.open(IPKGSource, self.val)
@@ -173,7 +173,7 @@ class IPKGSource(Screen):
 		text = ""
 		if self.configfile:
 			try:
-				fp = open(configfile, "r")
+				fp = open(configfile)
 				sources = fp.readlines()
 				if sources:
 					text = sources[0]
@@ -625,7 +625,7 @@ class BackupHelper(Screen):
 	def doAction(self):
 		doClose = True
 		if self.args == 1:
-			self.session.openWithCallback(self.backupDone, BackupScreen, runBackup=True)
+			self.session.openWithCallback(self.backupDone, BackupScreen, runBackup=True, closeOnSuccess=False)
 			doClose = False
 		elif self.args == 2:
 			if isfile(self.fullbackupfilename):
@@ -687,7 +687,7 @@ class BackupHelper(Screen):
 			self.close()
 
 	def startRestore(self, ret=False):
-		if (ret == True):
+		if (ret is True):
 			self.exe = True
 			self.session.open(RestoreScreen, runRestore=True)
 		self.close()

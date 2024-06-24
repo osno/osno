@@ -430,5 +430,6 @@ for ciSlot in range(BoxInfo.getItem("CommonInterface")):
 	BoxInfo.setItem(f"CI{ciSlot}SupportsHighBitrates", fileCheck(f"/proc/stb/tsmux/ci{ciSlot}_tsclk"))
 	BoxInfo.setItem(f"CI{ciSlot}RelevantPidsRoutingSupport", fileCheck(f"/proc/stb/tsmux/ci{ciSlot}_relevant_pids_routing"))
 
+BoxInfo.setItem("AISubs", exists("/etc/init.d/aisocket"))
 
 updateSysSoftCam()
