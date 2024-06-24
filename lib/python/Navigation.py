@@ -9,6 +9,7 @@ import PowerTimer
 import RecordTimer
 import ServiceReference
 from Components.config import config
+from Components.ChannelsImporter import ImportChannels
 from Components.ParentalControl import parentalControl
 from Components.PluginComponent import plugins
 from Components.SystemInfo import BoxInfo
@@ -65,9 +66,7 @@ class Navigation:
 			self.RecordTimer = RecordTimer.RecordTimer()
 			self.RecordTimer.loadTimers()  # call loadTimers after init of self.RecordTimer
 			self.isRecordTimerImageStandard = True
-
 		self.PowerTimer.loadTimers()  # call loadTimers after init of self.PowerTimer
-
 		self.__wasTimerWakeup = False
 		self.__wasRecTimerWakeup = False
 		self.__wasPowerTimerWakeup = False
@@ -78,7 +77,6 @@ class Navigation:
 			self.gotopower()
 			return
 		remove("/etc/enigma2/.deep")
-
 		#wakeup data
 		now = time()
 		try:
@@ -91,7 +89,6 @@ class Navigation:
 		hasFakeTime = (now <= 31536000 or now - self.lastshutdowntime <= 120) and self.getstandby < 2  # Set hasFakeTime only if lower than values and was last shutdown to deep standby.
 		wasTimerWakeup, wasTimerWakeup_failure = getFPWasTimerWakeup(True)
 		#TODO: verify wakeup-state for boxes where only after shutdown removed the wakeup-state (for boxes where "/proc/stb/fp/was_timer_wakeup" is not writable (clearFPWasTimerWakeup() in StbHardware.py has no effect -> after x hours and restart/reboot is wasTimerWakeup = True)
-
 		if 0:  # debug
 			print("#" * 100)
 			print(f"[Navigation] Time difference from last shutdown to now is {now - self.lastshutdowntime} seconds.")
@@ -150,6 +147,11 @@ class Navigation:
 			print("~" * 100)
 		else:
 			self.wakeupCheck(False)
+		# TODO
+		# if config.usage.remote_fallback_import_restart.value:
+		#	ImportChannels()
+		# if config.usage.remote_fallback_import.value and not config.usage.remote_fallback_import_restart.value:
+		#	ImportChannels()
 
 	def wakeupCheck(self, runCheck=True):
 		now = time()

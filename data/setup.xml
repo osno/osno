@@ -152,10 +152,8 @@
 			<item level="1" text="Show PiP in the Front Display" description="You can Display PiP with or without OSD Menu." requires="PIPAvailable">config.lcd.modepip</item>
 			<item level="1" text="Set Framerate for MiniTV" description="Lower Framerate saves CPU Time.">config.lcd.fpsminitv</item>
 		</if>
-		<if requires="LCDSKINSetup">
-			<item level="1" text="REC Symbol in use" description="Enable blinking rec symbol on the LCD Display.">config.usage.blinking_rec_symbol_during_recording</item>
-			<item level="1" text="REC Symbol in Standby" description="Enable blinking rec symbol on the LCD Display in Standby.">config.usage.blinking_display_clock_during_recording</item>
-		</if>
+		<item level="1" text="REC Symbol in use" description="Enable blinking rec symbol on the LCD Display." requires="LCDRECUse">config.usage.blinking_rec_symbol_during_recording</item>
+		<item level="1" text="REC Symbol in Standby" description="Enable blinking rec symbol on the LCD Display in Standby." requires="LCDRECStandby">config.usage.blinking_display_clock_during_recording</item>
 		<item level="1" text="switch 12 to 8 character display mode" description="12, show Latin-1 characters except for greek and cyrillic, switch to 8 if needed." requires="XcoreVFD">config.usage.vfd_xcorevfd</item>
 		<item level="1" text="Show Display Icons" description="Allows you to enable/disable displaying icons on the front panel.">config.lcd.mode</item>
 		<if requires="ConfigDisplay">
@@ -239,7 +237,7 @@
 		<item level="2" text="Service width" description="Configure the width allocated to the service name.">config.epgselection.graph_servicewidth</item>
 		<item level="2" text="Picon width" description="Configure the width allocated to the picon.">config.epgselection.graph_piconwidth</item>
 		<item level="2" text="Info icon width" description="Configure the minimum width before showing the 'i' icon, '0' is equal to not showing the icon at all.">config.epgselection.graph_infowidth</item>
-		<item level="2" text="Position of recording icons" description="Set the position of the recording icons">config.epgselection.graph_rec_icon_height</item>
+		<item level="2" text="Position of recording icons" description="Set the position of the recording icons.">config.epgselection.graph_rec_icon_height</item>
 		<item level="2" text="Timeline font size" description="Configure the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.epgselection.graph_timelinefs</item>
 		<item level="2" text="Timeline 24 Hour" description="Show time in 24 hour clock format.">config.epgselection.graph_timeline24h</item>
 		<item level="2" text="Timeline marker" description="Select the initial position of the timeline marker. The marker is the vertical line drawn on the EPG that shows the current time. The larger the value the more the marker will move to the right showing more history and less of upcoming events.">config.epgselection.graph_histminutes</item>
@@ -273,7 +271,7 @@
 		<item level="2" text="Service width" description="Configure the width allocated to the service name.">config.epgselection.infobar_servicewidth</item>
 		<item level="2" text="Picon width" description="Configure the width allocated to the picon.">config.epgselection.infobar_piconwidth</item>
 		<item level="2" text="Info icon width" description="Configure the minimum width before showing the 'i' icon, '0' is equal to not showing the icon at all.">config.epgselection.infobar_infowidth</item>
-		<item level="2" text="Position of recording icons" description="Set the position of the recording icons">config.epgselection.graph_rec_icon_height</item>
+		<item level="2" text="Position of recording icons" description="Set the position of the recording icons.">config.epgselection.graph_rec_icon_height</item>
 		<item level="2" text="Timeline font size" description="Configure the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.epgselection.infobar_timelinefs</item>
 		<item level="2" text="Timeline 24 Hour" description="Show time in 24 hour clock format.">config.epgselection.infobar_timeline24h</item>
 		<item level="2" text="Timeline marker" description="Select the initial position of the timeline marker. The marker is the vertical line drawn on the EPG that shows the current time. The larger the value the more the marker will move to the right showing more history and less of upcoming events.">config.epgselection.infobar_histminutes</item>
@@ -303,7 +301,7 @@
 		<item level="2" text="Font size" description="Configure the font size relative to default size, so 1 increases by 1 point size, and -1 decreases by 1 point size.">config.epgselection.vertical_eventfs</item>
 		<item level="2" text="Channel buttons" description="Set to what you want the button to do.">config.epgselection.vertical_channelbtn</item>
 		<item level="2" text="Channel buttons invert" description="Inverts the button function.">config.epgselection.vertical_channelbtn_invert</item>
-		<item level="2" text="Up/Down buttons also for 'all up/down'" description="Enable Up / Down buttons for the 'all up / down' function? (at the beginning / end of the column)">config.epgselection.vertical_updownbtn</item>
+		<item level="2" text="Up/Down buttons also for 'all up/down'." description="Enable Up/Down buttons for the 'all up/down' functions (at the beginning/end of the column)?">config.epgselection.vertical_updownbtn</item>
 		<item level="2" text="OK button (short)" description="Set to what you want the button to do.">config.epgselection.vertical_ok</item>
 		<item level="2" text="OK button (long)" description="Set to what you want the button to do.">config.epgselection.vertical_oklong</item>
 		<item level="2" text="Info button (short)" description="Set to what you want the button to do.">config.epgselection.vertical_info</item>
@@ -330,7 +328,68 @@
 			<item level="0" text="Remove all other data" description="Select 'Yes' to remove all other files and directories not covered by the options above." conditional="len(self.others)">config.factory.resetOthers</item>
 		</if>
 	</setup>
-		<setup level="2" key="vodsetup" title="VOD Settings" showOpenWebif="1">
+	<setup key="Fallbacktuner" title="Fallback tuner setup" level="2">
+		<item text="Enable fallback remote receiver" description="Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001.">config.usage.remote_fallback_enabled</item>
+		<item text="Import from remote receiver URL" description="Import channels and/or EPG from remote receiver URL when receiver is booted">config.usage.remote_fallback_import</item>
+		<if conditional="config.usage.remote_fallback_enabled.value">
+			<item text="Enable import timer from fallback tuner" description="When enabled the timer from the fallback tuner is imported">config.usage.remote_fallback_external_timer</item>
+			<item text="Select the timer from the fallback tuner by default" description="When enabled the timer from the fallback tuner is the default timer" conditional="config.usage.remote_fallback_external_timer.value">config.usage.remote_fallback_external_timer_default</item>
+			<item text="Fallback remote receiver" description="Destination of fallback remote receiver">self.avahiselect</item>
+			<if conditional="self.avahiselect.value == 'ip'">
+				<item text="Fallback remote receiver IP" description="IP of fallback remote receiver">self.ip</item>
+				<item text="Fallback remote receiver Port" description="Port of fallback remote receiver">self.port</item>
+			<elif conditional="self.avahiselect.value == 'url'"/>
+				<item text="Fallback remote receiver URL" description="URL of fallback remote receiver">config.usage.remote_fallback</item>
+			</if>
+			<if conditional="config.usage.remote_fallback_import.value">
+				<item text="Import remote receiver URL" description="URL of fallback remote receiver">self.avahiselect_seperate</item>
+				<if conditional="self.avahiselect_seperate.value == 'ip'">
+					<item text="Fallback remote receiver IP" description="IP of fallback remote receiver">self.ip_seperate</item>
+					<item text="Fallback remote receiver Port" description="Port of fallback remote receiver">self.port_seperate</item>
+				<elif conditional="self.avahiselect_seperate.value == 'url'"/>
+					<item text="Fallback remote receiver URL" description="URL of fallback remote receiver">config.usage.remote_fallback_import_url</item>
+				</if>
+				<item text="Also import at reboot/restart enigma2" description="Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted">config.usage.remote_fallback_import_restart</item>
+				<item text="Also import when box is leaving standby" description="Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby">config.usage.remote_fallback_import_standby</item>
+				<item text="Also import from the extension menu" description="Make it possible to manually initiate the channels import and/or EPG via the extension menu">config.usage.remote_fallback_extension_menu</item>
+				<item text="Show notification when import channels was successful" description="Show notification when import channels and/or EPG from remote receiver URL is completed">config.usage.remote_fallback_ok</item>
+				<item text="Show notification when import channels was not successful" description="Show notification when import channels and/or EPG from remote receiver URL did not complete">config.usage.remote_fallback_nok</item>
+			</if>
+			<if conditional="config.usage.remote_fallback.value">
+				<item text="Customize OpenWebIF settings for fallback tuner" description="When enabled you can customize the OpenWebIf settings for the fallback tuner">config.usage.remote_fallback_openwebif_customize</item>
+				<if conditional="config.usage.remote_fallback_openwebif_customize.value">
+					<item text="User ID" description="Set the User ID of the OpenWebif from your fallback tuner">config.usage.remote_fallback_openwebif_userid</item>
+					<item text="Password" description="Set the password of the OpenWebif from your fallback tuner">config.usage.remote_fallback_openwebif_password</item>
+					<item text="Port" description="Set the port of the OpenWebif from your fallback tuner">config.usage.remote_fallback_openwebif_port</item>
+				</if>
+				<item text="Alternative URLs for DVB-T/C or ATSC" description="Set alternative fallback tuners for DVB-T/C or ATSC">config.usage.remote_fallback_alternative</item>
+				<if conditional="config.usage.remote_fallback_alternative.value">
+					<item text="Fallback remote receiver for DVB-T" description="Destination of fallback remote receiver for DVB-T">self.avahi_dvb_t</item>
+					<if conditional="self.avahi_dvb_t.value == 'ip'">
+						<item text="Fallback remote receiver IP" description="IP of fallback remote receiver">self.ip_dvb_t</item>
+						<item text="Fallback remote receiver Port" description="Port of fallback remote receiver">self.port_dvb_t</item>
+					<elif conditional="self.avahi_dvb_t.value == 'url'"/>
+						<item text="Fallback remote receiver URL" description="URL of fallback remote receiver">config.usage.remote_fallback_dvb_t</item>
+					</if>
+					<item text="Fallback remote receiver for DVB-C" description="Destination of fallback remote receiver for DVB-C">self.avahi_dvb_c</item>
+					<if conditional="self.avahi_dvb_c.value == 'ip'">
+						<item text="Fallback remote receiver IP" description="IP of fallback remote receiver">self.ip_dvb_c</item>
+						<item text="Fallback remote receiver Port" description="Port of fallback remote receiver">self.port_dvb_c</item>
+					<elif conditional="self.avahi_dvb_c.value == 'url'"/>
+						<item text="Fallback remote receiver URL" description="URL of fallback remote receiver">config.usage.remote_fallback_dvb_c</item>
+					</if>
+					<item text="Fallback remote receiver for ATSC" description="Destination of fallback remote receiver for ATSC">self.avahi_atsc</item>
+					<if conditional="self.avahi_atsc.value == 'ip'">
+						<item text="Fallback remote receiver IP" description="IP of fallback remote receiver">self.ip_atsc</item>
+						<item text="Fallback remote receiver Port" description="Port of fallback remote receiver">self.port_atsc</item>
+					<elif conditional="self.avahi_atsc.value == 'url'"/>
+						<item text="Fallback remote receiver URL" description="URL of fallback remote receiver">config.usage.remote_fallback_atsc</item>
+					</if>
+				</if>
+			</if>
+		</if>
+	</setup>
+	<setup level="2" key="vodsetup" title="VOD Settings" showOpenWebif="1">
 		<item level="2" text="Enable VOD at channel list" description="If set to 'yes' it will enable PLAY,PAUSE, SEEK on channel list movies">config.usage.enableVodMode</item>
 		<item level="2" text="VOD download Directory" description="Choose where to save VOD movies">config.usage.vod_path</item>
 	</setup>
@@ -338,7 +397,7 @@
 		<item level="2" text="Show Imageversion" description="Select witch Imageversion to Download">config.usage.mbimageversion</item>
 	</setup>
 
-		<setup key="clientmode" title="Client Mode setup" showOpenWebif="1">
+	<setup key="clientmode" title="Client Mode setup" showOpenWebif="1">
 		<item text="Enable client mode" description="Enable or disable client mode.">config.clientmode.enabled</item>
 		<if conditional="config.clientmode.enabled.value">
 			<item text="Host receiver address type" description="'Network peer' automatically detects other Enigma2 receivers on the local network. You can also manually enter the URL or IP address.">self.addressType</item>
@@ -706,6 +765,9 @@
 		<item level="2" text="Show free space in timer view" description="When 'Enabled', the timer view will show the free space on the target device. This will wake the device from sleep mode.">config.recording.timerviewshowfreespace</item>
 	</setup>
 	<setup key="RecordTimer" title="RecordTimer Settings">
+		<if conditional="config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value">
+			<item level="0" text="Fallback Timer" description="Fallback Timer">self.timerFallback</item>
+		</if>
 		<item level="0" text="Timer type" description="Select the type of this timer.">self.timerType</item>
 		<item level="0" text="Name" description="Enter a name for this timer.">self.timerName</item>
 		<item level="0" text="Description" description="Enter a description for this timer.">self.timerDescription</item>

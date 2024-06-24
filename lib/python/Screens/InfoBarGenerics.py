@@ -3205,6 +3205,7 @@ class InfoBarExtensions:
 				"showEventInfo": (self.SelectopenEventView, _("Show the information on current event.")),
 				"showMediaPlayer": (self.showMediaPlayer, _("Show the media player...")),
 			}, prio=1, description=_("Extension Actions")) # lower priority
+		self.addExtension((lambda: _("Manually import from fallback tuner"), self.importChannels, lambda: config.usage.remote_fallback_extension_menu.value and config.usage.remote_fallback_import.value))
 		self.addExtension(extension=self.getLogManager, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getOsd3DSetup, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
@@ -3230,6 +3231,10 @@ class InfoBarExtensions:
 			print("[INFOBARGENERICS] BluePanel: error pipshow, starting Blue Panel")
 		from Screens.BluePanel import BluePanel
 		self.session.open(BluePanel)
+
+	def importChannels(self):
+		from Components.ChannelsImporter import ImportChannels
+		ImportChannels()
 
 	def SelectopenEventView(self):
 		try:
