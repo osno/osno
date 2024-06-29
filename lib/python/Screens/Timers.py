@@ -818,13 +818,13 @@ class PowerTimerOverview(TimerOverviewBase):
 			self.session.nav.PowerTimer.cleanup()
 			self.reloadTimerList()
 
-	def refill(self):
-		length = len(self.timerList)
-		self.fillTimerList()
-		if length and length != len(self.timerList):
-			self["timerlist"].entryRemoved(self["timerlist"].getCurrentIndex())
-		else:
-			self["timerlist"].invalidate()
+	# def refill(self):
+	#	length = len(self.timerList)
+	#	self.fillTimerList()
+	#	if length and length != len(self.timerList):
+	#		self["timerlist"].entryRemoved(self["timerlist"].getCurrentIndex())
+	#	else:
+	#		self["timerlist"].invalidate()
 
 
 class RecordTimerOverview(TimerOverviewBase):
@@ -863,19 +863,19 @@ class RecordTimerOverview(TimerOverviewBase):
 		event = eEPGCache.getInstance().lookupEventId(timer.service_ref.ref, timer.eit) if timer.eit else None
 		if event:
 			self["Event"].newEvent(event)
-				#
-				# This is not in openATV but could be helpful to update the timer description with the actual recording details!
-				#
-				# shortDescription = event.getShortDescription()
-				# if shortDescription and description != shortDescription:
-				# 	if description and shortDescription:
-				# 		description = "%s %s\n\n%s %s" % (_("Timer:"), description, _("EPG:"), shortDescription)
-				# 	elif shortDescription:
-				# 		description = shortDescription
-				# 		timer.description = shortDescription
-				# extendDescription = event.getExtendedDescription()
-				# if extendDescription and description != extendDescription:
-				# 	description = "%s\n%s" % (description, extendDescription) if description else extendDescription
+			#
+			# This is not in openOPD but could be helpful to update the timer description with the actual recording details!
+			#
+			# shortDescription = event.getShortDescription()
+			# if shortDescription and description != shortDescription:
+			# 	if description and shortDescription:
+			# 		description = "%s %s\n\n%s %s" % (_("Timer:"), description, _("EPG:"), shortDescription)
+			# 	elif shortDescription:
+			# 		description = shortDescription
+			# 		timer.description = shortDescription
+			# extendDescription = event.getExtendedDescription()
+			# if extendDescription and description != extendDescription:
+			# 	description = "%s\n%s" % (description, extendDescription) if description else extendDescription
 		return description
 
 	def selectionChanged(self):
@@ -1482,6 +1482,7 @@ class RecordTimerEdit(Setup):
 		if default not in locations:
 			locations.append(default)
 		self.timerLocation = ConfigSelection(default=default, choices=locations)
+
 		self.tags = self.timer.tags[:]
 		if not self.tags:  # If no tags found, make name of event default tag set.
 			tagName = self.timer.name.strip()

@@ -79,7 +79,7 @@ void keyEvent(const eRCKey &key)
 	/*eDebug("key.code : %02x \n", key.code);*/
 
 	int flags = key.flags;
-	int long_press_emulation_key = eConfigManager::getConfigIntValue("config.usage.long_press_emulation_key");
+	int long_press_emulation_key = ptr->getLongPressedEmulationKey();
 	if ((long_press_emulation_key > 0) && (key.code == long_press_emulation_key))
 	{
 		long_press_emulation_pushed = true;
@@ -481,6 +481,11 @@ int getVFDSymbolsPoll()
 const char *getGStreamerVersionString()
 {
 	return gst_version_string();
+}
+
+int getE2Flags()
+{
+	return 1;
 }
 
 #include <malloc.h>
