@@ -49,7 +49,7 @@ self.session.open(GreenPanel)
 			<item weight="2" text="Tuner setup" key="client_mode" requires="ClientModeEnabled"><screen module="ClientMode" screen="ClientModeScreen"/></item>
 			<item weight="20" text="Automatic scan" key="auto_scan" conditional="nimmanager.somethingConnected()" requires="ClientModeDisabled"><screen module="ScanSetup" screen="ScanSimple"/></item>
 			<item weight="30" text="Manual scan" key="manual_scan" conditional="nimmanager.somethingConnected()" requires="ClientModeDisabled"><screen module="ScanSetup"/></item>
-			<item weight="100" text="Fallback remote receiver configuration" key="fallback_mode" requires="ClientModeDisabled"><screen  module="FallbackTunerSetup" screen="FallbackTunerSetup"/></item>
+			<!-- item weight="100" text="Fallback remote receiver configuration" key="fallback_mode" requires="ClientModeDisabled"><screen  module="FallbackTunerSetup" screen="FallbackTunerSetup"/></item>-->
 			</menu>
 			<!-- Menu / Setup / Software Management -->
 			<menu key="software_manager" level="0" text="Software Management" description="This menu offers options related managing the software on the %s %s." weight="50">
