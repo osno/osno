@@ -126,7 +126,7 @@ def parseKeymap(filename, context, actionMapInstance, device, domKeys):
 				unmapDict.update({(context, keyName, unmap): filename})
 
 
-def getKeyId(id):  # FIME Remove keytranslation.xml.
+def getKeyId(id):
 	if len(id) == 1:
 		keyid = ord(id) | 0x8000
 	elif id[0] == "\\":

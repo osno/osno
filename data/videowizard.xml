@@ -19,7 +19,7 @@ self.selectKey("OK")
 		<condition>
 self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
-		<text value="Use automatic mode detection?\n This option reads all supported modes from your TV.\n Please disable it only if you want to customize the preferred configuration." />
+		<text value="Use automatic mode detection?\n\nThis option reads all supported modes from your TV. Disable it only if you want to customize the preferred configuration." />
 		<displaytext value="Use automatic mode detection" />
 		<list>
 			<listentry caption="Yes" step="modeauto" />
@@ -35,7 +35,7 @@ self.selectKey("DOWN")
 		<condition>
 self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
-		<text value="Default Modes Selected." />
+		<text value="Default video mode selected for the TV." />
 		<displaytext value="Default video mode selected" />
 		<code>
 config.av.edid_override.setValue(True)
@@ -46,7 +46,7 @@ config.av.edid_override.save()
 		<condition>
 self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
-		<text value="Auto Modes Selected." />
+		<text value="Auto video mode selected for the TV." />
 		<displaytext value="Auto video mode selected" />
 		<code>
 config.av.edid_override.setValue(False)
@@ -54,7 +54,7 @@ config.av.edid_override.save()
 		</code>
 	</step>
 	<step id="modeselection" nextstep="rateselection" timeout="10" timeoutaction="selectnext">
-		<text value="Video mode selection." />
+		<text value="Select the video mode to be used on the TV." />
 		<displaytext value="Select video mode" />
 		<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
 		<code>
@@ -67,7 +67,7 @@ self.selectKey("DOWN")
 		<condition>
 self.condition = (self.port != "DVI" or self.mode == "PC")
 		</condition>
-		<text value="Refresh rate selection." />
+		<text value="Select the refresh rate to be used on the TV." />
 		<displaytext value="Select refresh rate" />
 		<list type="dynamic" source="listRates" evaluation="rateSelectionMade" onselect="rateSelectionMoved" />
 		<code>
