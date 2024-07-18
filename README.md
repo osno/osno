@@ -16,7 +16,7 @@
 
 ## Git repositories involved
 
-> [https://github.com/oe-alliance/oe-alliance-core/tree/5.4](https://github.com/oe-alliance/oe-alliance-core/tree/5.4 "OE-Alliance")
+> [https://github.com/oe-alliance/oe-alliance-core/tree/5.4](https://github.com/oe-alliance/oe-alliance-core/tree/5.5 "OE-Alliance")
 
 * [https://github.com/opendroid-Team/enigma2](https://github.com/opendroid-Team/enigma2/tree/master "openDroid Enigma2")
 
@@ -83,7 +83,7 @@
 ----------
 10 - Clone oe-alliance git
 
-    git clone https://github.com/oe-alliance/build-enviroment.git -b 5.4
+    git clone https://github.com/oe-alliance/build-enviroment.git -b 5.5
 
 ----------
 11 - Switch to folder build-enviroment
