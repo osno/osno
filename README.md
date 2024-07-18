@@ -83,7 +83,7 @@
 ----------
 10 - Clone oe-alliance git
 
-    git clone https://github.com/oe-alliance/build-enviroment.git -b 5.5
+    git clone https://github.com/formiano/build-enviroment.git -b 5.5
 
 ----------
 11 - Switch to folder build-enviroment
