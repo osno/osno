@@ -9,7 +9,7 @@ import PowerTimer
 import RecordTimer
 import ServiceReference
 from Components.config import config
-from Components.ChannelsImporter import ImportChannels
+from Components.ChannelsImporter import ChannelsImporter
 from Components.ParentalControl import parentalControl
 from Components.PluginComponent import plugins
 from Components.SystemInfo import BoxInfo
