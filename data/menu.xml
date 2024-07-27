@@ -220,7 +220,6 @@ self.session.open(UsbFormat)
 		<item weight="15" level="0" text="Network" key="device_screen"><screen module="About" screen="SystemNetworkInfo"/></item>
 		<item weight="20" level="1" text="Service" key="service_info_screen"><screen module="ServiceInfo" screen="ServiceInfo"/></item>
 		<item weight="6" level="0" text="CommitInfo" key="CommitInfo_info_screen"><screen module="About" screen="CommitInfo"/></item>
-		<item weight="8" level="0" text="GitLog" key="GitLog_info_screen"><screen module="About" screen="ViewGitLog"/></item>
                 <item level="2" text="Streaming clients info" key="streaming_clients_info_screen"><screen module="StreamingClientsInfo" screen="StreamingClientsInfo"/></item>
 	</menu>
 	<!-- Menu / Timer -->
