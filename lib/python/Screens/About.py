@@ -1332,7 +1332,7 @@ class CommitInfo(Screen):
 		self.project = 0
 		self.projects = [
 			("https://api.github.com/repos/opendroid-Team/enigma2/commits" + branch, "Enigma2", API_GITHUB),
-			("https://api.github.com/repos/oe-alliance/oe-alliance-core/commits" + branch, "5.3", API_GITHUB),
+			("https://api.github.com/repos/oe-alliance/oe-alliance-core/commits" + branch, "5.5", API_GITHUB),
 			("https://api.github.com/repos/oe-alliance/oe-alliance-plugins/commits" + branch, "master", API_GITHUB),
 			("https://api.github.com/repos/oe-alliance/aio-grab/commits", "Aio Grab", API_GITHUB),
 			("https://api.github.com/repos/openpli/enigma2-plugin-extensions-epgimport/commits", "Plugin EPGImport", API_GITHUB),
