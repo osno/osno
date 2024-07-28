@@ -1,4 +1,4 @@
-AC_INIT([enigma2],[7.4],[https://droidsat.org])
+AC_INIT([enigma2],[7.5],[https://droidsat.org])
 AM_INIT_AUTOMAKE([dist-bzip2 no-define tar-pax -Wno-portability])
 AC_CONFIG_HEADERS([enigma2_config.h])
 
