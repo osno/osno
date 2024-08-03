@@ -278,7 +278,7 @@ class DNSSettings(Setup):
 		dnsRefresh(refresh)
 		return option
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		Setup.createSetup(self)
 		dnsList = self["config"].getList()
 		self.dnsStart = len(dnsList)
@@ -1655,7 +1655,7 @@ class NetworkServicesSetup(Setup, NetworkDaemons):
 		cfg = ConfigSelection(default=default, choices=choices)
 		return (title, cfg, _("Select the action for '%s'" % title), daemon)
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		if not self.serviceItems:
 			for daemon in self.getDaemons():
 				self.serviceItems.append(self.getService(daemon))
@@ -1784,7 +1784,7 @@ class NetworkInadynSetup(Setup):
 	def changedEntry(self):
 		pass  # No actions needed
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		inadynItems = []
 		lines = fileReadLines("/etc/inadyn.conf", source=MODULE_NAME)
 		if lines:
@@ -1873,7 +1873,7 @@ class NetworkuShareSetup(Setup):
 	def changedEntry(self):
 		pass  # No actions needed
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		ushareItems = []
 		lines = fileReadLines("/etc/ushare.conf", source=MODULE_NAME)
 		if lines:
@@ -2037,7 +2037,7 @@ class NetworkMiniDLNASetup(Setup):
 	def changedEntry(self):
 		pass  # No actions needed
 
-	def createSetup(self):  # NOSONAR silence S2638
+	def createSetup(self):
 		minidlnaItems = []
 		lines = fileReadLines("/etc/minidlna.conf", source=MODULE_NAME)
 		if lines:

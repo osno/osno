@@ -171,7 +171,7 @@ int eServiceTS::openHttpConnection(std::string url)
 	}
 
 	// FIXME use getaddrinfo
-	struct hostent* h = gethostbyname(host.c_str()); // NOSONAR
+	struct hostent* h = gethostbyname(host.c_str());
 	if (h == NULL || h->h_addr_list == NULL)
 		return -1;
 	int fd = socket(PF_INET, SOCK_STREAM, 0);

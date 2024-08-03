@@ -2728,7 +2728,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 											for (lloop=0x0;lloop<(dbglen+EIT_EXTENDED_EVENT_DESCRIPTOR_SIZE+2);lloop++)
 											{
 												if ((lloop>0) && (lloop%16==0)) { eDebug(buff); z=0; }
-												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]); //NOSONAR
+												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]);
 												z++;
 											}
 											if (z>1) { eDebug(buff);}
@@ -2758,7 +2758,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 											for (lloop=0x0;lloop<(dbglen+EIT_EXTENDED_EVENT_DESCRIPTOR_SIZE+2);lloop++)
 											{
 												if ((lloop>0) && (lloop%16==0)) { eDebug(buff); z=0; }
-												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]); //NOSONAR
+												snprintf(&buff[z*3], sizeof(buff), "%02X ", data[lloop]);
 												z++;
 											}
 											if (z>1) { eDebug(buff);}
@@ -3278,7 +3278,7 @@ void eEPGCache::crossepgImportEPGv21(std::string dbroot)
 	}
 
 	ret = fread(&aliases_groups_count, sizeof (int), 1, aliases);
-	epgdb_aliases_t all_aliases[aliases_groups_count]; // NOSONAR
+	epgdb_aliases_t all_aliases[aliases_groups_count];
 	for (int i=0; i<aliases_groups_count; i++)
 	{
 		int j;

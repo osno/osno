@@ -640,7 +640,7 @@ class FlashImage(Screen):
 	def startUnzip(self):
 		try:
 			zipData = ZipFile(self.zippedImage, mode="r")
-			zipData.extractall(self.unzippedImage)  # NOSONAR
+			zipData.extractall(self.unzippedImage)
 			zipData.close()
 			self.flashImage()
 		except Exception as err:

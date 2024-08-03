@@ -82,7 +82,7 @@ int checkLinkStatus()
 }
 
 
-size_t curl_ignore_output(void *ptr, size_t size, size_t nmemb, void *stream) // NOSONAR
+size_t curl_ignore_output(void *ptr, size_t size, size_t nmemb, void *stream)
 {
 	(void)ptr;
 	(void)stream;
