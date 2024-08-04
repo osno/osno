@@ -9,7 +9,7 @@ import PowerTimer
 import RecordTimer
 import ServiceReference
 from Components.config import config
-from Components.ChannelsImporter import ChannelsImporter
+#from Components.ChannelsImporter import ChannelsImporter
 from Components.ParentalControl import parentalControl
 from Components.PluginComponent import plugins
 from Components.SystemInfo import BoxInfo
@@ -44,6 +44,7 @@ class Navigation:
 		self.pnav.m_record_event.get().append(self.dispatchRecordEvent)
 		self.event = []
 		self.record_event = []
+		self.currentBouquetName = ""
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None

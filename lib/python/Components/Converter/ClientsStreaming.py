@@ -4,7 +4,7 @@ from Components.Converter.Poll import Poll
 from Components.Element import cached
 from enigma import eStreamServer
 from ServiceReference import ServiceReference
-import socket
+from socket import gethostbyaddr
 
 
 class ClientsStreaming(Converter, Poll):
