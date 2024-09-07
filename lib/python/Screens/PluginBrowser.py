@@ -30,7 +30,7 @@ from Tools.NumericalTextInput import NumericalTextInput
 MODULE_NAME = __name__.split(".")[-1]
 
 INTERNET_TIMEOUT = 2
-FEED_SERVER = "opendroid.org/feeds/7.3"
+FEED_SERVER = "opendroid.org/feeds/7.5"
 ENIGMA_PREFIX = "enigma2-plugin-%s"
 PACKAGE_PREFIX = "%s"
 SOFTCAM_PREFIX = "enigma2-plugin-softcams-%s"
