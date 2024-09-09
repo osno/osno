@@ -18,8 +18,8 @@
 	<menu key="mainmenu" text="Main Menu" title="Main Menu">
 			<menu key="BluePanel" level="1" text="Blue Panel" weight="0">
 				<item key="softcam_settings" level="0" text="Softcam Settings" weight="50" requires="HAVEINITCAM"><screen module="BluePanel" screen="BluePanel" /></item>
-				<item key="autocam_settings" level="0" text="AutoCam Settings" weight="60" requires="HAVEINITCAM"><screen module="BluePanel" screen="AutocamSetup" /></item>
-				<item key="cardserver_settings" level="0" text="Cardserver Settings" weight="70" requires="HAVEINITCARDSERVER"><screen module="BluePanel" screen="CardserverSetup" /></item>
+				<!--<item key="autocam_settings" level="0" text="AutoCam Settings" weight="60" requires="HAVEINITCAM"><screen module="BluePanel" screen="AutocamSetup" /></item>-->
+				<!--<item key="cardserver_settings" level="0" text="Cardserver Settings" weight="70" requires="HAVEINITCARDSERVER"><screen module="BluePanel" screen="CardserverSetup" /></item>-->
 				<item key="streamrelay_settings" level="2" text="Stream Relay Settings" weight="110" requires="HAVEINITCAM"><screen module="BluePanel" screen="StreamRelaySetup" /></item>
 			</menu>
 		                <item weight="0" level="1" text="Green Panel" key="GreenPanel_selection">

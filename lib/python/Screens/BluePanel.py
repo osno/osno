@@ -62,6 +62,7 @@ class CamControl:
 		return None
 
 	def switch(self, newcam, callback):
+		print(f"switch called with newcam: {newcam}, callback: {callback}")
 		self.callback = callback
 		self.deamonSocket = socket(AF_UNIX, SOCK_STREAM)
 		self.deamonSocket.connect("/tmp/deamon.socket")
@@ -69,6 +70,7 @@ class CamControl:
 		self.waitSocket()
 
 	def restart(self, callback):
+		print(f"restart called with callback: {callback}")
 		self.callback = callback
 		self.deamonSocket = socket(AF_UNIX, SOCK_STREAM)
 		self.deamonSocket.connect("/tmp/deamon.socket")
@@ -92,9 +94,10 @@ class CamControl:
 			self.deamonSocket.close()
 		if self.deamonSocket.fileno() == -1:
 			if callable(self.callback):
-				self.callback()
+				print(f"Calling callback: {self.callback}")
+				self.callback()  # the issue happens here
 			else:
-				print(f"Warning: Attempted to call a non-callable callback: {self.callback}")
+				raise TypeError(f"Expected a callable for callback, got {type(self.callback).__name__}: {self.callback}")
 
 
 class CamSetupCommon(Setup):
@@ -193,6 +196,7 @@ class BluePanel(Screen, ConfigListScreen):
 				"yellow": self.restartSoftcam,
 				"red": self.cancel,
 				"blue": self.softcamInfo,
+				"menu": self.keyMenu,
 			}, -1)
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
@@ -235,6 +239,8 @@ class BluePanel(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText(_("Restart"))
 		self["key_blue"] = StaticText()
+		self["key_menu"] = Label(_("Open Cardserver"))
+		self['label1'] = Label(_("Open Cardserver"))
 		self.onShown.append(self.blueButton)
 
 	def changedEntry(self):
@@ -315,6 +321,10 @@ class BluePanel(Screen, ConfigListScreen):
 
 	def cancel(self):
 		self.close()
+
+	def keyMenu(self):
+		from Screens.BluePanel import CardserverSetup
+		self.session.open(CardserverSetup)
 
 class CamSetupHelper:
 	def getOrbPos(self, sref):

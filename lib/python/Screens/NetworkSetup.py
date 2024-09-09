@@ -2507,15 +2507,14 @@ class NetworkInadynSetup(Screen, ConfigListScreen):
 			for line in inme.readlines():
 				line = line.replace("\n", "")
 				if line.startswith("username "):
-					line = ("username %s" % self.ina_user.value.strip())
+					line = f"username {self.ina_user.value.strip()}"
 				elif line.startswith("password "):
-					line = ("password %s" % self.ina_pass.value.strip())
+					line = f"password {self.ina_pass.value.strip()}"
 				elif line.startswith("alias "):
-					line = ("alias %s" % self.ina_alias.value.strip())
+					line = f"alias {self.ina_alias.value.strip()}"
 				elif line.startswith("update_period_sec "):
-					strview = (self.ina_period.value * 60)
-					strview = str(strview)
-					line = ("update_period_sec %s" % strview)
+					strview = self.ina_period.value * 60
+					line = f"update_period_sec {str(strview)}"
 				elif line.startswith("dyndns_system ") or line.startswith("#dyndns_system "):
 					if self.ina_sysactive.value:
 						line = ("dyndns_system %s" % self.ina_system.value.strip())
