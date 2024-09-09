@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OpenDROID\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-09 14:05+0200\n"
-"PO-Revision-Date: 2024-09-10 00:00+0200\n"
+"PO-Revision-Date: 2024-09-10 00:35+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -3261,9 +3261,8 @@ msgstr "Blu"
 msgid "Blue Panel"
 msgstr "Blue Panel"
 
-#, fuzzy
 msgid "BluePanel/Extensions"
-msgstr "Estensioni"
+msgstr "Estensioni/BluePanel"
 
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -4575,7 +4574,7 @@ msgid "Common interface"
 msgstr "Common Interface"
 
 msgid "Comodo Secure DNS"
-msgstr ""
+msgstr "Comodo DNS sicuro"
 
 msgid "Comoros"
 msgstr "Comore"
