@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OpenDROID\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-09 14:05+0200\n"
-"PO-Revision-Date: 2024-09-10 00:35+0200\n"
+"PO-Revision-Date: 2024-09-13 19:02+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -2441,9 +2441,8 @@ msgstr "Consente di impostare la dimensione massima del registro di debug (MB). 
 msgid "Allows you to show/hide Log Manager in extensions (BLUE button)."
 msgstr "Consente di mostrare/nascondere Log Manager nelle estensioni (tasto BLU)."
 
-#, fuzzy
 msgid "Allows you to show/hide OScam/CCcam in the Extension Menu screen (BLUE button)."
-msgstr "Consente di mostrare/nascondere OScam nelle estensioni (tasto BLU)."
+msgstr "Consente di mostrare/nascondere OScam/CCcam nella schermata del menu Estensione (pulsante BLU)."
 
 msgid "Allows you to tag your image backup to a box. (default is box name/type)"
 msgstr "Consente di contrassegnare il backup dell'immagine in un ricevitore. (l'impostazione predefinita è nome/tipo di ricevitore)"
@@ -5418,9 +5417,8 @@ msgstr ""
 msgid "Currently Defined Volume Offsets:"
 msgstr "Offset del volume attualmente definito:"
 
-#, fuzzy
 msgid "Currently the commit log cannot be retrieved - please try later again."
-msgstr "Al momento non è possibile recuperare il log del commit. Riprova più tardi"
+msgstr "Al momento non è possibile recuperare il registro degli impegni: riprovare più tardi."
 
 msgid "Custom"
 msgstr "Personalizza"
@@ -6142,9 +6140,8 @@ msgstr "Destinazione del ricevitore remoto di fallback per DVB-C"
 msgid "Destination of fallback remote receiver for DVB-T"
 msgstr "Destinazione del ricevitore remoto di fallback per DVB-T"
 
-#, fuzzy
 msgid "Detail of GStreamer log."
-msgstr "Dettaglio del registro di GStreamer"
+msgstr "Dettaglio del log di GStreamer."
 
 msgid "Details"
 msgstr "Dettagli"
@@ -6575,9 +6572,8 @@ msgstr "Vuoi installare il pacchetto:\n"
 msgid "Do you want to install this image now?"
 msgstr "Vuoi installare questa immagine ora?"
 
-#, fuzzy
 msgid "Do you want to install:"
-msgstr "Vuoi installare nuovi plugin"
+msgstr "Vuoi installare:"
 
 msgid "Do you want to play DVD in drive?"
 msgstr "Vuoi riprodurre DVD nell'unità?"
@@ -7172,9 +7168,8 @@ msgstr "Abilita scansione rapida automatica per %s"
 msgid "Enable blinking rec symbol on the LCD Display in Standby."
 msgstr "Abilita simbolo lampeggiante registrazione su display LCD in standby"
 
-#, fuzzy
 msgid "Enable blinking rec symbol on the LCD Display."
-msgstr "Abilita simbolo REC lampeggiante sul display LCD"
+msgstr "Abilita il simbolo rec lampeggiante sul display LCD."
 
 msgid "Enable chapter support for video files"
 msgstr "Abilita supporto capitoli per i file video"
@@ -7685,12 +7680,16 @@ msgid ""
 "Error while retrieving fallback timer information\n"
 "%s"
 msgstr ""
+"Errore durante il recupero delle informazioni sul timer di fallback\n"
+"%s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Error:\n"
 "%s"
-msgstr "Errore %d: %s"
+msgstr ""
+"Errore:\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -8295,7 +8294,7 @@ msgstr "File"
 msgid "File %d of %d"
 msgstr "File %d di %d"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "File %s.conf not found.\n"
 "Enter username/password manually."
@@ -9602,9 +9601,8 @@ msgstr "Indirizzo IP"
 msgid "IP address of the Stream Relay server used to descramble services that can only be decrypted via Stream Relay."
 msgstr ""
 
-#, fuzzy
 msgid "IP of fallback remote receiver"
-msgstr "IP del ricevitore remoto di riserva"
+msgstr "IP del ricevitore remoto di fallback"
 
 msgid "IP:"
 msgstr "IP:"
@@ -10449,11 +10447,10 @@ msgstr "Mantieni il vecchio drive"
 msgid "Keep service"
 msgstr "Mantieni servizio"
 
-#, fuzzy
 msgid "Keep warning"
 msgid_plural "Keep warnings"
 msgstr[0] "Attenzione"
-msgstr[1] "Attenzione"
+msgstr[1] "Attenzioni"
 
 msgid "Keeps MovieList open whilst playing audio files."
 msgstr "Mantieni elenco registrazioni aperto durante la riproduzione file audio."
@@ -10548,7 +10545,6 @@ msgstr "Curdo"
 msgid "Kurdish (Sorani)"
 msgstr "Curdo (Sorani)"
 
-#, fuzzy
 msgid "Kurdistan"
 msgstr "Kurdistan"
 
@@ -16330,12 +16326,11 @@ msgstr "Seleziona 'Sì' per mostrare i pacchetti delle skin nella schermata scar
 msgid "Select 'Yes' to show source 'src' packages in the Download Plugins screen."
 msgstr "Seleziona 'Sì' per mostrare i pacchetti sorgenti 'src' nella schermata scarica plugin."
 
-#, fuzzy
 msgid "Select 'Yes' to show subscription packages in the Download Plugins screen."
-msgstr "Seleziona 'Sì' per mostrare i pacchetti dei picon nella schermata scarica plugin."
+msgstr "Selezionare 'Sì' per visualizzare i pacchetti di abbonamento nella schermata Scarica plugin."
 
 msgid "Select 'Yes' to show system plugin packages in the Download Plugins screen."
-msgstr "Seleziona \"Sì\" per mostrare i pacchetti dei plugin di sistema nella schermata scarica plugin."
+msgstr "Seleziona 'Sì' per mostrare i pacchetti dei plugin di sistema nella schermata scarica plugin."
 
 msgid "Select 'Yes' to show the advanced setting options."
 msgstr "Seleziona 'Sì' per mostrare le opzioni di impostazione avanzate."
@@ -17268,9 +17263,8 @@ msgstr "I servizi possono essere raggruppati in bouquet. Se abilitato, puoi util
 msgid "Set As Startup Service"
 msgstr "Imposta come servizio di avvio"
 
-#, fuzzy
 msgid "Set Base Time"
-msgstr "Imposta tempo base"
+msgstr "Imposta ora base"
 
 msgid "Set CI Boot delay."
 msgstr ""
@@ -17281,7 +17275,6 @@ msgstr "Imposta assegnazione CI per il rilevamento dei servizi disponibili."
 msgid "Set DVB CI delay."
 msgstr ""
 
-#, fuzzy
 msgid "Set Default"
 msgstr "Imposta predefinito"
 
@@ -24107,7 +24100,6 @@ msgstr "immagine in caricamento, attendi..."
 msgid "plugin"
 msgstr "plugin"
 
-#, fuzzy
 msgid "plugins"
 msgstr "Plugin"
 
