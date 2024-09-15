@@ -115,8 +115,8 @@ class InstallWizard(Screen, ConfigListScreen):
 		elif self.index == self.STATE_CHOISE_CHANNELLIST and self.enabled.value:
 			self.session.open(InstallWizardOpkgUpdater, self.index, _('Please wait (downloading channel list)'), OpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-' + self.channellist_type.value})
 		elif self.index == self.INSTALL_PLUGINS and self.enabled.value:
-			from Screens.PluginBrowser import PluginBrowserList
-			self.session.open(PluginBrowserList, 0)
+			from Screens.PluginBrowser import PluginBrowser
+			self.session.open(PluginBrowser)
 		elif self.index == self.INSTALL_SKINS and self.enabled.value:
 			from Screens.SkinSelector import SkinSelector
 			self.session.open(SkinSelector)
