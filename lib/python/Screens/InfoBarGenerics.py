@@ -3118,8 +3118,8 @@ class InfoBarTimeshiftState(InfoBarPVRState):
 		if self.session.nav.getCurrentlyPlayingServiceReference():
 			name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
 			url = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getPath()
-		if self.timeshiftEnabled() and exists("%spts_livebuffer_%s.meta" % (config.usage.timeshift_path.value, self.pts_currplaying)):
-			readmetafile = open("%spts_livebuffer_%s.meta" % (config.usage.timeshift_path.value, self.pts_currplaying), "r")
+		if self.timeshiftEnabled() and exists("%spts_livebuffer_%s.meta" % (config.timeshift.path.value, self.pts_currplaying)):
+			readmetafile = open("%spts_livebuffer_%s.meta" % (config.timeshift.path.value, self.pts_currplaying))
 			servicerefname = readmetafile.readline()[0:-1]
 			eventname = readmetafile.readline()[0:-1]
 			readmetafile.close()
@@ -3833,7 +3833,7 @@ class InfoBarInstantRecord:
 				self.session.open(MessageBox, _('Downloading starded - VOD: ' + name.replace('_', ' ')), MessageBox.TYPE_INFO, timeout=5)
 			else:
 				self.session.open(MessageBox, _('Downloading filed, test another VOD title'), MessageBox.TYPE_INFO, timeout=5)
-		if answer[1] != 'savetimeshiftEvent':
+		if answer[1] != "savetimeshiftEvent":
 			self.saveTimeshiftEventPopupActive = False
 
 	def changeEndtime(self, entry):

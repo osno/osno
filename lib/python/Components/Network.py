@@ -1,5 +1,5 @@
 import netifaces as ni
-from os import listdir, remove, system as os_system
+from os import listdir, system as os_system
 from os.path import basename, exists, isdir, realpath
 from re import compile
 from socket import inet_ntoa, gethostbyname, gethostname
@@ -31,7 +31,6 @@ class Network:
 		self.dnsCheckList = ("www.cloudflare.com", "www.google.com", "www.microsoft.com", "www.akamai.com", "www.ebay.com", "www.amazon.com")  # To be discussed!
 		self.dnsTestsPassed = 0
 		self.resolvFile = "/etc/resolv.conf"
-		self.nameserverFile = "/etc/enigma2/nameserversdns.conf"
 		self.ifaces = {}  # Don't rename this!
 		self.configuredNetworkAdapters = []
 		self.nameservers = []
@@ -78,13 +77,12 @@ class Network:
 		return len(self.ifaces)
 
 	def regExpMatch(self, pattern, string):  # Helper function.
-		result = None
-		if string:
-			try:
-				result = pattern.search(string).group()
-			except AttributeError:
-				result = None
-		return result
+		if string is None:
+			return None
+		try:
+			return pattern.search(string).group()
+		except AttributeError:
+			return None
 
 	# Function to convert IPs from a string to a list of integers. If
 	# noneOnError is True then return None if a valid IP address is
@@ -98,42 +96,43 @@ class Network:
 		return data if data and len(data) == 4 else None
 
 	def loadNetworkConfig(self, iface, callback=None):  # Parse the interfaces file.
-		interfaces = {}
-		interface = ""
-		for line in fileReadLines(self.networkInterfaceFile, default=[], source=MODULE_NAME):
-			data = line.strip().split(" ")
-			if data[0] == "iface":
-				interface = data[1]
-				if interface not in interfaces:
-					interfaces[interface] = {}
-					interfaces[interface]["ipv6"] = False
-				if data[2] == "inet6":
-					interfaces[interface]["ipv6"] = True
+		interfaces = fileReadLines(self.networkInterfaceFile, default=[], source=MODULE_NAME)
+		ifaces = {}
+		currif = ""
+		for i in interfaces:
+			split = i.strip().split(" ")
+			if split[0] == "iface" and split[2] != "inet6":
+				currif = split[1]
+				ifaces[currif] = {}
+				if len(split) == 4 and split[3] == "dhcp":
+					ifaces[currif]["dhcp"] = True
 				else:
-					interfaces[interface]["dhcp"] = len(data) == 4 and data[3] == "dhcp"
-			if interface == iface:  # Read information only for available interfaces.
-				if data[0] == "address":
-					interfaces[interface]["address"] = list(map(int, data[1].split(".")))
-					if "ip" in self.ifaces[interface] and self.ifaces[interface]["ip"] != interfaces[interface]["address"] and interfaces[interface]["dhcp"] is False:
-						self.ifaces[interface]["ip"] = interfaces[interface]["address"][:]
-				if data[0] == "netmask":
-					interfaces[interface]["netmask"] = list(map(int, data[1].split(".")))
-					if "netmask" in self.ifaces[interface] and self.ifaces[interface]["netmask"] != interfaces[interface]["netmask"] and interfaces[interface]["dhcp"] is False:
-						self.ifaces[interface]["netmask"] = interfaces[interface]["netmask"][:]
-				if data[0] == "gateway":
-					interfaces[interface]["gateway"] = list(map(int, data[1].split(".")))
-					if "gateway" in self.ifaces[interface] and self.ifaces[interface]["gateway"] != interfaces[interface]["gateway"] and interfaces[interface]["dhcp"] is False:
-						self.ifaces[interface]["gateway"] = interfaces[interface]["gateway"][:]
-				if data[0] == "pre-up" and "preup" in self.ifaces[interface]:
-					self.ifaces[interface]["preup"] = line
-				if data[0] in ("pre-down", "post-down"):
-					if "predown" in self.ifaces[interface]:
-						self.ifaces[interface]["predown"] = line
-		print(f"[Network] DEBUG: Interfaces={interfaces}")
-		for ifacename, iface in list(interfaces.items()):
+					ifaces[currif]["dhcp"] = False
+			if currif == iface:  # Read information only for available interfaces.
+				if split[0] == "address":
+					ifaces[currif]["address"] = list(map(int, split[1].split(".")))
+					if "ip" in self.ifaces[currif]:
+						if self.ifaces[currif]["ip"] != ifaces[currif]["address"] and ifaces[currif]["dhcp"] == False:
+							self.ifaces[currif]["ip"] = list(map(int, split[1].split(".")))
+				if split[0] == "netmask":
+					ifaces[currif]["netmask"] = map(int, split[1].split("."))
+					if "netmask" in self.ifaces[currif]:
+						if self.ifaces[currif]["netmask"] != ifaces[currif]["netmask"] and ifaces[currif]["dhcp"] == False:
+							self.ifaces[currif]["netmask"] = list(map(int, split[1].split(".")))
+				if split[0] == "gateway":
+					ifaces[currif]["gateway"] = map(int, split[1].split("."))
+					if "gateway" in self.ifaces[currif]:
+						if self.ifaces[currif]["gateway"] != ifaces[currif]["gateway"] and ifaces[currif]["dhcp"] == False:
+							self.ifaces[currif]["gateway"] = list(map(int, split[1].split(".")))
+				if split[0] == "pre-up":
+					if "preup" in self.ifaces[currif]:
+						self.ifaces[currif]["preup"] = i
+				if split[0] in ("pre-down", "post-down"):
+					if "predown" in self.ifaces[currif]:
+						self.ifaces[currif]["predown"] = i
+		for ifacename, iface in list(ifaces.items()):
 			if ifacename in self.ifaces:
 				self.ifaces[ifacename]["dhcp"] = iface["dhcp"]
-				self.ifaces[ifacename]["ipv6"] = iface["ipv6"]
 		if self.console and len(self.console.appContainers) == 0:
 			self.configuredNetworkAdapters = self.configuredInterfaces  # Save configured interface list.
 			self.loadNameserverConfig()  # Load name servers only once.
@@ -182,49 +181,42 @@ class Network:
 
 	def writeNetworkConfig(self):
 		self.configuredInterfaces = []
-		lines = ["# Automatically generated by Enigma2."]
-		lines.append("# Do NOT change manually!")
+		lines = []
+		lines.append("# Automatically generated by Enigma2.\n# Do NOT change manually!")
 		lines.append("")
 		lines.append("auto lo")
 		lines.append("iface lo inet loopback")
 		lines.append("")
-		print(f"[Network] writeNetworkConfig DEBUG: onlyWoWifaces = {self.onlyWoWifaces}")
-		for ifacename, iface in sorted(self.ifaces.items()):
-			print(f"[Network] writeNetworkConfig {ifacename} = {str(iface)}")
+		print("[Network] writeNetworkConfig onlyWoWifaces = %s" % (str(self.onlyWoWifaces)))
+		for ifacename, iface in list(self.ifaces.items()):
+			print("[Network] writeNetworkConfig %s = %s" % (ifacename, str(iface)))
 			if "dns-nameservers" in iface and iface["dns-nameservers"]:
 				dns = []
-				for nameserver in iface["dns-nameservers"].split()[1:]:
-					dns.append((self.convertIP(nameserver)))
+				for s in iface["dns-nameservers"].split()[1:]:
+					dns.append((self.convertIP(s)))
 				if dns:
 					self.nameservers = dns
 			WoW = False
 			if ifacename in self.onlyWoWifaces:
 				WoW = self.onlyWoWifaces[ifacename]
-			if WoW is False and iface["up"] is True:
-				lines.append(f"auto {ifacename}")
+			if WoW == False and iface["up"] == True:
+				lines.append("auto %s" % ifacename)
 				self.configuredInterfaces.append(ifacename)
 				self.onlyWoWifaces[ifacename] = False
-			elif WoW is True:
+			elif WoW == True:
 				self.onlyWoWifaces[ifacename] = True
-				lines.append(f"# Only WakeOnWiFi {ifacename}")
-			comment = "" if "ipv6" in iface and iface["ipv6"] else "# "
-			lines.append(f"{comment}iface {ifacename} inet6 dhcp")
+				lines.append("# Only WakeOnWiFi %s" % ifacename)
 			if iface["dhcp"]:
-				lines.append(f"iface {ifacename} inet dhcp")
+				lines.append("iface %s inet dhcp" % ifacename)
 			if not iface["dhcp"]:
-				lines.append(f"iface {ifacename} inet static")
+				lines.append("iface %s inet static" % ifacename)
 				lines.append("  hostname $(hostname)")
 				if "ip" in iface:
-					dummy = ".".join([str(x) for x in iface["ip"]])
-					lines.append(f"	address {dummy}")
-					dummy = ".".join([str(x) for x in iface["netmask"]])
-					lines.append(f"	netmask {dummy}")
-					# lines.append(f"	address {".".join([str(x) for x in iface["ip"]])}")
-					# lines.append(f"	netmask {".".join([str(x) for x in iface["netmask"]])}")
+					# print tuple(iface["ip"])
+					lines.append("	address %d.%d.%d.%d" % tuple(iface["ip"]))
+					lines.append("	netmask %d.%d.%d.%d" % tuple(iface["netmask"]))
 					if "gateway" in iface:
-						dummy = ".".join([str(x) for x in iface["gateway"]])
-						lines.append(f"	gateway {dummy}")
-						# lines.append(f"	gateway {".".join([str(x) for x in iface["gateway"]])}")
+						lines.append("	gateway %d.%d.%d.%d" % tuple(iface["gateway"]))
 			if "configStrings" in iface:
 				lines.append(iface["configStrings"])
 			if iface["preup"] is not False and "configStrings" not in iface:
@@ -237,51 +229,30 @@ class Network:
 		self.writeNameserverConfig()
 
 	def writeNameserverConfig(self):
-		# try:
-		# Console().ePopen("/bin/rm -f '%s'" % self.resolvFile)
-		linesV4 = ["nameserver %d.%d.%d.%d" % tuple(nameserver) for nameserver in self.nameservers if isinstance(nameserver, list)]
-		# linesV4 = [f"nameserver {".".join([str(x) for x in nameserver])}" for nameserver in self.nameservers if isinstance(nameserver, list)]
-		linesV6 = [f"nameserver {nameserver}" for nameserver in self.nameservers if isinstance(nameserver, str)]
-		match config.usage.dnsMode.value:
-			case 0:
-				lines = linesV4 + linesV6
-			case 1:
-				lines = linesV6 + linesV4
-			case 2:
-				lines = linesV4
-			case 3:
-				lines = linesV6
-		suffix = [f"domain {config.usage.dnsSuffix.value}"] if config.usage.dnsSuffix.value else []
-		rotate = ["options rotate"] if config.usage.dnsRotate.value else []
-		fileWriteLines(self.resolvFile, rotate + suffix + lines, source=MODULE_NAME)
-		if config.usage.dns.value != "dhcp-router":
-			fileWriteLines(self.nameserverFile, lines, source=MODULE_NAME)
-		elif exists(self.nameserverFile):
-			remove(self.nameserverFile)
-		# self.restartNetwork()
-		# except:
-		# 	print("[Network] resolv.conf or nameserversdns.conf - writing failed")
+		try:
+			Console().ePopen("/bin/rm -f '%s'" % self.resolvFile)
+			lines = ["nameserver %d.%d.%d.%d" % tuple(nameserver) for nameserver in self.nameservers]
+			fileWriteLines(self.resolvFile, lines, source=MODULE_NAME)
+			if config.usage.dns.value.lower() not in ("dhcp-router"):
+				Console().ePopen("rm -f /etc/enigma2/nameserversdns.conf")
+				fileWriteLines("/etc/enigma2/nameserversdns.conf", lines, source=MODULE_NAME)
+			# self.restartNetwork()
+		except:
+			print("[Network] resolv.conf or nameserversdns.conf - writing failed")
 
 	def loadNameserverConfig(self):
-		ipRegExpV4 = r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
-		ipRegExpV6 = r"(^|(?<=[^\w:.]))(([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4})(?=$|(?![\w:.]))"
-		ipPatternV4 = compile(ipRegExpV4)
-		nameserverPatternV4 = compile(f"nameserver +{ipRegExpV4}")
-		nameserverPatternV6 = compile(f"nameserver +{ipRegExpV6}")
+		ipRegexp = "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+		nameserverPattern = compile("nameserver +%s" % ipRegexp)
+		ipPattern = compile(ipRegexp)
+		fileName = self.resolvFile if config.usage.dns.value.lower() in ("dhcp-router") else "/etc/enigma2/nameserversdns.conf"
+		resolv = fileReadLines(fileName, default=[], source=MODULE_NAME)
 		self.nameservers = []
-		fileName = self.resolvFile if config.usage.dns.value == "dhcp-router" else self.nameserverFile
-		for line in fileReadLines(fileName, default=[], source=MODULE_NAME):
-			if line == "options rotate":
-				config.usage.dnsRotate.value = True
-			elif line.startswith("domain "):
-				config.usage.dnsSuffix.value = line.replace("domain ", "")
-			elif self.regExpMatch(nameserverPatternV4, line) is not None:
-				ip = self.regExpMatch(ipPatternV4, line)
+		for line in resolv:
+			if self.regExpMatch(nameserverPattern, line) is not None:
+				ip = self.regExpMatch(ipPattern, line)
 				if ip:
 					self.nameservers.append(self.convertIP(ip))
-			elif self.regExpMatch(nameserverPatternV6, line) is not None:
-				self.nameservers.append(line.replace("nameserver ", ""))
-		print(f"[Network] DEBUG: Nameservers: {self.nameservers}.")
+		# print "nameservers:", self.nameservers
 
 	def getConfiguredAdapters(self):
 		return self.configuredNetworkAdapters

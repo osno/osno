@@ -145,24 +145,16 @@ def InitUsageConfig():
 	config.usage.use_pig = ConfigYesNo(default=False)
 	config.usage.update_available = NoSave(ConfigYesNo(default=False))
 	config.misc.ecm_info = ConfigYesNo(default=False)
-	choices = [
+	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
 		("dhcp-router", _("Router / Gateway")),
-		("custom", _("Static IP / Custom"))
-	]
-	fileDom = fileReadXML(resolveFilename(SCOPE_SKINS, "dnsservers.xml"), source=MODULE_NAME)
-	for dns in fileDom.findall("dnsserver"):
-		if dns.get("key", ""):
-			choices.append((dns.get("key"), _(dns.get("title"))))
-
-	config.usage.dns = ConfigSelection(default="dhcp-router", choices=choices)
-	config.usage.dnsMode = ConfigSelection(default=0, choices=[
-		(0, _("Prefer IPv4")),
-		(1, _("Prefer IPv6")),
-		(2, _("IPv4 only")),
-		(3, _("IPv6 only"))
+		("custom", _("Static IP / Custom")),
+		("google", _("Google DNS")),
+		("cloudflare", _("Cloudflare DNS")),
+		("quad9", _("Quad9 DNS")),
+		("opendns-familyshield", _("OpenDNS FamilyShield")),
+		("opendns-home", _("OpenDNS Home"))
 	])
-	config.usage.dnsSuffix = ConfigText(default="")
-	config.usage.dnsRotate = ConfigYesNo(default=False)
+
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)
 	config.usage.subnetwork_terrestrial = ConfigYesNo(default=True)
