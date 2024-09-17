@@ -2,10 +2,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 OpenDROID\n"
+"Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-09 14:05+0200\n"
-"PO-Revision-Date: 2024-09-13 19:02+0200\n"
+"PO-Revision-Date: 2024-09-18 00:37+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -330,6 +330,7 @@ msgstr "%A %-d.%-m"
 msgid "%A %-d.%-m.%Y"
 msgstr "%A %-d.%-m.%Y"
 
+#, fuzzy
 msgid "%A %-d.%m"
 msgstr "%A %-d/%m"
 
@@ -9599,7 +9600,7 @@ msgid "IP address"
 msgstr "Indirizzo IP"
 
 msgid "IP address of the Stream Relay server used to descramble services that can only be decrypted via Stream Relay."
-msgstr ""
+msgstr "Indirizzo IP del server Stream Relay utilizzato per decodificare i servizi che possono essere decrittografati solo tramite Stream Relay."
 
 msgid "IP of fallback remote receiver"
 msgstr "IP del ricevitore remoto di fallback"
@@ -10343,7 +10344,7 @@ msgid "Jordan"
 msgstr "Giordania"
 
 msgid "Jump"
-msgstr ""
+msgstr "Vai"
 
 msgid "Jump back 24 hours"
 msgstr "Vai indietro di 24 ore"
@@ -12156,7 +12157,7 @@ msgid "Network Wizard"
 msgstr "Procedura guidata rete"
 
 msgid "Network adapter not connected to a network!"
-msgstr ""
+msgstr "Adattatore di rete non connesso a una rete!"
 
 msgid "Network configuration..."
 msgstr "Configurazione rete..."
@@ -17267,13 +17268,13 @@ msgid "Set Base Time"
 msgstr "Imposta ora base"
 
 msgid "Set CI Boot delay."
-msgstr ""
+msgstr "Imposta il ritardo di avvio CI."
 
 msgid "Set CI assignment for detection of available services."
 msgstr "Imposta assegnazione CI per il rilevamento dei servizi disponibili."
 
 msgid "Set DVB CI delay."
-msgstr ""
+msgstr "Imposta il ritardo CI DVB."
 
 msgid "Set Default"
 msgstr "Imposta predefinito"
@@ -17458,7 +17459,7 @@ msgid "Sets the root directory of media list. This removes the '..' entry from b
 msgstr "Imposta la cartella principale per le registrazioni. Verrà rimossa la voce '..' dalla visualizzazione della cartella."
 
 msgid "Setting"
-msgstr "Impostazione"
+msgstr "Liste Canali"
 
 msgid "Setting a password is strongly advised if your STB is open to the Internet. You must set a password in order to be able to use network services like FTP, Telnet or SSH."
 msgstr "L'impostazione di una password è fortemente consigliata soprattutto se il ricevitore ha delle porte aperte verso Internet. È necessario impostare una password per poter usare i servizi di rete come FTP, Telnet o SSH."
@@ -18105,7 +18106,7 @@ msgid "Show notification when import channels and/or EPG from remote receiver UR
 msgstr "Mostrare una notifica quando i canali di importazione e/o l'EPG dall'URL del ricevitore remoto sono stati completati"
 
 msgid "Show notification when import channels was not successful"
-msgstr ""
+msgstr "Mostra una notifica quando l'importazione dei canali non ha avuto esito positivo"
 
 msgid "Show notification when import channels was successful"
 msgstr "Mostrare una notifica quando i canali di importazione non sono stati completati"
@@ -20485,7 +20486,7 @@ msgstr ""
 "Questo test verifica il DNS configurato.\n"
 "Se ricevi un messaggio 'non confermato':\n"
 "- controlla il DHCP, il cablaggio e la configurazione dell'adattatore\n"
-"- se hai configurato i nameserver manualmente, verifica le voci nella configurazione \"Nameserver\""
+"- se hai configurato i nameserver manualmente, verifica le voci nella configurazione \"Nameserver"
 
 msgid ""
 "This test checks whether a network cable is connected to your LAN adapter.\n"
@@ -21423,6 +21424,8 @@ msgid ""
 "Update succeeded!\n"
 "Your Bootloader is now up-to-date!"
 msgstr ""
+"Aggiornamento riuscito!\n"
+"Il tuo Bootloader è ora aggiornato!"
 
 msgid "Update the selected plugin / list of plugins"
 msgstr "Aggiorna plugin/elenco dei plugin selezionati"
@@ -22190,7 +22193,7 @@ msgstr ""
 
 #, python-format
 msgid "Warning: %d feeds were unable to be reloaded!"
-msgstr ""
+msgstr "Avviso: %d impossibile ricaricare feed!"
 
 msgid "Warning: If your usb is already connected\n"
 msgstr "Attenzione: Se il vostro USB è già collegata\n"
