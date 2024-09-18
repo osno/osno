@@ -1,6 +1,6 @@
 from glob import glob
 from locale import AM_STR, PM_STR, nl_langinfo
-from os import makedirs, remove, system as ossystem
+from os import makedirs, remove, system as ossystem, mkdir
 from os.path import exists, isfile, join as pathjoin, normpath, splitext
 from sys import maxsize
 from time import time
@@ -15,7 +15,7 @@ from Components.International import international
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo
-from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT,SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename, fileWriteLine
+from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT, SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename, fileWriteLine
 from Components.AVSwitch import iAVSwitch
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -855,18 +855,18 @@ def InitUsageConfig():
 	config.usage.frontend_priority_strictly.addNotifier(PreferredTunerChanged)
 	if not exists(resolveFilename(SCOPE_VOD)):
 	 try:
-	  mkdir(resolveFilename(SCOPE_VOD), 493)
+	  mkdir(resolveFilename(SCOPE_VOD), 0o755)
 	 except:
 	  pass
 	config.usage.vod_path = ConfigText(default = resolveFilename(SCOPE_VOD))
-	if not config.usage.default_path.value.endswith('/'):
+	if not config.usage.default_path.value.endswith("/"):
 	  tmpvalue = config.usage.vod_path.value
-	  config.usage.vod_path.setValue(tmpvalue + '/')
+	  config.usage.vod_path.setValue(tmpvalue + "/")
 	  config.usage.vod_path.save()
 	def vodpathChanged(configElement):
-	 if not config.usage.vod_path.value.endswith('/'):
+	 if not config.usage.vod_path.value.endswith("/"):
 	   tmpvalue = config.usage.vod_path.value
-	   config.usage.vod_path.setValue(tmpvalue + '/')
+	   config.usage.vod_path.setValue(tmpvalue + "/")
 	   config.usage.vod_path.save()
 	config.usage.vod_path.addNotifier(vodpathChanged, immediate_feedback=False)
 	config.usage.allowed_vod_paths = ConfigLocations(default = [
@@ -901,8 +901,8 @@ def InitUsageConfig():
 		("(1280, 720)", "1280x720"),
 		("(1920, 1080)", "1920x1080")
 	])
-	config.usage.enable_delivery_system_workaround = ConfigYesNo(default=False)
 
+	config.usage.enable_delivery_system_workaround = ConfigYesNo(default=False)
 	config.usage.date = ConfigSubsection()
 	config.usage.date.enabled = NoSave(ConfigBoolean(default=False))
 	config.usage.date.enabled_display = NoSave(ConfigBoolean(default=False))
