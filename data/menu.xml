@@ -77,7 +77,7 @@ self.session.open(GreenPanel)
 			</menu>
 		<!-- Menu / Settings / GUI -->
 		<!-- was: Menu / Settings / System -->
-                  <menu key="system" level="0" text="User Interface" weight="15">
+                  <menu key="system" level="0" text="User Interface" weight="6">
 				<!-- Menu / Setup / GUI / Display-->
 				<item key="user_interface" level="0" text="OSD Settings" weight="0"><setup setupKey="UserInterface" /></item>
 				<item key="remote_setup" level="0" text="Remote Control Button Settings" weight="5"><setup setupKey="RemoteButton" /></item>
