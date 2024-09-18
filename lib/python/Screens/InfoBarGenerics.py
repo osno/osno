@@ -1450,9 +1450,7 @@ class InfoBarNumberZap:
 		service, bouquet = self.searchNumber(number)
 		self.selectAndStartService(service, bouquet)
 
-
 config.misc.initialchannelselection = ConfigBoolean(default=True)
-
 
 class InfoBarChannelSelection:
 	""" ChannelSelection - handles the channelSelection dialog and the initial
@@ -1747,7 +1745,6 @@ class InfoBarChannelSelection:
 
 class InfoBarMenu:
 	""" Handles a menu action, to open the (main) menu """
-
 	def __init__(self):
 		# "MenuActions" is also used by EMC
 		self["MenuActions"] = HelpableActionMap(self, ["InfoBarMenuActions"], {
@@ -1857,7 +1854,6 @@ class InfoBarSimpleEventView:
 			self.toggleShow()
 			return 1
 
-
 class SimpleServicelist:
 	def __init__(self, services):
 		self.services = services
@@ -1900,7 +1896,6 @@ class SimpleServicelist:
 
 class InfoBarEPG:
 	""" EPG - Opens an EPG list when the showEPGList action fires """
-
 	def __init__(self):
 		self.is_now_next = False
 		self.dlg_stack = []
@@ -2293,7 +2288,6 @@ class InfoBarRdsDecoder:
 			self.RassSlidePicChanged()
 		self.rds_display.show()
 
-
 class Seekbar(Screen):
 	def __init__(self, session, fwd):
 		Screen.__init__(self, session)
@@ -2362,7 +2356,6 @@ class Seekbar(Screen):
 			self.percent = float(number) * 10.0
 		else:
 			ConfigListScreen.keyNumberGlobal(self, number)
-
 
 class InfoBarSeek:
 	"""handles actions like seeking, pause"""
@@ -3118,8 +3111,8 @@ class InfoBarTimeshiftState(InfoBarPVRState):
 		if self.session.nav.getCurrentlyPlayingServiceReference():
 			name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
 			url = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getPath()
-		if self.timeshiftEnabled() and exists("%spts_livebuffer_%s.meta" % (config.timeshift.path.value, self.pts_currplaying)):
-			readmetafile = open("%spts_livebuffer_%s.meta" % (config.timeshift.path.value, self.pts_currplaying))
+		if self.timeshiftEnabled() and exists("%spts_livebuffer_%s.meta" % (config.usage.timeshift_path.value,self.pts_currplaying)):
+			readmetafile = open("%spts_livebuffer_%s.meta" % (config.usage.timeshift_path.value,self.pts_currplaying))
 			servicerefname = readmetafile.readline()[0:-1]
 			eventname = readmetafile.readline()[0:-1]
 			readmetafile.close()
