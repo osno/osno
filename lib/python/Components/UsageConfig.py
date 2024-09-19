@@ -33,7 +33,6 @@ def InitUsageConfig():
 			pngfile = "%s.png" % remote
 			if isfile(pngfile):
 				RemoteChoices.append(remote.split("/")[-1])
-
 	config.misc.SettingsVersion = ConfigFloat(default=[1, 1], limits=[(1, 10), (0, 99)])
 	config.misc.SettingsVersion.value = [1, 1]
 	config.misc.SettingsVersion.save_forced = True
@@ -861,12 +860,12 @@ def InitUsageConfig():
 	config.usage.vod_path = ConfigText(default = resolveFilename(SCOPE_VOD))
 	if not config.usage.default_path.value.endswith("/"):
 	  tmpvalue = config.usage.vod_path.value
-	  config.usage.vod_path.setValue(tmpvalue + "/")
+	  config.usage.vod_path.setValue(f"{tmpvalue}/")
 	  config.usage.vod_path.save()
 	def vodpathChanged(configElement):
 	 if not config.usage.vod_path.value.endswith("/"):
 	   tmpvalue = config.usage.vod_path.value
-	   config.usage.vod_path.setValue(tmpvalue + "/")
+	   config.usage.vod_path.setValue(f"{tmpvalue}/")
 	   config.usage.vod_path.save()
 	config.usage.vod_path.addNotifier(vodpathChanged, immediate_feedback=False)
 	config.usage.allowed_vod_paths = ConfigLocations(default = [
