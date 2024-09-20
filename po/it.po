@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
-"PO-Revision-Date: 2024-09-20 22:58+0200\n"
+"POT-Creation-Date: 2024-09-20 23:13+0200\n"
+"PO-Revision-Date: 2024-09-21 00:03+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
@@ -2629,7 +2629,10 @@ msgstr ""
 "Sei sicuro di voler eliminare\n"
 "il seguente backup:\n"
 
-msgid "Are you sure you want to delete Image:\n"
+#, fuzzy
+msgid ""
+"Are you sure you want to delete Image:\n"
+" "
 msgstr "Sei sicuro di voler eliminare l'immagine:\n"
 
 msgid "Are you sure you want to delete all selected logs:\n"
@@ -2644,7 +2647,10 @@ msgstr "Sei sicuro di voler eliminare questa immagine?"
 msgid "Are you sure you want to delete this log:\n"
 msgstr "Sei sicuro di voler eliminare questo registro:\n"
 
-msgid "Are you sure you want to delete this:\n"
+#, fuzzy
+msgid ""
+"Are you sure you want to delete this:\n"
+" "
 msgstr "Sicuro di voler cancellare questo:\n"
 
 msgid "Are you sure you want to delete this?"
@@ -6372,7 +6378,10 @@ msgstr "Divehi / Dhivehi / Maldiviano"
 msgid "Djibouti"
 msgstr "Gibuti"
 
-msgid "Do You really want to install OPDBoot in:\n"
+#, fuzzy
+msgid ""
+"Do You really want to install OPDBoot in:\n"
+" "
 msgstr "Vuoi davvero installare OPDBoot in:\n"
 
 msgid "Do not backup the image"
