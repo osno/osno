@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2021-12-28 18:02+0000\n"
 "Last-Translator: BliNeR-KeY <blinerg@gmail.com>\n"
 "Language-Team: Albanian <https://hosted.weblate.org/projects/openatv/enigma2-7-0-po/sq/>\n"
@@ -2879,9 +2879,6 @@ msgstr "Cilësimet e koleksionit"
 msgid "AutoCam Setup Actions"
 msgstr "Veprimet e zakonshme të konfigurimit"
 
-msgid "AutoFS"
-msgstr ""
-
 msgid "AutoMountManager"
 msgstr ""
 
@@ -4309,9 +4306,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr ""
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -4571,9 +4565,6 @@ msgstr "Veprimet e zakonshme të konfigurimit"
 #, fuzzy
 msgid "Common interface"
 msgstr "Ndërfaqe e zakonshme"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr "Komoret"
@@ -5339,9 +5330,6 @@ msgstr ""
 msgid "Croatian"
 msgstr ""
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr ""
 
@@ -5503,12 +5491,6 @@ msgid "DNS Settings"
 msgstr ""
 
 msgid "DNS data source"
-msgstr ""
-
-msgid "DNS mode"
-msgstr ""
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -5863,9 +5845,6 @@ msgid "Define Softcam For This Service"
 msgstr ""
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -8119,9 +8098,6 @@ msgstr ""
 msgid "FTA"
 msgstr ""
 
-msgid "FTP"
-msgstr ""
-
 msgid "FTP Actions"
 msgstr ""
 
@@ -9588,12 +9564,6 @@ msgstr ""
 msgid "IP:"
 msgstr ""
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 msgid "ISO file is too large for this file system!"
 msgstr ""
 
@@ -9811,10 +9781,6 @@ msgstr ""
 
 msgid "Inactive"
 msgstr ""
-
-#, fuzzy
-msgid "Inadyn"
-msgstr "Veprime të zakonshme menuje"
 
 #, fuzzy
 msgid "Inadyn Actions"
@@ -11378,9 +11344,6 @@ msgstr ""
 msgid "Mini Series"
 msgstr ""
 
-msgid "MiniDLNA"
-msgstr ""
-
 msgid "MiniDLNA Log"
 msgstr ""
 
@@ -11986,9 +11949,6 @@ msgstr ""
 msgid "NEXT"
 msgstr ""
 
-msgid "NFS"
-msgstr ""
-
 msgid "NFS Actions"
 msgstr ""
 
@@ -12516,12 +12476,6 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr ""
 
@@ -12917,6 +12871,9 @@ msgstr ""
 msgid "Open AutoTimerlist"
 msgstr ""
 
+msgid "Open Cardserver"
+msgstr ""
+
 msgid "Open EPGSearch"
 msgstr ""
 
@@ -13022,9 +12979,6 @@ msgid "OpenSSL:\t%s"
 msgstr ""
 
 msgid "OpenVIX"
-msgstr ""
-
-msgid "OpenVPN"
 msgstr ""
 
 msgid "OpenVPN Actions"
@@ -14162,12 +14116,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -14607,12 +14555,6 @@ msgid "Quad PiP is not available."
 msgstr ""
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -15639,9 +15581,6 @@ msgstr ""
 msgid "S"
 msgstr ""
 
-msgid "SABnzbd"
-msgstr ""
-
 msgid "SABnzbd Actions"
 msgstr ""
 
@@ -15652,9 +15591,6 @@ msgid "SAT"
 msgstr ""
 
 msgid "SATA"
-msgstr ""
-
-msgid "SATPI"
 msgstr ""
 
 msgid "SATPI Setting Actions"
@@ -15706,9 +15642,6 @@ msgstr ""
 msgid "SSA file"
 msgstr ""
 
-msgid "SSH"
-msgstr ""
-
 msgid "SSID:"
 msgstr ""
 
@@ -15748,14 +15681,7 @@ msgstr ""
 msgid "Samba Actions"
 msgstr ""
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Klientët"
-
 msgid "Samba Log"
-msgstr ""
-
-msgid "Samba Server"
 msgstr ""
 
 msgid "Samba Setup"
@@ -16809,9 +16735,6 @@ msgstr ""
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
-msgid "Select the mode of the DNS."
-msgstr ""
-
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr ""
 
@@ -17525,9 +17448,6 @@ msgid "Shares"
 msgstr ""
 
 msgid "Sharpness"
-msgstr ""
-
-msgid "ShellInABox"
 msgstr ""
 
 msgid "Shellscript"
@@ -19718,10 +19638,6 @@ msgstr ""
 
 msgid "Teletext subtitle color"
 msgstr ""
-
-#, fuzzy
-msgid "Telnet"
-msgstr "Veprimet e zakonshme të konfigurimit"
 
 #, fuzzy
 msgid "Telnet Actions"
@@ -24273,9 +24189,6 @@ msgid "tree delete"
 msgstr ""
 
 msgid "turbo"
-msgstr ""
-
-msgid "uShare"
 msgstr ""
 
 msgid "uShare Actions"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2019-07-27 12:19+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3118,10 +3118,6 @@ msgid "AutoCam Setup Actions"
 msgstr "Hành động khởi động"
 
 #, fuzzy
-msgid "AutoFS"
-msgstr "Tự động"
-
-#, fuzzy
 msgid "AutoMountManager"
 msgstr "Mountmanager"
 
@@ -4658,9 +4654,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Đảo giáng sinh"
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -4939,9 +4932,6 @@ msgstr "Hành động khởi động"
 #, fuzzy
 msgid "Common interface"
 msgstr "Giao diện chung"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr "Comoros"
@@ -5784,9 +5774,6 @@ msgstr "Croatia"
 msgid "Croatian"
 msgstr "Tiếng Croatia"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr "Quản lý cron"
 
@@ -5959,13 +5946,6 @@ msgid "DNS Settings"
 msgstr "Cài đặt OSD"
 
 msgid "DNS data source"
-msgstr ""
-
-#, fuzzy
-msgid "DNS mode"
-msgstr "Chế độ DiSEqC"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -6356,9 +6336,6 @@ msgid "Define Softcam For This Service"
 msgstr "Ẩn dòng VBI cho dịch vụ này"
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -8888,10 +8865,6 @@ msgid "FTA"
 msgstr "FTA"
 
 #, fuzzy
-msgid "FTP"
-msgstr "FTA"
-
-#, fuzzy
 msgid "FTP Actions"
 msgstr "Thao tác nhanh"
 
@@ -10528,12 +10501,6 @@ msgstr "Cho phép thu từ xa dự phòng"
 msgid "IP:"
 msgstr "IP:"
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 #, fuzzy
 msgid "ISO file is too large for this file system!"
 msgstr "Tập tin ISO quá lớn cho hệ thống tập tin này!"
@@ -10771,10 +10738,6 @@ msgstr "Không hoạt động"
 
 msgid "Inactive"
 msgstr "Không hoạt động"
-
-#, fuzzy
-msgid "Inadyn"
-msgstr "Nhật ký đăng nhập"
 
 #, fuzzy
 msgid "Inadyn Actions"
@@ -12479,10 +12442,6 @@ msgstr "Thiết lập MiniDLNA"
 msgid "Mini Series"
 msgstr "Tất cả các nhà cung cấp dịch vụ"
 
-#, fuzzy
-msgid "MiniDLNA"
-msgstr "Nhật ký MiniDLNA"
-
 msgid "MiniDLNA Log"
 msgstr "Nhật ký MiniDLNA"
 
@@ -13182,10 +13141,6 @@ msgid "NEXT"
 msgstr ""
 
 #, fuzzy
-msgid "NFS"
-msgstr "Trong"
-
-#, fuzzy
 msgid "NFS Actions"
 msgstr "Thao tác nhanh"
 
@@ -13779,12 +13734,6 @@ msgstr ""
 msgid "None"
 msgstr "Không"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr "Đảo Norfolk"
 
@@ -14223,6 +14172,10 @@ msgid "Open AutoTimerlist"
 msgstr "Mở danh sách tự động ..."
 
 #, fuzzy
+msgid "Open Cardserver"
+msgstr "Chọn máy chủ thẻ"
+
+#, fuzzy
 msgid "Open EPGSearch"
 msgstr "Mở Tìm kiếm EPG ..."
 
@@ -14347,10 +14300,6 @@ msgstr ""
 
 #, fuzzy
 msgid "OpenVIX"
-msgstr "Mở"
-
-#, fuzzy
-msgid "OpenVPN"
 msgstr "Mở"
 
 #, fuzzy
@@ -15620,12 +15569,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -16113,12 +16056,6 @@ msgid "Quad PiP is not available."
 msgstr "Quad PiP không có sẵn."
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -17263,10 +17200,6 @@ msgid "S"
 msgstr "SD"
 
 #, fuzzy
-msgid "SABnzbd"
-msgstr "Thiết lập SABnzbd"
-
-#, fuzzy
 msgid "SABnzbd Actions"
 msgstr "Thiết lập SABnzbd"
 
@@ -17279,9 +17212,6 @@ msgstr "SAT"
 
 msgid "SATA"
 msgstr "SATA"
-
-msgid "SATPI"
-msgstr ""
 
 #, fuzzy
 msgid "SATPI Setting Actions"
@@ -17335,9 +17265,6 @@ msgstr "Tập tin thường xuyên"
 msgid "SSA file"
 msgstr ""
 
-msgid "SSH"
-msgstr ""
-
 msgid "SSID:"
 msgstr "SSID:"
 
@@ -17379,16 +17306,8 @@ msgstr "Samba"
 msgid "Samba Actions"
 msgstr "Nhật ký Samba"
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Cài đặt Samba"
-
 msgid "Samba Log"
 msgstr "Nhật ký Samba"
-
-#, fuzzy
-msgid "Samba Server"
-msgstr "Cài đặt Samba"
 
 msgid "Samba Setup"
 msgstr "Cài đặt Samba"
@@ -18540,10 +18459,6 @@ msgid "Select the method of restoring screen resolution and framebuffer when lea
 msgstr ""
 
 #, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "Chọn đường dẫn phim"
-
-#, fuzzy
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr "Chọn số kiểu máy của thiết bị Unicable của bạn. Nếu số kiểu máy không được liệt kê, hãy đặt 'SCR' thành 'người dùng xác định' và nhập thủ công các thông số thiết bị theo bảng thông số kỹ thuật của nó."
 
@@ -19352,9 +19267,6 @@ msgstr "Chia sẻ"
 
 msgid "Sharpness"
 msgstr "Độ sắc nét"
-
-msgid "ShellInABox"
-msgstr ""
 
 msgid "Shellscript"
 msgstr "Vỏ sò"
@@ -21832,10 +21744,6 @@ msgstr "Vui lòng chọn độ phân giải ..."
 #, fuzzy
 msgid "Teletext subtitle color"
 msgstr "Chọn hành động"
-
-#, fuzzy
-msgid "Telnet"
-msgstr "Cổng Telnet"
 
 #, fuzzy
 msgid "Telnet Actions"
@@ -26882,10 +26790,6 @@ msgstr "xóa bỏ"
 
 msgid "turbo"
 msgstr "turbo"
-
-#, fuzzy
-msgid "uShare"
-msgstr "Chia sẻ"
 
 #, fuzzy
 msgid "uShare Actions"

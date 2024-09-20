@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2018-10-04 21:46+0200\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: \n"
@@ -3325,11 +3325,6 @@ msgstr "Selecció de gravació"
 
 #
 #, fuzzy
-msgid "AutoFS"
-msgstr "Auto"
-
-#
-#, fuzzy
 msgid "AutoMountManager"
 msgstr "Gestió de paquets"
 
@@ -4924,9 +4919,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr ""
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -5230,9 +5222,6 @@ msgid "Common Setup Actions"
 msgstr ""
 
 msgid "Common interface"
-msgstr ""
-
-msgid "Comodo Secure DNS"
 msgstr ""
 
 msgid "Comoros"
@@ -6048,9 +6037,6 @@ msgstr "Croat"
 msgid "Croatian"
 msgstr "Croat"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr ""
 
@@ -6244,14 +6230,6 @@ msgid "DNS Settings"
 msgstr "Configuracions"
 
 msgid "DNS data source"
-msgstr ""
-
-#
-#, fuzzy
-msgid "DNS mode"
-msgstr "mode DiSEqC"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -6656,9 +6634,6 @@ msgid "Define Softcam For This Service"
 msgstr ""
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -9311,9 +9286,6 @@ msgstr ""
 msgid "FTA"
 msgstr ""
 
-msgid "FTP"
-msgstr ""
-
 msgid "FTP Actions"
 msgstr ""
 
@@ -11023,12 +10995,6 @@ msgstr ""
 msgid "IP:"
 msgstr ""
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 msgid "ISO file is too large for this file system!"
 msgstr ""
 
@@ -11260,9 +11226,6 @@ msgid "Inaccessible"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
-
-msgid "Inadyn"
 msgstr ""
 
 msgid "Inadyn Actions"
@@ -13117,11 +13080,6 @@ msgstr ""
 msgid "Mini Series"
 msgstr "Canals"
 
-#
-#, fuzzy
-msgid "MiniDLNA"
-msgstr "Configuracions"
-
 msgid "MiniDLNA Log"
 msgstr ""
 
@@ -13889,9 +13847,6 @@ msgstr "N/D"
 msgid "NEXT"
 msgstr ""
 
-msgid "NFS"
-msgstr ""
-
 msgid "NFS Actions"
 msgstr ""
 
@@ -14563,12 +14518,6 @@ msgstr ""
 msgid "None"
 msgstr "Cap"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr ""
 
@@ -15028,6 +14977,11 @@ msgstr ""
 msgid "Open AutoTimerlist"
 msgstr "Gravar"
 
+#
+#, fuzzy
+msgid "Open Cardserver"
+msgstr "Seleccionar una pel·lícula"
+
 msgid "Open EPGSearch"
 msgstr ""
 
@@ -15147,11 +15101,6 @@ msgstr ""
 
 msgid "OpenVIX"
 msgstr ""
-
-#
-#, fuzzy
-msgid "OpenVPN"
-msgstr "Configuracions"
 
 msgid "OpenVPN Actions"
 msgstr ""
@@ -16589,12 +16538,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -17148,12 +17091,6 @@ msgid "Quad PiP is not available."
 msgstr "Alguns plugins no estan disponibles:\n"
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -18430,11 +18367,6 @@ msgstr ""
 msgid "S"
 msgstr ""
 
-#
-#, fuzzy
-msgid "SABnzbd"
-msgstr "Configuracions"
-
 msgid "SABnzbd Actions"
 msgstr ""
 
@@ -18447,9 +18379,6 @@ msgid "SAT"
 msgstr ""
 
 msgid "SATA"
-msgstr ""
-
-msgid "SATPI"
 msgstr ""
 
 msgid "SATPI Setting Actions"
@@ -18507,9 +18436,6 @@ msgstr ""
 msgid "SSA file"
 msgstr "Gravar"
 
-msgid "SSH"
-msgstr ""
-
 #
 msgid "SSID:"
 msgstr ""
@@ -18554,18 +18480,8 @@ msgstr ""
 msgid "Samba Actions"
 msgstr "Selecció de subtítols"
 
-#
-#, fuzzy
-msgid "Samba Client"
-msgstr "Selecció de subtítols"
-
 msgid "Samba Log"
 msgstr ""
-
-#
-#, fuzzy
-msgid "Samba Server"
-msgstr "Servidor de noms"
 
 msgid "Samba Setup"
 msgstr ""
@@ -19775,11 +19691,6 @@ msgstr ""
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
-#
-#, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "Seleccionar una pel·lícula"
-
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr ""
 
@@ -20625,9 +20536,6 @@ msgstr ""
 
 #
 msgid "Sharpness"
-msgstr ""
-
-msgid "ShellInABox"
 msgstr ""
 
 #
@@ -23433,11 +23341,6 @@ msgstr "Recerca automàtica"
 #, fuzzy
 msgid "Teletext subtitle color"
 msgstr "Programació d'apagada"
-
-#
-#, fuzzy
-msgid "Telnet"
-msgstr "Selecció EPG"
 
 #
 #, fuzzy
@@ -28630,11 +28533,6 @@ msgstr "Hora inici"
 
 msgid "turbo"
 msgstr ""
-
-#
-#, fuzzy
-msgid "uShare"
-msgstr "Config OSD"
 
 #
 #, fuzzy

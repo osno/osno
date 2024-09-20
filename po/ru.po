@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: a.k.a Uchkun <madamin2007@mail.ru>\n"
@@ -3174,10 +3174,6 @@ msgid "AutoCam Setup Actions"
 msgstr "Действие при старте системы"
 
 #, fuzzy
-msgid "AutoFS"
-msgstr "Автоматически"
-
-#, fuzzy
 msgid "AutoMountManager"
 msgstr "Установки монтирования"
 
@@ -4709,9 +4705,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr ""
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -4995,9 +4988,6 @@ msgstr "Действие при старте системы"
 
 msgid "Common interface"
 msgstr "Интерфейс карт и модулей"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr ""
@@ -5831,9 +5821,6 @@ msgstr "Хорватский"
 msgid "Croatian"
 msgstr "Хорватский"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr "Менеджер Cron"
 
@@ -6005,13 +5992,6 @@ msgid "DNS Settings"
 msgstr "Настройки OSD"
 
 msgid "DNS data source"
-msgstr ""
-
-#, fuzzy
-msgid "DNS mode"
-msgstr "DiSEqC режим"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -6388,9 +6368,6 @@ msgid "Define Softcam For This Service"
 msgstr ""
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -8878,10 +8855,6 @@ msgid "FTA"
 msgstr "ФТП"
 
 #, fuzzy
-msgid "FTP"
-msgstr "ФТП"
-
-#, fuzzy
 msgid "FTP Actions"
 msgstr "Действия быстрого меню"
 
@@ -10504,12 +10477,6 @@ msgstr "Включить резервный удаленный ресивер"
 msgid "IP:"
 msgstr ""
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 #, fuzzy
 msgid "ISO file is too large for this file system!"
 msgstr "ISO файл слишком велик для этой файловой системы!"
@@ -10748,10 +10715,6 @@ msgstr "Неактивен"
 
 msgid "Inactive"
 msgstr "Неактивен"
-
-#, fuzzy
-msgid "Inadyn"
-msgstr "Лог Inadyn"
 
 #, fuzzy
 msgid "Inadyn Actions"
@@ -12460,10 +12423,6 @@ msgstr "Настройки MiniDLNA"
 msgid "Mini Series"
 msgstr "Каналы"
 
-#, fuzzy
-msgid "MiniDLNA"
-msgstr "Лог MiniDLNA"
-
 msgid "MiniDLNA Log"
 msgstr "Лог MiniDLNA"
 
@@ -13140,9 +13099,6 @@ msgstr "N/A"
 msgid "NEXT"
 msgstr ""
 
-msgid "NFS"
-msgstr ""
-
 #, fuzzy
 msgid "NFS Actions"
 msgstr "Действия быстрого меню"
@@ -13745,12 +13701,6 @@ msgstr ""
 msgid "None"
 msgstr "Нет"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr ""
 
@@ -14197,6 +14147,10 @@ msgid "Open AutoTimerlist"
 msgstr "Открыть список AutoTimer…"
 
 #, fuzzy
+msgid "Open Cardserver"
+msgstr "Выберите запись (фильм)"
+
+#, fuzzy
 msgid "Open EPGSearch"
 msgstr "Запустить EPGSearch..."
 
@@ -14322,10 +14276,6 @@ msgstr ""
 
 #, fuzzy
 msgid "OpenVIX"
-msgstr "Открыть"
-
-#, fuzzy
-msgid "OpenVPN"
 msgstr "Открыть"
 
 #, fuzzy
@@ -15607,12 +15557,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -16103,12 +16047,6 @@ msgid "Quad PiP is not available."
 msgstr "Тюнер не найден."
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -17258,10 +17196,6 @@ msgid "S"
 msgstr "SD"
 
 #, fuzzy
-msgid "SABnzbd"
-msgstr "Настройки SABnzbd"
-
-#, fuzzy
 msgid "SABnzbd Actions"
 msgstr "Настройки SABnzbd"
 
@@ -17273,9 +17207,6 @@ msgid "SAT"
 msgstr ""
 
 msgid "SATA"
-msgstr ""
-
-msgid "SATPI"
 msgstr ""
 
 #, fuzzy
@@ -17329,9 +17260,6 @@ msgstr ""
 msgid "SSA file"
 msgstr ""
 
-msgid "SSH"
-msgstr ""
-
 msgid "SSID:"
 msgstr "SSID:"
 
@@ -17374,16 +17302,8 @@ msgstr ""
 msgid "Samba Actions"
 msgstr "Лог Samba"
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Настройки Samba"
-
 msgid "Samba Log"
 msgstr "Лог Samba"
-
-#, fuzzy
-msgid "Samba Server"
-msgstr "Настройки Samba"
 
 msgid "Samba Setup"
 msgstr "Настройки Samba"
@@ -18521,10 +18441,6 @@ msgstr ""
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
-#, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "выбрать папку для фильмов"
-
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr ""
 
@@ -19322,9 +19238,6 @@ msgstr "Сетевые диски"
 
 msgid "Sharpness"
 msgstr "Резкость"
-
-msgid "ShellInABox"
-msgstr ""
 
 msgid "Shellscript"
 msgstr ""
@@ -21835,10 +21748,6 @@ msgstr "Пожалуйста, выберите разрешение изобра
 #, fuzzy
 msgid "Teletext subtitle color"
 msgstr "Выбор расположения"
-
-#, fuzzy
-msgid "Telnet"
-msgstr "Telnet-Порт"
 
 #, fuzzy
 msgid "Telnet Actions"
@@ -26905,10 +26814,6 @@ msgstr "удалить"
 
 msgid "turbo"
 msgstr ""
-
-#, fuzzy
-msgid "uShare"
-msgstr "Сетевые диски"
 
 #, fuzzy
 msgid "uShare Actions"

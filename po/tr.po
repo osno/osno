@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2018-03-30 09:22+0200\n"
 "Last-Translator:  FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Turkish <sunder67@hotmail.com>\n"
@@ -3381,11 +3381,6 @@ msgstr "İletişim"
 
 #
 #, fuzzy
-msgid "AutoFS"
-msgstr "Otomatik"
-
-#
-#, fuzzy
 msgid "AutoMountManager"
 msgstr "Eklenti yönetici yardımı"
 
@@ -4995,9 +4990,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr ""
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -5311,9 +5303,6 @@ msgstr "İletişim"
 
 msgid "Common interface"
 msgstr "Ortak arayüz"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr ""
@@ -6186,9 +6175,6 @@ msgstr "Hırvatça"
 msgid "Croatian"
 msgstr "Hırvatça"
 
-msgid "Cron"
-msgstr ""
-
 #, fuzzy
 msgid "Cron Manager"
 msgstr "Günlük Yöneticisi"
@@ -6376,14 +6362,6 @@ msgid "DNS Settings"
 msgstr "Ayarlar"
 
 msgid "DNS data source"
-msgstr ""
-
-#
-#, fuzzy
-msgid "DNS mode"
-msgstr "DiSEqC kipi"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -6787,9 +6765,6 @@ msgid "Define Softcam For This Service"
 msgstr ""
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -9452,10 +9427,6 @@ msgid "FTA"
 msgstr "FTP"
 
 #, fuzzy
-msgid "FTP"
-msgstr "FTP"
-
-#, fuzzy
 msgid "FTP Actions"
 msgstr "EPG konumu"
 
@@ -11189,12 +11160,6 @@ msgstr ""
 msgid "IP:"
 msgstr "IP:"
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 #
 #, fuzzy
 msgid "ISO file is too large for this file system!"
@@ -11436,10 +11401,6 @@ msgstr ""
 
 msgid "Inactive"
 msgstr ""
-
-#, fuzzy
-msgid "Inadyn"
-msgstr "Inadyn Günlüğü"
 
 #, fuzzy
 msgid "Inadyn Actions"
@@ -13278,10 +13239,6 @@ msgstr "MiniDLNA Kurulumu"
 msgid "Mini Series"
 msgstr "Kanallar"
 
-#, fuzzy
-msgid "MiniDLNA"
-msgstr "MiniDLNA Günlüğü"
-
 msgid "MiniDLNA Log"
 msgstr "MiniDLNA Günlüğü"
 
@@ -14020,10 +13977,6 @@ msgstr "Kullanılamaz"
 msgid "NEXT"
 msgstr ""
 
-#, fuzzy
-msgid "NFS"
-msgstr "NFS"
-
 msgid "NFS Actions"
 msgstr ""
 
@@ -14688,12 +14641,6 @@ msgstr ""
 msgid "None"
 msgstr "Yok"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr ""
 
@@ -15163,6 +15110,10 @@ msgid "Open AutoTimerlist"
 msgstr "Oto-zamanlama Listesini göster"
 
 #, fuzzy
+msgid "Open Cardserver"
+msgstr "Bir film seçin"
+
+#, fuzzy
 msgid "Open EPGSearch"
 msgstr "EPG Ara"
 
@@ -15287,10 +15238,6 @@ msgstr ""
 
 #, fuzzy
 msgid "OpenVIX"
-msgstr "Aç"
-
-#, fuzzy
-msgid "OpenVPN"
 msgstr "Aç"
 
 msgid "OpenVPN Actions"
@@ -16701,12 +16648,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -17247,12 +17188,6 @@ msgid "Quad PiP is not available."
 msgstr "Tuner mevcut değil."
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -18542,10 +18477,6 @@ msgid "S"
 msgstr "SD"
 
 #, fuzzy
-msgid "SABnzbd"
-msgstr "SABnzbd Kurulumu"
-
-#, fuzzy
 msgid "SABnzbd Actions"
 msgstr "SABnzbd Kurulumu"
 
@@ -18558,9 +18489,6 @@ msgstr ""
 
 msgid "SATA"
 msgstr "SATA"
-
-msgid "SATPI"
-msgstr ""
 
 msgid "SATPI Setting Actions"
 msgstr ""
@@ -18614,9 +18542,6 @@ msgstr ""
 msgid "SSA file"
 msgstr "Zamanlayıcı ekle"
 
-msgid "SSH"
-msgstr ""
-
 #
 msgid "SSID:"
 msgstr "Ağ adı (SSID):"
@@ -18661,16 +18586,8 @@ msgstr "Samba"
 msgid "Samba Actions"
 msgstr "Samba Günlüğü"
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Samba Kurulumu"
-
 msgid "Samba Log"
 msgstr "Samba Günlüğü"
-
-#, fuzzy
-msgid "Samba Server"
-msgstr "Samba Kurulumu"
 
 msgid "Samba Setup"
 msgstr "Samba Kurulumu"
@@ -19873,11 +19790,6 @@ msgstr ""
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
-#
-#, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "film yolu seç"
-
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr ""
 
@@ -20710,9 +20622,6 @@ msgstr "Paylaşımlar"
 #
 msgid "Sharpness"
 msgstr "Keskinlik"
-
-msgid "ShellInABox"
-msgstr ""
 
 msgid "Shellscript"
 msgstr "Shell Komut"
@@ -23434,10 +23343,6 @@ msgstr "Lütfen bir çözünürlük seçin..."
 #, fuzzy
 msgid "Teletext subtitle color"
 msgstr "Teleteks"
-
-#, fuzzy
-msgid "Telnet"
-msgstr "Telnet Kapısı"
 
 #
 #, fuzzy
@@ -28864,10 +28769,6 @@ msgstr "sil"
 
 msgid "turbo"
 msgstr ""
-
-#, fuzzy
-msgid "uShare"
-msgstr "Paylaşımlar"
 
 #, fuzzy
 msgid "uShare Actions"

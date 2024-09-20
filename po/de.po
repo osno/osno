@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2020-05-07 01:09+0200\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: openATV\n"
@@ -3302,11 +3302,6 @@ msgstr "Ton-Einstellungen"
 msgid "AutoCam Setup Actions"
 msgstr "Startmodus"
 
-#
-#, fuzzy
-msgid "AutoFS"
-msgstr "Auto"
-
 #, fuzzy
 msgid "AutoMountManager"
 msgstr "Mount Verwaltung"
@@ -4945,9 +4940,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Weihnachtsinsel"
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -5250,9 +5242,6 @@ msgstr "Startmodus"
 
 msgid "Common interface"
 msgstr "Entschlüsselung"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr "Komoren"
@@ -6121,9 +6110,6 @@ msgstr "Kroatien"
 msgid "Croatian"
 msgstr "Kroatisch"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr "Cron-Verwaltung"
 
@@ -6302,14 +6288,6 @@ msgid "DNS Settings"
 msgstr "OSD Einstellungen"
 
 msgid "DNS data source"
-msgstr ""
-
-#
-#, fuzzy
-msgid "DNS mode"
-msgstr "DiSEqC-Modus"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -6708,9 +6686,6 @@ msgid "Define Softcam For This Service"
 msgstr "Verstecke VBI Line für diesen Kanal"
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -9432,10 +9407,6 @@ msgid "FTA"
 msgstr "FreeTV (FTA)"
 
 #, fuzzy
-msgid "FTP"
-msgstr "FreeTV (FTA)"
-
-#, fuzzy
 msgid "FTP Actions"
 msgstr "Aktion"
 
@@ -11148,12 +11119,6 @@ msgstr "Aktiviere Reservereceiver"
 msgid "IP:"
 msgstr "IP:"
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 #
 #, fuzzy
 msgid "ISO file is too large for this file system!"
@@ -11403,10 +11368,6 @@ msgstr "Inaktiv"
 
 msgid "Inactive"
 msgstr "Inaktiv"
-
-#, fuzzy
-msgid "Inadyn"
-msgstr "Inadyn-Log"
 
 #, fuzzy
 msgid "Inadyn Actions"
@@ -13243,10 +13204,6 @@ msgstr "MiniDLNA-Medienserver"
 msgid "Mini Series"
 msgstr ""
 
-#, fuzzy
-msgid "MiniDLNA"
-msgstr "MiniDLNA-Medienserver"
-
 msgid "MiniDLNA Log"
 msgstr ""
 
@@ -14008,11 +13965,6 @@ msgstr "N/A"
 msgid "NEXT"
 msgstr ""
 
-#
-#, fuzzy
-msgid "NFS"
-msgstr "Einfügen"
-
 #, fuzzy
 msgid "NFS Actions"
 msgstr "Aktion"
@@ -14674,12 +14626,6 @@ msgstr ""
 msgid "None"
 msgstr "Keine"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr "Norfolkinsel"
 
@@ -15159,6 +15105,10 @@ msgid "Open AutoTimerlist"
 msgstr "Zeige AutoTimer-Liste..."
 
 #, fuzzy
+msgid "Open Cardserver"
+msgstr "Cardserver (2. Softcam) auswählen"
+
+#, fuzzy
 msgid "Open EPGSearch"
 msgstr "Öffne EPG-Suche..."
 
@@ -15293,10 +15243,6 @@ msgstr ""
 
 #, fuzzy
 msgid "OpenVIX"
-msgstr "Öffnen"
-
-#, fuzzy
-msgid "OpenVPN"
 msgstr "Öffnen"
 
 #, fuzzy
@@ -16712,12 +16658,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -17251,12 +17191,6 @@ msgid "Quad PiP is not available."
 msgstr ""
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -18506,10 +18440,6 @@ msgid "S"
 msgstr ""
 
 #, fuzzy
-msgid "SABnzbd"
-msgstr "SABnzbd (Binary News)"
-
-#, fuzzy
 msgid "SABnzbd Actions"
 msgstr "SABnzbd (Binary News)"
 
@@ -18522,9 +18452,6 @@ msgstr "SAT"
 
 msgid "SATA"
 msgstr "SATA"
-
-msgid "SATPI"
-msgstr ""
 
 #, fuzzy
 msgid "SATPI Setting Actions"
@@ -18579,9 +18506,6 @@ msgstr "Umbenennen Ordner/Datei"
 msgid "SSA file"
 msgstr ""
 
-msgid "SSH"
-msgstr ""
-
 #
 msgid "SSID:"
 msgstr "SSID:\t"
@@ -18624,16 +18548,8 @@ msgstr "Samba"
 msgid "Samba Actions"
 msgstr "Samba-Log"
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Samba-Einstellungen"
-
 msgid "Samba Log"
 msgstr "Samba-Log"
-
-#, fuzzy
-msgid "Samba Server"
-msgstr "Samba-Einstellungen"
 
 msgid "Samba Setup"
 msgstr "Samba-Einstellungen"
@@ -19881,11 +19797,6 @@ msgstr "Wählen Sie den Hersteller Ihres Unicable/SCR-Geräts aus. Wenn der Hers
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
-#
-#, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "Den Filmpfad auswählen"
-
 #, fuzzy
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr "Wählen Sie das Modell Ihres Unicable/SCR-Geräts aus. Wenn der Hersteller nicht aufgeführt ist, setzen Sie 'SCR' auf 'Benutzerdefiniert' und geben Sie die Geräteparameter gemäß dem zugehörigen Datenblatt manuell ein."
@@ -20762,9 +20673,6 @@ msgstr "Netzwerkfreigaben"
 #
 msgid "Sharpness"
 msgstr "Schärfe"
-
-msgid "ShellInABox"
-msgstr ""
 
 msgid "Shellscript"
 msgstr "Shellscript"
@@ -23424,10 +23332,6 @@ msgstr "Bitte die Auflösung wählen..."
 #, fuzzy
 msgid "Teletext subtitle color"
 msgstr "Videotext"
-
-#, fuzzy
-msgid "Telnet"
-msgstr "Telnet-Port"
 
 #
 #, fuzzy
@@ -28840,10 +28744,6 @@ msgstr "Löschen"
 
 msgid "turbo"
 msgstr "Turbo"
-
-#, fuzzy
-msgid "uShare"
-msgstr "Netzwerkfreigaben"
 
 # UsageConfig.py:295
 #, fuzzy

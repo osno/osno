@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3799,6 +3799,9 @@ msgstr ""
 msgid "Close title selection"
 msgstr ""
 
+msgid "Cloudflare DNS"
+msgstr ""
+
 msgid "Cocos (Keeling) Islands"
 msgstr ""
 
@@ -7160,6 +7163,9 @@ msgstr ""
 msgid "Golf"
 msgstr ""
 
+msgid "Google DNS"
+msgstr ""
+
 msgid "Goto"
 msgstr ""
 
@@ -7656,12 +7662,6 @@ msgid "IP of fallback remote receiver"
 msgstr ""
 
 msgid "IP:"
-msgstr ""
-
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
 msgstr ""
 
 msgid "ISO file is too large for this file system!"
@@ -10454,6 +10454,9 @@ msgstr ""
 msgid "Open AutoTimerlist"
 msgstr ""
 
+msgid "Open Cardserver"
+msgstr ""
+
 msgid "Open EPGSearch"
 msgstr ""
 
@@ -10530,6 +10533,12 @@ msgid "Open with File Commander"
 msgstr ""
 
 msgid "OpenATV"
+msgstr ""
+
+msgid "OpenDNS FamilyShield"
+msgstr ""
+
+msgid "OpenDNS Home"
 msgstr ""
 
 msgid "OpenDroid"
@@ -11400,12 +11409,6 @@ msgstr ""
 msgid "Predefined transponder"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Preferred tuner ATSC"
 msgstr ""
 
@@ -11776,6 +11779,9 @@ msgid "Quad PiP channel "
 msgstr ""
 
 msgid "Quad PiP is not available."
+msgstr ""
+
+msgid "Quad9 DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -19215,54 +19221,6 @@ msgstr ""
 msgid "help..."
 msgstr ""
 
-msgid "AutoFS"
-msgstr ""
-
-msgid "Chrony"
-msgstr ""
-
-msgid "Cron"
-msgstr ""
-
-msgid "FTP"
-msgstr ""
-
-msgid "Inadyn"
-msgstr ""
-
-msgid "MiniDLNA"
-msgstr ""
-
-msgid "NFS"
-msgstr ""
-
-msgid "OpenVPN"
-msgstr ""
-
-msgid "SABnzbd"
-msgstr ""
-
-msgid "SATPI"
-msgstr ""
-
-msgid "SSH"
-msgstr ""
-
-msgid "Samba Client"
-msgstr ""
-
-msgid "Samba Server"
-msgstr ""
-
-msgid "ShellInABox"
-msgstr ""
-
-msgid "Telnet"
-msgstr ""
-
-msgid "uShare"
-msgstr ""
-
 msgid "Check the internet connection"
 msgstr ""
 
@@ -19460,36 +19418,6 @@ msgstr ""
 msgid "TUNER:"
 msgstr ""
 
-msgid "Cloudflare DNS"
-msgstr ""
-
-msgid "Comodo Secure DNS"
-msgstr ""
-
-msgid "Google DNS"
-msgstr ""
-
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
-msgid "OpenDNS FamilyShield"
-msgstr ""
-
-msgid "OpenDNS Home"
-msgstr ""
-
-msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
-msgstr ""
-
 msgid "Advanced Restore"
 msgstr ""
 
@@ -19500,9 +19428,6 @@ msgid "Audio Settings"
 msgstr ""
 
 msgid "Auto Language Settings"
-msgstr ""
-
-msgid "AutoCam Settings"
 msgstr ""
 
 msgid "Automatic scan"
@@ -19524,9 +19449,6 @@ msgid "Button setup"
 msgstr ""
 
 msgid "CIFS/Samba Settings"
-msgstr ""
-
-msgid "Cardserver Settings"
 msgstr ""
 
 msgid "Channel Selection Settings"
@@ -20076,6 +19998,9 @@ msgstr ""
 msgid "Audio volume step size fast mode"
 msgstr ""
 
+msgid "AutoCam Settings"
+msgstr ""
+
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
@@ -20152,6 +20077,9 @@ msgid "CI+ Helper*"
 msgstr ""
 
 msgid "Can be used for different fps between external subtitles and video."
+msgstr ""
+
+msgid "Cardserver Settings"
 msgstr ""
 
 msgid "Change bouquets in quickzap"
@@ -20691,12 +20619,6 @@ msgstr ""
 msgid "DNS data source"
 msgstr ""
 
-msgid "DNS mode"
-msgstr ""
-
-msgid "DNS suffix"
-msgstr ""
-
 msgid "DTS/DTS-HD HR/DTS-HD MA/DTS:X"
 msgstr ""
 
@@ -20734,9 +20656,6 @@ msgid "Default volume offset"
 msgstr ""
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -22141,9 +22060,6 @@ msgid "Select the location where the picon files will be installed."
 msgstr ""
 
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
-msgstr ""
-
-msgid "Select the mode of the DNS."
 msgstr ""
 
 msgid "Select the network data rate below which the timer should activate as specified. Traffic above this rate with deactivate the timer."

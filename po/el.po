@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid Enigma2 Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: MCelliot_g <mcelliot_g@hotmail.com>\n"
@@ -3260,10 +3260,6 @@ msgid "AutoCam Setup Actions"
 msgstr "Ενέργεια εκκίνησης"
 
 #, fuzzy
-msgid "AutoFS"
-msgstr "Αυτόματο"
-
-#, fuzzy
 msgid "AutoMountManager"
 msgstr "Διαχείριση Προσαρτήσεων"
 
@@ -4799,9 +4795,6 @@ msgstr ""
 msgid "Christmas Island"
 msgstr ""
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr ""
 
@@ -5082,9 +5075,6 @@ msgstr "Ενέργεια εκκίνησης"
 
 msgid "Common interface"
 msgstr "Κοινή διεπαφή"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr ""
@@ -5922,9 +5912,6 @@ msgstr "Κροάτικα"
 msgid "Croatian"
 msgstr "Κροάτικα"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr "Διαχείριση Προγραμματισμένων Εργασιών"
 
@@ -6095,13 +6082,6 @@ msgid "DNS Settings"
 msgstr "Ρυθμίσεις OSD"
 
 msgid "DNS data source"
-msgstr ""
-
-#, fuzzy
-msgid "DNS mode"
-msgstr "Λειτουργία DiSEqC"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -6484,9 +6464,6 @@ msgid "Define Softcam For This Service"
 msgstr ""
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
-msgstr ""
-
-msgid "Define the DNS suffix."
 msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
@@ -8974,10 +8951,6 @@ msgid "FTA"
 msgstr "FTP"
 
 #, fuzzy
-msgid "FTP"
-msgstr "FTP"
-
-#, fuzzy
 msgid "FTP Actions"
 msgstr "Γρήγορες Ενέργειες"
 
@@ -10607,12 +10580,6 @@ msgstr "Ενεργοποίηση εφεδρικού απομακρυσμένου
 msgid "IP:"
 msgstr "IP:"
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 #, fuzzy
 msgid "ISO file is too large for this file system!"
 msgstr "Το αρχείο ISO είναι πολύ μεγάλο για αυτό το σύστημα αρχείων!"
@@ -10851,10 +10818,6 @@ msgstr "Ανενεργό"
 
 msgid "Inactive"
 msgstr "Ανενεργό"
-
-#, fuzzy
-msgid "Inadyn"
-msgstr "Καταγραφολόγιο Inadyn"
 
 #, fuzzy
 msgid "Inadyn Actions"
@@ -12563,10 +12526,6 @@ msgstr "Ρυθμίσεις MiniDLNA"
 msgid "Mini Series"
 msgstr "Όλες οι υπηρεσίες"
 
-#, fuzzy
-msgid "MiniDLNA"
-msgstr "Καταγραφές MiniDLNA"
-
 msgid "MiniDLNA Log"
 msgstr "Καταγραφές MiniDLNA"
 
@@ -13252,10 +13211,6 @@ msgid "NEXT"
 msgstr ""
 
 #, fuzzy
-msgid "NFS"
-msgstr "NFS"
-
-#, fuzzy
 msgid "NFS Actions"
 msgstr "Γρήγορες Ενέργειες"
 
@@ -13862,12 +13817,6 @@ msgstr ""
 msgid "None"
 msgstr "Κανένα"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr ""
 
@@ -14315,6 +14264,10 @@ msgid "Open AutoTimerlist"
 msgstr "Άνοιγμα Λίστας Αυτόματων Χρονοδιακοπτών"
 
 #, fuzzy
+msgid "Open Cardserver"
+msgstr "Επιλογή ταινίας"
+
+#, fuzzy
 msgid "Open EPGSearch"
 msgstr "Άνοιγμα Αναζήτησης EPG..."
 
@@ -14440,10 +14393,6 @@ msgstr ""
 
 #, fuzzy
 msgid "OpenVIX"
-msgstr "Άνοιγμα"
-
-#, fuzzy
-msgid "OpenVPN"
 msgstr "Άνοιγμα"
 
 #, fuzzy
@@ -15731,12 +15680,6 @@ msgstr ""
 msgid "Prefer AC3+ track"
 msgstr ""
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr ""
 
@@ -16230,12 +16173,6 @@ msgid "Quad PiP is not available."
 msgstr "Μη διαθέσιμο tuner."
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -17390,10 +17327,6 @@ msgid "S"
 msgstr "SD"
 
 #, fuzzy
-msgid "SABnzbd"
-msgstr "Ρυθμίσεις SABnzbd"
-
-#, fuzzy
 msgid "SABnzbd Actions"
 msgstr "Ρυθμίσεις SABnzbd"
 
@@ -17406,9 +17339,6 @@ msgstr "SAT"
 
 msgid "SATA"
 msgstr "SATA"
-
-msgid "SATPI"
-msgstr ""
 
 #, fuzzy
 msgid "SATPI Setting Actions"
@@ -17462,9 +17392,6 @@ msgstr ""
 msgid "SSA file"
 msgstr "Προσθήκη Χρονοδιακόπτη"
 
-msgid "SSH"
-msgstr ""
-
 msgid "SSID:"
 msgstr "SSID:"
 
@@ -17508,16 +17435,8 @@ msgstr "Samba"
 msgid "Samba Actions"
 msgstr "Καταγραφολόγιο Samba"
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Ρυθμίσεις Samba"
-
 msgid "Samba Log"
 msgstr "Καταγραφολόγιο Samba"
-
-#, fuzzy
-msgid "Samba Server"
-msgstr "Ρυθμίσεις Samba"
 
 msgid "Samba Setup"
 msgstr "Ρυθμίσεις Samba"
@@ -18654,10 +18573,6 @@ msgstr ""
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
-#, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "Επιλογή διαδρομής ταινίας"
-
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr ""
 
@@ -19458,9 +19373,6 @@ msgstr "Κοινόχρηστα στοιχεία"
 
 msgid "Sharpness"
 msgstr "Οξύτητα"
-
-msgid "ShellInABox"
-msgstr ""
 
 msgid "Shellscript"
 msgstr "Script κελύφους"
@@ -21986,10 +21898,6 @@ msgstr "Παρακαλώ επιλέξτε μία ανάλυση..."
 #, fuzzy
 msgid "Teletext subtitle color"
 msgstr "Τηλεκείμενο"
-
-#, fuzzy
-msgid "Telnet"
-msgstr "Θύρα Telnet"
 
 #, fuzzy
 msgid "Telnet Actions"
@@ -27076,10 +26984,6 @@ msgstr "διαγραφή"
 
 msgid "turbo"
 msgstr ""
-
-#, fuzzy
-msgid "uShare"
-msgstr "Κοινόχρηστα στοιχεία"
 
 #, fuzzy
 msgid "uShare Actions"

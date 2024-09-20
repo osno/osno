@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2024-09-19 12:53+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
@@ -427,16 +427,16 @@ msgid "%A %d. %B %Y"
 msgstr "%A %d %B %Y"
 
 msgid "%A %d.%-m"
-msgstr "%A %d/%-m"
+msgstr "%A %d.%-m"
 
 msgid "%A %d.%-m.%Y"
-msgstr "%A %d/%-m/%Y"
+msgstr "%A %d.%-m.%Y"
 
 msgid "%A %d.%m"
-msgstr "%A %d/%m"
+msgstr "%A %d.%m"
 
 msgid "%A %d.%m.%Y"
-msgstr "%A %d/%m/%Y"
+msgstr "%A %d.%m.%Y"
 
 msgid "%A %d/%-m"
 msgstr "%A %d/%-m"
@@ -580,16 +580,16 @@ msgid "%a %-d. %b %Y"
 msgstr "%a %-d %b %Y"
 
 msgid "%a %-d.%-m"
-msgstr "%a %-d/%-m"
+msgstr "%a %-d.%-m"
 
 msgid "%a %-d.%-m.%Y"
-msgstr "%a %-d/%-m/%Y"
+msgstr "%a %-d.%-m/%Y"
 
 msgid "%a %-d.%m"
-msgstr "%a %-d/%m"
+msgstr "%a %-d.%m"
 
 msgid "%a %-d.%m.%Y"
-msgstr "%a %-d/%m/%Y"
+msgstr "%a %-d.%m.%Y"
 
 msgid "%a %-d/%-m"
 msgstr "%a %-d/%-m"
@@ -721,16 +721,16 @@ msgid "%a %d. %b %Y"
 msgstr "%a %d %b %Y"
 
 msgid "%a %d.%-m"
-msgstr "%a %d/%-m"
+msgstr "%a %d.%-m"
 
 msgid "%a %d.%-m.%Y"
-msgstr "%a %d/%-m/%Y"
+msgstr "%a %d.%-m.%Y"
 
 msgid "%a %d.%m"
-msgstr "%a %d/%m"
+msgstr "%a %d.%m"
 
 msgid "%a %d.%m.%Y"
-msgstr "%a %d/%m/%Y"
+msgstr "%a %d.%m.%Y"
 
 msgid "%a %d/%-m"
 msgstr "%a %d/%-m"
@@ -978,7 +978,7 @@ msgstr "%d ms"
 #, python-format
 msgid "%d package has an update"
 msgid_plural "%d packages have updates."
-msgstr[0] "C'è %d pacchetto con un aggiornamento."
+msgstr[0] "C'è %d pacchetto con un aggiornamento"
 msgstr[1] "Ci sono %d pacchetti con aggiornamenti."
 
 #, python-format
@@ -2631,10 +2631,8 @@ msgstr ""
 
 msgid ""
 "Are you sure you want to delete Image:\n"
-" "
 msgstr ""
 "Sei sicuro di voler eliminare l'immagine:\n"
-" "
 
 msgid "Are you sure you want to delete all selected logs:\n"
 msgstr "Sei sicuro di voler eliminare tutti i registri selezionati:\n"
@@ -2650,10 +2648,8 @@ msgstr "Sei sicuro di voler eliminare questo registro:\n"
 
 msgid ""
 "Are you sure you want to delete this:\n"
-" "
 msgstr ""
 "Sicuro di voler cancellare questo:\n"
-" "
 
 msgid "Are you sure you want to delete this?"
 msgstr "Sei sicuro di voler eliminare questo?"
@@ -2921,9 +2917,6 @@ msgstr "Impostazioni AutoCam"
 msgid "AutoCam Setup Actions"
 msgstr "Azioni di impostazione AutoCam"
 
-msgid "AutoFS"
-msgstr "AutoFS"
-
 msgid "AutoMountManager"
 msgstr "Gestore di montaggio automatico"
 
@@ -3145,6 +3138,9 @@ msgstr "Barbados"
 
 msgid "Base"
 msgstr "Base"
+
+msgid "Base Shell"
+msgstr "Shell di Base"
 
 msgid "Base time"
 msgstr "Ora base"
@@ -4328,9 +4324,6 @@ msgstr "Scegli quale tuner configurare."
 msgid "Christmas Island"
 msgstr "Isola di Natale"
 
-msgid "Chrony"
-msgstr "Chrony"
-
 msgid "Church Slavic"
 msgstr "Chiesa slava"
 
@@ -4571,9 +4564,6 @@ msgstr "Azioni di configurazione comuni"
 
 msgid "Common interface"
 msgstr "Common Interface"
-
-msgid "Comodo Secure DNS"
-msgstr "Comodo DNS sicuro"
 
 msgid "Comoros"
 msgstr "Comore"
@@ -5331,9 +5321,6 @@ msgstr "Croazia"
 msgid "Croatian"
 msgstr "Croato"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr "Gestore cron"
 
@@ -5498,12 +5485,6 @@ msgstr "Impostazioni DNS"
 
 msgid "DNS data source"
 msgstr "Sorgente dati DNS"
-
-msgid "DNS mode"
-msgstr "Modalità DNS"
-
-msgid "DNS suffix"
-msgstr "Suffisso DNS"
 
 msgid ""
 "DO NOT POWER OFF YOUR DEVICE WHILE UPDATING!\n"
@@ -5827,13 +5808,13 @@ msgid "Default sort order for directories in the left column"
 msgstr "Ordinamento predefinito per le cartelle nella colonna di sinistra"
 
 msgid "Default sort order for directories in the right column."
-msgstr "Ordinamento predefinito per le cartelle nella colonna di destra"
+msgstr "Ordinamento predefinito per le cartelle nella colonna di destra."
 
 msgid "Default sort order for files in the left column."
-msgstr "Ordinamento predefinito per i file nella colonna di sinistra"
+msgstr "Ordinamento predefinito per i file nella colonna di sinistra."
 
 msgid "Default sort order for files in the right column."
-msgstr "Ordinamento predefinito per i file nella colonna di destra"
+msgstr "Ordinamento predefinito per i file nella colonna di destra."
 
 msgid "Default video mode selected"
 msgstr "Modalità video predefinita selezionata"
@@ -5860,9 +5841,6 @@ msgstr "Definisci softcam per questo servizio"
 msgid "Define additional delay in milliseconds before start of http(s) streams."
 msgstr "Definisci un ritardo aggiuntivo in millisecondi prima dell'inizio dei flussi http."
 
-msgid "Define the DNS suffix."
-msgstr "Definisci il suffisso DNS."
-
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
 msgstr "Definisce quanto veloce sono ripetuti i salti temporali. Valori minori di 500ms possono essere fonti di problemi con i NAS."
 
@@ -5888,7 +5866,7 @@ msgid "Delay after continuous tone disable before DiSEqC"
 msgstr "Ritardo dopo segnale continuo disabilitato via DiSEqC"
 
 msgid "Delay after enable voltage before motor command"
-msgstr "Ritardo dopo abilitazione del voltaggio prima di un comando al motore "
+msgstr "Ritardo dopo abilitazione del voltaggio prima di un comando al motore"
 
 msgid "Delay after enable voltage before switch command"
 msgstr "Ritardo dopo abilitazione della tensione prima del comando di commutazione"
@@ -6318,7 +6296,7 @@ msgid "Disable intro screen"
 msgstr "Disabilita schermata introduttiva"
 
 msgid "Disable the HDD Process on VFD."
-msgstr "Disabilita processo HDD su VFD"
+msgstr "Disabilita processo HDD su VFD."
 
 msgid "Disable timer"
 msgstr "Disabilita timer"
@@ -6400,10 +6378,8 @@ msgstr "Gibuti"
 
 msgid ""
 "Do You really want to install OPDBoot in:\n"
-" "
 msgstr ""
 "Vuoi davvero installare OPDBoot in:\n"
-" "
 
 msgid "Do not backup the image"
 msgstr "Non eseguire il backup dell'immagine"
@@ -7069,7 +7045,7 @@ msgid "Enable 5V for active antenna"
 msgstr "Abilita 5V per antenna attiva"
 
 msgid "Enable AI-Powered translation for all teletext and DVB subtitles."
-msgstr ""
+msgstr "Abilita la traduzione basata sull'intelligenza artificiale per tutti i sottotitoli del televideo e DVB."
 
 msgid "Enable BT Audio"
 msgstr "Abilita audio BT"
@@ -7166,7 +7142,7 @@ msgid "Enable auto fast scan for %s"
 msgstr "Abilita scansione rapida automatica per %s"
 
 msgid "Enable blinking rec symbol on the LCD Display in Standby."
-msgstr "Abilita simbolo lampeggiante registrazione su display LCD in standby"
+msgstr "Abilita simbolo lampeggiante registrazione su display LCD in standby."
 
 msgid "Enable blinking rec symbol on the LCD Display."
 msgstr "Abilita il simbolo rec lampeggiante sul display LCD."
@@ -7310,7 +7286,7 @@ msgid "Enables a feature so that the receiver can decrypt streams (if the ECM da
 msgstr "Abilita funzione in modo che il destinatario possa decrittografare i flussi (se i dati ECM sono inclusi nel flusso ed è disponibile una scheda valida)."
 
 msgid "Encrypted: "
-msgstr "Crittografato:"
+msgstr "Crittografato: "
 
 msgid "Encryption"
 msgstr "Crittografia"
@@ -8121,9 +8097,6 @@ msgstr "Controllo aggiornamento FSBL"
 msgid "FTA"
 msgstr "FTA"
 
-msgid "FTP"
-msgstr "FTP"
-
 msgid "FTP Actions"
 msgstr "Azioni FTP"
 
@@ -8149,7 +8122,7 @@ msgid "Failed"
 msgstr "Non riuscito"
 
 msgid "Failed to write /tmp/positionersetup.log: "
-msgstr "Impossibile scrivere /tmp/positionersetup.log:"
+msgstr "Impossibile scrivere /tmp/positionersetup.log: "
 
 msgid "Failed:"
 msgstr "Fallito:"
@@ -8713,7 +8686,7 @@ msgid "Frequency:"
 msgstr "Frequenza:"
 
 msgid "Frequency: "
-msgstr "Frequenza:"
+msgstr "Frequenza: "
 
 msgid "Fri"
 msgstr "Ven"
@@ -8722,7 +8695,7 @@ msgid "Friday"
 msgstr "Venerdì"
 
 msgid "From :"
-msgstr "Da:"
+msgstr "Da :"
 
 msgid "Front USB"
 msgstr "USB anteriore"
@@ -8959,7 +8932,7 @@ msgid "Goto X"
 msgstr "Vai a X"
 
 msgid "Goto current channel and now"
-msgstr "vai al canale attuale ed ora"
+msgstr "Vai al canale corrente e ora"
 
 msgid "Goto deep standby"
 msgstr "Vai a spegnimento"
@@ -9191,7 +9164,7 @@ msgid "Hausa"
 msgstr "Hausa"
 
 msgid "Hawaiian"
-msgstr ""
+msgstr "Hawaiano"
 
 msgid "HddSetup"
 msgstr "HddSetup"
@@ -9607,12 +9580,6 @@ msgstr "IP del ricevitore remoto di fallback"
 msgid "IP:"
 msgstr "IP:"
 
-msgid "IPv4 only"
-msgstr "Solo IPv4"
-
-msgid "IPv6 only"
-msgstr "Solo IPv6"
-
 msgid "ISO file is too large for this file system!"
 msgstr "File ISO troppo grande per questo file system!"
 
@@ -9839,9 +9806,6 @@ msgstr "Inaccessibile"
 
 msgid "Inactive"
 msgstr "Inattivo"
-
-msgid "Inadyn"
-msgstr "Inadyn"
 
 msgid "Inadyn Actions"
 msgstr "Azioni Inadyn"
@@ -10665,7 +10629,7 @@ msgid "Large"
 msgstr "Grande"
 
 msgid "Last Req."
-msgstr "Ultima registrazione"
+msgstr "Ultima registrazione."
 
 msgid "Last Translator"
 msgstr "Ultima traduzione"
@@ -11011,7 +10975,7 @@ msgid "Loop through to"
 msgstr "In cascata da"
 
 msgid "Lower Framerate saves CPU Time."
-msgstr "Frequenza fotogrammi più bassa risparmia tempo CPU"
+msgstr "Frequenza fotogrammi più bassa risparmia tempo CPU."
 
 msgid "Lower USB"
 msgstr "USB inferiore"
@@ -11388,9 +11352,6 @@ msgstr "Azioni impostazione Mini DLNA"
 
 msgid "Mini Series"
 msgstr "Miniserie"
-
-msgid "MiniDLNA"
-msgstr "MiniDLNA"
 
 msgid "MiniDLNA Log"
 msgstr "Registro MiniDLNA"
@@ -11987,9 +11948,6 @@ msgstr "N/A"
 msgid "NEXT"
 msgstr "PROSSIMO"
 
-msgid "NFS"
-msgstr "NFS"
-
 msgid "NFS Actions"
 msgstr "Azioni NFS"
 
@@ -12108,7 +12066,7 @@ msgid "Netmask"
 msgstr "Maschera di rete"
 
 msgid "Netmask:"
-msgstr "Maschera di rete"
+msgstr "Maschera di rete:"
 
 msgid "Network"
 msgstr "Rete"
@@ -12533,12 +12491,6 @@ msgstr "Non lineare"
 msgid "None"
 msgstr "Nessuno"
 
-msgid "NordVPN Secure DNS"
-msgstr "DNS NordVPN Secure"
-
-msgid "NordVPN Smart DNS"
-msgstr "DNS NordVPN Smart"
-
 msgid "Norfolk Island"
 msgstr "Isola Norfolk"
 
@@ -12938,6 +12890,9 @@ msgstr "Apri timer automatico"
 msgid "Open AutoTimerlist"
 msgstr "Apri elenco timer automatici"
 
+msgid "Open Cardserver"
+msgstr "Apri il Cardserver"
+
 msgid "Open EPGSearch"
 msgstr "Aprire ricerca EPG"
 
@@ -13043,9 +12998,6 @@ msgstr "OpenSSL:\t%s"
 
 msgid "OpenVIX"
 msgstr "OpenVIX"
-
-msgid "OpenVPN"
-msgstr "OpenVPN"
 
 msgid "OpenVPN Actions"
 msgstr "Azioni OpenVPN"
@@ -14210,12 +14162,6 @@ msgstr "Privilegiare le tracce AC3"
 msgid "Prefer AC3+ track"
 msgstr "Privilegiare le tracce AC3+"
 
-msgid "Prefer IPv4"
-msgstr "Preferisci IPv4"
-
-msgid "Prefer IPv6"
-msgstr "Preferisci IPv6"
-
 msgid "Prefer audio track stored by service"
 msgstr "Preferisci la traccia audio memorizzata dal servizio"
 
@@ -14395,6 +14341,9 @@ msgid ""
 "\n"
 "Press left/right to see different log types"
 msgstr ""
+"Premere su/giù per scorrere il registro selezionato\n"
+"\n"
+"Premi sinistra/destra per vedere diversi tipi di registro"
 
 msgid "Press yellow to set this interface as the default interface."
 msgstr "GIALLO -> per impostare l'interfaccia come predefinita."
@@ -14643,12 +14592,6 @@ msgstr "Il PiP quadruplo non è disponibile."
 
 msgid "Quad9 DNS"
 msgstr "DNS Quad9"
-
-msgid "Quad9 ECS DNS"
-msgstr "DNS Quad9 ECS"
-
-msgid "Quad9 Unsecured DNS"
-msgstr "DNS Quad9 Unsecured"
 
 msgid "Quechua"
 msgstr "Quechua"
@@ -15659,9 +15602,6 @@ msgstr "Riunione"
 msgid "S"
 msgstr "S"
 
-msgid "SABnzbd"
-msgstr "SABnzbd"
-
 msgid "SABnzbd Actions"
 msgstr "Azioni SABnzbd"
 
@@ -15673,9 +15613,6 @@ msgstr "SAT"
 
 msgid "SATA"
 msgstr "SATA"
-
-msgid "SATPI"
-msgstr "SATPI"
 
 msgid "SATPI Setting Actions"
 msgstr "Azioni di impostazione SATPI"
@@ -15726,9 +15663,6 @@ msgstr "File SRT"
 msgid "SSA file"
 msgstr "File SSA"
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSID:"
 msgstr "SSID:"
 
@@ -15768,14 +15702,8 @@ msgstr "Samba"
 msgid "Samba Actions"
 msgstr "Azioni Samba"
 
-msgid "Samba Client"
-msgstr "Client Samba"
-
 msgid "Samba Log"
 msgstr "Registro Samba"
-
-msgid "Samba Server"
-msgstr "Server Samba"
 
 msgid "Samba Setup"
 msgstr "Configurazione Samba"
@@ -16814,9 +16742,6 @@ msgstr "Seleziona produttore del dispositivo SCR. Se il produttore non è elenca
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr "Seleziona metodo di ripristino della risoluzione dello schermo e del framebuffer quando esci dal televideo."
 
-msgid "Select the mode of the DNS."
-msgstr "Seleziona modalità del DNS."
-
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr "Seleziona numero del modello del dispositivo Unicable. Se il numero del modello non è elencato, imposta 'SCR' su \"Definito dall'utente\" e inserisci manualmente i parametri del dispositivo in base alla relativa scheda tecnica."
 
@@ -17541,9 +17466,6 @@ msgstr "Condivisioni"
 msgid "Sharpness"
 msgstr "Nitidezza"
 
-msgid "ShellInABox"
-msgstr "ShellInABox"
-
 msgid "Shellscript"
 msgstr "Shellscript"
 
@@ -17696,7 +17618,7 @@ msgid "Show HDD progress"
 msgstr "Mostra avanzamento HDD"
 
 msgid "Show HDMI Output Resolution."
-msgstr "Mostra risoluzione dell'uscita HDMI"
+msgstr "Mostra risoluzione dell'uscita HDMI."
 
 msgid "Show HDMI-Output Res"
 msgstr "Mostra risoluzione uscita HDMI"
@@ -19722,9 +19644,6 @@ msgstr "Carattere e risoluzione del televideo"
 
 msgid "Teletext subtitle color"
 msgstr "Colore dei sottotitoli televideo"
-
-msgid "Telnet"
-msgstr "Telnet"
 
 msgid "Telnet Actions"
 msgstr "Azioni Telnet"
@@ -21838,7 +21757,7 @@ msgstr "Versione:"
 
 #, python-format
 msgid "Version: %s"
-msgstr "Versione: %s:"
+msgstr "Versione: %s"
 
 msgid "Versions Info"
 msgstr "Informazioni Versione"
@@ -22303,10 +22222,10 @@ msgstr ""
 "\n"
 "Questa procedura guidata ti guiderà attraverso la configurazione di rete di base di %s %s.\n"
 "\n"
-"Premi OK per iniziare a configurare la rete"
+"Premi OK per iniziare a configurare la rete."
 
 msgid "Welcome..."
-msgstr "Benvenuto…"
+msgstr "Benvenuto..."
 
 msgid "Welsh"
 msgstr "Gallese"
@@ -22327,10 +22246,10 @@ msgid "Western Sahara"
 msgstr "Sahara Occidentale"
 
 msgid "What Day of month ?"
-msgstr "Che Giorno del mese?"
+msgstr "Che Giorno del mese ?"
 
 msgid "What Day of week ?"
-msgstr "Che giorno della settimana?"
+msgstr "Che giorno della settimana ?"
 
 msgid "What day of month?"
 msgstr "Che giorno del mese?"
@@ -24425,9 +24344,6 @@ msgstr "elimina albero"
 
 msgid "turbo"
 msgstr "turbo"
-
-msgid "uShare"
-msgstr "uShare"
 
 msgid "uShare Actions"
 msgstr "Azioni uShare"

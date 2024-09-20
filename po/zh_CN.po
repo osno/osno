@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:05+0200\n"
+"POT-Creation-Date: 2024-09-20 22:07+0200\n"
 "PO-Revision-Date: 2023-11-12 23:11+0100\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
@@ -2895,10 +2895,6 @@ msgstr "音频设置"
 msgid "AutoCam Setup Actions"
 msgstr "常见设置操作"
 
-#, fuzzy
-msgid "AutoFS"
-msgstr "自动"
-
 msgid "AutoMountManager"
 msgstr "自动挂载管理器"
 
@@ -4351,9 +4347,6 @@ msgstr "选择要配置的调谐器."
 msgid "Christmas Island"
 msgstr "圣诞岛"
 
-msgid "Chrony"
-msgstr ""
-
 msgid "Church Slavic"
 msgstr "教堂用斯拉夫语"
 
@@ -4603,9 +4596,6 @@ msgstr "常见设置操作"
 #, fuzzy
 msgid "Common interface"
 msgstr "通用接口"
-
-msgid "Comodo Secure DNS"
-msgstr ""
 
 msgid "Comoros"
 msgstr "科摩罗"
@@ -5378,9 +5368,6 @@ msgstr "克罗地亚"
 msgid "Croatian"
 msgstr "克罗地亚语"
 
-msgid "Cron"
-msgstr ""
-
 msgid "Cron Manager"
 msgstr "任务管理"
 
@@ -5546,13 +5533,6 @@ msgid "DNS Settings"
 msgstr ""
 
 msgid "DNS data source"
-msgstr ""
-
-#, fuzzy
-msgid "DNS mode"
-msgstr "DiSEqC模式"
-
-msgid "DNS suffix"
 msgstr ""
 
 msgid ""
@@ -5917,9 +5897,6 @@ msgstr "隐藏此服务的VBI行"
 
 msgid "Define additional delay in milliseconds before start of http(s) streams."
 msgstr "定义http流开始之前的额外延迟(以毫秒为单位)."
-
-msgid "Define the DNS suffix."
-msgstr ""
 
 msgid "Defines how fast the time jumps are repeated. Values lower than 500ms may be problematic with NAS."
 msgstr "定义重复跳转的时间有多快.数值低于500毫秒可能NAS会有问题."
@@ -8249,9 +8226,6 @@ msgstr "FSBL更新检查"
 msgid "FTA"
 msgstr "免费频道"
 
-msgid "FTP"
-msgstr "FTP协议"
-
 msgid "FTP Actions"
 msgstr ""
 
@@ -9758,12 +9732,6 @@ msgstr "备用远程接收机地址"
 msgid "IP:"
 msgstr "本机地址"
 
-msgid "IPv4 only"
-msgstr ""
-
-msgid "IPv6 only"
-msgstr ""
-
 msgid "ISO file is too large for this file system!"
 msgstr "ISO文件对此文件系统太大!"
 
@@ -9997,9 +9965,6 @@ msgstr ""
 
 msgid "Inactive"
 msgstr "未激活"
-
-msgid "Inadyn"
-msgstr "Inadyn客户端"
 
 msgid "Inadyn Actions"
 msgstr ""
@@ -11593,9 +11558,6 @@ msgstr ""
 msgid "Mini Series"
 msgstr "迷你系列"
 
-msgid "MiniDLNA"
-msgstr "MiniDLNA"
-
 msgid "MiniDLNA Log"
 msgstr "MiniDLNA日志"
 
@@ -12218,9 +12180,6 @@ msgstr "无数据"
 msgid "NEXT"
 msgstr "接下来"
 
-msgid "NFS"
-msgstr "NFS"
-
 msgid "NFS Actions"
 msgstr ""
 
@@ -12786,12 +12745,6 @@ msgstr ""
 msgid "None"
 msgstr "无"
 
-msgid "NordVPN Secure DNS"
-msgstr ""
-
-msgid "NordVPN Smart DNS"
-msgstr ""
-
 msgid "Norfolk Island"
 msgstr "诺福克岛"
 
@@ -13214,6 +13167,10 @@ msgstr "打开自动定时器"
 msgid "Open AutoTimerlist"
 msgstr "打开自动定时器列表"
 
+#, fuzzy
+msgid "Open Cardserver"
+msgstr "选择卡服务器"
+
 msgid "Open EPGSearch"
 msgstr "开源EPG搜索"
 
@@ -13326,9 +13283,6 @@ msgstr "OpenSSL版本"
 #, fuzzy
 msgid "OpenVIX"
 msgstr "打开"
-
-msgid "OpenVPN"
-msgstr "打开VPN"
 
 msgid "OpenVPN Actions"
 msgstr ""
@@ -14520,12 +14474,6 @@ msgstr "首选AC3轨道"
 msgid "Prefer AC3+ track"
 msgstr "首选AC3+音轨"
 
-msgid "Prefer IPv4"
-msgstr ""
-
-msgid "Prefer IPv6"
-msgstr ""
-
 msgid "Prefer audio track stored by service"
 msgstr "优先使用频道存储的音轨"
 
@@ -14968,12 +14916,6 @@ msgid "Quad PiP is not available."
 msgstr "四画面PiP不可用."
 
 msgid "Quad9 DNS"
-msgstr ""
-
-msgid "Quad9 ECS DNS"
-msgstr ""
-
-msgid "Quad9 Unsecured DNS"
 msgstr ""
 
 msgid "Quechua"
@@ -16011,9 +15953,6 @@ msgstr "团圆"
 msgid "S"
 msgstr "标清"
 
-msgid "SABnzbd"
-msgstr "SABnzbd"
-
 msgid "SABnzbd Actions"
 msgstr ""
 
@@ -16025,9 +15964,6 @@ msgstr "卫星"
 
 msgid "SATA"
 msgstr "SATA硬盘"
-
-msgid "SATPI"
-msgstr "SATPI"
 
 msgid "SATPI Setting Actions"
 msgstr ""
@@ -16078,9 +16014,6 @@ msgstr "SRT文件"
 msgid "SSA file"
 msgstr "SSA文件"
 
-msgid "SSH"
-msgstr ""
-
 msgid "SSID:"
 msgstr "SSID:"
 
@@ -16121,16 +16054,8 @@ msgstr "SMB协议"
 msgid "Samba Actions"
 msgstr ""
 
-#, fuzzy
-msgid "Samba Client"
-msgstr "Samba设置"
-
 msgid "Samba Log"
 msgstr "Samba日志"
-
-#, fuzzy
-msgid "Samba Server"
-msgstr "Samba设置"
 
 msgid "Samba Setup"
 msgstr "Samba设置"
@@ -17200,10 +17125,6 @@ msgid "Select the method of restoring screen resolution and framebuffer when lea
 msgstr "选择屏幕分辨率和帧恢复时留下的图文的方法."
 
 #, fuzzy
-msgid "Select the mode of the DNS."
-msgstr "选择电影路径"
-
-#, fuzzy
 msgid "Select the model number of your Unicable device. If the model number is not listed, set 'SCR' to 'User defined' and enter the device parameters manually according to its specifications."
 msgstr "选择Unicable设备的型号.如果未列出型号,请将'SCR'设置为'用户定义',并根据其规格表手动输入设备参数."
 
@@ -17942,9 +17863,6 @@ msgstr "共享"
 
 msgid "Sharpness"
 msgstr "清晰度"
-
-msgid "ShellInABox"
-msgstr ""
 
 msgid "Shellscript"
 msgstr "shell脚本语言"
@@ -20196,9 +20114,6 @@ msgstr "图文电视字体和分辨率"
 
 msgid "Teletext subtitle color"
 msgstr "图文字幕颜色"
-
-msgid "Telnet"
-msgstr "Telnet"
 
 msgid "Telnet Actions"
 msgstr ""
@@ -24920,9 +24835,6 @@ msgstr ""
 
 msgid "turbo"
 msgstr "turbo码"
-
-msgid "uShare"
-msgstr "uShare共享"
 
 msgid "uShare Actions"
 msgstr ""
