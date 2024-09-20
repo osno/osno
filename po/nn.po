@@ -2,10 +2,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenATV\n"
+"Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-20 23:13+0200\n"
-"PO-Revision-Date: 2024-09-21 00:06+0200\n"
+"PO-Revision-Date: 2024-09-21 00:23+0200\n"
 "Last-Translator: Stig-O <stiose@hotmail.com>\n"
 "Language-Team: Stig-O\n"
 "Language: nn\n"
