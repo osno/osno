@@ -3074,7 +3074,6 @@ class InfoBarPVRState:
 		else:
 			self._mayShow()
 
-
 class InfoBarTimeshiftState(InfoBarPVRState):
 	def __init__(self):
 		InfoBarPVRState.__init__(self, screen=TimeshiftState, force_show=True)

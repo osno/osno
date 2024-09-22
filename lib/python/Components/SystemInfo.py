@@ -42,8 +42,6 @@ class BoxInformation:  # To maintain data integrity class variables should not b
 							self.boxInfo[item] = literal_eval(value)
 						except:  # Remove this code when the build system is updated.
 							self.boxInfo[item] = value
-						# except Exception as err:  # Activate this replacement code when the build system is updated.
-						# 	print(f"[SystemInfo] Error: Information variable '{item}' with a value of '{value}' can not be loaded into BoxInfo!  ({err})")
 			self.enigmaInfoList = sorted(self.enigmaInfoList)
 			print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
 		else:
@@ -65,8 +63,6 @@ class BoxInformation:  # To maintain data integrity class variables should not b
 							self.boxInfo[item] = literal_eval(value)
 						except Exception:  # Remove this code when the build system is updated.
 							self.boxInfo[item] = value
-						# except Exception as err:  # Activate this replacement code when the build system is updated.
-						# 	print(f"[SystemInfo] Error: Information override variable '{item}' with a value of '{value}' can not be loaded into BoxInfo!  ({err})")
 			self.enigmaConfList = sorted(self.enigmaConfList)
 		else:
 			self.boxInfo["overrideactive"] = False

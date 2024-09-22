@@ -1742,7 +1742,7 @@ def UNICABLE_CHOICES():
 		"unicable_user": "Unicable " + _("User defined")}
 
 
-print(LNB_CHOICES())
+#print(LNB_CHOICES())
 
 
 def InitNimManager(nimmgr, update_slots=None):
