@@ -9,6 +9,7 @@
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/db.h>
 #include <lib/dvb/pmt.h>
+#include <lib/dvb/idvb.h>
 #include <lib/nav/core.h>
 #include <lib/python/connections.h>
 #include <lib/python/python.h>
