@@ -10959,6 +10959,10 @@ msgid "Long press emulation with button"
 msgstr "Emulazione pressione prolungata di un tasto"
 
 #, python-format
+msgid "Long press volume steps"
+msgstr "Premere a lungo i passaggi del volume"
+
+#, python-format
 msgid "Long press: %s"
 msgstr "Pressione prolungata: %s"
 
@@ -16460,7 +16464,7 @@ msgstr "Seleziona per quanto tempo visualizzare il messaggio di errore del tasto
 msgid "Select how long to display the task and script message pop up."
 msgstr "Seleziona per quanto tempo visualizzare l'attività e il messaggio popup dello script."
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr "Seleziona per quanto tempo, in secondi, deve essere visualizzato il livello del volume prima che si nasconda automaticamente."
 
 msgid "Select how often this timer is to be repeated."
@@ -16798,6 +16802,12 @@ msgstr "Seleziona il set di caratteri maiuscoli"
 
 msgid "Select the shifted character set for the next character only"
 msgstr "Seleziona il set di caratteri maiuscoli solo per il carattere successivo"
+
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr "Selezionare la dimensione dell'incremento del volume quando vengono premuti i pulsanti VOLUME."
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr "Selezionare la dimensione degli incrementi del volume quando si tengono premuti i pulsanti VOLUME."
 
 msgid "Select the sort order for the file lines:"
 msgstr "Seleziona ordinamento per le righe del file:"
@@ -22005,8 +22015,14 @@ msgstr "Volume giù"
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr "I tasti del volume sul telecomando del ricevitore controlleranno il volume della TV. Se questa funzione non è supportata, i tasti del volume non hanno alcuna funzione!"
 
+msgid "Volume steps"
+msgstr "Steps Volume"
+
 msgid "Volume up"
 msgstr "Volume su"
+
+msgid "Volume/Mute display timer"
+msgstr "Timer visualizzazione volume/mute"
 
 msgid "W"
 msgstr "W"
