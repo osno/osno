@@ -2,7 +2,7 @@ from os.path import exists
 from os import W_OK, access, system
 from time import sleep
 
-from enigma import eAVControl, eDVBVolumecontrol, getDesktop
+from enigma import eAVControl, getDesktop
 
 from Components.config import ConfigBoolean, ConfigEnableDisable, ConfigInteger, ConfigNothing, ConfigOnOff, ConfigSelection, ConfigSelectionInteger, ConfigSelectionNumber, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config
 from Components.About import about

@@ -2,7 +2,7 @@ from enigma import eDVBVolumecontrol, eTimer
 
 from GlobalActions import globalActionMap
 from Components.config import ConfigBoolean, ConfigInteger, ConfigSelectionNumber, ConfigSubsection, config
-from Screens.VolumeControl import Mute, Volume
+from Screens.Volume import Mute, Volume
 
 
 class VolumeControl:
