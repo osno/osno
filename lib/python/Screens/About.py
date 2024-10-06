@@ -170,7 +170,7 @@ class About(Screen):
 				line = line.strip()
 				freeflash += line
 				return str(freeflash)
-		self["lab1"] = StaticText(_("OpenDroid by OPD Image Team"))
+		self["lab1"] = StaticText(_("openDroid by OPD Image Team"))
 		self["lab2"] = StaticText(_("Support at") + " https://droidsat.org")
 		model = None
 		AboutText = ""
@@ -770,7 +770,7 @@ class SystemMemoryInfo(Screen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Memory Information"))
 		self.skinName = ["SystemMemoryInfo", "About"]
-		self["lab1"] = StaticText(_("OpenDroid"))
+		self["lab1"] = StaticText(_("openDroid"))
 		self["lab2"] = StaticText(_("By OPD Image Team"))
 		self["AboutScrollLabel"] = ScrollLabel()
 

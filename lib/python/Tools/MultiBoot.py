@@ -580,22 +580,16 @@ class MultiBootClass():
 			data = lines[-2].strip()[:-6].split()
 			info["distro"] = " ".join(data[:-1])
 			info["displaydistro"] = {
-				"beyonwiz": "Beyonwiz",
-				"blackhole": "Black Hole",
 				"egami": "EGAMI",
 				"openatv": "openATV",
 				"openbh": "OpenBH",
 				"opendroid": "OpenDroid",
 				"openeight": "OpenEight",
 				"openhdf": "OpenHDF",
-				"opennfr": "OpenNFR",
 				"openpli": "OpenPLi",
 				"openspa": "OpenSpa",
-				"openvision": "Open Vision",
 				"openvix": "OpenViX",
-				"sif": "Sif",
-				"teamblue": "teamBlue",
-				"vti": "VTi"
+				"teamblue": "teamBlue"
 			}.get(info["distro"].lower(), info["distro"].capitalize())
 			info["imgversion"] = data[-1]
 		else:

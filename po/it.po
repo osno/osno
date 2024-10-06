@@ -1,12 +1,12 @@
-# Italian translations for OpenDROID Images.
+# Italian translations for openDroid Images.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-20 23:13+0200\n"
-"PO-Revision-Date: 2024-09-21 00:16+0200\n"
-"Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
+"PO-Revision-Date: 2024-10-06 19:25+0200\n"
+"Last-Translator: FULL NAME <opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1660,13 +1660,13 @@ msgid "6.2"
 msgstr "6.2"
 
 msgid "6.3"
-msgstr "6.0"
+msgstr "6.3"
 
 msgid "6.4"
 msgstr "6.4"
 
 msgid "6.5"
-msgstr "6.0"
+msgstr "6.5"
 
 msgid "64 Mb"
 msgstr "64 Mb"
@@ -1675,9 +1675,9 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
-msgstr "7. In caso di problemi con l'installazione, annullare e chiedere supporto a OpenDroid-Team su:\n"
+msgstr "7. In caso di problemi con l'installazione, annullare e chiedere supporto a openDroid-Team su:\n"
 
 msgid "7.0"
 msgstr "7.0"
@@ -5128,13 +5128,13 @@ msgid "Controlled by HDMI"
 msgstr "Controllato da HDMI"
 
 msgid "Convert EXT3 File System to EXT4"
-msgstr "Converti file system da ext3 a ext4"
+msgstr "Converti il ​​file system EXT3 in EXT4"
 
 msgid "Convert ext3 to ext4"
 msgstr "Converti da ext3 a ext4"
 
 msgid "Convert file system ext3 to ext4"
-msgstr "Converti file system ext3 in ext4"
+msgstr "Converti il ​​file system ext3 in ext4"
 
 msgid "Convert to AC3"
 msgstr "Converti in AC3"
@@ -6698,7 +6698,7 @@ msgid "Download latest PurE2 Image"
 msgstr "Scarica l'ultima immagine PurE2"
 
 msgid "Download latest opendroid Image"
-msgstr "Scarica l'ultima immagine OpenDroid"
+msgstr "Scarica l'ultima immagine openDroid"
 
 msgid "Download latest opennfr Image"
 msgstr "Scarica l'ultima immagine Opennfr"
@@ -7437,8 +7437,8 @@ msgstr "Inserisci codice PIN"
 msgid "Enter text via an attached keyboard"
 msgstr "Inserisci testo tramite una tastiera collegata"
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
-msgstr "Inserisci la password FTP del ricevitore host (richiesto per qualsiasi server che esegue OpenDroid 7.3 o versione successiva)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
+msgstr "Inserisci la password FTP del ricevitore host (richiesto per qualsiasi server che esegue openDroid 7.5 o versione successiva)."
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
 msgstr "Immettere la porta FTP del ricevitore host (normalmente '21')."
@@ -10058,8 +10058,8 @@ msgstr "Installa estensioni."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr "Installa da /media/opdboot/OPDBootUpload"
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
-msgstr "Installa da Internet (OpenDroid,OpenATV,Egami,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
+msgstr "Installa da Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 
 msgid "Install lcd picons on"
 msgstr "Installa picon LCD su"
@@ -12287,7 +12287,7 @@ msgid "No age block"
 msgstr "Nessun blocco d'età"
 
 msgid "No backup needed"
-msgstr "Backup non necessario"
+msgstr "Non effettuare nessun backup"
 
 msgid "No cable tuner found!"
 msgstr "Nessun sintonizzatore via cavo trovato!"
@@ -12975,10 +12975,10 @@ msgstr "OpenDNS FamilyShield"
 msgid "OpenDNS Home"
 msgstr "OpenDNS Home"
 
-msgid "OpenDroid"
-msgstr "OpenDroid"
+msgid "openDroid"
+msgstr "openDroid"
 
-msgid "OpenDroid by OPD Image Team"
+msgid "openDroid by OPD Image Team"
 msgstr "A cura di openDroid Image Team"
 
 msgid "OpenEight"
@@ -18743,7 +18743,7 @@ msgid "Sorry: OPDBoot no work by this Box!"
 msgstr "Spiacente: OPDBoot non funziona con questo Box!"
 
 msgid "Sorry: Wrong image in flash found. You have to install in flash OPD Image"
-msgstr "Spiacenti: trovata un'immagine errata nel flash. Devi installare in Flash Opendroid Image"
+msgstr "Spiacenti: trovata un'immagine errata nel flash. Devi installare in Flash openDroid Image"
 
 msgid "Sort"
 msgstr "Riordino"
@@ -21133,10 +21133,10 @@ msgid "USB 3.0 (Back, outer)"
 msgstr "USB 3.0 (posteriore, esterno)"
 
 msgid "USB Disk Format"
-msgstr "USB Disk Format Wizard"
+msgstr "Formattare disco USB"
 
 msgid "USB Disk Format Wizard"
-msgstr "USB Disk Format Wizard"
+msgstr "Procedura guidata di formattazione del disco USB"
 
 msgid "USB Stick"
 msgstr "Chiavetta USB"
