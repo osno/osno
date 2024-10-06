@@ -2335,7 +2335,6 @@ def getScrollLabelStyle(element):
 # default screen resolution of HD (720p).  That is the scale factor for a HD
 # screen will be 1.
 #
-# NOTE: This function is deprecated for openATV!
 #
 def getSkinFactor(screen=GUI_SKIN_ID):
 	skinfactor = getDesktop(screen).size().height() / 720.0

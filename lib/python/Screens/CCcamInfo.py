@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 # CCcam Info by AliAbdul
-# CCcam Line Editor by egami and openATV
 from base64 import b64encode
 from glob import glob
 import requests
