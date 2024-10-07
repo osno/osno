@@ -45,12 +45,12 @@ FEED_URLS = [
 	("OpenPLi", "http://downloads.openpli.org/json/%s", "model"),
 	("Open Vision", "https://images.openvision.dedyn.io/json/%s", "model"),
 	("OpenViX", "https://www.openvix.co.uk/json/%s", "machinebuild"),
-	("OpenHDF", "https://flash.hdfreaks.cc/openhdf/json/%s", "machinebuild"),
+	("OpenHDF", "https://v65.hdfreaks.cc/json/%s", "machinebuild"),
 	("Open8eIGHT", "http://openeight.de/json/%s", "machinebuild"),
-	("OpenDROID", "https://opendroid.org/json/%s", "machinebuild"),
+	("openDroid", "https://opendroid.org/json/%s", "machinebuild"),
 	("TeamBlue", "https://images.teamblue.tech/json/%s", "machinebuild"),
 	("EGAMI", "https://image.egami-image.com/json/%s", "machinebuild"),
-	("OpenSPA", "https://openspa.webhop.info/online/json.php?box=%s", "BoxName")
+	("OpenSPA", "https://openspa.webhop.info/json.php?box=%s", "BoxName")
 ]
 
 
