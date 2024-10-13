@@ -1422,7 +1422,7 @@ class PackageAction(Screen, NumericalTextInput):
 			self.logData = ""  # Clear previous log data if necessary
 #			Processing.instance.showProgress(endless=True)
 		else:
-			Processing.instance.hideProgress()
+#			Processing.instance.hideProgress()
 			self.processing = False
 			self["selectAction"].setEnabled(self.actionMaps[0])
 			self["performAction"].setEnabled(self.actionMaps[1])
