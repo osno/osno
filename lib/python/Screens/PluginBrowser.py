@@ -2,9 +2,7 @@ from os import makedirs, symlink, unlink
 from os.path import exists, join, islink
 from re import compile
 from shutil import rmtree
-
 from enigma import checkInternetAccess, eDVBDB, eTimer, gRGB
-
 from skin import parseColor
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
 from Components.config import ConfigDictionarySet, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, config
@@ -326,7 +324,7 @@ class PluginBrowser(Screen, NumericalTextInput, ProtectedScreen):
 					print("[PluginBrowser] Feed update completed successfully.")
 					self["pluginDownloadActions"].setEnabled(True)
 			elif event == opkgComponent.EVENT_DONE:
-#				Processing.instance.hideProgress()
+				Processing.instance.hideProgress()
 				self["actions"].setEnabled(True)
 				self["pluginRemoveActions"].setEnabled(True)
 				self["navigationActions"].setEnabled(True)
@@ -632,6 +630,8 @@ class PluginBrowserSetup(Setup):
 		self.opkgComponent.addCallback(self.keyResetFeedsCallback)
 		self.cleanError = False
 		self.refreshIncomplete = 0
+		self.addSaveNotifier(self.onUpdateSettings)
+		self.onClose.append(self.clearSaveNotifiers)
 
 	def keyResetFeeds(self):
 		self.suspendAllActionMaps()
@@ -653,7 +653,7 @@ class PluginBrowserSetup(Setup):
 				if eventData:
 					self.refreshIncomplete = eventData
 			case self.opkgComponent.EVENT_DONE:
-#				Processing.instance.hideProgress()
+				Processing.instance.hideProgress()
 				self["resetFeedsAction"].setEnabled(False)
 				self["actions"].setEnabled(True)
 				self.resumeAllActionMaps()
@@ -666,7 +666,7 @@ class PluginBrowserSetup(Setup):
 
 	def keyResetFeedsCancel(self):
 		self.opkgComponent.stop()
-#		Processing.instance.hideProgress()
+		Processing.instance.hideProgress()
 		self["resetFeedsAction"].setEnabled(False)
 		self["actions"].setEnabled(True)
 		self.resumeAllActionMaps()
@@ -726,6 +726,21 @@ class PluginBrowserSetup(Setup):
 				lines += ["%s raw.githubusercontent.com" % ip for ip in ("185.199.108.133", "185.199.109.133", "185.199.110.133", "185.199.111.133", "2606:50c0:8000::154", "2606:50c0:8001::154", "2606:50c0:8002::154", "2606:50c0:8003::154")]
 			fileWriteLines("/etc/hosts", lines, source=MODULE_NAME)
 
+	def onUpdateSettings(self):
+		if config.usage.pluginListLayout.isChanged():
+			oldDialogIndex = None
+			oldSummarys = (-1, None)
+			for index, dialog in enumerate(self.session.dialog_stack):
+				if isinstance(dialog[0], PluginBrowser):
+					oldDialogIndex = (index, dialog[1])
+					oldSummarys = dialog[0].summaries[:]
+					break
+			if oldDialogIndex[0] != -1:
+				newDialog = self.session.instantiateDialog(PluginBrowser)
+				newDialog.summaries = oldSummarys
+				newDialog.isTmp = False
+				newDialog.callback = None
+				self.session.dialog_stack[oldDialogIndex[0]] = (newDialog, oldDialogIndex[1])
 
 class PluginBrowserSummary(ScreenSummary):
 	def __init__(self, session, parent):
@@ -836,6 +851,7 @@ class PackageAction(Screen, NumericalTextInput):
 
 	def __init__(self, session, mode=MODE_REMOVE):
 		Screen.__init__(self, session, enableHelp=True)
+		self.session = session
 		NumericalTextInput.__init__(self, handleTimeout=False, mode="SearchUpper")
 		self.skinName = ["PackageAction", "PluginAction"]
 		self.modeData = self.MANAGE_OPTIONS.get(mode, self.MANAGE_OPTIONS[self.MODE_MANAGE])
@@ -887,18 +903,23 @@ class PackageAction(Screen, NumericalTextInput):
 			"yellow": (self.keyShowLog, _("Show the last opkg command's output"))
 		}, prio=0, description=description)
 		self["logAction"].setEnabled(False)
-		self["navigationActions"] = HelpableActionMap(self, ["NavigationActions"], {
+		self["navigationActions"] = HelpableActionMap(self, ["NavigationActions", "PreviousNextActions"], {
 			"top": (self["plugins"].goTop, _("Move to the first item on the first screen")),
 			"pageUp": (self["plugins"].goPageUp, _("Move up a screen")),
 			"up": (self["plugins"].goLineUp, _("Move up a line")),
-			# "first": (self.keyTop, _("Move to the first item on the current line")),
-			"left": (self.keyPreviousCategory, _("Move to the previous category in the list")),
-			"right": (self.keyNextCategory, _("Move to the next category in the list")),
-			# "last": (self.keyBottom, _("Move to the last item on the current line")),
+			"first": (self.keyPreviousCategory, _("Move to the previous category in the list")),
+			"previous": (self.keyPreviousCategory, _("Move to the previous category in the list")),
+			"last": (self.keyNextCategory, _("Move to the next category in the list")),
+			"next": (self.keyNextCategory, _("Move to the next category in the list")),
 			"down": (self["plugins"].goLineDown, _("Move down a line")),
 			"pageDown": (self["plugins"].goPageDown, _("Move down a screen")),
 			"bottom": (self["plugins"].goBottom, _("Move to the last item on the last screen"))
 		}, prio=0, description=description)
+		self["legacyNavigationActions"] = HelpableActionMap(self, ["NavigationActions"], {
+			"left": (self.keyPreviousCategory, _("Move to the previous category in the list")),
+			"right": (self.keyNextCategory, _("Move to the next category in the list")),
+		}, prio=0, description=description)
+		self["legacyNavigationActions"].setEnabled(not config.misc.actionLeftRightToPageUpPageDown.value)
 		smsMsg = _("SMS style QuickSelect entry selection")
 		self["quickSelectActions"] = HelpableNumberActionMap(self, "NumberActions", {  # Action used by QuickSelect.
 			"1": (self.keyNumberGlobal, smsMsg),
@@ -1379,6 +1400,14 @@ class PackageAction(Screen, NumericalTextInput):
 				plugins.append((category, category, self.modeData[self.DATA_CATEGORIES].get(category, category), None, None, None, self.expandableIcon, None, self.modeData[self.DATA_CATEGORIES].get(category, category), None, None, None))
 		self["plugins"].setList(plugins)
 
+    # Automatically show the log when the plugin list is displayed
+		self.showLogAfterProcessing()
+
+	def showLogAfterProcessing(self):
+		# Ensure the logData is set properly before displaying
+		if hasattr(self, 'logData') and self.logData:
+			self.session.open(PackageActionLog, self.logData)
+
 	def setWaiting(self, text):
 		if text:
 			self.actionMaps = (self["selectAction"].getEnabled(), self["performAction"].getEnabled(), self["logAction"].getEnabled(), self["navigationActions"].getEnabled(), self["quickSelectActions"].getEnabled())
@@ -1389,15 +1418,18 @@ class PackageAction(Screen, NumericalTextInput):
 			self["quickSelectActions"].setEnabled(False)
 			self.processing = True
 			Processing.instance.setDescription(text)
+			# Optionally log at the beginning of processing
+			self.logData = ""  # Clear previous log data if necessary
 #			Processing.instance.showProgress(endless=True)
 		else:
-#			Processing.instance.hideProgress()
+			Processing.instance.hideProgress()
 			self.processing = False
 			self["selectAction"].setEnabled(self.actionMaps[0])
 			self["performAction"].setEnabled(self.actionMaps[1])
 			self["logAction"].setEnabled(self.actionMaps[2])
 			self["navigationActions"].setEnabled(self.actionMaps[3])
 			self["quickSelectActions"].setEnabled(self.actionMaps[4])
+			self.showLogAfterProcessing()  # Show log after finishing processing
 
 	def keyNumberGlobal(self, digit):
 		self.quickSelectTimer.stop()

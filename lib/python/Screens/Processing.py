@@ -1,9 +1,7 @@
 from enigma import eLabel, ePoint, eSize, eTimer, getDesktop
-
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Screens.Screen import Screen
-
 
 class ProcessingScreen(Screen):
 	skin = """
@@ -22,6 +20,7 @@ class ProcessingScreen(Screen):
 		self.deskSize = None
 
 	def setDescription(self, description):
+			# Resizes screen dynamically based on description text length
 		def resize(description):
 			size = self.instance.csize()
 			width = size.width()
@@ -58,6 +57,7 @@ class Processing:
 			self.timer = eTimer()
 			self.timer.callback.append(self.updateProgress)
 			self.progress = 0
+			self.logData = ""  # Log data per tracciare i messaggi del processo
 
 	def showProgress(self, title=None, progress=0, endless=False):
 		if title is None:
@@ -82,3 +82,27 @@ class Processing:
 
 	def setProgress(self, progress):
 		self.processingDialog.setProgress(progress)
+
+	# Aggiungi al log
+	def appendLog(self, message):
+		self.logData += message + "\n"
+
+	# Mostra la finestra del log quando il processo è completato
+	def showLog(self):
+		# Qui dovresti accedere a `self.session` invece di riceverlo come argomento
+		from Screens.PluginBrowser import PackageActionLog
+		self.session.open(PackageActionLog, self.logData)
+		# Modifica il flusso di processo
+class MyApp:
+	def __init__(self, session):
+		self.session = session
+	def startProcess(self):
+		Processing.instance.setDescription(_("Please wait while feeds are updated..."))
+		Processing.instance.showProgress(endless=True)
+		# Simulazione dell'aggiornamento (qui puoi mettere la tua logica reale)
+		for i in range(100):
+			Processing.instance.setProgress(i)
+			Processing.instance.appendLog(f"Progress: {i}%")
+			# Alla fine, nascondi il progresso e mostra il log
+			Processing.instance.hideProgress()
+			Processing.instance.showLog(self.session)
