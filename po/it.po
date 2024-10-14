@@ -5,9 +5,9 @@ msgstr ""
 "Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-20 23:13+0200\n"
-"PO-Revision-Date: 2024-10-07 18:03+0200\n"
+"PO-Revision-Date: 2024-10-14 23:06+0200\n"
 "Last-Translator: FULL NAME <opendroid-Team <opendroid2013@gmail.com>, >\n"
-"Language-Team: Gimsy,Formiano,erminio\n"
+"Language-Team: Gimsy Formiano\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2875,7 +2875,7 @@ msgid "Auto deep standby"
 msgstr "Spegnimento automatico"
 
 msgid "Auto flesh"
-msgstr "Colore automatico pelle"
+msgstr "Colore automatico skin"
 
 msgid "Auto focus"
 msgstr "Messa a fuoco automatica"
@@ -5742,7 +5742,7 @@ msgid "Decoding_Setup"
 msgstr "Impostazione della decodifica"
 
 msgid "Deep Standby"
-msgstr "Spegni ricevitore"
+msgstr "Spegnere il ricevitore"
 
 msgid "Deep standby"
 msgstr "Spegnimento"
@@ -6170,7 +6170,7 @@ msgid "Devices Manager"
 msgstr "Gestore dispositivi"
 
 msgid "Devices Panel"
-msgstr "Pannello dei dispositivi"
+msgstr "elenco dei dispositivi"
 
 msgid "DiSEqC"
 msgstr "DiSEqC"
@@ -19147,7 +19147,7 @@ msgid "Streaming"
 msgstr "Streaming"
 
 msgid "Streaming clients info"
-msgstr "Informazioni sui clienti in streaming"
+msgstr "Informazioni sui clients in streaming"
 
 #. TRANSLATORS: Aspect ratio policy: Display as fullscreen, with stretching all parts of the picture with the same factor (force aspect).
 msgid "Stretch full"
@@ -21904,7 +21904,7 @@ msgid "Videocodec, size & format"
 msgstr "Codec video, dimensione e formato"
 
 msgid "Videosetup"
-msgstr "Impostazioni video"
+msgstr "Configurazioni video"
 
 msgid "Viet Nam"
 msgstr "Vietnam"
@@ -23706,7 +23706,7 @@ msgid "info"
 msgstr "informazioni"
 
 msgid "info Install"
-msgstr "informazioni Installazioni"
+msgstr "Guida Installazione"
 
 msgid "information/education/school program"
 msgstr "informazione/educazione/programmi scolastici"
