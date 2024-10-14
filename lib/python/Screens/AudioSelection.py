@@ -1,20 +1,20 @@
-from Screens.Screen import Screen
-from Screens.Setup import Setup, setupDom
-from Screens.InputBox import PinInput
-from Screens.MessageBox import MessageBox
+from enigma import iPlayableService, eTimer, eSize
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
-from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import BoxInfo
-from Components.VolumeControl import VolumeControl
+from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 
-from enigma import iPlayableService, eTimer, eSize
+from Screens.InputBox import PinInput
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Setup import Setup, setupDom
 
 from Tools.ISO639 import LanguageCodes
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
@@ -29,7 +29,7 @@ def getConfigMenuItem(configElementName):
 	return "", None
 
 
-class AudioSelection(Screen, ConfigListScreen):
+class AudioSelection(ConfigListScreen, Screen):
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
 
@@ -68,9 +68,6 @@ class AudioSelection(Screen, ConfigListScreen):
 			"down": self.keyDown,
 			"left": self.keyLeft,
 			"right": self.keyRight,
-			"volumeUp": self.volumeUp,
-			"volumeDown": self.volumeDown,
-			"volumeMute": self.volumeMute,
 			"menu": self.openAutoLanguageSetup,
 			"1": self.keyNumberGlobal,
 			"2": self.keyNumberGlobal,
@@ -136,7 +133,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				if BoxInfo.getItem("machinebuild") in ('dm900', 'dm920', 'dm7080', 'dm800'):
 					choice_list = [("downmix", _("Downmix")), ("passthrough", _("Pass-through")), ("multichannel", _("Convert to multi-channel PCM")), ("hdmi_best", _("Use best / Controlled by HDMI"))]
 					self.settings.downmix_aac = ConfigSelection(choices=choice_list, default=config.av.downmix_aac.value)
-				elif BoxInfo.getItem("machinebuild") in ('gbquad4k', 'gbue4k', 'gbx34k'):
+				elif BoxInfo.getItem("machinebuild") in ('gbquad4k', 'gbquad4kpro', 'gbue4k', 'gbx34k'):
 					choice_list = [("downmix", _("Downmix")), ("passthrough", _("Pass-through")), ("multichannel", _("Convert to multi-channel PCM")), ("force_ac3", _("Convert to AC3")), ("force_dts", _("Convert to DTS")), ("use_hdmi_cacenter", _("Use best / Controlled by HDMI")), ("wide", _("Wide")), ("extrawide", _("Extra wide"))]
 					self.settings.downmix_aac = ConfigSelection(choices=choice_list, default=config.av.downmix_aac.value)
 				else:
@@ -160,7 +157,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				if BoxInfo.getItem("machinebuild") in ('dm900', 'dm920', 'dm7080', 'dm800'):
 					choice_list = [("use_hdmi_caps", _("Controlled by HDMI")), ("force_ac3", _("Convert to AC3")), ("multichannel", _("Convert to multi-channel PCM")), ("hdmi_best", _("Use best / Controlled by HDMI")), ("force_ddp", _("Force AC3plus"))]
 					self.settings.transcodeac3plus = ConfigSelection(choices=choice_list, default=config.av.transcodeac3plus.value)
-				elif BoxInfo.getItem("machinebuild") in ('gbquad4k', 'gbue4k', 'gbx34k'):
+				elif BoxInfo.getItem("machinebuild") in ('gbquad4k', 'gbquad4kpro', 'gbue4k', 'gbx34k'):
 					choice_list = [("downmix", _("Downmix")), ("passthrough", _("Pass-through")), ("force_ac3", _("Convert to AC3")), ("multichannel", _("Convert to multi-channel PCM")), ("force_dts", _("Convert to DTS"))]
 					self.settings.transcodeac3plus = ConfigSelection(choices=choice_list, default=config.av.transcodeac3plus.value)
 				else:
@@ -227,9 +224,15 @@ class AudioSelection(Screen, ConfigListScreen):
 					cnt = 0
 					for lang in languages:
 						if cnt:
-							language += ' / '
-						if lang in LanguageCodes:
+							language += " / "
+						if lang == "":
+							language += _("Not defined")
+						elif lang in originalAudioTracks:
+							language += _("Original language")
+						elif lang in LanguageCodes:
 							language += _(LanguageCodes[lang][0])
+						elif lang in visuallyImpairedCommentary:
+							language += _("Narration")
 						else:
 							language += lang
 						cnt += 1
@@ -269,11 +272,8 @@ class AudioSelection(Screen, ConfigListScreen):
 					def __call__(self, *args, **kwargs):
 						self.fnc(*self.args)
 
-				Plugins = [(p.name, PluginCaller(self.infobar.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_AUDIOMENU)]
-				if len(Plugins):
-					for x in Plugins:
-						if x[0] != 'AudioEffect':  # always make AudioEffect Blue button.
-							conflist.append(getConfigListEntry(x[0], ConfigNothing(), x[1]))
+				for item in [(p.name, PluginCaller(self.infobar.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_AUDIOMENU) if p.key != "AudioEffect"]:  # Ignore AudioEffect because it's always Blue button.
+					conflist.append(getConfigListEntry(item[0], ConfigNothing(), item[1]))
 
 		elif self.settings.menupage.value == PAGE_SUBTITLES:
 
@@ -416,7 +416,7 @@ class AudioSelection(Screen, ConfigListScreen):
 		self.fillList()
 
 	def changeAACDownmix(self, downmix):
-		if BoxInfo.getItem("machinebuild") in ('dm900', 'dm920', 'dm7080', 'dm800', 'gbquad4k', 'gbue4k', 'gbx34k'):
+		if BoxInfo.getItem("machinebuild") in ('dm900', 'dm920', 'dm7080', 'dm800', 'gbquad4k', 'gbquad4kpro', 'gbue4k', 'gbx34k'):
 			config.av.downmix_aac.setValue(downmix.value)
 		else:
 			if downmix.value:
@@ -546,15 +546,6 @@ class AudioSelection(Screen, ConfigListScreen):
 				self.focus = FOCUS_STREAMS
 		elif self.focus == FOCUS_STREAMS:
 			self["streams"].selectNext()
-
-	def volumeUp(self):
-		VolumeControl.instance and VolumeControl.instance.volUp()
-
-	def volumeDown(self):
-		VolumeControl.instance and VolumeControl.instance.volDown()
-
-	def volumeMute(self):
-		VolumeControl.instance and VolumeControl.instance.volMute()
 
 	def keyNumberGlobal(self, number):
 		if number <= len(self["streams"].list):

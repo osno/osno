@@ -437,17 +437,28 @@ class OscamSmartcard(ConfigListScreen, Screen):
 			self.session.open(MessageBox, (_("Oscam Binary is not installed\nYou must this install") + "\n\n\tOK"  ), MessageBox.TYPE_ERROR,).setTitle(_("wrong Settings detected"))
 			return False
 
-
 	def getcurrent(self):
 		current = _("no")
 		if os.path.exists("/usr/bin/oscam_oscamsmartcard"):
-			current = os.popen("chmod 775 /usr/bin/oscam_oscamsmartcard && /usr/bin/oscam_oscamsmartcard -V | grep Version |awk '{print $2}'").read().strip()
-		if current ==_("no"):
+			try:
+				subprocess.run(["chmod", "775", "/usr/bin/oscam_oscamsmartcard"], check=True)
+				result = subprocess.run(
+					["/usr/bin/oscam_oscamsmartcard", "-V"],
+					capture_output=True,
+					text=True,
+					check=True
+		)
+				current = next((line.split()[1] for line in result.stdout.splitlines() if "Version" in line), current)
+			except subprocess.CalledProcessError as e:
+				print(f"An error occurred while executing a command: {e}")
+			except Exception as e:
+				print(f"An unexpected error occurred: {e}")
+		if current == _("no"):
 			return current
 		if "oscam" in current:
 			return six.ensure_str(current)
-		else:
-			self.getcurrent()
+		return current
+
 	def createoscamsmartcarddata(self):
 		dldata = six.ensure_str(base64.b64decode(self.getdl()[1])).strip() + "data.zip"
 		system('wget -T5 --no-check-certificate -O /tmp/data.zip ' + dldata +  ' ' + null)
