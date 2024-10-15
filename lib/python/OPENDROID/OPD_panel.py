@@ -36,7 +36,7 @@ from Components.ActionMap import ActionMap
 from Components.SystemInfo import BoxInfo
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
-from OPENDROID.OscamSmartcard import *
+#from OPENDROID.OscamSmartcard import *
 from enigma import eConsoleAppContainer
 from Tools.Directories import fileExists
 from Tools.Downloader import downloadWithProgress
@@ -472,8 +472,8 @@ class OPD_panel(Screen, InfoBarPiP, ProtectedScreen):
 			self.session.open(DeviceManager)
 		elif menu == "HddSetup":
 			self.session.open(HddSetup)
-		elif menu == "OscamSmartcard":
-			self.session.open(OscamSmartcard)
+#		elif menu == "OscamSmartcard":
+#			self.session.open(OscamSmartcard)
 		elif menu == "SwapManager":
 			self.session.open(Swap)
 		elif menu == "KeymapSel":
@@ -500,7 +500,7 @@ class OPD_panel(Screen, InfoBarPiP, ProtectedScreen):
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('CronTimer'), _("CronManager"), 'CronTimer')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('JobManager'), _("JobManager"), 'JobManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('SwapManager'), _("SwapManager"), 'SwapManager')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('OscamSmartcard'), _("OscamSmartcard"), 'OscamSmartcard')))
+#		self.tlist.append(MenuEntryItem((InfoEntryComponent('OscamSmartcard'), _("OscamSmartcard"), 'OscamSmartcard')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('Samba'), _("Samba"), 'Samba')))
 
 		if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.py") is True:
