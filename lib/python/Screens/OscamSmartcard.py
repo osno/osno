@@ -30,6 +30,12 @@ import glob
 import six
 import re
 import subprocess
+import platform
+
+def get_architecture():
+    # Restituisce l'architettura del sistema
+    arch = platform.machine()  # 'armv7l', 'aarch64', ecc.
+    return arch
 
 plugin='[OscamSmartcard] '
 dev_null = ' > /dev/null 2>&1'
@@ -50,7 +56,6 @@ def architectures():
 
 arch = architectures()[2]
 extrainfo=(architectures()[3])
-
 
 config.OscamSmartcard = ConfigSubsection()
 config.OscamSmartcard.systemclean = ConfigSelection(default = True, choices = [
@@ -143,7 +148,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
   <widget name="HELPTEXT" position="670,518" size="544,110" zPosition="1" font="Regular; 20" halign="left" backgroundColor="black" transparent="1" />
   <widget name="HEADER" position="60,114" size="590,180" zPosition="1" font="Regular; 20" halign="left" backgroundColor="black" transparent="1" />
   <widget name="INFOTXT" position="60,518" size="590,110" zPosition="1" font="Regular; 20" halign="left" backgroundColor="black" transparent="1" />
-  <eLabel text="OscamSmartcard 2.4 by arn354 and Undertaker Mod team OPD" position="874,45" size="360,20" zPosition="1" font="Regular; 15" halign="right" backgroundColor="black" transparent="1" />
+  <eLabel text="OscamSmartcard 2.4 by arn354 and Undertaker Mod team OpenDroid" position="874,45" size="360,20" zPosition="1" font="Regular; 15" halign="right" backgroundColor="black" transparent="1" />
 <ePixmap pixmap="/usr/lib/enigma2/python/OPENDROID/OscamSmartcard/icons/oscamsmartcard.png" position="958,75" size="275,250" alphatest="blend" zPosition="2" />
 </screen>"""
 	def __init__(self, session, args = None, picPath = None):
@@ -173,6 +178,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		self.online = self.onlinecheck()
 		self.createoscamsmartcarddata()
 		self.oscamsmartcarddata = "/tmp/data/"
+		self.arch = get_architecture()
 		self.downloadurl()
 
 		if self.online == False:
@@ -185,7 +191,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
 			self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "InputActions", "ColorActions", "SetupActions"], {"red": self.exit,"yellow": self.exit,"blue": self.exit,"green": self.exit,"ok": self.exit,"cancel": self.exit}, -1)
 			self.exit
 		else:
-			if arch != 'armv7l' and arch != 'mips' and arch != 'sh4' and arch != 'ppc' and arch != 'armv7ahf-vfp-neon' and arch != 'aarch64' :
+			if arch != 'cortexa7hf-vfp' and arch != 'aarch64' and arch != 'cortexa9hf-neon' and arch != 'cortexa15hf-neon-vfpv4' and arch != 'armv7l' :
 				list = []
 				self.headers = _("Error") + "\n"
 				self.headers += _("Unsupportet CPU") + ' -> ' + arch + ' <- ' + _("found") + "\n"
@@ -379,7 +385,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
 					if self.newversion(arch) > self.installedversion:
 						mm = "Binary\t" + _("file exists, becomes upgrade")
 			else:
-				mm = "Binary\t" + str( self.newversion(arch)).replace('-1.20-unstable_svn', '') + " " + _("will be installed")	+ "\n"
+				mm = "Binary\t" + str( self.newversion(arch)).replace('-emu_11845', '') + " " + _("will be installed")	+ "\n"
 		if mm != "":
 			msginfo += mm + "\n"
 		msginfo += "\n"
@@ -599,41 +605,28 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		system('cp -f ' + self.oscamsmartcarddata + 'oscam.tiers'  + ' ' + config.OscamSmartcard.ConfigPath.value)
 
 	def oscambinaryupdate(self):
-		if self.newversion(arch) != _("Download not avaible"):
-			system('killall -9 oscam_oscamsmartcard' + null)
-			system('wget -T5 --no-check-certificate -q -O /tmp/oscam.tar.gz ' + self.downloadurl().strip() + ' ' + null)
-			system('tar -xzf /tmp/oscam.tar.gz -C /tmp' + null)
-			system('rm -f /usr/bin/oscam_oscamsmartcard' + null)
-			system('mv /tmp/oscam /usr/bin/oscam_oscamsmartcard' + null)
-			system('chmod 755 /usr/bin/oscam_oscamsmartcard')
-			system('rm -f /tmp/oscam.tar.gz')
+		url = self.downloadurl()
+		if url:
+			print(f"Scaricando da: {url}")
+			os.system(f"wget -T5 --no-check-certificate -O /tmp/oscam.tar.gz {url}")
+			os.system('tar -xzf /tmp/oscam.tar.gz -C /tmp')
+			os.system('rm -f /usr/bin/oscam_oscamsmartcard')
+			os.system('cp /tmp/oscam/oscam_oscamsmartcard /usr/bin/')
+			os.system('chmod 755 /usr/bin/oscam_oscamsmartcard')
+			os.system('rm -f /tmp/oscam.tar.gz')
+		else:
+		    print("Architettura non supportata.")
 
 	def downloadurl(self):
-		binary = 'oscam_oscamsmartcard'
-		suffix = '.tar.gz'
-		emu=''
-		if getImageDistro() =='opendroid':
-			if config.OscamSmartcard.emu.value:
-				emu='_emu'
-		if getImageDistro() =='openmips':
-			if config.OscamSmartcard.emu.value:
-				emu='_emu'
-		if getImageDistro() =='teamblue':
-			if config.OscamSmartcard.emu.value:
-				emu='_emu'
-		archs = ['armv7l', 'mips', 'sh4', 'ppc', 'armv7ahf-vfp-neon', 'aarch64']
-		if arch =='aarch64':
-			emu=''
-		if arch in archs:
-			downloadurl = base64.b64decode(self.getdl()[1]).strip().decode('ascii') + binary + '_' + arch + emu + suffix
-			#overwrite if Box is a WeTeKPLAY
-			if getMachineBrand() =='WeTeK':
-				downloadurl = base64.b64decode(self.getdl()[1]).strip().decode('ascii') + binary + '_' + 'wetekplay' + suffix
-			if self.hd34check():
-				downloadurl = base64.b64decode(self.getdl()[1]).strip().decode('ascii') + binary + '_' + arch + '_hd34' + suffix
-		else:
-			downloadurl = 'unknown_' + arch
-		return downloadurl
+               binary = 'oscam_oscamsmartcard'
+               suffix = '.tar.gz'
+               emu = ''
+               archs = ['cortexa7hf-vfp', 'aarch64', 'cortexa9hf-neon', 'cortexa15hf-neon-vfpv4', 'armv7l']
+               if self.arch in archs:
+                   download_url = f"https://opendroid.org/osc/{self.arch}/{binary}{suffix}"
+                   return download_url
+               else:
+                   return None
 
 	def hd34check(self):
 		hd34 = ['HD03', 'HD04']
@@ -646,6 +639,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		if config.OscamSmartcard.externalReader1.value in hd34:
 			return True
 		return False
+
 	def newversion(self, arch):
 		upgradeinfo = _("Download not avaible")
 		if self.online == True:
@@ -656,7 +650,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
 			for line in file.readlines():
 				line = line.strip().split(',')
 				if line[0] == arch:
-					upgradeinfo = line[1].replace("-unstable", "")
+					upgradeinfo = line[1].replace("_oscam-emu_11845", "")
 			file.close()
 			os.remove("/tmp/version.info")
 			os.remove(upgfile)
@@ -921,14 +915,15 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		return str(popen('ip address |grep -v "inet6" |grep -v "127" |grep inet |cut -d " " -f6').read().strip().replace('/24',''))
 
 	def getdl(self):
-		info  = 'aHR0cDovL29zYy50ZWFtYmx1ZS50ZWNoL29zYy92ZXJzaW9uLmluZm8gCg=='
-		srv   = 'aHR0cDovL29zYy50ZWFtYmx1ZS50ZWNoL29zYy8K'
-		infoz = 'aHR0cDovL29zYy50ZWFtYmx1ZS50ZWNoL29zYy92ZXJzaW9uLnppcAo='
+		info  = 'aHR0cHM6Ly9vcGVuZHJvaWQub3JnL29zYy92ZXJzaW9uLmluZm8='
+		srv   = 'aHR0cHM6Ly9vcGVuZHJvaWQub3JnL29zYy8='
+		infoz = 'aHR0cHM6Ly9vcGVuZHJvaWQub3JnL29zYy92ZXJzaW9uLnppcA=='
 		return info, srv, infoz
 
 	def showNews(self):
 		lastinfo =  ""
 		x = " : "
+		lastinfo += "22-10-2024" + x + _("update oscam 11845") + "\n"
 		lastinfo += "06-11-2020" + x + _("added dropbadcws on cccam import") + "\n"
 		lastinfo += "10-20-2018" + x + _("added bcm arm 64 bit CPU") + "\n"
 		lastinfo += "11-07-2018" + x + _("download fix") + "\n"
@@ -948,4 +943,4 @@ class OscamSmartcard(ConfigListScreen, Screen):
 def main(session, **kwargs):
 	session.open(OscamSmartcard, "/usr/lib/enigma2/python/OPENDROID/icons/oscamsmartcard.png")
 def OPENDROID(**kwargs):
-	return PluginDescriptor(name="Oscam Smartcard v2.4", description=_("Configuration tool for OScam"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
+	return PluginDescriptor(name="Oscam Smartcard v2.5", description=_("Configuration tool for OScam"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
