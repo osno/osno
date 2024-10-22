@@ -32,10 +32,12 @@ import re
 import subprocess
 import platform
 
-def get_architecture():
-    # Restituisce l'architettura del sistema
-    arch = platform.machine()  # 'armv7l', 'aarch64', ecc.
+def get_arch_suffix():
+    # Forza il ritorno della corretta architettura per questa macchina
+    arch = 'armv7l'
+    print(f"Architettura rilevata: {arch}")
     return arch
+url = f"https://opendroid.org/osc/armv7l/oscam.tar.gz"
 
 plugin='[OscamSmartcard] '
 dev_null = ' > /dev/null 2>&1'
@@ -178,7 +180,6 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		self.online = self.onlinecheck()
 		self.createoscamsmartcarddata()
 		self.oscamsmartcarddata = "/tmp/data/"
-		self.arch = get_architecture()
 		self.downloadurl()
 
 		if self.online == False:
@@ -605,28 +606,44 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		system('cp -f ' + self.oscamsmartcarddata + 'oscam.tiers'  + ' ' + config.OscamSmartcard.ConfigPath.value)
 
 	def oscambinaryupdate(self):
-		url = self.downloadurl()
-		if url:
+		arch = get_arch_suffix()
+		if arch:
+			url = f"https://opendroid.org/osc/{arch}/oscam.tar.gz"
 			print(f"Scaricando da: {url}")
 			os.system(f"wget -T5 --no-check-certificate -O /tmp/oscam.tar.gz {url}")
-			os.system('tar -xzf /tmp/oscam.tar.gz -C /tmp')
-			os.system('rm -f /usr/bin/oscam_oscamsmartcard')
-			os.system('cp /tmp/oscam/oscam_oscamsmartcard /usr/bin/')
-			os.system('chmod 755 /usr/bin/oscam_oscamsmartcard')
-			os.system('rm -f /tmp/oscam.tar.gz')
+        
+                        # Verifica se il file è stato scaricato correttamente
+			if os.path.exists('/tmp/oscam.tar.gz'):
+                                print("File scaricato correttamente.")
+                                os.system('tar -xzf /tmp/oscam.tar.gz -C /tmp')
+                                os.system('rm -f /usr/bin/oscam_oscamsmartcard')
+                                os.system('cp /tmp/oscam/oscam_oscamsmartcard /usr/bin/')
+                                os.system('chmod 755 /usr/bin/oscam_oscamsmartcard')
+                                os.system('rm -f /tmp/oscam.tar.gz')
+			else:
+                                print("Errore: Il file non è stato scaricato.")
 		else:
-		    print("Architettura non supportata.")
+			    print("Architettura non supportata.")
 
 	def downloadurl(self):
-               binary = 'oscam_oscamsmartcard'
-               suffix = '.tar.gz'
-               emu = ''
-               archs = ['cortexa7hf-vfp', 'aarch64', 'cortexa9hf-neon', 'cortexa15hf-neon-vfpv4', 'armv7l']
-               if self.arch in archs:
-                   download_url = f"https://opendroid.org/osc/{self.arch}/{binary}{suffix}"
-                   return download_url
-               else:
-                   return None
+		# Architettura della macchina
+		arch = get_arch_suffix()  # Assumiamo che questa funzione restituisca arch come 'armv7l', 'aarch64', ecc.
+    
+		# Base URL per il download
+		base_url = "https://opendroid.org/osc/"
+    
+		# File binario da scaricare
+		binary = 'oscam.tar.gz'
+    
+		# Verifica se l'architettura è supportata
+		if arch:
+		    # Costruisce l'URL finale basato sull'architettura
+		    url = f"{base_url}{arch}/{binary}"
+		    print(f"Download URL costruito: {url}")
+		    return url
+		else:
+		    print("Architettura non supportata.")
+		    return None
 
 	def hd34check(self):
 		hd34 = ['HD03', 'HD04']
