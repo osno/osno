@@ -941,7 +941,7 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		lastinfo =  ""
 		x = " : "
 		lastinfo += "22-10-2024" + x + _("update oscamsmartcard code") + "\n"
-		lastinfo += "22-10-2024" + x + _("update oscam 11845") + "\n"
+		lastinfo += "22-10-2024" + x + _("update version oscam 11845") + "\n"
 		lastinfo += "06-11-2020" + x + _("added dropbadcws on cccam import") + "\n"
 		lastinfo += "10-20-2018" + x + _("added bcm arm 64 bit CPU") + "\n"
 		lastinfo += "11-07-2018" + x + _("download fix") + "\n"
