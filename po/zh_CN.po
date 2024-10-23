@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-21 00:08+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy,Formiano,erminio\n"
@@ -1135,10 +1135,6 @@ msgid "%s  "
 msgstr "%s  (%s)"
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s  (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
@@ -1599,6 +1595,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Mb"
 
@@ -1630,7 +1629,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1927,6 +1926,9 @@ msgstr "即将开始"
 
 msgid "About..."
 msgstr "关于..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "无线接入点:"
@@ -2555,6 +2557,18 @@ msgstr "应用当前突出显示的语言环境/语言并退出"
 msgid "Arabic"
 msgstr "阿拉伯语"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr "阿拉贡语"
 
@@ -2815,12 +2829,6 @@ msgstr "选择第4音频语言"
 
 msgid "Audio options..."
 msgstr "音频选项..."
-
-msgid "Audio volume step size"
-msgstr "音频音量大小"
-
-msgid "Audio volume step size fast mode"
-msgstr "音频音量大小固定模式"
 
 msgid "Australia"
 msgstr "澳大利亚"
@@ -4775,9 +4783,6 @@ msgstr "配置图文电视显示区域的x端坐标."
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "配置图文显示区域在y方向的终点坐标."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "配置固定模式音频音量大小(限制1-10).当音量键永久按下或连续快速按下时激活."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "配置第一种音频语言(最高优先级)."
 
@@ -4810,9 +4815,6 @@ msgstr ""
 
 msgid "Configure the gateway."
 msgstr "配置网关."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "配置一般音频音量大小(限制1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "配置当机顶盒待机时硬盘驱动器在指定的空闲时间后进入待机状态."
@@ -7501,7 +7503,7 @@ msgstr "输入PIN码"
 msgid "Enter text via an attached keyboard"
 msgstr ""
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9355,9 +9357,6 @@ msgstr ""
 msgid "Hide known extensions"
 msgstr "隐藏已知扩展名"
 
-msgid "Hide mute notification"
-msgstr "隐藏静音通知"
-
 msgid "Hide number markers"
 msgstr "隐藏数字标记"
 
@@ -9715,9 +9714,6 @@ msgstr "如果启用,使用时间窗口检测定时器从深度待机 状态唤�
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "如果日志文件设置了最大空间,旧有的将会删除."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "如果静音,几秒钟后将隐藏静音图标或静音信息."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "如果设置为'是',则将向电视发送与在常规待机事件期间发送的深度待机事件相同的命令."
@@ -10159,7 +10155,7 @@ msgstr "安装扩展."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10550,9 +10546,6 @@ msgstr ""
 msgid "Kexec MultiBoot files are missing."
 msgstr ""
 
-msgid "Key"
-msgstr ""
-
 msgid "Keyboard"
 msgstr "键盘"
 
@@ -10606,10 +10599,6 @@ msgid "Kuanyama / Kwanyama"
 msgstr "关山"
 
 msgid "Kurdish"
-msgstr "库尔德语"
-
-#, fuzzy
-msgid "Kurdish (Sorani)"
 msgstr "库尔德语"
 
 msgid "Kurdistan"
@@ -10698,9 +10687,6 @@ msgstr "高本振频率"
 
 msgid "LOF/L"
 msgstr "低本振频率"
-
-msgid "Label"
-msgstr "标签"
 
 msgid "Language"
 msgstr "语言"
@@ -11073,6 +11059,10 @@ msgstr "长文件名"
 msgid "Long press emulation with button"
 msgstr "长按模拟按键"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "长按: %s"
+
 #, python-format
 msgid "Long press: %s"
 msgstr "长按: %s"
@@ -11362,6 +11352,10 @@ msgstr ""
 
 msgid "MediaPlayer"
 msgstr "媒体播放器"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "媒体流"
 
 msgid "Medical"
 msgstr "医疗"
@@ -12149,6 +12143,10 @@ msgstr "名称空间和轨道位置."
 msgid "Namibia"
 msgstr "纳米比亚"
 
+#, fuzzy
+msgid "Narration"
+msgstr "饱和度"
+
 msgid "Native"
 msgstr "原始"
 
@@ -12409,10 +12407,6 @@ msgstr "简单"
 
 msgid "No Connection"
 msgstr "未连接"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "工作概述"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12697,6 +12691,10 @@ msgstr "未关联"
 
 msgid "Not configured"
 msgstr "未配置"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "未定义"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13148,9 +13146,6 @@ msgstr "OpenDNS首页"
 msgid "OpenDroid"
 msgstr "打开"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "高度"
@@ -13225,6 +13220,10 @@ msgstr ""
 msgid "Original"
 msgstr "原始"
 
+#, fuzzy
+msgid "Original language"
+msgstr "原始语言"
+
 msgid "Oriya"
 msgstr "奥里亚"
 
@@ -13252,7 +13251,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "智能卡PIN"
 
 msgid "Oscamsmartcard found "
@@ -16672,7 +16671,7 @@ msgstr ""
 msgid "Select how long to display the task and script message pop up."
 msgstr ""
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr ""
 
 msgid "Select how often this timer is to be repeated."
@@ -17009,6 +17008,12 @@ msgstr "选择转换后的字符集"
 msgid "Select the shifted character set for the next character only"
 msgstr "仅为下一个字符选择移位字符集"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr ""
 
@@ -17100,9 +17105,6 @@ msgid ""
 "Select the wireless network to which you want to connect.\n"
 "\n"
 "Press OK to continue."
-msgstr ""
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
 msgstr ""
 
 msgid "Select update source location"
@@ -21538,6 +21540,9 @@ msgstr "解压镜像"
 msgid "Up"
 msgstr "上箭头"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "向上/向下 按键模式"
 
@@ -21768,9 +21773,6 @@ msgid "Use key map *"
 msgstr "使用键盘映射 *"
 
 msgid "Use legacy navigation"
-msgstr ""
-
-msgid "Use logarithmic steps"
 msgstr ""
 
 msgid "Use official channel numbering"
@@ -22246,18 +22248,22 @@ msgstr ""
 msgid "Volume Adjust Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Volume display timer"
-msgstr "切换信息栏的显示"
-
 msgid "Volume down"
 msgstr "音量减小"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr "接收器遥控器上的音量键将控制电视音量. 如果不支持此功能,音量键将不起作用!"
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "音量增大"
+
 msgid "Volume up"
 msgstr "音量增大"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "切换信息栏的显示"
 
 msgid "W"
 msgstr "W"
@@ -24232,6 +24238,14 @@ msgstr "单行"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "打开"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "由openATV镜像团队提供"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24669,6 +24683,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

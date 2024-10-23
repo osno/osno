@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-21 00:06+0200\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: SK jazyk upravil dym1\n"
@@ -1201,10 +1201,6 @@ msgid "%s  "
 msgstr "%s  (%s)"
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s  (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
@@ -1663,6 +1659,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Mb"
 
@@ -1694,7 +1693,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1988,6 +1987,9 @@ msgstr "sa čoskoro začne"
 
 msgid "About..."
 msgstr "O prijímači..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Prístupový bod:"
@@ -2616,6 +2618,18 @@ msgstr "Použiť aktuálne zvýraznené miestne nastavenie/jazyk a ukončiť"
 msgid "Arabic"
 msgstr "arabčina"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr "aragónčina"
 
@@ -2876,12 +2890,6 @@ msgstr "Voľba jazyka zvuku 4"
 
 msgid "Audio options..."
 msgstr "Možnosti zvuku..."
-
-msgid "Audio volume step size"
-msgstr "Veľkosť kroku úpravy hlasitosti"
-
-msgid "Audio volume step size fast mode"
-msgstr "Veľkosť kroku úpravy hlasitosti – rýchly režim"
 
 msgid "Australia"
 msgstr "Austrália"
@@ -4843,9 +4851,6 @@ msgstr "Nastavte koncovú súradnicu v osi X oblasti zobrazovania teletextu."
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Nastavte koncovú súradnicu v osi Y oblasti zobrazovania teletextu."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Nastavte veľkosť kroku pre hlasitosť zvuku v rýchlom režime (limit: 1-10). Aktivuje sa pri držaní tlačidla pre hlasitosť alebo pri jeho rýchlom stláčaní."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Nastavte prvý jazyk zvuku (najvyššia priorita)."
 
@@ -4878,9 +4883,6 @@ msgstr "Konfigurovať funkciu tlačidiel < a >."
 
 msgid "Configure the gateway."
 msgstr "Nastavte bránu."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "Nastavte veľkosť kroku hlasitosti zvuku všeobecne (limit: 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Nastavte čas nečinnosti na prechod pevného disku do úsporného režimu ak je prijímač v pohotovostnom režime."
@@ -7582,7 +7584,7 @@ msgstr "Zadajte PIN kód"
 msgid "Enter text via an attached keyboard"
 msgstr "Zadajte text pomocou pripojenej klávesnice"
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9439,9 +9441,6 @@ msgstr "Nezobrazovať chybové hlásenia CI modulu."
 msgid "Hide known extensions"
 msgstr "Skryť známe prípony súborov"
 
-msgid "Hide mute notification"
-msgstr "Nezobrazovať notifikáciu o stíšení"
-
 msgid "Hide number markers"
 msgstr "Skryť číselné indikátory"
 
@@ -9799,9 +9798,6 @@ msgstr "Ak je povolené, je možné nastaviť časové okno na detekciu prebuden
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Ak súbory denníkov dosiahnu maximum prideleného miesta, najstaršie súbory sa odstránia."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "Pri stlmení zvuku sa ikona stlmenia alebo informácia o stlmení po niekoľkých sekundách skryje."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Ak je vybraná možnosť 'Áno', počas vypnutia sa do televízora odosielajú rovnaké príkazy ako počas normálneho pohotovostného režimu."
@@ -10242,7 +10238,7 @@ msgstr "Inštalovať rozšírenia."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10635,9 +10631,6 @@ msgstr "Správca Kexec MultiBoot"
 msgid "Kexec MultiBoot files are missing."
 msgstr "Súbory Kexec MultiBoot chýbajú."
 
-msgid "Key"
-msgstr "Kľúč"
-
 msgid "Keyboard"
 msgstr "Klávesnica"
 
@@ -10692,9 +10685,6 @@ msgstr "Kuaňama (Kuanyama)"
 
 msgid "Kurdish"
 msgstr "kurdčina"
-
-msgid "Kurdish (Sorani)"
-msgstr "Kurdčina (sorančina)"
 
 msgid "Kurdistan"
 msgstr "Kurdistan"
@@ -10782,9 +10772,6 @@ msgstr "LOF/H"
 
 msgid "LOF/L"
 msgstr "LOF/L"
-
-msgid "Label"
-msgstr "Označenie"
 
 msgid "Language"
 msgstr "Jazyk"
@@ -11161,6 +11148,10 @@ msgstr "Dlhé názvy súborov"
 msgid "Long press emulation with button"
 msgstr "Emulácia dlhého stlačenia tlačidlom"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "Dlhé stlačenie: %s"
+
 #, python-format
 msgid "Long press: %s"
 msgstr "Dlhé stlačenie: %s"
@@ -11450,6 +11441,10 @@ msgstr "Informácie o médiu"
 
 msgid "MediaPlayer"
 msgstr "Prehrávač médií"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "Stream média"
 
 msgid "Medical"
 msgstr "Medicínske"
@@ -12234,6 +12229,10 @@ msgstr "Názov a orbitálna pozícia"
 msgid "Namibia"
 msgstr "Namíbia"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Sýtosť"
+
 msgid "Native"
 msgstr "Natívne"
 
@@ -12497,10 +12496,6 @@ msgstr "jednoduché"
 
 msgid "No Connection"
 msgstr "Žiadne pripojenie"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "Prehľad úlohy"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12785,6 +12780,10 @@ msgstr "Neasociované"
 
 msgid "Not configured"
 msgstr "Nenakonfigurované"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Nedefinované"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13239,9 +13238,6 @@ msgstr "OpenDNS – domovská stránka"
 msgid "OpenDroid"
 msgstr "Android"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "Výška"
@@ -13315,6 +13311,10 @@ msgstr "Orientácia"
 msgid "Original"
 msgstr "Originálne"
 
+#, fuzzy
+msgid "Original language"
+msgstr "pôvodný jazyk"
+
 msgid "Oriya"
 msgstr "urijčina"
 
@@ -13345,7 +13345,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "PIN pre smarkartu"
 
 msgid "Oscamsmartcard found "
@@ -16826,7 +16826,8 @@ msgstr "Vyberte trvanie zobrazenia vyskakovacieho okna pre chybu tlačidla. Vstu
 msgid "Select how long to display the task and script message pop up."
 msgstr "Vyberte trvanie zobrazenia úlohy a vyskakovacieho okna pre správu skriptu."
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+#, fuzzy
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr "Vyberte trvanie (v sekundách) zobrazenia hlasitosti, kým sa automaticky skryje."
 
 msgid "Select how often this timer is to be repeated."
@@ -17166,6 +17167,12 @@ msgstr "Vyberte znakovú sadu pre veľké písmená"
 msgid "Select the shifted character set for the next character only"
 msgstr "Vyberte znakovú sadu veľkých písmen len pre ďalšie písmeno"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr "Vyberte poradie zoraďovania riadkov so súbormi:"
 
@@ -17261,9 +17268,6 @@ msgstr ""
 "Vyberte bezdrôtovú sieť, ku ktorej sa chcete pripojiť.\n"
 "\n"
 "Pokračujte stlačením OK."
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
-msgstr "Túto možnosť vyberte vtedy, ak chcete použiť logaritmickú veľkosť kroku s viacerými krokmi pri nižších úrovniach hlasitosti."
 
 msgid "Select update source location"
 msgstr "Vyberte umiestnenie zdroja aktualizácie"
@@ -21736,6 +21740,9 @@ msgstr "Rozbaľovanie image"
 msgid "Up"
 msgstr "Nahor"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Režim tlačidla hore/dolu"
 
@@ -21970,9 +21977,6 @@ msgstr "Použiť mapu tlačidiel *"
 
 msgid "Use legacy navigation"
 msgstr "Použiť starší spôsob navigovania"
-
-msgid "Use logarithmic steps"
-msgstr "Použiť logaritmické kroky"
 
 msgid "Use official channel numbering"
 msgstr "Použiť oficiálne číslovanie kanálov"
@@ -22454,17 +22458,22 @@ msgstr "Výber stanice na úpravu hlasitosti"
 msgid "Volume Adjust Settings"
 msgstr "Nastavenia úpravy hlasitosti"
 
-msgid "Volume display timer"
-msgstr "Dĺžka zobrazenia hlasitosti"
-
 msgid "Volume down"
 msgstr "Zníženie hlasitosti"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr "Tlačidlá hlasitosti na diaľkovom ovládači prijímača budú ovládať hlasitosť TV prijímača. Ak nie je takáto funkcia podporovaná, nemajú tlačidlá žiadnu inú funkciu!"
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "Zvýšiť hlasitosť"
+
 msgid "Volume up"
 msgstr "Zvýšiť hlasitosť"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "Dĺžka zobrazenia hlasitosti"
 
 msgid "W"
 msgstr "Z"
@@ -24445,6 +24454,14 @@ msgstr "Jeden riadok"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "Android"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "Od openATV Image Team"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24882,6 +24899,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

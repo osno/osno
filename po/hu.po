@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-21 00:01+0200\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: Mediavox, robertut <info@mediavox.hu, robertut@yahoo.com>\n"
@@ -1201,10 +1201,6 @@ msgstr "%s GHz"
 msgid "%s  "
 msgstr "%s (%s)"
 
-#, fuzzy, python-format
-msgid "%s  (%s)"
-msgstr "%s (%s)"
-
 #, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
@@ -1670,6 +1666,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 MB"
 
@@ -1701,7 +1700,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1999,6 +1998,9 @@ msgstr "az indításról"
 
 msgid "About..."
 msgstr "Névjegy..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Hozzáférési pont:"
@@ -2629,6 +2631,18 @@ msgstr "Alkalmazza az aktuálisan kiemelt terület/nyelvet, és lépjen ki"
 msgid "Arabic"
 msgstr "Arab"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr ""
 
@@ -2892,12 +2906,6 @@ msgstr "Negyedleges előnyben részesített hangsáv"
 
 msgid "Audio options..."
 msgstr "Hang beállítások..."
-
-msgid "Audio volume step size"
-msgstr "Audió hangerő léptetés mértéke"
-
-msgid "Audio volume step size fast mode"
-msgstr "Audió hangerő léptetés mértékének gyors módja"
 
 msgid "Australia"
 msgstr "Ausztrália"
@@ -4847,9 +4855,6 @@ msgstr "Állítsa be a teletext kijelzési területének \"x\" befejezési koord
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Állítsa be a teletext kijelzési területének \"x\" befejezési koordinátáját."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Állítsa be a gyors módú hangerő lépésméretet (1-10). Aktiválva van, ha a hangerőszabályzó folyamatosan nyomva van, vagy gyorsan egymás után le van nyomva."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Többnyelvű csatornáknál ezt a hangsávot választja automatikusan, legmagasabb prioritással."
 
@@ -4882,9 +4887,6 @@ msgstr ""
 
 msgid "Configure the gateway."
 msgstr "Átjáró beállítása."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "A hangerő léptékének mértékét (1-10) tudja itt beállítani."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Beállíthatja, hogy a merevlemez leálljon készenléti állapotába a beállításnak megfelelően miután a készülék készenléti állapotba kerül."
@@ -7588,7 +7590,7 @@ msgstr "Adja meg a PIN-kódot"
 msgid "Enter text via an attached keyboard"
 msgstr ""
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9463,9 +9465,6 @@ msgstr ""
 msgid "Hide known extensions"
 msgstr "Ismert fájlkiterjesztések elrejtése"
 
-msgid "Hide mute notification"
-msgstr "Értesítés némításának elrejtése"
-
 msgid "Hide number markers"
 msgstr "Számjelölők elrejtése"
 
@@ -9824,9 +9823,6 @@ msgstr "Ha engedélyezve van, akkor egy időablak segítségével érzékelheti 
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Ha a naplók a beállított maximális hely értékét túllépik, akkor a legidősebb napló törlődik."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "Ha némítva van, akkor rejtse el a némító ikont vagy az információkat néhány másodperc múlva."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr ""
@@ -10272,7 +10268,7 @@ msgstr "Bővítmények telepítése."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10669,9 +10665,6 @@ msgstr ""
 msgid "Kexec MultiBoot files are missing."
 msgstr ""
 
-msgid "Key"
-msgstr ""
-
 msgid "Keyboard"
 msgstr "Billentyűzet"
 
@@ -10728,9 +10721,6 @@ msgid "Kuanyama / Kwanyama"
 msgstr ""
 
 msgid "Kurdish"
-msgstr ""
-
-msgid "Kurdish (Sorani)"
 msgstr ""
 
 msgid "Kurdistan"
@@ -10819,9 +10809,6 @@ msgstr "LOF/H"
 
 msgid "LOF/L"
 msgstr "LOF/L"
-
-msgid "Label"
-msgstr "Címke"
 
 msgid "Language"
 msgstr "Kezelő felület nyelve"
@@ -11202,6 +11189,10 @@ msgstr "Hosszú fájlnevek"
 msgid "Long press emulation with button"
 msgstr "Emulációhoz a gombot hosszan nyomja"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "Hosszú gombnyomás"
+
 #, fuzzy, python-format
 msgid "Long press: %s"
 msgstr "Hosszú gombnyomás"
@@ -11501,6 +11492,10 @@ msgstr ""
 
 msgid "MediaPlayer"
 msgstr "Médialejátszó"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "Adatfolyam"
 
 msgid "Medical"
 msgstr "Orvosi"
@@ -12310,6 +12305,10 @@ msgstr ""
 msgid "Namibia"
 msgstr "Namíbia"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Színtelítettség"
+
 msgid "Native"
 msgstr "Natív"
 
@@ -12572,10 +12571,6 @@ msgstr "egyszerű"
 
 msgid "No Connection"
 msgstr "Nincs kapcsolat"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "Folyamat nézet"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12864,6 +12859,10 @@ msgstr "Nem-csatlakozott"
 
 msgid "Not configured"
 msgstr "nem konfigurált"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Nincs megadva"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13321,9 +13320,6 @@ msgstr "AutoTimer megnyitása"
 msgid "OpenDroid"
 msgstr "Nyitás"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "Magasság"
@@ -13398,6 +13394,10 @@ msgstr ""
 msgid "Original"
 msgstr "Eredeti"
 
+#, fuzzy
+msgid "Original language"
+msgstr "eredeti nyelv"
+
 msgid "Oriya"
 msgstr ""
 
@@ -13425,7 +13425,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "Smart-kártya PIN"
 
 msgid "Oscamsmartcard found "
@@ -16865,7 +16865,7 @@ msgstr ""
 msgid "Select how long to display the task and script message pop up."
 msgstr ""
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr ""
 
 msgid "Select how often this timer is to be repeated."
@@ -17206,6 +17206,12 @@ msgstr "Válassza ki a virtuális billentyűzettel eltolt karakterkészletét"
 msgid "Select the shifted character set for the next character only"
 msgstr "Válassza ki a virtuális billentyűzettel eltolt karakterkészletet csak a következő karakterhez"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr ""
 
@@ -17297,9 +17303,6 @@ msgid ""
 "Select the wireless network to which you want to connect.\n"
 "\n"
 "Press OK to continue."
-msgstr ""
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
 msgstr ""
 
 msgid "Select update source location"
@@ -21796,6 +21799,9 @@ msgstr "Lemezkép kibontása"
 msgid "Up"
 msgstr "Fel"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Fel/Le billentyű mód"
 
@@ -22026,9 +22032,6 @@ msgid "Use key map *"
 msgstr "Melyik Keymapot választja *"
 
 msgid "Use legacy navigation"
-msgstr ""
-
-msgid "Use logarithmic steps"
 msgstr ""
 
 msgid "Use official channel numbering"
@@ -22511,18 +22514,22 @@ msgstr ""
 msgid "Volume Adjust Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Volume display timer"
-msgstr "Hangerő szabályozás"
-
 msgid "Volume down"
 msgstr "Hangerő le"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr ""
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "Hangerő fel"
+
 msgid "Volume up"
 msgstr "Hangerő fel"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "Hangerő szabályozás"
 
 msgid "W"
 msgstr "Ny"
@@ -24506,6 +24513,14 @@ msgstr "Egy sor"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "Nyitás"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "Az openATV Image Team által"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24944,6 +24959,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

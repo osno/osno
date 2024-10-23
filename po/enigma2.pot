@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 23:15+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1157,10 +1157,6 @@ msgid "%s  "
 msgstr ""
 
 #, python-format
-msgid "%s  (%s)"
-msgstr ""
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr ""
 
@@ -1559,6 +1555,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr ""
 
@@ -1583,7 +1582,7 @@ msgid "64 Mb"
 msgstr ""
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1820,6 +1819,9 @@ msgid "About to start"
 msgstr ""
 
 msgid "About..."
+msgstr ""
+
+msgid "Above 200 Mbps"
 msgstr ""
 
 msgid "Access point:"
@@ -2305,6 +2307,18 @@ msgid "Apply the currently highlighted locale/language and exit"
 msgstr ""
 
 msgid "Arabic"
+msgstr ""
+
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
 msgstr ""
 
 msgid "Aragonese"
@@ -7988,7 +8002,7 @@ msgstr ""
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 msgid "Install lcd picons on"
@@ -8345,9 +8359,6 @@ msgstr ""
 msgid "Kexec MultiBoot files are missing."
 msgstr ""
 
-msgid "Key"
-msgstr ""
-
 msgid "Keyboard"
 msgstr ""
 
@@ -8399,9 +8410,6 @@ msgstr ""
 msgid "Kurdish"
 msgstr ""
 
-msgid "Kurdish (Sorani)"
-msgstr ""
-
 msgid "Kurdistan"
 msgstr ""
 
@@ -8445,9 +8453,6 @@ msgid "LOF/H"
 msgstr ""
 
 msgid "LOF/L"
-msgstr ""
-
-msgid "Label"
 msgstr ""
 
 msgid "Language"
@@ -9707,6 +9712,9 @@ msgstr ""
 msgid "Namibia"
 msgstr ""
 
+msgid "Narration"
+msgstr ""
+
 msgid "Native"
 msgstr ""
 
@@ -10182,6 +10190,9 @@ msgstr ""
 msgid "Not configured"
 msgstr ""
 
+msgid "Not defined"
+msgstr ""
+
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr ""
@@ -10544,9 +10555,6 @@ msgstr ""
 msgid "OpenDroid"
 msgstr ""
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 msgid "OpenEight"
 msgstr ""
 
@@ -10599,6 +10607,9 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
+msgid "Original language"
+msgstr ""
+
 msgid "Oriya"
 msgstr ""
 
@@ -10623,9 +10634,6 @@ msgid "Oscam will be installed with the following settings"
 msgstr ""
 
 msgid "Oscam/Ncam not running - start Cam to obtain information."
-msgstr ""
-
-msgid "OscamSmartcard"
 msgstr ""
 
 msgid "Oscamsmartcard found "
@@ -16418,6 +16426,9 @@ msgstr ""
 msgid "Up"
 msgstr ""
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Update"
 msgstr ""
 
@@ -18473,6 +18484,12 @@ msgstr ""
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+msgid "openDroid"
+msgstr ""
+
+msgid "openDroid by OPD Image Team"
+msgstr ""
+
 msgid "opennfr"
 msgstr ""
 
@@ -18892,6 +18909,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"
@@ -19406,9 +19426,6 @@ msgstr ""
 msgid "Your %s %s is not connected to the internet"
 msgstr ""
 
-msgid "No Cover"
-msgstr ""
-
 msgid "C"
 msgstr ""
 
@@ -19416,6 +19433,9 @@ msgid "D"
 msgstr ""
 
 msgid "TUNER:"
+msgstr ""
+
+msgid "MediaStream"
 msgstr ""
 
 msgid "Advanced Restore"
@@ -19580,6 +19600,9 @@ msgstr ""
 msgid "Online update of your %s %s software."
 msgstr ""
 
+msgid "OscamSmartcard Settings"
+msgstr ""
+
 msgid "Package Manager"
 msgstr ""
 
@@ -19730,6 +19753,9 @@ msgstr ""
 msgid "by hmmmdada"
 msgstr ""
 
+msgid "-"
+msgstr ""
+
 msgid "E "
 msgstr ""
 
@@ -19745,22 +19771,19 @@ msgstr ""
 msgid "I"
 msgstr ""
 
-msgid "IMDB Search"
-msgstr ""
-
 msgid "J"
-msgstr ""
-
-msgid "Quick EPG"
-msgstr ""
-
-msgid "-"
 msgstr ""
 
 msgid "EtPortal"
 msgstr ""
 
+msgid "IMDB Search"
+msgstr ""
+
 msgid "1,1"
+msgstr ""
+
+msgid "  REC  "
 msgstr ""
 
 msgid "Configure interface"
@@ -19813,6 +19836,9 @@ msgid ""
 "Please press OK if you can see this page on your TV (or select a different input port).\n"
 "\n"
 "The next input port will be automatically probed in 10 seconds."
+msgstr ""
+
+msgid "Quick EPG"
 msgstr ""
 
 msgid "Enigmalight"
@@ -19990,12 +20016,6 @@ msgid "Audio language selection 3"
 msgstr ""
 
 msgid "Audio language selection 4"
-msgstr ""
-
-msgid "Audio volume step size"
-msgstr ""
-
-msgid "Audio volume step size fast mode"
 msgstr ""
 
 msgid "AutoCam Settings"
@@ -20382,9 +20402,6 @@ msgstr ""
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr ""
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr ""
-
 msgid "Configure the first audio language (highest priority)."
 msgstr ""
 
@@ -20416,9 +20433,6 @@ msgid "Configure the function of the < and > buttons."
 msgstr ""
 
 msgid "Configure the gateway."
-msgstr ""
-
-msgid "Configure the general audio volume step size (limit 1-10)."
 msgstr ""
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
@@ -20925,7 +20939,7 @@ msgstr ""
 msgid "Enter a name for this timer."
 msgstr ""
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -21093,9 +21107,6 @@ msgstr ""
 msgid "Hide known extensions"
 msgstr ""
 
-msgid "Hide mute notification"
-msgstr ""
-
 msgid "Hide number markers"
 msgstr ""
 
@@ -21172,9 +21183,6 @@ msgid "If enabled, using a time window to detect a wake up from deep standby by 
 msgstr ""
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
-msgstr ""
-
-msgid "If muted, hide mute icon or mute information after few seconds."
 msgstr ""
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
@@ -21373,6 +21381,9 @@ msgid "Logs older then the set no of days will be deleted."
 msgstr ""
 
 msgid "Long press emulation with button"
+msgstr ""
+
+msgid "Long press volume steps"
 msgstr ""
 
 msgid "Lower Framerate saves CPU Time."
@@ -21945,7 +21956,7 @@ msgstr ""
 msgid "Select how long to display the button error pop up. Button input is still permitted while the pop up is displayed."
 msgstr ""
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr ""
 
 msgid "Select how often this timer is to be repeated."
@@ -22068,6 +22079,12 @@ msgstr ""
 msgid "Select the screen layout, from the options provided by the skin, to be used for the ChannelSelection screen."
 msgstr ""
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order of the Extension Menu entries."
 msgstr ""
 
@@ -22111,9 +22128,6 @@ msgid "Select the type of shutdown desired when the SleepTimer activates."
 msgstr ""
 
 msgid "Select the type of this timer."
-msgstr ""
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
 msgstr ""
 
 msgid "Select what action to take when reaching the end of a media file during playback."
@@ -23097,9 +23111,6 @@ msgstr ""
 msgid "Use key map *"
 msgstr ""
 
-msgid "Use logarithmic steps"
-msgstr ""
-
 msgid "Use original DVB subtitle position"
 msgstr ""
 
@@ -23157,10 +23168,13 @@ msgstr ""
 msgid "Volume Adjust Settings"
 msgstr ""
 
-msgid "Volume display timer"
+msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr ""
 
-msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
+msgid "Volume steps"
+msgstr ""
+
+msgid "Volume/Mute display timer"
 msgstr ""
 
 msgid "WMA Pro"
@@ -23404,9 +23418,6 @@ msgid "switch 12 to 8 character display mode"
 msgstr ""
 
 msgid "userdefined"
-msgstr ""
-
-msgid "  REC  "
 msgstr ""
 
 msgid "[REC]"

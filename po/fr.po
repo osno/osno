@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-21 00:00+0200\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: french\n"
@@ -1167,10 +1167,6 @@ msgid "%s  "
 msgstr "%s  (%s)"
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s  (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
@@ -1631,6 +1627,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Mb"
 
@@ -1662,7 +1661,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1960,6 +1959,9 @@ msgstr "sur le point de commencer"
 
 msgid "About..."
 msgstr "À propos..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Point d'accès :"
@@ -2588,6 +2590,18 @@ msgstr "Appliquer les paramètres régionaux/langues actuellement en surbrillanc
 msgid "Arabic"
 msgstr "Arabe"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr "Aragonais"
 
@@ -2848,12 +2862,6 @@ msgstr "Sélection de la langue audio 4"
 
 msgid "Audio options..."
 msgstr "Options audio…"
-
-msgid "Audio volume step size"
-msgstr "Taille du pas du volume audio"
-
-msgid "Audio volume step size fast mode"
-msgstr "Mode rapide de taille de pas de volume audio"
 
 msgid "Australia"
 msgstr "Australie"
@@ -4812,9 +4820,6 @@ msgstr "Configure la fin de coordonnées en x de la zone d'affichage du téléte
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Configure la fin de coordonnées en y de la zone d'affichage du télétexte."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Configurez la taille du pas de volume audio en mode rapide (limite 1-10). Activé lors de l'appui permanent sur la touche de volume ou d'un appui rapide consécutif."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Configure la première langue audio (priorité la plus élevée)."
 
@@ -4847,9 +4852,6 @@ msgstr ""
 
 msgid "Configure the gateway."
 msgstr "Configure la passerelle."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "Configure la taille du pas du volume audio général (limite 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Configure le disque dur pour passer en mode veille après la durée spécifiée d'inactivité lorsque le récepteur est en veille."
@@ -7542,7 +7544,7 @@ msgstr "Saisir code PIN"
 msgid "Enter text via an attached keyboard"
 msgstr ""
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9401,9 +9403,6 @@ msgstr ""
 msgid "Hide known extensions"
 msgstr "Cacher les extensions connues"
 
-msgid "Hide mute notification"
-msgstr "Masquer la notification de mise en sourdine"
-
 msgid "Hide number markers"
 msgstr "Cacher les nombres des marqueurs"
 
@@ -9760,9 +9759,6 @@ msgstr "Si activé, utilisation d'une fenêtre de temps pour détecter un révei
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Si les logs utilisent le maximum d'espace le plus vieux sera supprimé."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "En cas de mise en sourdine, l'icône de mise en sourdine ou les informations relatives à la mise en sourdine sont masquées après quelques secondes."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Si ce paramètre est réglé sur 'Yes' ; les mêmes commandes seront envoyées au téléviseur pour les événements de mise en veille profonde que pour les événements de mise en veille normale."
@@ -10203,7 +10199,7 @@ msgstr "Installer extensions."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10594,9 +10590,6 @@ msgstr ""
 msgid "Kexec MultiBoot files are missing."
 msgstr ""
 
-msgid "Key"
-msgstr ""
-
 msgid "Keyboard"
 msgstr "Clavier"
 
@@ -10650,10 +10643,6 @@ msgid "Kuanyama / Kwanyama"
 msgstr "Kuanyama / Kwanyama"
 
 msgid "Kurdish"
-msgstr "Kurde"
-
-#, fuzzy
-msgid "Kurdish (Sorani)"
 msgstr "Kurde"
 
 msgid "Kurdistan"
@@ -10742,9 +10731,6 @@ msgstr "LOF/H"
 
 msgid "LOF/L"
 msgstr "LOF/L"
-
-msgid "Label"
-msgstr "Etiquette"
 
 msgid "Language"
 msgstr "Langue"
@@ -11118,6 +11104,10 @@ msgstr "Nom de fichiers long"
 msgid "Long press emulation with button"
 msgstr "Émulation de pression prolongée avec bouton"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "Presse longue : %s"
+
 #, python-format
 msgid "Long press: %s"
 msgstr "Presse longue : %s"
@@ -11408,6 +11398,11 @@ msgstr ""
 
 msgid "MediaPlayer"
 msgstr "Lecteur de médias"
+
+# TODO
+#, fuzzy
+msgid "MediaStream"
+msgstr "Flux"
 
 msgid "Medical"
 msgstr "Médical"
@@ -12196,6 +12191,10 @@ msgstr "Espace de nom - pos. orbitale"
 msgid "Namibia"
 msgstr "Namibie"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Saturation"
+
 msgid "Native"
 msgstr "Natif"
 
@@ -12456,10 +12455,6 @@ msgstr "Simple"
 
 msgid "No Connection"
 msgstr "Pas de connexion"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "Vue travail"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12745,6 +12740,10 @@ msgstr "Non-Associé"
 
 msgid "Not configured"
 msgstr "Pas configuré"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Pas défini"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13199,9 +13198,6 @@ msgstr "Accueil OpenDNS"
 msgid "OpenDroid"
 msgstr "Android"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "Hauteur"
@@ -13276,6 +13272,10 @@ msgstr ""
 msgid "Original"
 msgstr "Original"
 
+#, fuzzy
+msgid "Original language"
+msgstr "Langue originale"
+
 msgid "Oriya"
 msgstr "Oriya"
 
@@ -13303,7 +13303,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "Code PIN de la carte à puce"
 
 msgid "Oscamsmartcard found "
@@ -16729,7 +16729,7 @@ msgstr ""
 msgid "Select how long to display the task and script message pop up."
 msgstr ""
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr ""
 
 msgid "Select how often this timer is to be repeated."
@@ -17066,6 +17066,12 @@ msgstr "Sélectionnez le jeu de caractères décalé"
 msgid "Select the shifted character set for the next character only"
 msgstr "Sélectionnez le caractère décalé uniquement pour le suivant"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr ""
 
@@ -17157,9 +17163,6 @@ msgid ""
 "Select the wireless network to which you want to connect.\n"
 "\n"
 "Press OK to continue."
-msgstr ""
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
 msgstr ""
 
 msgid "Select update source location"
@@ -21621,6 +21624,9 @@ msgstr "Décompression de l'image"
 msgid "Up"
 msgstr "Haut"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Mode des boutons haut/bas"
 
@@ -21851,9 +21857,6 @@ msgid "Use key map *"
 msgstr "Sélectionner le keymap à utiliser *"
 
 msgid "Use legacy navigation"
-msgstr ""
-
-msgid "Use logarithmic steps"
 msgstr ""
 
 msgid "Use official channel numbering"
@@ -22329,18 +22332,22 @@ msgstr ""
 msgid "Volume Adjust Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Volume display timer"
-msgstr "Basculer l'affichage de la barre d'informations"
-
 msgid "Volume down"
 msgstr "Volume bas"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr "Les touches de volume de la télécommande du récepteur permettent de contrôler le volume du téléviseur. Si cette fonction n'est pas prise en charge, les touches de volume n'ont aucune fonction !"
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "Volume haut"
+
 msgid "Volume up"
 msgstr "Volume haut"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "Basculer l'affichage de la barre d'informations"
 
 msgid "W"
 msgstr "O"
@@ -24320,6 +24327,14 @@ msgstr "Une ligne"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "Android"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "Par openATV Image Team"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24757,6 +24772,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

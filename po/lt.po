@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-21 00:04+0200\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: \n"
@@ -1170,10 +1170,6 @@ msgid "%s  "
 msgstr "%s  (%s)"
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s  (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
@@ -1634,6 +1630,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Mb"
 
@@ -1665,7 +1664,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1964,6 +1963,9 @@ msgstr "Netrukus prasidės"
 
 msgid "About..."
 msgstr "Apie..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Prieigos taškas:"
@@ -2594,6 +2596,18 @@ msgstr "Taikyti šiuo metu paryškintą lokalę / kalbą ir išeiti"
 msgid "Arabic"
 msgstr "Arabų"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr "Aragoniečių kalba"
 
@@ -2854,12 +2868,6 @@ msgstr "4-a pasirinkta garso kalba"
 
 msgid "Audio options..."
 msgstr "Garso parinktys..."
-
-msgid "Audio volume step size"
-msgstr "Garso stiprumo žingsnio dydis"
-
-msgid "Audio volume step size fast mode"
-msgstr "Garso garsumo žingsnio dydžio greitas režimas"
 
 msgid "Australia"
 msgstr "Australija"
@@ -4820,9 +4828,6 @@ msgstr "Konfigūruokite baigimo koordinates x teleteksto ekrano pločiui."
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Konfigūruokite baigimo koordinates y teleteksto ekrano pločiui."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Nustatykite bendrą garso stiprumo žingsnio dydį (riba 1-10). Aktyvus, kai garso klavišą spausite pastoviai arba greitai spausite iš eilės."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Konfigūruokite pagrindinę garso kalbą (didžiausias prioritetas)."
 
@@ -4855,9 +4860,6 @@ msgstr "Konfigūruoti mygtukų < ir > funkciją."
 
 msgid "Configure the gateway."
 msgstr "Konfigūruokite tinklo šliuzą."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "Nustatykite bendrą garso stiprumo žingsnio dydį (riba 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Konfigūruokite, kiek laiko lauks kietas diskas, kad pereiti į budėjimo režimą, kai imtuvas budėjimo režime."
@@ -7552,7 +7554,7 @@ msgstr "Įrašykite pin kodą"
 msgid "Enter text via an attached keyboard"
 msgstr ""
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9409,9 +9411,6 @@ msgstr ""
 msgid "Hide known extensions"
 msgstr "Paslėpti žinomus plėtinius"
 
-msgid "Hide mute notification"
-msgstr "Slėpti pranešimą apie nutildymą"
-
 msgid "Hide number markers"
 msgstr "Slėpti numerių žymeklius"
 
@@ -9769,9 +9768,6 @@ msgstr "Jei įjungta, naudokite laiko langą, kad nustatytumėte gilaus budėjim
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Jei žurnalai jau išnaudoja maksimalią jiems skirtą erdvę, įkeliant naują, seniausias bus ištrintas."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "Jei nutildyta, paslėpti nutildymo piktogramą arba po kelių sekundžių nutildyti informaciją."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Jei nustatyta į 'taip', į televizorių bus siunčiamos tos pačios komandos gilaus budėjimo režimo įvykiams, kaip ir įprastų laukimo režimo įvykių metu."
@@ -10212,7 +10208,7 @@ msgstr "Įdiekite plėtinius."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10604,9 +10600,6 @@ msgstr ""
 msgid "Kexec MultiBoot files are missing."
 msgstr ""
 
-msgid "Key"
-msgstr "Raktas"
-
 msgid "Keyboard"
 msgstr "Klaviatūra"
 
@@ -10660,10 +10653,6 @@ msgid "Kuanyama / Kwanyama"
 msgstr "Kuanyama / Kwanyama"
 
 msgid "Kurdish"
-msgstr "Kurdų"
-
-#, fuzzy
-msgid "Kurdish (Sorani)"
 msgstr "Kurdų"
 
 msgid "Kurdistan"
@@ -10752,9 +10741,6 @@ msgstr "LOF/H"
 
 msgid "LOF/L"
 msgstr "LOF/L"
-
-msgid "Label"
-msgstr "Etiketė"
 
 msgid "Language"
 msgstr "Kalba"
@@ -11128,6 +11114,10 @@ msgstr "Ilgi failų pavadinimai"
 msgid "Long press emulation with button"
 msgstr "Ilgas paspaudimas, emuliacija su mygtuku"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "Ilgas spaudimas: %s"
+
 #, python-format
 msgid "Long press: %s"
 msgstr "Ilgas spaudimas: %s"
@@ -11417,6 +11407,10 @@ msgstr "MediaInfo"
 
 msgid "MediaPlayer"
 msgstr "Medija grotuvas"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "Srautas"
 
 msgid "Medical"
 msgstr "Medicinos"
@@ -12201,6 +12195,10 @@ msgstr "Pavadinimo vieta ir orbitinė poz."
 msgid "Namibia"
 msgstr "Namibija"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Prisotinimas"
+
 msgid "Native"
 msgstr "Gimtasis"
 
@@ -12461,10 +12459,6 @@ msgstr "paprastas"
 
 msgid "No Connection"
 msgstr "Nėra prisijungimo"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "Užduoties apžvalga"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12749,6 +12743,10 @@ msgstr "Nesusietas"
 
 msgid "Not configured"
 msgstr "nekonfigūruota"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Neapibrėžta"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13202,9 +13200,6 @@ msgstr "OpenDNS pagrindinis puslapis"
 msgid "OpenDroid"
 msgstr "Android"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "Aukštis"
@@ -13278,6 +13273,10 @@ msgstr "Orentacija"
 msgid "Original"
 msgstr "Originali"
 
+#, fuzzy
+msgid "Original language"
+msgstr "originalo kalba"
+
 msgid "Oriya"
 msgstr "Orijų"
 
@@ -13305,7 +13304,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "Intelektualiosios kortelės PIN"
 
 msgid "Oscamsmartcard found "
@@ -16727,7 +16726,8 @@ msgstr "Pasirinkite, kiek laiko norite rodyti iššokantį mygtuko klaidos lang�
 msgid "Select how long to display the task and script message pop up."
 msgstr "Pasirinkite, kiek laiko bus rodomas užduoties ir scenarijaus pranešimas."
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+#, fuzzy
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr "Pasirinkite, kiek laiko (sekundėmis) bus rodomas garsumo ekranas, kol jis automatiškai pasislėps."
 
 msgid "Select how often this timer is to be repeated."
@@ -17064,6 +17064,12 @@ msgstr "Pasirinkite perkeltą simbolių rinkinį"
 msgid "Select the shifted character set for the next character only"
 msgstr "Pasirinkite paslinktų simbolių rinkinį tik kitam simboliui"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr "Pasirinkite failų eilučių rūšiavimo tvarką:"
 
@@ -17155,9 +17161,6 @@ msgid ""
 "Select the wireless network to which you want to connect.\n"
 "\n"
 "Press OK to continue."
-msgstr ""
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
 msgstr ""
 
 msgid "Select update source location"
@@ -21601,6 +21604,9 @@ msgstr "Išarchyvuojamas atvaizdas"
 msgid "Up"
 msgstr "Aukštyn"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Aukštyn/žemyn mygtuko režimas"
 
@@ -21831,9 +21837,6 @@ msgid "Use key map *"
 msgstr "Naudoti mygtukų išdėstymą *"
 
 msgid "Use legacy navigation"
-msgstr ""
-
-msgid "Use logarithmic steps"
 msgstr ""
 
 msgid "Use official channel numbering"
@@ -22309,18 +22312,22 @@ msgstr "Garsumo reguliavimo paslaugos pasirinkimas"
 msgid "Volume Adjust Settings"
 msgstr "Garsumo reguliavimo nustatymai"
 
-#, fuzzy
-msgid "Volume display timer"
-msgstr "Perjungti informacinės juostos rodymą"
-
 msgid "Volume down"
 msgstr "Sumažinti garsumą"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr "Imtuvo nuotolinio valdymo pulto garsumo klavišai valdys televizoriaus garsumą. Jei ši funkcija nepalaikoma, garsumo klavišai neturi funkcijos!"
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "Padidinti garsumą"
+
 msgid "Volume up"
 msgstr "Padidinti garsumą"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "Perjungti informacinės juostos rodymą"
 
 msgid "W"
 msgstr "W"
@@ -24298,6 +24305,14 @@ msgstr "Viena eilutė"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "Android"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "OpenATV atvaizdo komanda"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24735,6 +24750,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

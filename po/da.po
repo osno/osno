@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-20 23:55+0200\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
@@ -1167,10 +1167,6 @@ msgid "%s  "
 msgstr "%s  (%s)"
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s  (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
@@ -1632,6 +1628,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Mb"
 
@@ -1663,7 +1662,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1959,6 +1958,9 @@ msgstr "er ved at starte"
 
 msgid "About..."
 msgstr "Om..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Access point:"
@@ -2587,6 +2589,18 @@ msgstr "Aktiver alle ændringer af det fremhævede område/sprog og afslut"
 msgid "Arabic"
 msgstr "Arabisk"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr ""
 
@@ -2848,12 +2862,6 @@ msgstr "Lydsprog valg 4"
 
 msgid "Audio options..."
 msgstr "Lydmuligheder..."
-
-msgid "Audio volume step size"
-msgstr "Lydstyrke trinstørrelse"
-
-msgid "Audio volume step size fast mode"
-msgstr "Lydstyrke trinstørrelse hurtigtilstand"
 
 msgid "Australia"
 msgstr "Australien"
@@ -4810,9 +4818,6 @@ msgstr "Konfigurer slutkoordinat i X af Tekst-TVs visningsområde."
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Konfigurer slutkoordinat i Y af Tekst-TVs visningsområde."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Konfigurer trinstørrelse for hurtig lydstyrke tilstand (grænse 1-10). Aktiveres ved vedvarende lydstyrke tastetryk eller hurtige tryk efter hinanden."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Konfigurere det første lydsprog (højest prioritet)."
 
@@ -4845,9 +4850,6 @@ msgstr ""
 
 msgid "Configure the gateway."
 msgstr "Konfigurer en Gateway."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "Konfigurere den generelle lysstyrke trinstørrelse (grænse 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Konfigurer harddisken til at gå i Standby efter den angivne inaktivitetstid når boksen er i Standby."
@@ -7532,7 +7534,7 @@ msgstr "Indtast PIN kode"
 msgid "Enter text via an attached keyboard"
 msgstr ""
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9392,9 +9394,6 @@ msgstr ""
 msgid "Hide known extensions"
 msgstr "Skjul kendte udvidelser"
 
-msgid "Hide mute notification"
-msgstr "Skjul lyd slukket meddelser"
-
 msgid "Hide number markers"
 msgstr "Skjul nummermærker"
 
@@ -9755,9 +9754,6 @@ msgstr "Hvis aktiveret, bruger Timeren et tidsrum til at opdage en opvågning fr
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Hvis logge bruger den maksimale tilladte plads, vil den ældste blive slettet."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "Skjul ikon for lyd slukket eller information efter få sekunder, hvis lyd slukkes."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr ""
@@ -10204,7 +10200,7 @@ msgstr "Installer udvidelser."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10602,9 +10598,6 @@ msgstr ""
 msgid "Kexec MultiBoot files are missing."
 msgstr ""
 
-msgid "Key"
-msgstr ""
-
 msgid "Keyboard"
 msgstr "Tastatur"
 
@@ -10661,10 +10654,6 @@ msgid "Kuanyama / Kwanyama"
 msgstr ""
 
 msgid "Kurdish"
-msgstr "Kurdisk"
-
-#, fuzzy
-msgid "Kurdish (Sorani)"
 msgstr "Kurdisk"
 
 msgid "Kurdistan"
@@ -10753,9 +10742,6 @@ msgstr "LOF/H"
 
 msgid "LOF/L"
 msgstr "LOF/V"
-
-msgid "Label"
-msgstr "Mærkat"
 
 msgid "Language"
 msgstr "Sprog"
@@ -11136,6 +11122,10 @@ msgstr "Lange filnavne"
 msgid "Long press emulation with button"
 msgstr "Emuler lang tryk med knap"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "Langt tryk: %s"
+
 #, python-format
 msgid "Long press: %s"
 msgstr "Langt tryk: %s"
@@ -11439,6 +11429,10 @@ msgstr ""
 
 msgid "MediaPlayer"
 msgstr "Medieafspiller"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "Stream"
 
 msgid "Medical"
 msgstr "Medicinsk"
@@ -12239,6 +12233,10 @@ msgstr ""
 msgid "Namibia"
 msgstr "Namibia"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Farvemætning"
+
 msgid "Native"
 msgstr "Oprindelig"
 
@@ -12502,10 +12500,6 @@ msgstr "enkel"
 
 msgid "No Connection"
 msgstr "Ingen forbindelse"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "Opgave overblik"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12794,6 +12788,10 @@ msgstr "Ikke tilknyttet"
 
 msgid "Not configured"
 msgstr "ikke konfigureret"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Ikke defineret"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13252,9 +13250,6 @@ msgstr "Åben AutoTimer"
 msgid "OpenDroid"
 msgstr "Åben"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "Højde"
@@ -13330,6 +13325,10 @@ msgstr ""
 msgid "Original"
 msgstr "Original"
 
+#, fuzzy
+msgid "Original language"
+msgstr "original sprog"
+
 msgid "Oriya"
 msgstr ""
 
@@ -13357,7 +13356,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "Chipkort PIN"
 
 msgid "Oscamsmartcard found "
@@ -16800,7 +16799,7 @@ msgstr ""
 msgid "Select how long to display the task and script message pop up."
 msgstr ""
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr ""
 
 msgid "Select how often this timer is to be repeated."
@@ -17140,6 +17139,12 @@ msgstr "Vælg det skiftet tegnsæt"
 msgid "Select the shifted character set for the next character only"
 msgstr "Vælg kun skiftet tegnsæt for det næste tegn"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr ""
 
@@ -17231,9 +17236,6 @@ msgid ""
 "Select the wireless network to which you want to connect.\n"
 "\n"
 "Press OK to continue."
-msgstr ""
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
 msgstr ""
 
 msgid "Select update source location"
@@ -21726,6 +21728,9 @@ msgstr "Udpakker Image"
 msgid "Up"
 msgstr "Op"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Op/Ned knap tilstand"
 
@@ -21959,9 +21964,6 @@ msgid "Use key map *"
 msgstr "Brug tastekort *"
 
 msgid "Use legacy navigation"
-msgstr ""
-
-msgid "Use logarithmic steps"
 msgstr ""
 
 msgid "Use official channel numbering"
@@ -22441,18 +22443,22 @@ msgstr ""
 msgid "Volume Adjust Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Volume display timer"
-msgstr "Ombyt visning af Infobjælken"
-
 msgid "Volume down"
 msgstr "Lydstyrke ned"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr ""
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "Lydstyrke op"
+
 msgid "Volume up"
 msgstr "Lydstyrke op"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "Ombyt visning af Infobjælken"
 
 msgid "W"
 msgstr "V"
@@ -24434,6 +24440,14 @@ msgstr "En linje"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "Åben"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "Fra openATV Image Team"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24881,6 +24895,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 22:07+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-09-21 00:07+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: sat-ukraine.info <bodyan_ua@hotmail.com>\n"
@@ -1204,10 +1204,6 @@ msgid "%s  "
 msgstr "%s  (%s)"
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s  (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d. %02d."
 
@@ -1666,6 +1662,9 @@ msgid ""
 "\n"
 msgstr ""
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Мб"
 
@@ -1697,7 +1696,7 @@ msgid "7"
 msgstr "7"
 
 msgid ""
-"7. In case of problems with the installation, cancel and ask OpenDroid-Team for support on:\n"
+"7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
 msgstr ""
 
@@ -1991,6 +1990,9 @@ msgstr "час до запису"
 
 msgid "About..."
 msgstr "Інформація приймача..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Точка доступу:"
@@ -2619,6 +2621,18 @@ msgstr "Застосувати виділену локаль/мову і вий�
 msgid "Arabic"
 msgstr "Арабська"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr "Арагонська"
 
@@ -2879,12 +2893,6 @@ msgstr "Вибір мови аудіо 4"
 
 msgid "Audio options..."
 msgstr "Вибір аудіо-доріжки..."
-
-msgid "Audio volume step size"
-msgstr "Розмір величини кроку звуку"
-
-msgid "Audio volume step size fast mode"
-msgstr "Розмір величини кроку звуку швидкого режиму"
 
 msgid "Australia"
 msgstr "Австралія"
@@ -4846,9 +4854,6 @@ msgstr "Налаштування кінцевої координати Х від
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Налаштування кінцевої координати Y відображення телетексту."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Налаштування розміру кроку гучності звуку для швидкого режиму (обмеження 1-10). Активується, коли клавіша гучності постійно натиснена, або часто натискається."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Налаштування першої мови аудіо (високий пріоритет)."
 
@@ -4881,9 +4886,6 @@ msgstr "Налаштуйте функцію кнопок < та >."
 
 msgid "Configure the gateway."
 msgstr "Налаштування шлюза."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "Налаштуйте загальний розмір кроку величини аудіо (обмеження 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Вкажіть, через який час знаходження приймача в режимі очікування або невикористання, переводити жорсткий диск в режим очікування."
@@ -7585,7 +7587,7 @@ msgstr "Введіть пін-код"
 msgid "Enter text via an attached keyboard"
 msgstr "Введіть текст за допомогою підключеної клавіатури"
 
-msgid "Enter the FTP password of the host receiver (required for any server running OpenDroid 7.3 or greater)."
+msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
 msgstr ""
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
@@ -9442,9 +9444,6 @@ msgstr "Приховати повідомлення про помилки в м�
 msgid "Hide known extensions"
 msgstr "Сховати відомі розширення"
 
-msgid "Hide mute notification"
-msgstr "Приховати відключення повідомлення"
-
 msgid "Hide number markers"
 msgstr "Сховати маркери номерів"
 
@@ -9800,9 +9799,6 @@ msgstr "Якщо включено, буде використано вікно ч
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Якщо логи займають занадто багато пам'яті, будуть видалятися найстаріші файли."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "Якщо відключено, приховати значок відключення звуку або відключення інформації після декількох секунд."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Якщо встановлено значення 'Так', для подій глибокого очікування на телевізор надсилатимуться ті самі команди, що й під час звичайних подій очікування."
@@ -10243,7 +10239,7 @@ msgstr "Встановити розширення."
 msgid "Install from /media/opdboot/OPDBootUpload"
 msgstr ""
 
-msgid "Install from Internet (OpenDroid,OpenATV,OpenNFR,OpenVIX,OpenHDF)"
+msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
 msgstr ""
 
 #, fuzzy
@@ -10636,9 +10632,6 @@ msgstr "Kexec MultiBoot Менеджер"
 msgid "Kexec MultiBoot files are missing."
 msgstr "Файли Kexec MultiBoot відсутні."
 
-msgid "Key"
-msgstr "Ключ"
-
 msgid "Keyboard"
 msgstr "Клавіатура"
 
@@ -10693,9 +10686,6 @@ msgstr "Куаняма / Кваняма"
 
 msgid "Kurdish"
 msgstr "Курдська"
-
-msgid "Kurdish (Sorani)"
-msgstr "Курдська (Суранська)"
 
 msgid "Kurdistan"
 msgstr "Курдистан"
@@ -10783,9 +10773,6 @@ msgstr "Верхня частота гетеродину"
 
 msgid "LOF/L"
 msgstr "Нижня частота гетеродину"
-
-msgid "Label"
-msgstr "Мітка"
 
 msgid "Language"
 msgstr "Мова інтерфейсу"
@@ -11162,6 +11149,10 @@ msgstr "Довгі імена файлів"
 msgid "Long press emulation with button"
 msgstr "Емуляція тривалого натискання за допомогою кнопки"
 
+#, fuzzy
+msgid "Long press volume steps"
+msgstr "Довге натиснення: %s"
+
 #, python-format
 msgid "Long press: %s"
 msgstr "Довге натиснення: %s"
@@ -11451,6 +11442,10 @@ msgstr "МедіаІнфо"
 
 msgid "MediaPlayer"
 msgstr "Медіа Плеєр"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "Медіа Потік"
 
 msgid "Medical"
 msgstr "Медицина"
@@ -12235,6 +12230,10 @@ msgstr "Простір імен і позиція"
 msgid "Namibia"
 msgstr "Намібія"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Насиченість"
+
 msgid "Native"
 msgstr "Власний"
 
@@ -12498,10 +12497,6 @@ msgstr "простий"
 
 msgid "No Connection"
 msgstr "З'єднання відсутнє"
-
-#, fuzzy
-msgid "No Cover"
-msgstr "Огляд завдань"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr ""
@@ -12786,6 +12781,10 @@ msgstr "Не пов’язано"
 
 msgid "Not configured"
 msgstr "не налаштований"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Не визначений"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -13240,9 +13239,6 @@ msgstr "Домашня сторінка OpenDNS"
 msgid "OpenDroid"
 msgstr "Android"
 
-msgid "OpenDroid by OPD Image Team"
-msgstr ""
-
 #, fuzzy
 msgid "OpenEight"
 msgstr "Висота"
@@ -13316,6 +13312,10 @@ msgstr "Орієнтація"
 msgid "Original"
 msgstr "Оригінал"
 
+#, fuzzy
+msgid "Original language"
+msgstr "мова оригіналу"
+
 msgid "Oriya"
 msgstr "Oriya"
 
@@ -13346,7 +13346,7 @@ msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr ""
 
 #, fuzzy
-msgid "OscamSmartcard"
+msgid "OscamSmartcard Settings"
 msgstr "Пін-код карти доступу"
 
 msgid "Oscamsmartcard found "
@@ -16827,7 +16827,8 @@ msgstr "Виберіть, як довго відображати спливаю�
 msgid "Select how long to display the task and script message pop up."
 msgstr "Виберіть, як довго відображати спливаюче повідомлення про завдання скрипта."
 
-msgid "Select how long, in seconds, that the volume display is shown before it automatically hides."
+#, fuzzy
+msgid "Select how long, in seconds, that the volume and mute displays are shown before they automatically hide."
 msgstr "Виберіть час у секундах, протягом якого відображення гучності буде показано, перш ніж воно автоматично приховається."
 
 msgid "Select how often this timer is to be repeated."
@@ -17167,6 +17168,12 @@ msgstr "Виберіть набір символів клавіатури"
 msgid "Select the shifted character set for the next character only"
 msgstr "Виберіть набір символів клавіатури лише для наступного символу"
 
+msgid "Select the size of the volume step when the VOLUME buttons are pressed."
+msgstr ""
+
+msgid "Select the size of the volume steps when the VOLUME buttons are held down."
+msgstr ""
+
 msgid "Select the sort order for the file lines:"
 msgstr "Виберіть порядок сортування для рядків файлу:"
 
@@ -17262,9 +17269,6 @@ msgstr ""
 "Виберіть бездротову мережу, до якої потрібно підключитися.\n"
 "\n"
 "Натисніть OK, щоб продовжити."
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
-msgstr "Виберіть використання логарифмічного розміру кроку з більшою кількістю кроків на нижчих рівнях гучності."
 
 msgid "Select update source location"
 msgstr "Виберіть розташування джерела оновлення"
@@ -21737,6 +21741,9 @@ msgstr "Розархівування Іміджу"
 msgid "Up"
 msgstr "Вгору"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Режим кнопок Вгору/Вниз"
 
@@ -21971,9 +21978,6 @@ msgstr "Використовувати Keymap *"
 
 msgid "Use legacy navigation"
 msgstr "Використовувати застарілу навігацію"
-
-msgid "Use logarithmic steps"
-msgstr "Використовуйте логарифмічні кроки"
 
 msgid "Use official channel numbering"
 msgstr "Використовувати звичайну нумерацію каналів"
@@ -22455,17 +22459,22 @@ msgstr "Вибір каналу регулювання гучності"
 msgid "Volume Adjust Settings"
 msgstr "Налаштування гучності"
 
-msgid "Volume display timer"
-msgstr "Таймер відображення гучності"
-
 msgid "Volume down"
 msgstr "Гучність нижче"
 
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr "Кнопки гучності на пульті дистанційного керування приймача будуть керувати гучністю телевізора. Якщо ця функція не підтримується, кнопки гучності не працюють!"
 
+#, fuzzy
+msgid "Volume steps"
+msgstr "Гучність вище"
+
 msgid "Volume up"
 msgstr "Гучність вище"
+
+#, fuzzy
+msgid "Volume/Mute display timer"
+msgstr "Таймер відображення гучності"
 
 msgid "W"
 msgstr "W"
@@ -24445,6 +24454,14 @@ msgstr "Одна лінія"
 msgid "opdBootLogo-Setup"
 msgstr ""
 
+#, fuzzy
+msgid "openDroid"
+msgstr "Android"
+
+#, fuzzy
+msgid "openDroid by OPD Image Team"
+msgstr "Від команди openATV"
+
 msgid "opennfr"
 msgstr ""
 
@@ -24882,6 +24899,9 @@ msgid "update Redlight HD Card"
 msgstr ""
 
 msgid "update init.d start/stop"
+msgstr ""
+
+msgid "update oscam 11845"
 msgstr ""
 
 msgid "update oscamsmartcard code"

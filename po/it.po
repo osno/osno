@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 23:13+0200\n"
+"POT-Creation-Date: 2024-10-23 14:45+0200\n"
 "PO-Revision-Date: 2024-10-16 12:37+0200\n"
 "Last-Translator: FULL NAME <opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy Formiano\n"
@@ -1180,10 +1180,6 @@ msgid "%s  "
 msgstr "%s  "
 
 #, python-format
-msgid "%s  (%s)"
-msgstr "%s (%s)"
-
-#, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
@@ -1643,6 +1639,9 @@ msgstr ""
 "5. Premere il tasto verde e selezionare la sorgente per installare l'immagine in multiboot.\n"
 "\n"
 
+msgid "50-200 Mbps"
+msgstr ""
+
 msgid "512 Mb"
 msgstr "512 Mb"
 
@@ -1959,6 +1958,9 @@ msgstr "Sta per iniziare"
 
 msgid "About..."
 msgstr "Informazioni su..."
+
+msgid "Above 200 Mbps"
+msgstr ""
 
 msgid "Access point:"
 msgstr "Punto di accesso:"
@@ -2585,6 +2587,18 @@ msgstr "Applica la localizzazione/lingua attualmente evidenziata ed esci"
 msgid "Arabic"
 msgstr "Arabo"
 
+msgid "Arabic (Egyptian)"
+msgstr ""
+
+msgid "Arabic (Moroccan)"
+msgstr ""
+
+msgid "Arabic (Syro-Lebanese)"
+msgstr ""
+
+msgid "Arabic (Tunisian)"
+msgstr ""
+
 msgid "Aragonese"
 msgstr "Aragonese"
 
@@ -2629,7 +2643,10 @@ msgstr ""
 "Sei sicuro di voler eliminare\n"
 "il seguente backup:\n"
 
-msgid "Are you sure you want to delete Image:\n"
+#, fuzzy
+msgid ""
+"Are you sure you want to delete Image:\n"
+" "
 msgstr "Sei sicuro di voler eliminare l'immagine:\n"
 
 msgid "Are you sure you want to delete all selected logs:\n"
@@ -2644,7 +2661,10 @@ msgstr "Sei sicuro di voler eliminare questa immagine?"
 msgid "Are you sure you want to delete this log:\n"
 msgstr "Sei sicuro di voler eliminare questo registro:\n"
 
-msgid "Are you sure you want to delete this:\n"
+#, fuzzy
+msgid ""
+"Are you sure you want to delete this:\n"
+" "
 msgstr "Sicuro di voler cancellare questo:\n"
 
 msgid "Are you sure you want to delete this?"
@@ -2834,12 +2854,6 @@ msgstr "Selezione lingua audio 4"
 
 msgid "Audio options..."
 msgstr "Opzioni audio…"
-
-msgid "Audio volume step size"
-msgstr "Dimensione passo volume audio"
-
-msgid "Audio volume step size fast mode"
-msgstr "Dimensione passo volume rapido"
 
 msgid "Australia"
 msgstr "Australia"
@@ -4765,9 +4779,6 @@ msgstr "Configura coordinata finale in x dell'area di visualizzazione del televi
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr "Configura coordinata finale in y dell'area di visualizzazione del televideo."
 
-msgid "Configure the fast mode audio volume step size (limit 1-10). Activated when volume key permanent press or press fast in a row."
-msgstr "Configura dimensione del volume dell'audio in modalità veloce (limite 1-10). Attivato quando il tasto del volume viene premuto o premuto velocemente di seguito."
-
 msgid "Configure the first audio language (highest priority)."
 msgstr "Configura prima lingua audio (priorità massima)."
 
@@ -4800,9 +4811,6 @@ msgstr "Configura funzione dei tasti < e >."
 
 msgid "Configure the gateway."
 msgstr "Configura gateway."
-
-msgid "Configure the general audio volume step size (limit 1-10)."
-msgstr "Configura dimensione generale del volume dell'audio (limite 1-10)."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time when the box is in standby."
 msgstr "Configura unità disco fisso in modo che vada in standby dopo il tempo di inattività specificato quando il ricevitore è in standby."
@@ -6372,7 +6380,10 @@ msgstr "Divehi / Dhivehi / Maldiviano"
 msgid "Djibouti"
 msgstr "Gibuti"
 
-msgid "Do You really want to install OPDBoot in:\n"
+#, fuzzy
+msgid ""
+"Do You really want to install OPDBoot in:\n"
+" "
 msgstr "Vuoi davvero installare OPDBoot in:\n"
 
 msgid "Do not backup the image"
@@ -9260,9 +9271,6 @@ msgstr "Nascondi i messaggi di errore dal modulo Common Interface."
 msgid "Hide known extensions"
 msgstr "Nascondi estensioni conosciute"
 
-msgid "Hide mute notification"
-msgstr "Nascondi notifica del muto"
-
 msgid "Hide number markers"
 msgstr "Nascondi marcatori numerici"
 
@@ -9630,9 +9638,6 @@ msgstr "Se abilitato, utilizza una finestra temporale per rilevare una riattivaz
 
 msgid "If logs are using the set maximum space used the eldest will be deleted."
 msgstr "Se i registri utilizzano lo spazio massimo impostato utilizzato, il più vecchio verrà eliminato."
-
-msgid "If muted, hide mute icon or mute information after few seconds."
-msgstr "Se disattivato, nasconde l'icona muto o le informazioni mute dopo pochi secondi."
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Se impostato su 'Sì', gli stessi comandi verranno inviati alla TV per gli eventi di spegnimento che vengono inviati durante i normali eventi di standby."
@@ -10443,9 +10448,6 @@ msgstr "Gestore MultiBoot Kexec"
 msgid "Kexec MultiBoot files are missing."
 msgstr "Mancano i file Kexec MultiBoot."
 
-msgid "Key"
-msgstr "Chiave"
-
 msgid "Keyboard"
 msgstr "Tastiera"
 
@@ -10499,9 +10501,6 @@ msgstr "Kuanyama / Kwanyama"
 
 msgid "Kurdish"
 msgstr "Curdo"
-
-msgid "Kurdish (Sorani)"
-msgstr "Curdo (Sorani)"
 
 msgid "Kurdistan"
 msgstr "Kurdistan"
@@ -10589,9 +10588,6 @@ msgstr "LOF/H"
 
 msgid "LOF/L"
 msgstr "LOF/L"
-
-msgid "Label"
-msgstr "Etichetta"
 
 msgid "Language"
 msgstr "Lingua"
@@ -10958,7 +10954,6 @@ msgstr "Nomi file lunghi"
 msgid "Long press emulation with button"
 msgstr "Emulazione pressione prolungata di un tasto"
 
-#, python-format
 msgid "Long press volume steps"
 msgstr "Premere a lungo i passaggi del volume"
 
@@ -11248,6 +11243,10 @@ msgstr "MediaInfo"
 
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
+
+#, fuzzy
+msgid "MediaStream"
+msgstr "Media Stream"
 
 msgid "Medical"
 msgstr "Medico"
@@ -12015,6 +12014,10 @@ msgstr "Nome e posizione orbitale."
 msgid "Namibia"
 msgstr "Namibia"
 
+#, fuzzy
+msgid "Narration"
+msgstr "Saturazione"
+
 msgid "Native"
 msgstr "Nativo"
 
@@ -12267,9 +12270,6 @@ msgstr "No - semplice"
 
 msgid "No Connection"
 msgstr "Nessuna connessione"
-
-msgid "No Cover"
-msgstr "Nessuna Cover"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr "Nessuna informazione ECM è attualmente disponibile. Questo è disponibile solo durante la decrittografia."
@@ -12551,6 +12551,10 @@ msgstr "Non associato"
 
 msgid "Not configured"
 msgstr "Non configurato"
+
+#, fuzzy
+msgid "Not defined"
+msgstr "Non definito"
 
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
@@ -12975,11 +12979,9 @@ msgstr "OpenDNS FamilyShield"
 msgid "OpenDNS Home"
 msgstr "OpenDNS Home"
 
-msgid "openDroid"
+#, fuzzy
+msgid "OpenDroid"
 msgstr "openDroid"
-
-msgid "openDroid by OPD Image Team"
-msgstr "A cura di openDroid Image Team"
 
 msgid "OpenEight"
 msgstr "OpenEight"
@@ -13048,6 +13050,10 @@ msgstr "Orientamento"
 msgid "Original"
 msgstr "Originale"
 
+#, fuzzy
+msgid "Original language"
+msgstr "lingua originale"
+
 msgid "Oriya"
 msgstr "Oriya"
 
@@ -13076,7 +13082,8 @@ msgstr "Oscam verrà installato con le seguenti impostazioni"
 msgid "Oscam/Ncam not running - start Cam to obtain information."
 msgstr "Oscam/Ncam non in esecuzione: avviare Cam per ottenere informazioni."
 
-msgid "OscamSmartcard"
+#, fuzzy
+msgid "OscamSmartcard Settings"
 msgstr "OscamSmartcard"
 
 msgid "Oscamsmartcard found "
@@ -16904,9 +16911,6 @@ msgstr ""
 "Seleziona rete wireless a cui vuoi connetterti.\n"
 "\n"
 "Premi OK per continuare."
-
-msgid "Select to use logarithmic step size with more steps at the lower volume levels."
-msgstr "Seleziona per utilizzare passi logaritmici più grandi a livelli di volume più bassi."
 
 msgid "Select update source location"
 msgstr "Seleziona posizione di origine degli aggiornamenti"
@@ -21309,6 +21313,9 @@ msgstr "Decompressione immagine"
 msgid "Up"
 msgstr "Su"
 
+msgid "Up to 50 Mbps"
+msgstr ""
+
 msgid "Up/Down button mode"
 msgstr "Modalità tasto Su/Giù"
 
@@ -21541,9 +21548,6 @@ msgstr "Usa mappa dei tasti *"
 
 msgid "Use legacy navigation"
 msgstr "Usa navigazione compatibile"
-
-msgid "Use logarithmic steps"
-msgstr "Usa passi logaritmici"
 
 msgid "Use official channel numbering"
 msgstr "Usa la numerazione canali ufficiale"
@@ -22005,9 +22009,6 @@ msgstr "Regolazione del volume in base al servizio selezionato"
 
 msgid "Volume Adjust Settings"
 msgstr "Impostazioni di regolazione del volume"
-
-msgid "Volume display timer"
-msgstr "Timer visualizzazione volume"
 
 msgid "Volume down"
 msgstr "Volume giù"
@@ -23979,6 +23980,12 @@ msgstr "in linea"
 msgid "opdBootLogo-Setup"
 msgstr "Configurazione opdBootLogo"
 
+msgid "openDroid"
+msgstr "openDroid"
+
+msgid "openDroid by OPD Image Team"
+msgstr "A cura di openDroid Image Team"
+
 msgid "opennfr"
 msgstr "opennfr"
 
@@ -24411,6 +24418,9 @@ msgstr "aggiorna la scheda Redlight HD"
 
 msgid "update init.d start/stop"
 msgstr "aggiorna init.d avvia/arresta"
+
+msgid "update oscam 11845"
+msgstr ""
 
 msgid "update oscamsmartcard code"
 msgstr "aggiorna il codice oscamsmartcard"
