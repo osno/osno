@@ -139,9 +139,9 @@ class OscamSmartcard(ConfigListScreen, Screen):
   <widget name="config" position="55,299" size="595,210" scrollbarMode="showOnDemand" transparent="1" backgroundColor="black" zPosition="1" />
   <widget name="Title" position="60,50" size="590,50" zPosition="1" font="Regular; 40" halign="left" backgroundColor="black" transparent="1" />
   <eLabel font="Regular; 20" zPosition="1" foregroundColor="black" halign="center" position="375,648" size="200,33" text="Cancel" transparent="1" backgroundColor="red" />
-  <eLabel font="Regular; 20" zPosition="1" foregroundColor="white" halign="center" position="60,648" size="200,33" text="Start" transparent="1" backgroundColor="green" />
-  <eLabel font="Regular; 20" zPosition="1" foregroundColor="black" halign="center" position="670,648" size="200,33" text="Info" transparent="1" backgroundColor="yellow" />
-  <eLabel font="Regular; 20" zPosition="1" foregroundColor="white" halign="center" position="965,648" size="200,33" text="clean up" transparent="1" backgroundColor="blue" />
+  <eLabel font="Regular; 20" zPosition="1" foregroundColor="white" halign="center" position="60,648" size="200,33" text="Download" transparent="1" backgroundColor="green" />
+  <eLabel font="Regular; 20" zPosition="1" foregroundColor="black" halign="center" position="670,648" size="200,33" text="Commit" transparent="1" backgroundColor="yellow" />
+  <eLabel font="Regular; 20" zPosition="1" foregroundColor="white" halign="center" position="965,648" size="200,33" text="Clean up" transparent="1" backgroundColor="blue" />
   <eLabel position="670,645" zPosition="0" size="200,33" backgroundColor="yellow" />
   <eLabel position="60,645" zPosition="0" size="200,33" backgroundColor="green" />
   <eLabel position="375,645" zPosition="0" size="200,33" backgroundColor="red" />
