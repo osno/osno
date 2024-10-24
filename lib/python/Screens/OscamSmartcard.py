@@ -373,9 +373,9 @@ class OscamSmartcard(ConfigListScreen, Screen):
 		msginfo += "CI+ Modul\t"		+ _(config.OscamSmartcard.hasciplus.value)			+ "\n"
 		if os.path.exists('/etc/CCcam.cfg'):
 			if config.OscamSmartcard.cccam.value == "yes_cccam_import":
-				msginfo += "CCcam Import\t" + _("yes") + "\n"
+				msginfo += "Import from CCcam.cfg\t" + _("yes") + "\n"
 			else:
-				msginfo += "CCcam Import\t" + _("no") + "\n"
+				msginfo += "Import from CCcam.cfg\t" + _("no") + "\n"
 		mm = ""
 		if self.hd34check() == True:
 			msginfo += "Binary\t" + "oscam r11400 special HD03/04" + "\n"
