@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-23 14:45+0200\n"
+"POT-Creation-Date: 2024-10-28 18:27+0100\n"
 "PO-Revision-Date: 2024-09-21 00:07+0200\n"
 "Last-Translator: FULL NAME <Opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Turkish <sunder67@hotmail.com>\n"
@@ -144,6 +144,150 @@ msgstr ""
 
 msgid "!! Boot loader Upgrade !!"
 msgstr "!! Bootloader Yükseltme !!"
+
+msgid "#000000"
+msgstr ""
+
+msgid "#00000000"
+msgstr ""
+
+msgid "#0004c81b"
+msgstr ""
+
+msgid "#00077cf5"
+msgstr ""
+
+msgid "#0064c7"
+msgstr ""
+
+msgid "#00879ce1"
+msgstr ""
+
+msgid "#00b3b3b3"
+msgstr ""
+
+msgid "#00edf506"
+msgstr ""
+
+msgid "#00f0f0f0"
+msgstr ""
+
+msgid "#00f50808"
+msgstr ""
+
+msgid "#00ffffff"
+msgstr ""
+
+msgid "#0f0f0f"
+msgstr ""
+
+msgid "#12191919"
+msgstr ""
+
+msgid "#16000000"
+msgstr ""
+
+msgid "#16ffffff"
+msgstr ""
+
+msgid "#18188b"
+msgstr ""
+
+msgid "#1f771f"
+msgstr ""
+
+msgid "#21001E4B"
+msgstr ""
+
+msgid "#21004C00"
+msgstr ""
+
+msgid "#21090909"
+msgstr ""
+
+msgid "#214B4B00"
+msgstr ""
+
+msgid "#214C0000"
+msgstr ""
+
+msgid "#25062748"
+msgstr ""
+
+msgid "#294a6b"
+msgstr ""
+
+msgid "#389416"
+msgstr ""
+
+msgid "#41080808"
+msgstr ""
+
+msgid "#4876FF"
+msgstr ""
+
+msgid "#56C856"
+msgstr ""
+
+msgid "#5A090909"
+msgstr ""
+
+msgid "#666666"
+msgstr ""
+
+msgid "#80000000"
+msgstr ""
+
+msgid "#80ffffff"
+msgstr ""
+
+msgid "#879cc1"
+msgstr ""
+
+msgid "#999999"
+msgstr ""
+
+msgid "#9f1313"
+msgstr ""
+
+msgid "#FCC000"
+msgstr ""
+
+msgid "#a08500"
+msgstr ""
+
+msgid "#adff2f"
+msgstr ""
+
+msgid "#bab329"
+msgstr ""
+
+msgid "#cfcfcf"
+msgstr ""
+
+msgid "#e5e5e5"
+msgstr ""
+
+msgid "#f0f0f0"
+msgstr ""
+
+msgid "#f23d21"
+msgstr ""
+
+msgid "#f3ca09"
+msgstr ""
+
+msgid "#ff000000"
+msgstr ""
+
+msgid "#ff4A3C"
+msgstr ""
+
+msgid "#ffffff"
+msgstr ""
+
+msgid "#ffffffff"
+msgstr ""
 
 #
 msgid "%-H:%M"
@@ -10035,10 +10179,6 @@ msgstr "Komut dosyaları için G/Ç önceliği"
 #, fuzzy
 msgid "I55SE/H7/H9/H9SE/H9COMBO/H9COMBOSE/H10/H11 new Model"
 msgstr "I55SE/H7/H9/H9SE/H9COMBO/H9COMBOSE/H10/H11 yeni model"
-
-#, fuzzy
-msgid "IMDB Search"
-msgstr "TMDB Arama"
 
 msgid "IMDb Details"
 msgstr "IMDb Ayrıntıları"
@@ -26135,11 +26275,12 @@ msgstr ""
 msgid "update init.d start/stop"
 msgstr ""
 
-msgid "update oscam 11845"
-msgstr ""
-
 msgid "update oscamsmartcard code"
 msgstr ""
+
+#, fuzzy
+msgid "update version oscam 11845"
+msgstr "Güncellenmiş sürüm bilinmiyor"
 
 msgid "usage: "
 msgstr ""

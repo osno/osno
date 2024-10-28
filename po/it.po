@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 openDroid\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-23 14:45+0200\n"
+"POT-Creation-Date: 2024-10-28 18:27+0100\n"
 "PO-Revision-Date: 2024-10-24 16:09+0200\n"
 "Last-Translator: FULL NAME <opendroid-Team <opendroid2013@gmail.com>, >\n"
 "Language-Team: Gimsy Formiano\n"
@@ -2787,7 +2787,10 @@ msgstr ""
 "Sei sicuro di voler eliminare\n"
 "il seguente backup:\n"
 
-msgid "Are you sure you want to delete Image:\n"
+#, fuzzy
+msgid ""
+"Are you sure you want to delete Image:\n"
+" "
 msgstr "Sei sicuro di voler eliminare l'immagine:\n"
 
 msgid "Are you sure you want to delete all selected logs:\n"
@@ -2802,7 +2805,10 @@ msgstr "Sei sicuro di voler eliminare questa immagine?"
 msgid "Are you sure you want to delete this log:\n"
 msgstr "Sei sicuro di voler eliminare questo registro:\n"
 
-msgid "Are you sure you want to delete this:\n"
+#, fuzzy
+msgid ""
+"Are you sure you want to delete this:\n"
+" "
 msgstr "Sicuro di voler cancellare questo:\n"
 
 msgid "Are you sure you want to delete this?"
@@ -6518,7 +6524,10 @@ msgstr "Divehi / Dhivehi / Maldiviano"
 msgid "Djibouti"
 msgstr "Gibuti"
 
-msgid "Do You really want to install OPDBoot in:\n"
+#, fuzzy
+msgid ""
+"Do You really want to install OPDBoot in:\n"
+" "
 msgstr "Vuoi davvero installare OPDBoot in:\n"
 
 msgid "Do not backup the image"
@@ -9600,9 +9609,6 @@ msgstr "Priorità I/O per gli script"
 
 msgid "I55SE/H7/H9/H9SE/H9COMBO/H9COMBOSE/H10/H11 new Model"
 msgstr "I55SE/H7/H9/H9SE/H9COMBO/H9COMBOSE/H10/H11 nuovo modello"
-
-msgid "IMDB Search"
-msgstr "Ricerca IMDb"
 
 msgid "IMDb Details"
 msgstr "Dettagli IMDb"
