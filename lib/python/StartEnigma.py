@@ -713,7 +713,6 @@ Components.ClientMode.InitClientMode()
 
 defaultLocale = {
 	"Atto.TV": "pt_BR",
-	"Zgemma": "en_US",
 	"Beyonwiz": "en_AU"
 }.get(DISPLAYBRAND, "it_IT")
 config.misc.locale = ConfigText(default=defaultLocale)

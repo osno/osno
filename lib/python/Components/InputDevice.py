@@ -200,7 +200,7 @@ class RemoteControl:
 	knownCompatibleRemotes = [
 		("gb0", "gb1", "gb2", "gb3", "gb4"),
 		("ini0", "ini1", "ini2", "ini3", "ini4", "ini5", "ini6", "ini7", "ini8"),
-		("zgemma1", "zgemma2", "zgemma3", "zgemma4", "zgemma5", "zgemma6", "zgemma7", "evo6", "evo7")
+		("evo6", "evo7")
 	]
 
 	def __init__(self):

@@ -346,7 +346,7 @@ class ImageBackup(Screen):
 			# Create the kernel dump.
 			cmdLines.append(f"{self.echoCmd} \"Create kernel dump.\"")
 			kernelFile = BoxInfo.getItem("kernelfile")
-			if MultiBoot.canMultiBoot() or mtdKernel.startswith("mmcblk0") or model in ("h8", "hzero"):
+			if MultiBoot.canMultiBoot() or mtdKernel.startswith("mmcblk0") or model in (""):
 				if BoxInfo.getItem("HasKexecMultiboot") or BoxInfo.getItem("HasGPT"):
 					cmdLines.append(f"{self.copyCmd} /{mtdKernel} {workDir}{kernelFile}")
 				else:
@@ -504,7 +504,7 @@ class ImageBackup(Screen):
 				cmdLines.append(f"{self.echoCmd} \"This file forces a reboot after the update.\" > {mainDestination}reboot.update")
 			elif boxName in ("vuzero", "vusolose", "vuuno4k", "vuzero4k"):
 				cmdLines.append(f"{self.echoCmd} \"This file forces the update.\" > {mainDestination}force.update")
-			elif boxName in ("viperslim", "evoslimse", "evoslimt2c", "novaip", "zgemmai55", "sf98", "xpeedlxpro", "evoslim", "vipert2c"):
+			elif boxName in ("viperslim", "evoslimse", "evoslimt2c", "novaip", "sf98", "xpeedlxpro", "evoslim", "vipert2c"):
 				cmdLines.append(f"{self.echoCmd} \"This file forces the update.\" > {mainDestination}force")
 			elif rootfsSubDir:
 				lines = []
@@ -517,7 +517,7 @@ class ImageBackup(Screen):
 				cmdLines.append(f"{self.moveCmd} {workDir}boot.bin {mainDestination}")
 				cmdLines.append(f"{self.moveCmd} {workDir}rescue.bin {mainDestination}")
 				cmdLines.append(f"{self.copyCmd} -f /usr/share/gpt.bin {mainDestination}")
-			if model in ("h9", "i55plus"):
+			if model in (""):
 				cmdLines.append(f"{self.moveCmd} {workDir}fastboot.bin {mainDestination}")
 				cmdLines.append(f"{self.moveCmd} {workDir}pq_param.bin {mainDestination}")
 				cmdLines.append(f"{self.moveCmd} {workDir}bootargs.bin {mainDestination}")
@@ -540,7 +540,7 @@ class ImageBackup(Screen):
 				lines.append("flash -noheader usbdisk0:gigablue/solo/rootfs.bin flash0.rootfs")
 				lines.append("setenv -p STARTUP \"boot -z -elf flash0.kernel: 'rootfstype=jffs2 bmem=106M@150M root=/dev/mtdblock6 rw '\"")
 				cmdLines.append(f"{self.echoCmd} '{"\n".join(lines)}' > {mainDestinationRoot}burn.bat")
-			if model in ("h9", "i55plus"):
+			if model in (""):
 				cmdLines.append(f"{self.copyCmd} -f /usr/share/fastboot.bin {mainDestinationRoot}")
 				cmdLines.append(f"{self.copyCmd} -f /usr/share/bootargs.bin {mainDestinationRoot}")
 			name = "recovery_emmc" if BoxInfo.getItem("canRecovery") and recovery else "usb"
