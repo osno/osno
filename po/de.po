@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-28 18:27+0100\n"
-"PO-Revision-Date: 2024-09-20 23:56+0200\n"
+"PO-Revision-Date: 2024-11-10 21:16+0100\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
 "Language: de\n"
@@ -1110,7 +1110,7 @@ msgstr "%d Minuten"
 msgid "%d ms"
 msgstr "%d ms"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d package has an update"
 msgid_plural "%d packages have updates."
 msgstr[0] "%d Paket kann aktualisiert werden."
@@ -1204,7 +1204,7 @@ msgstr[1] "%d Plugins nicht verfügbar:"
 msgid "%d sec"
 msgstr "%d Sek."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d Sekunde"
@@ -1256,13 +1256,11 @@ msgstr "%d.%03d GB"
 msgid "%d.%m"
 msgstr "%d.%m"
 
-#
 msgid "%d.%m.%Y"
 msgstr "%d.%m.%Y"
 
-#, fuzzy
 msgid "%d.%m.%Y - %H:%M:%S"
-msgstr "%-H:%M:%S"
+msgstr "%d.%m.%Y - %H:%M:%S"
 
 msgid "%d/%-m"
 msgstr "%d/%-m"
@@ -1307,25 +1305,25 @@ msgstr "%m/%d "
 msgid "%m/%d/%Y"
 msgstr "%m/%d/%Y"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%r is not callable"
-msgstr "%s nicht verfügbar."
+msgstr "%r ist nicht aufrufbar"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s "
-msgstr "%s %sB"
+msgstr "%s "
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s  "
-msgstr "%s  (%s)"
+msgstr "%s  "
 
 #, python-format
 msgid "%s %02d.%02d."
 msgstr "%s %02d.%02d."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s %s"
-msgstr "%s %sB"
+msgstr "%s %s"
 
 #, python-format
 msgid "%s %s advanced remote control (native)"
@@ -1367,14 +1365,13 @@ msgstr "%s Verwaltungsaktionen"
 msgid "%s GHz"
 msgstr "%s GHz"
 
-#
-#, fuzzy, python-format
+#, python-format
 msgid "%s Info - Configuration"
-msgstr "Tuner"
+msgstr "%s Info – Konfiguration"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s Info - Main Menu"
-msgstr "OSCam-Info - Hauptmenü"
+msgstr "%s Info – Hauptmenü"
 
 #, python-format
 msgid "%s KSymb/s"
@@ -1392,9 +1389,9 @@ msgstr "%s wurde aktiviert."
 msgid "%s has been disabled."
 msgstr "%s wurde deaktiviert."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s is UnInstalled"
-msgstr "Installiert"
+msgstr "%s ist nicht installiert"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1409,9 +1406,9 @@ msgstr "%s lang"
 msgid "%s not available."
 msgstr "%s nicht verfügbar."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s webif disabled"
-msgstr "OSCam-Weboberfläche deaktiviert"
+msgstr "%s Webif deaktiviert"
 
 #, python-format
 msgid "%s%d min"
@@ -1425,9 +1422,9 @@ msgstr "%s%s(Standard: %s)"
 msgid "%s/%s: %s"
 msgstr "%s/%s: %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%s: error: %s\n"
-msgstr "Fehler %d: %s!"
+msgstr "%s: Fehler: %s\n"
 
 #, python-format
 msgid "%sMode for FHD (up to 1080p)"
@@ -1476,17 +1473,16 @@ msgid "'Handle standby from TV' has a higher priority than 'Handle input from TV
 msgstr "'TV-Standby verwalten' besitzt eine höhere Priorität als 'TV-Eingänge verwalten'."
 
 msgid "'Network peer' automatically detects other Enigma2 receivers on the local network. You can also manually enter the URL or IP address."
-msgstr ""
+msgstr "'Der Netzwerk-Peer erkennt automatisch andere Enigma2-Empfänger im lokalen Netzwerk. Sie können die URL oder IP-Adresse auch manuell eingeben."
 
 msgid "'Unscramble & record ECM' gives the option to unscramble afterwards if unscrambling on recording failed. 'Don't unscramble, record ECM' save a scramble recording that can be unscrambled on playback. 'Normal' means unscramble the recording and don't record ECM."
 msgstr "'Entschlüsseln und ECM aufnehmen' ermöglicht es, die Aufnahme beim Abspielen zu entschlüsseln, falls die Entschlüsselung der Aufnahme fehlschlägt. 'Nicht entschlüsseln, ECM aufnehmen' kann beim Abspielen entschlüsselt werden. 'Normal' entschlüsselt die Aufnahme, ohne ECM's aufzunehmen."
 
 msgid "'required' is an invalid argument for positionals"
-msgstr ""
+msgstr "'erforderlich' ist ein ungültiges Argument für Positionsangaben"
 
-#, fuzzy
 msgid "(All readers)"
-msgstr "(Alle Lesegeräte)"
+msgstr "(Alle Leser)"
 
 #, python-format
 msgid "(Attention: There will be a restart after %d crashes.)"
@@ -1501,9 +1497,9 @@ msgstr "(Bild-im-Bild)"
 msgid "(Radio)"
 msgstr "(Radio)"
 
-#, fuzzy, python-format
+#, python-format
 msgid "(Show only reader) (%s)"
-msgstr "(Nur Lesegeräte zeigen:"
+msgstr "Nur Leser anzeigen) (%s)"
 
 msgid "(TV)"
 msgstr "(TV)"
@@ -1511,18 +1507,15 @@ msgstr "(TV)"
 msgid "(The file '/media/hdd/images/config/myrestore.sh' exists and will be run after the image is flashed.)"
 msgstr "(Die Datei '/media/hdd/images/config/myrestore.sh' existiert und wird nach dem Flashen des Images ausgeführt.)"
 
-#
 msgid "(empty)"
 msgstr "(leer)"
 
-#
 msgid "(show optional DVD audio menu)"
 msgstr "(DVD-Audiomenü anzeigen, falls vorhanden)"
 
 msgid "* = Restart Required"
 msgstr "* = Neustart erforderlich"
 
-#
 msgid "* Only available if more than one interface is active."
 msgstr "* Nur verfügbar, wenn mehr als ein Netzwerkadapter aktiv ist."
 
@@ -1549,10 +1542,10 @@ msgid "-24h/+24 Hours"
 msgstr "-24/+24 Stunden"
 
 msgid ".__call__() not defined"
-msgstr ""
+msgstr ".__call__() nicht definiert"
 
 msgid "/media/custom"
-msgstr ""
+msgstr "/media/custom"
 
 msgid "/s"
 msgstr "/s"
@@ -1566,45 +1559,34 @@ msgstr "Verzeichnis '/usr/share/enigma2'"
 msgid "/var directory"
 msgstr "Verzeichnis '/var'"
 
-#
 msgid "0"
 msgstr "0"
 
-#
-#, fuzzy
 msgid "0.0"
-msgstr "1.0"
+msgstr "0.0"
 
-#
 msgid "1"
 msgstr "1"
 
-#
-#, fuzzy
 msgid "1,1"
-msgstr "1.1"
+msgstr "1,1"
 
 msgid ""
 "1. If you do not have a media formatted in ext3 or ext4, open menu, general configurations, system, storage device, select the drive and format it.\n"
 "\n"
-msgstr ""
+msgstr "1. Wenn Sie kein mit ext3 oder ext4 formatiertes Medium haben, öffnen Sie das Menü, allgemeine Konfigurationen, System, Speichergerät, wählen Sie das Laufwerk aus und formatieren Sie es.\n"
 
-#
 msgid "1.0"
 msgstr "1.0"
 
-#
 msgid "1.1"
 msgstr "1.1"
 
-#
 msgid "1.2"
 msgstr "1.2"
 
-#
-#, fuzzy
 msgid "10 seconds"
-msgstr "Sekunden"
+msgstr "10 Sekunden"
 
 msgid "1024 Mb"
 msgstr "1024 MB"
@@ -1621,7 +1603,6 @@ msgstr "12, zeigt Latin-1-Zeichen an, außer für Griechisch und Kyrillisch, sch
 msgid "128 Mb"
 msgstr "128 MB"
 
-#
 msgid "12V output"
 msgstr "12V Ausgang"
 
@@ -1634,31 +1615,24 @@ msgstr "12 Bit"
 msgid "12bit 4:2:0/4:2:2 no PiP"
 msgstr "12 Bit 4:2:0/4:2:2 ohne Bild-im-Bild"
 
-#
 msgid "13 V"
 msgstr "13V"
 
-#
-#, fuzzy
 msgid "15 seconds"
-msgstr "Sekunden"
+msgstr "15 Sekunden"
 
 msgid "1536 Mb"
 msgstr "1536 MB"
 
-#
 msgid "16:10 Letterbox"
 msgstr "16:10 Letterbox"
 
-#
 msgid "16:10 PanScan"
 msgstr "16:10 Pan & Scan"
 
-#
 msgid "16:9"
 msgstr "16:9"
 
-#
 msgid "16:9 Always"
 msgstr "immer 16:9"
 
@@ -1668,7 +1642,6 @@ msgstr "16:9 Kombiniert"
 msgid "16:9 Ignore"
 msgstr "16:9 Ignorieren"
 
-#
 msgid "16:9 Letterbox"
 msgstr "16:9 Letterbox"
 
@@ -1678,33 +1651,28 @@ msgstr "16:9 Pan & Scan"
 msgid "16:9 reset to normal"
 msgstr "16:9 zurücksetzen"
 
-#
 msgid "18 V"
 msgstr "18V"
 
 msgid "1st InfoBar timeout"
 msgstr "Erste Infoleiste Anzeigedauer"
 
-#, fuzzy
 msgid "1st infobar timeout"
 msgstr "Erste Infoleiste Anzeigedauer"
 
 msgid "1x"
 msgstr "1x"
 
-#
 msgid "2"
 msgstr "2"
 
 msgid ""
 "2. Go to the mount device manager from the OPD panel, services, device mount management and install hdd and usb correctly.\n"
 "\n"
-msgstr ""
+msgstr "2. Gehen Sie über das OPD-Panel, Dienste, Geräte-Mount-Verwaltung zum Mount-Geräte-Manager und installieren Sie Festplatte und USB korrekt.\n"
 
-#
-#, fuzzy
 msgid "20 seconds"
-msgstr "Sekunden"
+msgstr "20 Sekunden"
 
 msgid "2048 Mb"
 msgstr "2048 MB"
@@ -1746,12 +1714,10 @@ msgstr "3"
 msgid ""
 "3. Now install OPDboot on the device by going to: menu, multiboot OPD.\n"
 "\n"
-msgstr ""
+msgstr "3. Installieren Sie nun OPDboot auf dem Gerät, indem Sie zu: Menü, Multiboot OPD gehen.\n"
 
-#
-#, fuzzy
 msgid "30 seconds"
-msgstr "Sekunden"
+msgstr "30 Sekunden"
 
 msgid "32 Mb"
 msgstr "32 MB"
@@ -1769,14 +1735,13 @@ msgstr "3D Surround Lautsprecherposition"
 msgid "3x"
 msgstr "3x"
 
-#
 msgid "4"
 msgstr "4"
 
 msgid ""
 "4. On OPDboot press: menu to choose the type of start. Attention select: Start without Bootmanager for 64Bit devices.\n"
 "\n"
-msgstr ""
+msgstr "4. Drücken Sie bei OPDboot: Menü, um den Starttyp auszuwählen. Achtung wählen: Start ohne Bootmanager für 64Bit-Geräte.\n"
 
 msgid "4:3 Combined"
 msgstr "4:3 Kombiniert"
@@ -1784,119 +1749,93 @@ msgstr "4:3 Kombiniert"
 msgid "4:3 Ignore"
 msgstr "4:3 Ignorieren"
 
-#
 msgid "4:3 Letterbox"
 msgstr "4:3 Letterbox"
 
-#
 msgid "4:3 PanScan"
 msgstr "4:3 Pan & Scan"
 
 msgid "4x"
 msgstr "4x"
 
-#
 msgid "5"
 msgstr "5"
 
-#
-#, fuzzy
 msgid "5 seconds"
-msgstr "Sekunden"
+msgstr "5 Sekunden"
 
 msgid ""
 "5. Press the green button and select the source to install the multiboot image.\n"
 "\n"
-msgstr ""
+msgstr "5. Drücken Sie die grüne Taste und wählen Sie die Quelle aus, um das Multiboot-Image zu installieren.\n"
 
 msgid "50-200 Mbps"
-msgstr ""
+msgstr "50-200 Mbps"
 
 msgid "512 Mb"
 msgstr "512 MB"
 
-#
 msgid "6"
 msgstr "6"
 
 msgid ""
 "6. Downloaded the image, we have the possibility to choose whether to copy the settings from the flash image! choose YES if we want to import the settings, the password, network configurations etc ...\n"
 "\n"
-msgstr ""
+msgstr "6. Nachdem wir das Image heruntergeladen haben, haben wir die Möglichkeit zu wählen, ob die Einstellungen aus dem Flash-Image kopiert werden sollen! Wählen Sie JA, wenn wir die Einstellungen, das Passwort, Netzwerkkonfigurationen usw. importieren möchten ...\n"
 
-#
-#, fuzzy
 msgid "6.2"
-msgstr "1.2"
+msgstr "6.2"
 
 msgid "6.3"
-msgstr ""
+msgstr "6.3"
 
 msgid "6.4"
-msgstr ""
+msgstr "6.4"
 
 msgid "6.5"
-msgstr ""
+msgstr "6.5"
 
 msgid "64 Mb"
 msgstr "64 MB"
 
-#
 msgid "7"
 msgstr "7"
 
 msgid ""
 "7. In case of problems with the installation, cancel and ask openDroid-Team for support on:\n"
 "\n"
-msgstr ""
+msgstr "7. Bei Problemen mit der Installation brechen Sie die Installation ab und bitten Sie das openDroid-Team um Unterstützung unter:\n"
 
-#
-#, fuzzy
 msgid "7.0"
-msgstr "1.0"
+msgstr "7.0"
 
-#
-#, fuzzy
-msgid "7.1"
-msgstr "1.1"
-
-#
-#, fuzzy
 msgid "7.2"
-msgstr "1.2"
+msgstr "7.2"
 
 msgid "7.3"
-msgstr ""
+msgstr "7.3"
 
-#
 msgid "8"
 msgstr "8"
 
 msgid "8 character"
 msgstr "8 Zeichen"
 
-#
-#, fuzzy
 msgid "81"
 msgstr "1"
 
-#
-#, fuzzy
 msgid "82"
-msgstr "2"
+msgstr "82"
 
-#
-#, fuzzy
 msgid "83"
-msgstr "3"
+msgstr "83"
 
 msgid "8888"
-msgstr ""
+msgstr "8888"
 
 msgid "8bit"
 msgstr "8 Bit"
 
-#
 msgid "9"
 msgstr "9"
 
@@ -2128,19 +2067,15 @@ msgstr "AFP-Aktionen"
 msgid "AFP Settings"
 msgstr "AFP-Dateiserver"
 
-#, fuzzy
 msgid "AI-Powered translation color"
 msgstr "Textfarbe für KI-gestützte Übersetzung"
 
-#, fuzzy
 msgid "AI-Powered translation enabled"
 msgstr "KI-gestützte Übersetzung aktiviert"
 
-#, fuzzy
 msgid "AI-Powered translation language"
 msgstr "Sprache der KI-gestützten Übersetzung"
 
-#, fuzzy
 msgid "AI-Powered translation subscription code"
 msgstr "Abo-Code für KI-gestützte Übersetzung"
 
@@ -2210,7 +2145,7 @@ msgstr "Zugriff"
 #
 #, fuzzy
 msgid "Accesspoint:"
-msgstr "Access Point MAC:"
+msgstr "Access Point:"
 
 msgid "Action"
 msgstr "Aktion"
@@ -2437,7 +2372,6 @@ msgid "Add recording (Stop after current event)"
 msgstr "Aufnahme hinzufügen (aktuelle Sendung)"
 
 #
-#, fuzzy
 msgid "Add recording (stop after current event)"
 msgstr "Aufnahme hinzufügen (aktuelle Sendung)"
 
@@ -2492,10 +2426,10 @@ msgid "Additional motor options allow you to enter details from your motor's spe
 msgstr "Mit zusätzlichen Motoroptionen können Details aus dem Datenblatt des Motors eingegeben werden, so dass berechnet werden kann, wie lange es dauern wird, um zu einem anderen Satelliten zu wechseln."
 
 msgid "Addons"
-msgstr ""
+msgstr "Addons"
 
 msgid "Addons "
-msgstr ""
+msgstr "Addons"
 
 msgid "Address"
 msgstr "Adresse"
@@ -2519,9 +2453,8 @@ msgstr "Erwachsene"
 msgid "Adult Audience, Strong Violence 15+"
 msgstr "Erwachsenes Publikum, starke Gewalt 15+"
 
-#, fuzzy
 msgid "Adv. UnInstall"
-msgstr "Entfernen"
+msgstr "Adv. Deinstallieren"
 
 #
 msgid "Advanced"
@@ -2620,6 +2553,8 @@ msgid ""
 "All Softcams will be deinstalled\n"
 "Are you sure ?"
 msgstr ""
+"Alle Softcams werden deinstalliert\n"
+"Bist du sicher ?"
 
 msgid "All ages"
 msgstr "Jedes Alter"
@@ -2689,7 +2624,7 @@ msgid "Allows the TV remote to be used to control the receiver."
 msgstr "Den Receiver mit der Fernbedienung des Fernsehers steuern."
 
 msgid "Allows you schedule your image backups."
-msgstr ""
+msgstr "Ermöglicht Ihnen, Ihre Image-Backups zu planen."
 
 msgid "Allows you to adjust the amount of time the resolution information display on screen."
 msgstr "Die Anzeige der Bildschirmeinblendung bei Auflösungsänderungen einstellen."
@@ -2710,12 +2645,11 @@ msgid "Allows you to hide the extensions of known file types."
 msgstr "Bei 'Ja' werden Dateiendungen von bekannten Dateiformaten ausgeblendet."
 
 msgid "Allows you to set a schedule to import the EPG and channels list. The EPG and channels list will always be imported on reboot or GUI restart."
-msgstr ""
+msgstr "Ermöglicht Ihnen, einen Zeitplan für den Import des EPG und der Kanalliste festzulegen. Der EPG und die Kanalliste werden immer beim Neustart oder GUI-Neustart importiert."
 
 msgid "Allows you to set the maximum size of the Debug log size (MB). When that size is reached, a new file will be created."
 msgstr "Maximale Größe in Megabyte (MB) des Debug-Logs festlegen. Wenn diese Größe erreicht ist, wird eine neue Datei erstellt."
 
-#, fuzzy
 msgid "Allows you to show/hide Log Manager in extensions (BLUE button)."
 msgstr "Die Logverwaltung unter Erweiterungen (Taste BLAU) anzeigen oder verstecken."
 
@@ -2723,7 +2657,7 @@ msgid "Allows you to show/hide OScam/CCcam in the Extension Menu screen (BLUE bu
 msgstr "OSCam/CCcam Info unter Erweiterungen (Taste BLAU) anzeigen."
 
 msgid "Allows you to tag your image backup to a box. (default is box name/type)"
-msgstr ""
+msgstr "Ermöglicht Ihnen, Ihr Image-Backup einer Box zuzuordnen. (Standard ist Boxname/-typ)"
 
 msgid "Alpha"
 msgstr "Buchstabe"
@@ -2869,23 +2803,22 @@ msgid "Arabic"
 msgstr "Arabisch"
 
 msgid "Arabic (Egyptian)"
-msgstr ""
+msgstr "Arabisch (Egyptisch)"
 
 msgid "Arabic (Moroccan)"
-msgstr ""
+msgstr "Arabisch (Marokkanisch)"
 
 msgid "Arabic (Syro-Lebanese)"
-msgstr ""
+msgstr "Arabisch (Syro-Libanesisch)"
 
 msgid "Arabic (Tunisian)"
-msgstr ""
+msgstr "Arabisch (Tunesisch)"
 
 msgid "Aragonese"
 msgstr "Aragonesisch"
 
-#, fuzzy
 msgid "Are the settings correct ?"
-msgstr "Ist diese Einstellung in Ordnung?"
+msgstr "Sind die Einstellungen korrekt?"
 
 #
 msgid "Are you ready to run the script ?"
@@ -2914,9 +2847,8 @@ msgstr "Alle terrestrischen Dienste entfernen?"
 msgid "Are you sure to remove this entry?"
 msgstr "Diesen Eintrag wirklich löschen?"
 
-#, fuzzy
 msgid "Are you sure you want to Boot Image:\n"
-msgstr "Dieses Image wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie das Boot-Image erstellen möchten:\n"
 
 #
 msgid "Are you sure you want to activate this network configuration?"
@@ -2930,11 +2862,8 @@ msgstr ""
 "Soll wirklich folgendes gelöscht werden?\n"
 "Sicherung(en):\n"
 
-#, fuzzy
-msgid ""
-"Are you sure you want to delete Image:\n"
-" "
-msgstr "Dieses Image wirklich löschen?"
+msgid "Are you sure you want to delete Image:\n"
+msgstr "Sind Sie sicher, dass Sie das Bild löschen möchten:\n"
 
 msgid "Are you sure you want to delete all selected logs:\n"
 msgstr "Alle ausgewählten Logdateien löschen:\n"
@@ -2948,11 +2877,8 @@ msgstr "Dieses Image wirklich löschen?"
 msgid "Are you sure you want to delete this log:\n"
 msgstr "Dieses Log löschen:\n"
 
-#, fuzzy
-msgid ""
-"Are you sure you want to delete this:\n"
-" "
-msgstr "Wirklich dies löschen?"
+msgid "Are you sure you want to delete this:\n"
+msgstr "Sind Sie sicher, dass Sie Folgendes löschen möchten:\n"
 
 msgid "Are you sure you want to delete this?"
 msgstr "Wirklich dies löschen?"
@@ -2991,7 +2917,6 @@ msgstr ""
 "Nach der Wiederherstellung wird der Receiver neu gestartet!"
 
 # InfoPanel restore settings
-#, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -3002,9 +2927,8 @@ msgstr ""
 msgid "Are you sure you want to save the EPG Cache to:\n"
 msgstr "Die EPG-Daten hier speichern:\n"
 
-#, fuzzy
 msgid "Are you sure you want to start the image now?:\n"
-msgstr "Dieses Image wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie das Image jetzt starten möchten?:\n"
 
 msgid "Argentina"
 msgstr "Argentinien"
@@ -3050,13 +2974,11 @@ msgstr "Aspekt"
 msgid "Aspect Ratio Actions"
 msgstr "Seitenverhältnisaktionen"
 
-#, fuzzy
 msgid "Aspect Ratio: "
-msgstr "Seitenverhältnis"
+msgstr "Seitenverhältnis:"
 
-#, fuzzy
 msgid "Aspect Ratio: n/a"
-msgstr "Seitenverhältnis"
+msgstr "Seitenverhältnis: n/a"
 
 #
 msgid "Aspect list..."
@@ -3107,7 +3029,7 @@ msgstr "Leichtathletik"
 msgid ""
 "Attention! During the entire installation process does not restart the receiver!\n"
 "\n"
-msgstr ""
+msgstr "Aufmerksamkeit! Während des gesamten Installationsvorgangs wird der Receiver nicht neu gestartet!\n"
 
 msgid "Audio"
 msgstr "Ton"
@@ -3126,16 +3048,15 @@ msgstr "Tonkanal"
 msgid "Audio PID"
 msgstr "Audio-PID"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Audio PID%s, codec & lang"
-msgstr "Audio-PID - Codec - Sprache"
+msgstr "Audio-PID%s, Codec und Sprache"
 
 msgid "Audio PID, codec & lang"
 msgstr "Audio-PID - Codec - Sprache"
 
-#, fuzzy
 msgid "Audio Selection"
-msgstr "Audioaktionen"
+msgstr "Audioauswahl"
 
 #
 msgid "Audio Settings"
@@ -3215,12 +3136,11 @@ msgid "Auto standby"
 msgstr "Automatisch in Standby"
 
 msgid "Auto timeout (5-150min):"
-msgstr ""
+msgstr "Automatisches Timeout (5–150 Minuten):"
 
 # UsageConfig.py
-#, fuzzy
 msgid "Auto timeout:"
-msgstr "Permanent"
+msgstr "Automatisches Timeout"
 
 msgid "Auto video mode selected"
 msgstr "Automatischer Videomodus ausgewählt"
@@ -3257,9 +3177,8 @@ msgstr "Automatische Auflösung"
 msgid "Automatic resolution label"
 msgstr "Bildschirmmeldung der Auflösung"
 
-#, fuzzy
 msgid "Automatic scan"
-msgstr "Automatischer Suchlauf"
+msgstr "Automatischer Scan"
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Den Fernseher automatisch zusammen mit dem Receiver in den Standby oder Deep-Standby versetzen."
@@ -3273,9 +3192,8 @@ msgstr "Externe Untertitel automatisch anschalten"
 msgid "Automatically update Client/Server View"
 msgstr "Client-/Server-Ansicht automatisch aktualisieren."
 
-#, fuzzy
 msgid "Automatically update Client/Server View?"
-msgstr "Client-/Server-Ansicht automatisch aktualisieren."
+msgstr "Client/Server-Ansicht automatisch aktualisieren?"
 
 msgid "Autostart"
 msgstr "Autostart"
@@ -3294,9 +3212,8 @@ msgstr "Vorhandene Sprachen:"
 msgid "Available shares:"
 msgstr "Verfügbare Netzwerkfreigaben:"
 
-#, fuzzy
 msgid "Available:"
-msgstr "nicht verfügbar"
+msgstr "Verfügbar:"
 
 msgid "Avaric"
 msgstr "Awarisch"
@@ -3438,9 +3355,8 @@ msgstr ""
 "Gesicherte Erweiterungen gefunden!\n"
 "Diese jetzt installieren?"
 
-#, fuzzy
 msgid "Backup prefix"
-msgstr "Sicherungsmodus"
+msgstr "Backup-Präfix"
 
 #, python-format
 msgid "Backup tool for %s %s"
@@ -3474,11 +3390,9 @@ msgstr "Bangladesch"
 msgid "Barbados"
 msgstr "Barbados"
 
-#, fuzzy
 msgid "Base"
-msgstr "Baseball"
+msgstr "Basis"
 
-#, fuzzy
 msgid "Base Shell"
 msgstr "Basis Konsole Pakete"
 
@@ -3486,14 +3400,12 @@ msgid "Base time"
 msgstr "Zeitraster"
 
 # UserInterfacePositioner
-#, fuzzy
 msgid "Base transparency for OpenOpera web browser"
-msgstr "Grundtransparenz für den OpenOpera-Webbrowser."
+msgstr "Basistransparenz für den OpenOpera-Webbrowser"
 
 # UserInterfacePositioner
-#, fuzzy
 msgid "Base transparency for teletext, more options available within teletext screen."
-msgstr "Grundtransparenz für den Videotext. Weitere Optionen innerhalb des Videotextmenüs."
+msgstr "Basistransparenz für Videotext, weitere Optionen im Videotextbildschirm verfügbar."
 
 msgid "Baseball"
 msgstr "Baseball"
@@ -3603,13 +3515,11 @@ msgstr "Block-Rauschen-Reduzierung"
 msgid "Blue"
 msgstr "Blau"
 
-#, fuzzy
 msgid "Blue Panel"
-msgstr "PPanel"
+msgstr "Blue Panel"
 
-#, fuzzy
 msgid "BluePanel/Extensions"
-msgstr "Schnellstartmenü/Erweiterungen"
+msgstr "BluePanel/Erweiterungen"
 
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -3647,23 +3557,20 @@ msgstr "Blauanteil erhöhen"
 msgid "Boost green"
 msgstr "Grünanteil erhöhen"
 
-#, fuzzy
 msgid "Boot Confirmation"
-msgstr "Boot-Informationen"
+msgstr "Boot-Bestätigung"
 
-#, fuzzy
 msgid "Boot Image"
-msgstr "Root-Image"
+msgstr "Boot-Image"
 
-#, fuzzy
 msgid "Boot image not changed."
-msgstr "Nicht ändern"
+msgstr "Boot-Image nicht geändert."
 
 msgid "Boot loader update required!"
 msgstr "Bootloader-Update erforderlich!"
 
 msgid "Boot new Image directly?"
-msgstr ""
+msgstr "Neues Bild direkt oot?"
 
 msgid "Boot time"
 msgstr "Bootzeit"
