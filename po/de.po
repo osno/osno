@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-28 18:27+0100\n"
-"PO-Revision-Date: 2024-11-10 21:16+0100\n"
+"PO-Revision-Date: 2024-11-11 14:34+0100\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
 "Language: de\n"
@@ -20,13 +20,6 @@ msgid ""
 msgstr ""
 "\n"
 "<Dieser Tuner wird automatisch verwaltet>"
-
-# InfoPanel
-#, fuzzy
-msgid ""
-"\n"
-"Partition scheme:\n"
-msgstr "Partitionen"
 
 msgid ""
 "\n"
@@ -55,9 +48,9 @@ msgstr ""
 msgid " "
 msgstr " "
 
-#, fuzzy, python-format
+#, python-format
 msgid "   (%s MHz)"
-msgstr "%s MHz"
+msgstr "(%s MHz)"
 
 msgid "   (1.0 GHz)"
 msgstr ""
@@ -121,16 +114,14 @@ msgstr " <leer>"
 msgid " HI "
 msgstr " HI "
 
-#, fuzzy
 msgid " Server and "
-msgstr "Server ist Offline!"
+msgstr "Server Server und"
 
 msgid " and"
 msgstr " und"
 
-#, fuzzy
 msgid " as HDD ?"
-msgstr "Mount HDD"
+msgstr "als HDD?"
 
 msgid ""
 " is already installed.\n"
@@ -3719,27 +3710,23 @@ msgid "Button error timeout"
 msgstr "Timeout für Tastenfehler"
 
 # Quick Menue
-#, fuzzy
-msgid "Button setup"
+msgid "Button Setup"
 msgstr "Tastenbelegung"
 
 msgid "ButtonSetup"
 msgstr "Tastenbelegung"
 
-#, fuzzy
 msgid "By OPD Image Team"
-msgstr "Vom openATV-Imageteam"
+msgstr "Vom openDroid-Image Team"
 
 msgid "Bypass HDMI EDID Check"
 msgstr "HDMI-EDID-Prüfung überspringen"
 
-#, fuzzy
 msgid "Bytes received:"
-msgstr "Bytes empfangen"
+msgstr "Bytes empfangen:"
 
-#, fuzzy
 msgid "Bytes sent:"
-msgstr "Bytes gesendet"
+msgstr "Bytes gesendet:"
 
 msgid "C"
 msgstr "C"
@@ -3812,7 +3799,7 @@ msgid "CCcam.cfg Basic Line Editor"
 msgstr "Einfacher 'CCcam.cfg' Line Editor"
 
 msgid "CCcam.cfg found. Import your settings"
-msgstr ""
+msgstr "CCcam.cfg gefunden. Importieren Sie Ihre Einstellungen"
 
 msgid "CCcamInfo Mainmenu"
 msgstr "CCcam-Info - Hauptmenü"
@@ -3854,10 +3841,10 @@ msgid "CI+ Helper*"
 msgstr "CI+ Helper*"
 
 msgid "CI+ V13"
-msgstr ""
+msgstr "CI+ V13"
 
 msgid "CI+ V14"
-msgstr ""
+msgstr "CI+ V14"
 
 msgid "CIFS/Samba Settings"
 msgstr "CIFS/Samba-Dateiserver"
@@ -3867,11 +3854,11 @@ msgstr "CPU-Priorität für Skripte"
 
 #, python-format
 msgid "CPU:\t%s"
-msgstr ""
+msgstr "CPU:\t%s"
 
 #, python-format
 msgid "CPU:\t%s %s %s\n"
-msgstr ""
+msgstr "CPU:\t%s %s %s\n"
 
 msgid "CaID: "
 msgstr "CAID: "
@@ -3887,15 +3874,14 @@ msgstr "Kabel-Suchlauf"
 msgid "Cache thumbnails"
 msgstr "Vorschaubilder zwischenspeichern"
 
-#, fuzzy
 msgid "Cached:"
-msgstr "Zwischengespeichert"
+msgstr "Zwischengespeichert:"
 
 msgid "Caid"
-msgstr ""
+msgstr "Caid"
 
 msgid "Caid:Srvid"
-msgstr ""
+msgstr "Caid:Srvid"
 
 msgid "Calculate"
 msgstr "Berechnen"
@@ -3982,7 +3968,6 @@ msgstr ""
 "Partition kann nicht ausgehängt werden!\n"
 "Sicherstellen, dass sie nicht für eine Auslagerungsdatei oder Aufnahme/Timeshift-Pfade verwendet wird."
 
-#, fuzzy
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths"
 msgstr ""
 "Partition kann nicht ausgehängt werden!\n"
@@ -4108,9 +4093,9 @@ msgid ""
 "Please stop this actions/applications and try again"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Cannot format partition %d"
-msgstr "Warte auf Partition"
+msgstr "Warte auf Partition %d"
 
 msgid ""
 "Cannot mount new drive.\n"
@@ -4138,12 +4123,11 @@ msgstr "Kapazität"
 msgid "Cape Verde"
 msgstr "Kap Verde"
 
-#, fuzzy
 msgid "Card info (CCcam-Reader)"
 msgstr "Karteninfos (CCcam-Reader)"
 
 msgid "Cardreader found automatically"
-msgstr ""
+msgstr "Kartenleser automatisch gefunden"
 
 msgid "Cards:"
 msgstr "Karten:"
@@ -4230,7 +4214,7 @@ msgid "Change next timer"
 msgstr "Nächsten Timer ändern"
 
 msgid "Change old drive with this new drive"
-msgstr ""
+msgstr "Tauschen Sie das alte Laufwerk gegen dieses neue Laufwerk aus"
 
 #
 msgid "Change pin code"
@@ -4293,9 +4277,8 @@ msgstr "Programm-Informationen"
 msgid "Channel List"
 msgstr "Senderliste"
 
-#, fuzzy
 msgid "Channel Name"
-msgstr "Kanalname"
+msgstr "Kanal Name"
 
 msgid "Channel Selection"
 msgstr "Senderliste"
@@ -4365,7 +4348,6 @@ msgstr "Kanalname"
 msgid "Channel preview mode"
 msgstr "Sender-Vorschaumodus"
 
-#, fuzzy
 msgid "Channel selection"
 msgstr "Senderliste:"
 
@@ -4388,10 +4370,8 @@ msgstr "Kanal:"
 msgid "ChannelEPG Settings"
 msgstr "Sender-EPG-Einstellungen"
 
-#
-#, fuzzy
 msgid "Channellist menu"
-msgstr "Senderliste-Menü"
+msgstr "Senderliste Menü"
 
 msgid "Channels and EPG"
 msgstr "Sender und EPG"
@@ -4423,16 +4403,14 @@ msgid "Check"
 msgstr "Prüfung"
 
 msgid "Check disk terminated with success"
-msgstr ""
+msgstr "Die Prüfung der Festplatte wurde erfolgreich abgeschlossen"
 
 msgid "Check power and input state from TV"
 msgstr "Überprüfe den Betriebszustand vom TV"
 
-#, fuzzy
 msgid "Check the internet connection"
-msgstr "Überprüfe die Internetverbindung erneut"
+msgstr "Überprüfen Sie die Internetverbindung"
 
-#, fuzzy
 msgid "Check the internet connection again"
 msgstr "Überprüfe die Internetverbindung erneut"
 
@@ -4442,20 +4420,18 @@ msgstr "Überprüfe Feeds"
 msgid "Checking Logs..."
 msgstr "Überprüfe Logdateien..."
 
-#, fuzzy
 msgid "Checking disk"
-msgstr "Überprüfe Feeds"
+msgstr "Festplatte prüfen"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Checking disk %s"
-msgstr "Überprüfe Feeds"
+msgstr "Festplatte prüfen %s"
 
 msgid "Checking file system..."
 msgstr "Überprüfe Dateisystem..."
 
-#, fuzzy
 msgid "Checking the internet connection"
-msgstr "Überprüfe die Internetverbindung erneut"
+msgstr "Überprüfung der Internetverbindung"
 
 #, python-format
 msgid ""
@@ -4489,17 +4465,17 @@ msgstr "Chinesisch"
 msgid "Chinese (Simplified)"
 msgstr "Vereinfachtes Chinesisch"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Chipset:\t%s\n"
-msgstr "Chipsatz: BCM%s"
+msgstr "Chipsatz:\t%s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Chipset:\tBroadcom %s\n"
-msgstr "Chipsatz: BCM%s"
+msgstr "Chipsatz:\tBroadcom %s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Chipset:\tHiSilicon %s\n"
-msgstr "Chipsatz: BCM%s"
+msgstr "Chipsatz:\tHiSilicon %s\n"
 
 #, python-format
 msgid "Chipset: BCM%s"
@@ -4520,17 +4496,15 @@ msgstr "Auswahlisten-Sortier-Aktionen"
 msgid "Choice List Selection Actions"
 msgstr "Auswahlisten-Aktionen"
 
-#, fuzzy
 msgid "Choice filesystem."
-msgstr "Überprüfe Dateisystem..."
+msgstr "Auswahl-Dateisystem."
 
 #, python-format
 msgid "Choice where to put \"%s\""
 msgstr "Positionsauswahl für '%s'"
 
-#, fuzzy
 msgid "Choose CCcam-Reader"
-msgstr "Bitte einen CCcam-Reader auswählen"
+msgstr "Wählen Sie CCcam-Reader"
 
 msgid "Choose a country scheme for decoding genre information in EPG events."
 msgstr "Länderschema zum Dekodieren von Genre-Informationen in EPG-Ereignissen auswählen."
@@ -4541,9 +4515,8 @@ msgstr "Länderschema zum Dekodieren von Bewertungsinformationen in EPG-Ereignis
 msgid "Choose how much EPG history, if any, to keep in the EPG cache. This historic data can be browsed in any of the EPG views. This can be useful when you need information about an event which has recently finished."
 msgstr "Auswählen, ob und wie viele historische EPG-Daten gespeichert werden sollen. Diese Daten können in jeder der EPG-Ansichten durchsucht werden. Dies kann nützlich sein, wenn Informationen über ein Ereignis benötigt werden, welches kürzlich beendet wurde."
 
-#, fuzzy
 msgid "Choose reader"
-msgstr "Bitte einen Reader auswählen"
+msgstr "Leser auswählen"
 
 msgid "Choose the amount of additional slots."
 msgstr "Anzahl der zusätzlichen Slots auswählen."
@@ -4595,9 +4568,8 @@ msgstr "Auswählen, wie die Beschreibung der Fernbedienungstasten-Hilfe angezeig
 msgid "Choose the target location for the slots."
 msgstr "Zielort für die Slots auswählen."
 
-#, fuzzy
 msgid "Choose they way for installation!"
-msgstr "Die Ersatz-Schriftart auswählen."
+msgstr "Wählen Sie diese Art der Installation!"
 
 msgid "Choose time interval to which the graphics will be rounded off."
 msgstr "Das Zeitintervall einstellen, auf welches die Grafiken gerundet werden sollen."
@@ -4608,9 +4580,8 @@ msgstr "Die Funktion der Taste '0' auswählen, wenn Bild-im-Bild aktiv ist."
 msgid "Choose where to mount your devices to:"
 msgstr "Die Mountpunkte der Geräte auswählen:"
 
-#, fuzzy
 msgid "Choose where to save VOD movies"
-msgstr "Die Mountpunkte der Geräte auswählen:"
+msgstr "Wählen Sie aus, wo Sie VOD-Filme speichern möchten"
 
 msgid "Choose whether AAC sound tracks should be transcoded."
 msgstr "Auswählen, ob AAC-Tonspuren transkodiert werden sollen."
@@ -4696,10 +4667,8 @@ msgstr "Löschen"
 msgid "Clear Log"
 msgstr "Log löschen"
 
-#
-#, fuzzy
 msgid "Clear Now"
-msgstr "Log löschen"
+msgstr "Jetzt löschen"
 
 msgid "Clear before scan"
 msgstr "Vor dem Suchlauf löschen"
@@ -4719,16 +4688,14 @@ msgid_plural "Clear warnings"
 msgstr[0] "Warnung löschen"
 msgstr[1] "Warnungen löschen"
 
-#, fuzzy
 msgid "ClearMem Info"
-msgstr "CCcam-Info"
+msgstr "ClearMem-Info"
 
-#, fuzzy
 msgid "ClearMem Status"
-msgstr "Status:"
+msgstr "ClearMem Status"
 
 msgid "ClearMem-Setup"
-msgstr ""
+msgstr "ClearMem-Setup"
 
 msgid "Click the button on your remote you want to change."
 msgstr "Die Taste der Fernbedienung drücken, die mit einer neuen Funktion belegt werden soll."
@@ -4736,22 +4703,18 @@ msgstr "Die Taste der Fernbedienung drücken, die mit einer neuen Funktion beleg
 msgid "Client"
 msgstr "Client"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Client %s-%s"
-msgstr "Clients"
+msgstr "Kunde %s-%s"
 
-#
-#, fuzzy
 msgid "Client Mode setup"
-msgstr "Rotoreinstellungen"
+msgstr "Einrichtung des Client-Modus"
 
 msgid "Client is streaming from this box!"
 msgstr "Ein Client streamt gerade von diesem Receiver!"
 
-#
-#, fuzzy
 msgid "Client mode"
-msgstr "Modul initialisieren"
+msgstr "Client-Modus"
 
 msgid "ClientIP"
 msgstr "ClientIP"
