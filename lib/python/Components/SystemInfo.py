@@ -181,6 +181,23 @@ def getRCFile(ext):
 	return filename
 
 
+def getChipsetString():
+	if MODEL in ("dm7080", "dm820"):
+		chipset = "7435"
+	elif MODEL in ("dm520", "dm525"):
+		chipset = "73625"
+	elif MODEL in ("dm900", "dm920", "et13000"):
+		chipset = "7252S"
+	elif MODEL in ("hd51", "vs1500", "h7", "h17"):
+		chipset = "7251S"
+	elif MODEL in ("dreamone", "dreamtwo"):
+		chipset = "S922X"
+	else:
+		chipset = fileReadLine("/proc/stb/info/chipset", default=_("Undefined"), source=MODULE_NAME)
+		chipset = chipset.lower().replace("\n", "").replace("bcm", "").replace("brcm", "").replace("sti", "")
+	return chipset
+
+
 def getModuleLayout():
 	module = None
 	modulePath = BoxInfo.getItem("enigmamodule")
@@ -330,8 +347,8 @@ BoxInfo.setItem("CanMeasureFrontendInputPower", eDVBResourceManager.getInstance(
 BoxInfo.setItem("canMultiBoot", MultiBoot.getBootSlots())
 BoxInfo.setItem("HasKexecMultiboot", fileHas("/proc/cmdline", "kexec=1"))
 BoxInfo.setItem("cankexec", BoxInfo.getItem("kexecmb") and fileExists("/usr/bin/kernel_auto.bin") and fileExists("/usr/bin/STARTUP.cpio.gz") and not BoxInfo.getItem("HasKexecMultiboot"))
-BoxInfo.setItem("CanNotDoSimultaneousTranscodeAndPIP", MODEL in ("vusolo4k", "gbquad4k", "gbue4k"))
-BoxInfo.setItem("canRecovery", MODEL in ("hd51", "vs1500", "h7", "8100s") and ("disk.img", "mmcblk0p1") or MODEL in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "mmcblk1p1") or MODEL in ("gbmv200", "sf8008", "sf8008m", "sx988", "ip8", "ustym4kpro", "ustym4kottpremium", "ustym4ks2ottx", "beyonwizv2", "viper4k", "og2ott4k", "og2s4k", "sx88v2", "sx888") and ("usb_update.bin", "none"))
+BoxInfo.setItem("CanNotDoSimultaneousTranscodeAndPIP", MODEL in ("vusolo4k", "gbquad4k", "gbquad4kpro", "gbue4k"))
+BoxInfo.setItem("canRecovery", MODEL in ("hd51", "vs1500", "8100s") and ("disk.img", "mmcblk0p1") or MODEL in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "mmcblk1p1") or MODEL in ("gbmv200", "sf8008", "sf8008m", "sx988", "ip8", "ustym4kpro", "ustym4kottpremium", "ustym4ks2ottx", "beyonwizv2", "viper4k", "og2ott4k", "og2s4k", "sx88v2", "sx888") and ("usb_update.bin", "none"))
 BoxInfo.setItem("CanUse3DModeChoices", fileExists("/proc/stb/fb/3dmode_choices") and True or False)
 #BoxInfo.setItem("ChipsetString", getChipsetString(), immutable=True)
 BoxInfo.setItem("CIPlusHelper", exists("/usr/bin/ciplushelper"))
@@ -367,7 +384,7 @@ BoxInfo.setItem("LcdDisplay", fileExists("/dev/dbox/lcd0"))
 BoxInfo.setItem("LcdLiveTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
 BoxInfo.setItem("LcdLiveTVPiP", fileCheck("/proc/stb/lcd/live_decoder"))
 BoxInfo.setItem("LCDMiniTV", fileExists("/proc/stb/lcd/mode"))
-BoxInfo.setItem("LCDMiniTVPiP", BoxInfo.getItem("LCDMiniTV") and MACHINEBUILD not in ("gb800ueplus", "gbquad4k", "gbue4k"))
+BoxInfo.setItem("LCDMiniTVPiP", BoxInfo.getItem("LCDMiniTV") and MACHINEBUILD not in ("gb800ueplus", "gbquad4k", "gbquad4kpro", "gbue4k"))
 BoxInfo.setItem("LCDSKINSetup", fileExists("/usr/share/enigma2/display") and DISPLAYTYPE not in ("7segment",))
 BoxInfo.setItem("LEDButtons", MACHINEBUILD == "vuultimo")
 BoxInfo.setItem("LEDColorControl", fileExists("/proc/stb/fp/led_color"))
