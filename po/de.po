@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-28 18:27+0100\n"
-"PO-Revision-Date: 2024-11-11 14:34+0100\n"
+"PO-Revision-Date: 2024-11-16 15:14+0100\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
 "Language: de\n"
@@ -2133,8 +2133,6 @@ msgstr "Access Point MAC:"
 msgid "Accessed"
 msgstr "Zugriff"
 
-#
-#, fuzzy
 msgid "Accesspoint:"
 msgstr "Access Point:"
 
@@ -2907,7 +2905,6 @@ msgstr ""
 "\n"
 "Nach der Wiederherstellung wird der Receiver neu gestartet!"
 
-# InfoPanel restore settings
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -3520,7 +3517,7 @@ msgstr "Bluetooth-Einstellungen"
 
 #, python-format
 msgid "BogoMIPS:\t%s"
-msgstr ""
+msgstr "BogoMIPS:\t%s"
 
 msgid "Bolivia"
 msgstr "Bolivien"
@@ -3573,22 +3570,21 @@ msgid "Boot time and local time"
 msgstr "Bootzeit und lokale Uhrzeit"
 
 msgid "Boot without Bootmanager"
-msgstr ""
+msgstr "Booten ohne Bootmanager"
 
 # boot-up action
 msgid "Boot-up action"
 msgstr "Startmodus"
 
 msgid "BootLogo"
-msgstr ""
+msgstr "BootLogo"
 
 #, python-format
 msgid "Bootloader:\t%s\n"
-msgstr ""
+msgstr "Bootloader:\t%s\n"
 
-#, fuzzy
 msgid "Bootsetup"
-msgstr "Bluetooth-Einstellungen"
+msgstr "Bootsetup"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnien und Herzegowina"
@@ -3659,13 +3655,12 @@ msgstr "Brunei Darussalam"
 msgid "Buffering %d%%"
 msgstr "Pufferung %d%%"
 
-#, fuzzy
 msgid "Buffers:"
-msgstr "Puffer"
+msgstr "Puffer:"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Build:\t%s"
-msgstr "Build: %s"
+msgstr "Build:\t%s"
 
 #, python-format
 msgid "Build: %s"
@@ -4837,9 +4832,8 @@ msgstr "Comedy"
 msgid "Command '%s' is unknown"
 msgstr "Der Befehl '%s' ist unbekannt!"
 
-#, fuzzy
 msgid "Command To Run"
-msgstr "Auszuführender Befehl"
+msgstr "Befehl zum Ausführen"
 
 msgid "Command execution..."
 msgstr "Befehl wird ausgeführt..."
@@ -4854,9 +4848,8 @@ msgstr "Auszuführender Befehl"
 msgid "Command type"
 msgstr "Befehlsart"
 
-#, fuzzy
 msgid "CommitInfo"
-msgstr "Commit"
+msgstr "CommitInfo"
 
 #
 msgid "Common Interface"
@@ -4876,8 +4869,6 @@ msgstr "Allgemeine Einstellungen"
 msgid "Common Setup Actions"
 msgstr "Allgemeine Setup-Aktionen"
 
-#
-#, fuzzy
 msgid "Common interface"
 msgstr "Common Interface"
 
@@ -4927,9 +4918,8 @@ msgstr "Konfiguration"
 msgid "Configuration options for the HELP screen can be found in 'MENU > Setup > Usage & User Interface > Settings'."
 msgstr "Konfigurationsoptionen für den HILFE-Bildschirm befinden sich unter 'MENU > Einstellungen > Bedienung & Oberfläche > OSD'."
 
-#, fuzzy
 msgid "Configuration tool for OScam"
-msgstr "Konfiguration"
+msgstr "Konfigurationstool für OScam"
 
 msgid "Configure DNS (name servers)"
 msgstr "DNS (Nameserver) konfigurieren"
@@ -5012,9 +5002,8 @@ msgstr ""
 msgid "Configure remote control type"
 msgstr "Fernbedienungstyp einstellen"
 
-#, fuzzy
 msgid "Configure the AI-Powered translation language."
-msgstr "Sprache der KI-gestützten Übersetzung"
+msgstr "Konfigurieren Sie die KI-gestützte Übersetzungssprache."
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "DiSEqC-Modus für diesen LNB einstellen."
@@ -5071,9 +5060,8 @@ msgstr "Die Helligkeit für das Display im Normalbetrieb einstellen."
 msgid "Configure the brightness level of the front panel display for standby."
 msgstr "Die Helligkeit für das Display im Standby einstellen."
 
-#, fuzzy
 msgid "Configure the color of the AI-Powered translations."
-msgstr "Die Farbe für Videotext-Untertitel einstellen."
+msgstr "Konfigurieren Sie die Farbe der KI-gestützten Übersetzungen."
 
 msgid "Configure the color of the external subtitles, alternative (normal in white, italic in yellow, bold in cyan, underscore in green), white or yellow."
 msgstr "Farbe der externen Untertitel, Alternativ (normal in Weiß, kursiv in Gelb, fett in Cyan, Unterstriche in Grün), Weiß oder Gelb."
@@ -5381,7 +5369,7 @@ msgid "Connected: "
 msgstr "Verbunden: "
 
 msgid "Connection using the supplied FTP parameters failed. Please recheck the details and try again."
-msgstr ""
+msgstr "Die Verbindung mit den angegebenen FTP-Parametern ist fehlgeschlagen. Bitte überprüfen Sie die Details noch einmal und versuchen Sie es erneut."
 
 msgid "Console"
 msgstr "Konsole"
@@ -5389,13 +5377,11 @@ msgstr "Konsole"
 msgid "Console Actions"
 msgstr "Konsole Aktionen"
 
-#, fuzzy
 msgid "Console Network"
-msgstr "Konsole Netzwerk-Pakete"
+msgstr "Konsolennetzwerk"
 
-#, fuzzy
 msgid "Console Utility"
-msgstr "Konsole Tools-Pakete"
+msgstr "Konsolen-Dienstprogramm"
 
 msgid "Constellation & FFT mode"
 msgstr "Konstellation und FFT-Modus"
@@ -5412,25 +5398,20 @@ msgstr "Energieverwaltung. Weitere Informationen befinden sich im Handbuch des R
 msgid "Consult your receiver's manual for more information on power threshold."
 msgstr "Leistungsschwelle. Weitere Informationen befinden sich im Handbuch des Receivers."
 
-#, fuzzy
 msgid "Contact Info"
-msgstr "Sendungsinformationen"
+msgstr "Kontaktinformationen"
 
-#, fuzzy
 msgid "Contact info"
-msgstr "Bildkontrast"
+msgstr "Kontakt-informationen"
 
 msgid "Content"
 msgstr "Inhalt"
 
-#
-#, fuzzy
 msgid "Content Encoding"
-msgstr "Sofortaufnahme..."
+msgstr "Inhaltskodierung"
 
-#, fuzzy
 msgid "Content Type"
-msgstr "Inhalt"
+msgstr "Inhaltstyp"
 
 #
 msgid "Content does not fit on DVD!"
@@ -5439,9 +5420,8 @@ msgstr "Inhalt passt nicht auf die DVD!"
 msgid "Context"
 msgstr "Kontext"
 
-#, fuzzy
 msgid "Continue ->"
-msgstr "Endlos"
+msgstr "Weiter ->"
 
 #
 msgid "Continue in background"
@@ -5482,9 +5462,8 @@ msgstr "Steuerdateien:"
 msgid "Control of the position how finished timer are shown in the Timer List."
 msgstr "Die Anzeigeposition von abgeschlossenen Timern in der Timerliste einstellen."
 
-#, fuzzy
 msgid "Control the InfoBar fading speed"
-msgstr "Die Ausblendegeschwindigkeit der Infoleiste einstellen."
+msgstr "Steuern Sie die Geschwindigkeit, mit der die InfoBar ausgeblendet wird"
 
 msgid "Controlled by HDMI"
 msgstr "Steuerung über HDMI"
@@ -5520,7 +5499,7 @@ msgid "Copy"
 msgstr "Kopieren"
 
 msgid "Copy Settings to the new Image"
-msgstr ""
+msgstr "Kopieren Sie die Einstellungen in das neue Bild"
 
 #
 msgid "Copy To Bouquet"
@@ -5560,7 +5539,7 @@ msgstr "Kopiere Dateien"
 
 #, python-format
 msgid "Cores:\t%s"
-msgstr ""
+msgstr "Cores:\t%s"
 
 msgid "Cornish"
 msgstr "Kornisch"
@@ -5612,10 +5591,8 @@ msgstr "Land für EPG Genre-Informationen"
 msgid "Country for EPG event rating information"
 msgstr "Land für EPG-Ereignisbewertungs-Informationen"
 
-#
-#, fuzzy
 msgid "Cpu"
-msgstr "Schneiden"
+msgstr "Cpu"
 
 msgid "Crash Logs"
 msgstr "Crash-Logs"
@@ -5689,11 +5666,9 @@ msgstr "Kroatisch"
 msgid "Cron Manager"
 msgstr "Cronverwaltung"
 
-#, fuzzy
 msgid "CronManager"
-msgstr "Cronverwaltung"
+msgstr "CronManager"
 
-#, fuzzy
 msgid "CronTimers"
 msgstr "CronTimer"
 
