@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-28 18:27+0100\n"
-"PO-Revision-Date: 2024-11-16 15:14+0100\n"
+"PO-Revision-Date: 2024-11-16 23:00+0100\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
 "Language: de\n"
@@ -5750,9 +5750,8 @@ msgstr ""
 msgid "Currently Defined Volume Offsets:"
 msgstr "Aktuell definierte Lautstärke-Offsets:"
 
-#, fuzzy
 msgid "Currently the commit log cannot be retrieved - please try later again."
-msgstr "Die %s Commit-Logs können nicht abgerufen werden! Bitte später erneut versuchen."
+msgstr "Derzeit kann das Commit-Protokoll nicht abgerufen werden. Bitte versuchen Sie es später erneut."
 
 msgid "Custom"
 msgstr "Benutzerdefiniert"
@@ -5793,11 +5792,10 @@ msgstr "Radfahren"
 
 #, python-format
 msgid "Cylinders: %s (max) %s (current)"
-msgstr ""
+msgstr "Zylinder: %s (max) %s (aktuell)"
 
-#, fuzzy
 msgid "Cylinders: unknown"
-msgstr "Aktuelle Version unbekannt"
+msgstr "Zylinder: unbekannt"
 
 msgid "Cyprus"
 msgstr "Zypern"
@@ -5822,7 +5820,7 @@ msgid "DLNA support"
 msgstr "DLNA"
 
 msgid "DMIPS:\t"
-msgstr ""
+msgstr "DMIPS:\t"
 
 msgid "DMM advanced"
 msgstr "DMM advanced"
@@ -5863,7 +5861,6 @@ msgstr "Dual-Layer-DVD"
 msgid "DVB CI Delay"
 msgstr "DVB-CI-Verzögerung"
 
-#, fuzzy
 msgid "DVB Subtitles PID & lang"
 msgstr "DVB-Untertitel-PID - Sprache"
 
@@ -5906,7 +5903,6 @@ msgstr "DVD-Menü"
 msgid "DVD Title list"
 msgstr "DVD-Titelliste"
 
-#, fuzzy
 msgid "DVD file browser"
 msgstr "DVD-Dateimanager"
 
@@ -6100,13 +6096,11 @@ msgstr "Debug-Logs"
 msgid "Debug log time format *"
 msgstr "Debug-Log Zeitformat *"
 
-#, fuzzy
 msgid "Decoding Setup"
-msgstr "Aufnahmen"
+msgstr "Dekodierungs-Setup"
 
-#, fuzzy
 msgid "Decoding_Setup"
-msgstr "Aufnahmen"
+msgstr "Dekodierungs-Setup"
 
 #
 msgid "Deep Standby"
@@ -6128,13 +6122,11 @@ msgstr "Voreinstellung für 'Nach der Aufnahme' *"
 msgid "Default 'Timer type' *"
 msgstr "Voreinstellung für 'Timerart' *"
 
-#, fuzzy
 msgid "Default (Instant Record)"
-msgstr "Sofortaufnahme"
+msgstr "Standard (Sofortaufzeichnung)"
 
-#, fuzzy
 msgid "Default (Timeshift)"
-msgstr "Timeshift"
+msgstr "Standard (Timeshift)"
 
 msgid "Default CPU priority (nice) for executed scripts. This can reduce the system load so that scripts do not interfere with the rest of the system. (higher values = lower priority)"
 msgstr "Standard CPU-Priorität (nice) für ausgeführte Skripts. Dies kann die Last reduzieren, so dass Skripts den Rest des Systems nicht beeinträchtigen (höhere Werte = niedrigere Priorität)."
@@ -6163,7 +6155,7 @@ msgstr "Standard-Filmverzeichnis"
 
 #, python-format
 msgid "Default port is '%d'. Change if required."
-msgstr ""
+msgstr "Der Standardport ist '%d'. Bei Bedarf ändern."
 
 msgid "Default recording type"
 msgstr "Standard-Aufnahmetyp"
@@ -6310,9 +6302,8 @@ msgid "Delete Directory"
 msgstr "Verzeichnis löschen"
 
 msgid "Delete Download Imagezip after Install?"
-msgstr ""
+msgstr "Download Imagezip nach der Installation löschen?"
 
-#, fuzzy
 msgid "Delete EPG"
 msgstr "EPG-Cache löschen"
 
@@ -6460,9 +6451,8 @@ msgstr "Tiefe"
 msgid "Descending"
 msgstr "Absteigend"
 
-#, fuzzy
 msgid "Descramble http streams"
-msgstr "HTTP-Streams entschlüsseln"
+msgstr "Entschlüsseln Sie HTTP-Streams"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -6482,7 +6472,7 @@ msgstr "Auswahl aller zugehörigen Dateien aufheben"
 msgid "Deselect only highlighted file"
 msgstr "Nur markierte Datei abwählen"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Deselected packages usually occur because those packaged are incompatible with existing packages.  While this is mostly harmless it is possible that your %s %s may experience issues."
 msgstr ""
 "Die Abwahl von Paketen erfolgt in der Regel, weil die Pakete mit bestehenden Paketen nicht kompatibel sind.\n"
@@ -6506,40 +6496,34 @@ msgstr "Umfang des GStreamer-Logs."
 msgid "Details"
 msgstr "Details"
 
-#, fuzzy
 msgid "Detected Devices:"
-msgstr "Gerät auswählen"
+msgstr "Erkannte Geräte:"
 
-#, fuzzy
 msgid "Detected NIMs:"
-msgstr "Gelöscht %s!"
+msgstr "Erkannte NIMs:"
 
-#, fuzzy
 msgid "Development"
 msgstr "Entwicklung"
 
-#, fuzzy
 msgid "Device Details"
-msgstr "Netzwerkadapter-Einstellungen"
+msgstr "Gerätedetails"
 
-#, fuzzy
 msgid ""
 "Device Fixed Mount Point change needs a system restart in order to take effect.\n"
 "Restart your STB now?"
 msgstr ""
-"Geräteänderungen erfordern einen Systemneustart.\n"
-"Die %s %s jetzt neu starten?"
+"Die Änderung des festen Mount-Punkts des Geräts erfordert einen Systemneustart, damit sie wirksam wird.\n"
+"STB jetzt neu starten?"
 
-#, fuzzy
 msgid "Device Information"
-msgstr "Senderinformation"
+msgstr "Geräteinformationen"
 
 #
 msgid "Device Manager"
 msgstr "Geräteverwaltung"
 
 msgid "Device Manager - Fast Mounted Remove"
-msgstr ""
+msgstr "Geräte-Manager – Schnelles Entfernen"
 
 msgid "Device Settings"
 msgstr "Netzwerkadapter-Einstellungen"
@@ -6560,17 +6544,12 @@ msgstr "Gerät: "
 msgid "Devices"
 msgstr "Geräte"
 
-#
-#, fuzzy
 msgid "Devices Manager"
-msgstr "Geräteverwaltung"
+msgstr "Gerätemanager"
 
-#
-#, fuzzy
 msgid "Devices Panel"
-msgstr "Geräteverwaltung"
+msgstr "Gerätebereich"
 
-#
 msgid "DiSEqC"
 msgstr "DiSEqC"
 
@@ -6720,9 +6699,8 @@ msgstr "Bild-im-Bild wurde deaktiviert.\n"
 msgid "Dish"
 msgstr "Spiegel"
 
-#, fuzzy
 msgid "Disk temperature: unknown"
-msgstr "Systemtemperatur"
+msgstr "Festplattentemperatur: unbekannt"
 
 #
 msgid "Display 16:9 content as"
@@ -6740,10 +6718,8 @@ msgstr "Inhalt >16:9 anzeigen als"
 msgid "Display Settings"
 msgstr "Displayeinstellungen"
 
-# Quick Menue
-#, fuzzy
 msgid "Display Skin"
-msgstr "Displayeinstellungen"
+msgstr "Skin anzeigen"
 
 msgid "Display context menu"
 msgstr "Kontextmenü anzeigen"
@@ -6795,11 +6771,8 @@ msgstr "Divehi / Dhivehi / Maledivisch"
 msgid "Djibouti"
 msgstr "Dschibuti"
 
-#, fuzzy
-msgid ""
-"Do You really want to install OPDBoot in:\n"
-" "
-msgstr "Installieren:"
+msgid "Do You really want to install OPDBoot in:\n"
+msgstr "Möchten Sie OPDBoot wirklich installieren in:\n"
 
 msgid "Do not backup the image"
 msgstr "Das Image nicht sichern"
@@ -6890,6 +6863,10 @@ msgid ""
 "A backup will be created\n"
 "Please restart this plugin again!!"
 msgstr ""
+"Möchten Sie wirklich alles entfernen?\n"
+"oscam_smartcard-Konfigurationen, Binärdateien und Camstartdateien.\n"
+"Es wird ein Backup erstellt\n"
+"Bitte starten Sie dieses Plugin erneut!!"
 
 #
 #, python-format
@@ -6916,7 +6893,6 @@ msgstr "Den Zugriffsmodus '%s' ändern?"
 msgid "Do you want the upgrade guide?"
 msgstr "Wird eine Upgrade-Hilfe benötigt?"
 
-# NetworkSetup.py
 msgid ""
 "Do you want to also install samba client ?\n"
 "This allows you to mount your windows shares on this device."
@@ -6968,18 +6944,15 @@ msgstr "Einen weiteren manuellen Suchlauf durchführen?"
 msgid "Do you want to flash the image '%s'?"
 msgstr "Das Image '%s' flashen?"
 
-#, fuzzy
 msgid "Do you want to install plugins"
-msgstr "Installieren:"
+msgstr "Möchten Sie Plugins installieren"
 
 #
 msgid "Do you want to install the package:\n"
 msgstr "Das Paket installieren:\n"
 
-#
-#, fuzzy
 msgid "Do you want to install this image now?"
-msgstr "Das Paket installieren:\n"
+msgstr "Möchten Sie dieses Image jetzt installieren?"
 
 msgid "Do you want to install:"
 msgstr "Installieren:"
@@ -7017,9 +6990,8 @@ msgstr "Entfernen:"
 msgid "Do you want to replace:"
 msgstr "Ersetzen:"
 
-#, fuzzy
 msgid "Do you want to restart now?"
-msgstr "Jetzt eine Sicherung (Backup) starten?"
+msgstr "Möchten Sie jetzt neu starten?"
 
 #
 msgid "Do you want to restore your settings?"
