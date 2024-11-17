@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-28 18:27+0100\n"
-"PO-Revision-Date: 2024-11-16 23:00+0100\n"
+"PO-Revision-Date: 2024-11-17 15:42+0100\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
 "Language: de\n"
@@ -7087,17 +7087,15 @@ msgstr "Runter"
 msgid "Download (remember to switch to a channel DVB-S2/T/T2/C)"
 msgstr ""
 
-#, fuzzy
 msgid "Download Failed !!"
-msgstr "Image herunterladen"
+msgstr "Download fehlgeschlagen!!"
 
-#, fuzzy
 msgid "Download Failed!-Server error:"
-msgstr "Fehler beim Herunterladen!"
+msgstr "Download fehlgeschlagen! - Serverfehler:"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Download Failed!Unknown Error:%s"
-msgstr "Fehler beim Herunterladen!"
+msgstr "Download fehlgeschlagen!Unbekannter Fehler:%s"
 
 msgid "Download and flash images on your %s %s."
 msgstr "Online-/Lokales flashen der %s %s."
@@ -7105,40 +7103,30 @@ msgstr "Online-/Lokales flashen der %s %s."
 msgid "Download error"
 msgstr "Fehler beim Herunterladen!"
 
-#, fuzzy
 msgid "Download latest OpenATV Image"
 msgstr "Gewähltes Image herunterladen"
 
-#, fuzzy
 msgid "Download latest OpenEight Image"
-msgstr "Lade Image herunter"
+msgstr "Laden Sie das neueste OpenEight-Image herunter"
 
-#, fuzzy
 msgid "Download latest OpenHDF Image"
-msgstr "Gewähltes Image herunterladen"
+msgstr "Laden Sie das neueste OpenHDF-Image herunter"
 
-#, fuzzy
 msgid "Download latest OpenVIX Image"
-msgstr "Gewähltes Image herunterladen"
+msgstr "Laden Sie das neueste OpenVix-Image herunter"
 
-#, fuzzy
 msgid "Download latest PurE2 Image"
-msgstr "Image herunterladen"
+msgstr "Laden Sie das neueste PurE2t-Image herunter"
 
-#, fuzzy
 msgid "Download latest opendroid Image"
-msgstr "Gewähltes Image herunterladen"
+msgstr "Laden Sie das neueste OpenDroid-Image herunter"
 
-#, fuzzy
 msgid "Download latest opennfr Image"
-msgstr "Gewähltes Image herunterladen"
+msgstr "Laden Sie das neueste Opennfr-Image herunter"
 
-#, fuzzy
 msgid "Download not avaible"
-msgstr "%s nicht verfügbar."
+msgstr "Download nicht verfügbar"
 
-#
-#, fuzzy
 msgid "Download plugins"
 msgstr "Plugins herunterladen"
 
@@ -7154,32 +7142,28 @@ msgid "Downloading"
 msgstr "Herunterladen"
 
 #
-#, fuzzy, python-format
+#, python-format
 msgid "Downloading %s"
-msgstr "Herunterladen"
+msgstr "Herunterladen %s"
 
 msgid "Downloading Image"
 msgstr "Lade Image herunter"
 
 msgid "Downloading filed, test another VOD title"
-msgstr ""
+msgstr "Datei wird heruntergeladen, teste einen anderen VOD-Titel"
 
-#, fuzzy
 msgid "Downloading latest update list.  Please wait..."
 msgstr "Herunterladen der Updates. Bitte warten..."
 
-#
-#, fuzzy
 msgid "Downloading plugin information complete."
-msgstr "Herunterladen der Plugin-Informationen. Bitte warten..."
+msgstr "Das Herunterladen der Plugin-Informationen ist abgeschlossen."
 
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "Herunterladen der Plugin-Informationen. Bitte warten..."
 
-#, fuzzy
 msgid "Downloading starded - VOD: "
-msgstr "Lade Image herunter"
+msgstr "Download gestartet - VOD:"
 
 msgid "Downmix"
 msgstr "Downmix"
@@ -7193,17 +7177,16 @@ msgstr "Daten-DVD im Dreambox-Format (HDTV-kompatibel)"
 msgid "Dreambox format data DVD (won't work in other DVD players)"
 msgstr "Daten-DVD im Dreambox-Format (funktioniert nicht in anderen DVD-Playern)"
 
-#, fuzzy
 msgid "Driver"
-msgstr "CF-Laufwerk"
+msgstr "Treiber"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Drivers:\t%s"
-msgstr "Server:"
+msgstr "Treiber:\t%s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Drivers: %s"
-msgstr "Treiberversion"
+msgstr "Treiber: %s"
 
 msgid "Duplicate the current line"
 msgstr "Aktuelle Zeile duplizieren"
@@ -7232,15 +7215,15 @@ msgstr "O"
 msgid "E "
 msgstr "E"
 
-#, fuzzy, python-format
+#, python-format
 msgid "E2 (re)starts:\t%s\n"
-msgstr "Enigma2-Neustarts"
+msgstr "E2 (neu)startet:\t%s\n"
 
 msgid "E2 Light Multiboot"
-msgstr ""
+msgstr "E2 Light Multiboot"
 
 msgid "E2 Log"
-msgstr ""
+msgstr "E2-Protokoll"
 
 msgid "ECM Info"
 msgstr "ECM-Info"
@@ -7249,7 +7232,7 @@ msgid "ECM data will be included in the stream. This enables a client receiver t
 msgstr "Bei 'Ja' werden ECM-Daten in den Stream eingefügt. Dies ermöglicht einem Client-Receiver, den Stream selbst zu entschlüsseln."
 
 msgid "EDID decode"
-msgstr ""
+msgstr "EDID-Dekodierung"
 
 msgid "EJECTCD"
 msgstr "EJECTCD"
@@ -7332,8 +7315,6 @@ msgstr "EPG-Speicherort"
 msgid "EPG only"
 msgstr "Nur EPG"
 
-#
-#, fuzzy
 msgid "EPG selection"
 msgstr "EPG-Auswahl"
 
@@ -7358,25 +7339,20 @@ msgstr "Grenzwert Ost festgelegt"
 msgid "EasyMedia"
 msgstr "EasyMedia"
 
-#, fuzzy
 msgid "Ecm Info"
-msgstr "CCcam-Info"
+msgstr "ECM-Informationen"
 
-#, fuzzy
 msgid "Ecm Statistics"
-msgstr "ECM-Statistik"
+msgstr "ECM-Statistiken"
 
-#, fuzzy
 msgid "Ecm Time"
 msgstr "ECM-Zeit"
 
-#, fuzzy
 msgid "Ecm avg"
 msgstr "ECM-Durchschnitt"
 
-#, fuzzy
 msgid "Ecm last"
-msgstr "letzte ECM"
+msgstr "Ecm zuletzt"
 
 msgid "Ecuador"
 msgstr "Ecuador"
@@ -7507,9 +7483,8 @@ msgstr "Aktivieren"
 msgid "Enable 5V for active antenna"
 msgstr "5V für aktive Antenne aktivieren"
 
-#, fuzzy
 msgid "Enable AI-Powered translation for all teletext and DVB subtitles."
-msgstr "KI-gestützte Übersetzung für Teletext und DVB Untertitel aktivieren."
+msgstr "Aktivieren Sie die KI-gestützte Übersetzung für alle Teletext- und DVB-Untertitel."
 
 msgid "Enable BT Audio"
 msgstr "Bluetooth-Audio aktivieren"
@@ -7518,10 +7493,8 @@ msgstr "Bluetooth-Audio aktivieren"
 msgid "Enable Bouquet Edit"
 msgstr "Bouquet bearbeiten aktivieren"
 
-#
-#, fuzzy
 msgid "Enable ClearMem"
-msgstr "Verschiebemodus aktivieren"
+msgstr "ClearMem aktivieren"
 
 msgid "Enable Dolby Digital / Dolby AC-3 offsets"
 msgstr "Dolby Digital / Dolby AC-3 Offset aktivieren"
@@ -7568,9 +7541,8 @@ msgstr "Netmed-EPG aktivieren"
 msgid "Enable Network IP address check"
 msgstr "Überprüfung von IP-Adressen aktivieren"
 
-#, fuzzy
 msgid "Enable OK for channel selection"
-msgstr "Sendergruppen anzeigen"
+msgstr "Aktivieren Sie OK für die Kanalauswahl"
 
 msgid "Enable OpenTV EPG"
 msgstr "OpenTV-EPG aktivieren"
@@ -7588,9 +7560,8 @@ msgstr "Aktiviere Swap beim Hochfahren"
 msgid "Enable Up/Down buttons for the 'all up/down' functions (at the beginning/end of the column)?"
 msgstr "Die Tasten Hoch/Runter für die Funktion 'Alle Hoch/Runter' aktivieren (am Anfang/Ende der Spalte)."
 
-#, fuzzy
 msgid "Enable VOD at channel list"
-msgstr "keine Senderliste"
+msgstr "VOD in der Kanalliste aktivieren"
 
 msgid "Enable ViaSat EPG"
 msgstr "ViaSat-EPG aktivieren"
@@ -7624,10 +7595,8 @@ msgstr "Bei 'Ja' blinkt das Aufnahmesymbol bei Aufnahmen im Betrieb, bei 'Nein' 
 msgid "Enable chapter support for video files"
 msgstr "Kapitelunterstützung für Videodateien aktivieren"
 
-#
-#, fuzzy
 msgid "Enable client mode"
-msgstr "Verschiebemodus aktivieren"
+msgstr "Client-Modus aktivieren"
 
 msgid "Enable command line function"
 msgstr "Befehlszeilenfunktion aktivieren"
@@ -7635,14 +7604,12 @@ msgstr "Befehlszeilenfunktion aktivieren"
 msgid "Enable cut file support for audio files"
 msgstr "Schnittdateisupport für Audiodateien aktivieren"
 
-#, fuzzy
 msgid "Enable cut file support for audio files. (e.g. mp3)"
 msgstr "Bei 'Ja' wird die Unterstützung von Schnittdateien für Audiodateien (z.B. MP3) aktiviert."
 
 msgid "Enable cut file support for non *.ts files"
 msgstr "Schnittdateisupport für nicht '.ts'-Dateien aktivieren"
 
-#, fuzzy
 msgid "Enable cut file support for non *.ts files. (e.g. mp4)"
 msgstr "Bei 'Ja' wird die Unterstützung von Schnittdateien für nicht '.ts'-Dateien (z.B. MP4) aktiviert."
 
@@ -7677,9 +7644,8 @@ msgstr "Überprüfung der Netzwerkdatenübertragung aktivieren"
 msgid "Enable new GStreamer playback"
 msgstr "Neue GStreamer-Wiedergabe aktivieren"
 
-#, fuzzy
 msgid "Enable or disable client mode."
-msgstr "Verwendung von HDMI-CEC ein-/ausschalten."
+msgstr "Aktivieren oder deaktivieren Sie den Client-Modus."
 
 msgid "Enable or disable using HDMI-CEC."
 msgstr "Verwendung von HDMI-CEC ein-/ausschalten."
@@ -7751,14 +7717,13 @@ msgid "Enable to show the 'Restart Network' entry in the Extension Menu screen."
 msgstr "Bei 'Ja' wird 'Netzwerk neu starten' im Erweiterungsmenü angezeigt."
 
 msgid "Enable usage of tuners from another Enigma2 receiver on the local network. Remote tuners will be used when tuners are not available on this receiver. (No free tuner or service type is not available.)"
-msgstr ""
+msgstr "Aktivieren Sie die Verwendung von Tunern von einem anderen Enigma2-Receiver im lokalen Netzwerk. Remote-Tuner werden verwendet, wenn auf diesem Receiver keine Tuner verfügbar sind. (Kein freier Tuner oder Servicetyp verfügbar.)"
 
 msgid "Enable volume control with LEFT/RIGHT arrow buttons"
-msgstr ""
+msgstr "Aktivieren Sie die Lautstärkeregelung mit den Pfeiltasten LINKS/RECHTS"
 
-#, fuzzy
 msgid "Enable zapping with UP/DOWN arrow buttons"
-msgstr "Den Videoausgang mit den Hoch/Runter-Tasten auswählen"
+msgstr "Aktivieren Sie das Zappen mit den Pfeiltasten AUF/AB"
 
 #
 msgid "Enabled"
@@ -7807,9 +7772,8 @@ msgid "End time"
 msgstr "Endzeit"
 
 #
-#, fuzzy
 msgid "Ene"
-msgstr "Eingeben"
+msgstr "Ene"
 
 msgid "Energy Timer"
 msgstr "Energiesparfunktion"
@@ -7856,9 +7820,8 @@ msgstr "Englischer Name (absteigend)"
 msgid "Enhanced Movie Center"
 msgstr "Enhanced Movie Center"
 
-#, fuzzy
 msgid "Enigma2 Changes"
-msgstr "Enigma2 Pakete"
+msgstr "Enigma2-Änderungen"
 
 #
 msgid ""
@@ -7876,9 +7839,9 @@ msgstr ""
 "\n"
 "© 2006 - Stephan Reichholf"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Enigma2 debug level:\t%s"
-msgstr "Enigma2-Debuglevel"
+msgstr "Enigma2-Debugebene:\t%s"
 
 msgid "Enigma2 skin selector"
 msgstr "Enigma2-Skinauswahl"
@@ -7939,27 +7902,25 @@ msgid "Enter text via an attached keyboard"
 msgstr "Texteingabe über eine angeschlossene Tastatur"
 
 msgid "Enter the FTP password of the host receiver (required for any server running openDroid 7.5 or greater)."
-msgstr ""
+msgstr "Geben Sie das FTP-Passwort des Host-Empfängers ein (erforderlich für jeden Server, auf dem openDroid 7.5 oder höher läuft)."
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
-msgstr ""
+msgstr "Geben Sie den FTP-Port des Host-Empfängers ein (normalerweise '21')."
 
 msgid "Enter the FTP username of the host receiver (normally 'root')."
-msgstr ""
+msgstr "Geben Sie den FTP-Benutzernamen des Host-Empfängers ein (normalerweise 'root')."
 
-#, fuzzy
 msgid "Enter the IP address of the host receiver."
-msgstr "Eingeben, ob sich der Receiver in der östlichen oder westlichen Hemisphäre befindet."
+msgstr "Geben Sie die IP-Adresse des Host-Empfängers ein."
 
-#, fuzzy
 msgid "Enter the IP address of the receiver to use for fallback tuners."
-msgstr "Das Passwort vom OpenWebif des Reserve-Tuners eintragen"
+msgstr "Geben Sie die IP-Adresse des Receivers ein, der für Fallback-Tuner verwendet werden soll."
 
 msgid "Enter the URL/IP of the fallback remote receiver, e.g. '192.168.0.1'. The other details such as 'http://' and port number will be filled in automatically when you select save."
-msgstr ""
+msgstr "Geben Sie die URL/IP des Fallback-Remote-Empfängers ein, z. B. „192.168.0.1“. Die anderen Angaben wie 'http://' und die Portnummer werden automatisch eingetragen, wenn Sie auf 'Speichern' klicken."
 
 msgid "Enter the domain of the host receiver. Do not include 'http://' or port number."
-msgstr ""
+msgstr "Geben Sie die Domäne des Host-Empfängers ein. Schließen Sie weder 'http://' noch die Portnummer ein."
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the specifications of your LNB."
 msgstr "Die Frequenz eingeben, mit welcher der LNB zwischen Low- und High-Band wechselt. Weitere Informationen befinden sich im Datenblatt des LNBs."
@@ -7975,16 +7936,16 @@ msgid "Enter the service pin"
 msgstr "Den PIN-Code des Kanals eingeben"
 
 msgid "Enter the size in Megabyte of the first partition:"
-msgstr ""
+msgstr "Geben Sie die Größe der ersten Partition in Megabyte ein"
 
 msgid "Enter the size in Megabyte of the second partition:"
-msgstr ""
+msgstr "Geben Sie die Größe der zweiten Partition in Megabyte ein:"
 
 msgid "Enter the size in Megabyte of the third partition:"
-msgstr ""
+msgstr "Geben Sie die Größe der dritten Partition in Megabyte ein:"
 
 msgid "Enter the streaming port of the host receiver (normally '8001')."
-msgstr ""
+msgstr "Geben Sie den Streaming-Port des Host-Receivers ein (normalerweise '8001')."
 
 msgid "Enter your current latitude. This is the number of degrees you are from the equator as a decimal."
 msgstr "Den aktuellen Breitengrad eingeben. Dies ist die Anzahl der Grade (als Dezimalzahl) der Entfernung zum Äquator."
@@ -8001,9 +7962,8 @@ msgstr "Die Frequenz des lokalen Low-Band-Oszillators eingeben. Weitere Informat
 msgid "Enter your personal feed URL to allow you to select packages from your personal feed."
 msgstr "Die persönliche Feed-URL eingeben, um Pakete auswählen zu können."
 
-#, fuzzy
 msgid "Enter your subscription code, the unified code for trial is 15."
-msgstr "Abo Code der KI-gestützten Übersetzung eingeben. Code '15' ist für den Testmodus."
+msgstr "Geben Sie Ihren Abonnementcode ein. Der einheitliche Code für die Testversion lautet 15."
 
 #
 msgid "Entertainment"
@@ -8098,39 +8058,33 @@ msgid "Error %s: Unable to get information for '%s'!  (%s)"
 msgstr "Fehler %s: Informationen für '%s' konnten nicht abgerufen werden! (%s)"
 
 msgid "Error checking disk. The disk may be damaged"
-msgstr ""
+msgstr "Fehler beim Überprüfen der Festplatte. Die Festplatte ist möglicherweise beschädigt"
 
 msgid "Error code"
 msgstr "Fehlercode"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Error command '%s'"
-msgstr "Fehler %d: %s!"
+msgstr "Fehlerbefehl %s"
 
 #
-#, fuzzy
 msgid "Error creating oscam camstart files!"
-msgstr "Fehler: Das Erstellen des Verzeichnisses '%s' ist fehlgeschlagen!"
+msgstr "Fehler beim Erstellen der Oscam Camstart-Dateien"
 
-#, fuzzy
 msgid "Error creating oscam.conf!"
-msgstr "Fehler beim Lesen von 'bouquets.radio'!"
+msgstr "Fehler beim Erstellen von oscam.conf!"
 
-#, fuzzy
 msgid "Error creating oscam.dvbapi!"
-msgstr "Fehler beim Lesen von 'bouquets.radio'!"
+msgstr "Fehler beim Erstellen von oscam.dvbapi!"
 
-#, fuzzy
 msgid "Error creating oscam.server!"
-msgstr "Fehler beim Lesen von 'bouquets.tv'!"
+msgstr "Fehler beim Erstellen von oscam.server!"
 
-#, fuzzy
 msgid "Error creating oscam.services!"
-msgstr "Fehler beim Lesen von 'bouquets.radio'!"
+msgstr "Fehler beim Erstellen von oscam.services!"
 
-#, fuzzy
 msgid "Error creating oscam.user!"
-msgstr "Fehler beim Lesen der Webseite!"
+msgstr "Fehler beim Erstellen von oscam.user!"
 
 #, python-format
 msgid "Error downloading image '%s'!"
@@ -8141,7 +8095,7 @@ msgid "Error executing plugin"
 msgstr "Ausführen des Plugins fehlgeschlagen!"
 
 msgid "Error formatting disk. The disk may be damaged"
-msgstr ""
+msgstr "Fehler beim Formatieren der Festplatte. Die Festplatte ist möglicherweise beschädigt"
 
 #, python-format
 msgid ""
@@ -8169,11 +8123,13 @@ msgstr ""
 "Fehler beim Abrufen der Informationen des Reserve-Timers\n"
 "%s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Error:\n"
 "%s"
-msgstr "Fehler %d: %s!"
+msgstr ""
+"Fehler:\n"
+"%s"
 
 #
 #, python-format
@@ -8340,9 +8296,8 @@ msgstr "Schriftgröße für Sendungsnamen"
 msgid "Event name only"
 msgstr "Nur Sendungsname"
 
-#, fuzzy
 msgid "Event view"
-msgstr "Sendungsinformation:"
+msgstr "Ereignisansicht"
 
 msgid "Event view menu"
 msgstr "Sendungsanzeigenmenü"
@@ -8350,25 +8305,20 @@ msgstr "Sendungsanzeigenmenü"
 msgid "EventViewEPG Actions"
 msgstr "Sendungsinfo EPG Aktionen"
 
-#, fuzzy
 msgid "Every 12 hours"
-msgstr "12 Stunden"
+msgstr "Alle 12 Stunden"
 
-#, fuzzy
 msgid "Every 2 hours"
-msgstr "2 Stunden"
+msgstr "Alle 2 Stunden"
 
-#, fuzzy
 msgid "Every 3 hours"
-msgstr "3 Stunden"
+msgstr "Alle 3 Stunden"
 
-#, fuzzy
 msgid "Every 6 hours"
-msgstr "6 Stunden"
+msgstr "Alle 6 Stunden"
 
-#, fuzzy
 msgid "Every hour"
-msgstr "Überall"
+msgstr "Stündlich"
 
 #
 msgid "Everyday"
@@ -8518,9 +8468,8 @@ msgstr "Verlängern"
 msgid "Extended"
 msgstr "Erweitert"
 
-#, fuzzy
 msgid "Extended GUI"
-msgstr "Erweitert"
+msgstr "Erweiterte GUI"
 
 #
 msgid "Extended Networksetup Plugin..."
@@ -8537,7 +8486,6 @@ msgid "Extended Shares"
 msgstr "Erweiterte Netzwerkfreigaben"
 
 #
-#, fuzzy
 msgid "Extension"
 msgstr "Erweiterungen"
 
@@ -8546,17 +8494,15 @@ msgid "Extension Actions"
 msgstr "Erweiterungsaktionen"
 
 #
-#, fuzzy
 msgid "Extension Install"
-msgstr "Erweiterungen"
+msgstr "Erweiterung installieren"
 
 #
 msgid "Extensions"
 msgstr "Erweiterungen"
 
-#, fuzzy
 msgid "Extensions/BluePanel"
-msgstr "Erweiterungen/Schnellstartmenü"
+msgstr "Erweiterungen/BluePanel"
 
 msgid "External"
 msgstr "Extern"
@@ -8565,10 +8511,10 @@ msgid "External PiP"
 msgstr "Externes Bild-im-Bild"
 
 msgid "External Reader /dev/ttyUSB0:"
-msgstr ""
+msgstr "Externer Leser /dev/ttyUSB0:"
 
 msgid "External Reader /dev/ttyUSB1:"
-msgstr ""
+msgstr "Externer Leser /dev/ttyUSB1:"
 
 #, python-format
 msgid "External Storage %s"
@@ -8656,21 +8602,18 @@ msgstr "FTP-Aktionen"
 msgid "FTP Settings"
 msgstr "FTP-Dateiserver"
 
-#, fuzzy
 msgid "FTP connection failure"
-msgstr "Anmeldungsfehler"
+msgstr "FTP-Verbindungsfehler"
 
 #
-#, fuzzy
 msgid "FTP passive mode"
-msgstr "Übertragungsmodus"
+msgstr "FTP-Passivmodus"
 
 msgid "Factory Reset"
 msgstr "Werkseinstellungen"
 
-#, fuzzy
 msgid "Fade the InfoBar on hide"
-msgstr "Bei 'Ja' wird die Infoleiste langsam ausgeblendet."
+msgstr "InfoBar beim Ausblenden ein-/ausblendenausgeblendet"
 
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
@@ -8691,9 +8634,8 @@ msgstr "Falklandinseln (Malvinen)"
 msgid "Fallback API did not return a valid result."
 msgstr "Reserve-API lieferte fehlerhafte Ergebnisse!"
 
-#, fuzzy
 msgid "Fallback Configuration"
-msgstr "Manuelle Konfiguration"
+msgstr "Fallback-Konfiguration"
 
 msgid "Fallback Font *"
 msgstr "Ersatz-Schriftart *"
@@ -8701,21 +8643,17 @@ msgstr "Ersatz-Schriftart *"
 msgid "Fallback Timer"
 msgstr "Reserve-Timer"
 
-#, fuzzy
 msgid "Fallback Tuner Setup"
-msgstr "Reserve-Tuner-Einstellung"
+msgstr "Fallback-Tuner-Setup"
 
-#, fuzzy
 msgid "Fallback address type"
-msgstr "Reserve-Tuner-Einstellung"
+msgstr "Fallback-Adresstyp"
 
-#, fuzzy
 msgid "Fallback receiver IP address"
-msgstr "Reserve-Receiver IP"
+msgstr "Fallback-Empfänger-IP-Adresse"
 
-#, fuzzy
 msgid "Fallback receiver streaming port"
-msgstr "Reserve-Receiver Port"
+msgstr "Fallback-Empfänger-Streaming-Port"
 
 msgid "Fallback remote receiver"
 msgstr "Reserve-Receiver"
@@ -8772,7 +8710,7 @@ msgid "Fast DiSEqC"
 msgstr "Schnelles DiSEqC"
 
 msgid "Fast Mounted Remove"
-msgstr ""
+msgstr "Schnell montiert entfernen"
 
 msgid "Fast Scan"
 msgstr "Schneller Suchlauf"
@@ -8787,15 +8725,17 @@ msgstr "Vorlauf"
 msgid "Fast forward speeds"
 msgstr "Vorlaufgeschwindigkeiten"
 
-#, fuzzy
 msgid "Fast mount"
-msgstr "Schneller Suchlauf"
+msgstr "Schnelle Montage"
 
 msgid ""
 "Fast mounted Media unmounted.\n"
 "You can safely remove the Device now, if no further Partitions (displayed as P.x on Devicelist - where x >=2) are mounted on the same Device.\n"
 "Please unmount Fixed Mounted Devices with Device Manager Panel!"
 msgstr ""
+"Schnell gemountete Medien werden ausgehängt.\n"
+"Sie können das Gerät jetzt sicher entfernen, wenn keine weiteren Partitionen (angezeigt als P.x in der Geräteliste - wobei x >=2) auf demselben Gerät gemountet sind.\n"
+"Bitte heben Sie die Bereitstellung fest montierter Geräte über das Geräte-Manager-Panel auf!"
 
 #
 msgid "Favorite Edit"
@@ -8832,13 +8772,13 @@ msgstr "Datei"
 msgid "File %d of %d"
 msgstr "Datei %d von %d"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "File %s.conf not found.\n"
 "Enter username/password manually."
 msgstr ""
-"Datei 'oscam.conf' nicht gefunden!\n"
-"Bitte Benutzernamen und Passwort manuell eingeben."
+"Datei %s.conf nicht gefunden.\n"
+"Geben Sie Benutzernamen und Passwort manuell ein."
 
 msgid "File Commander"
 msgstr "File Commander"
@@ -8922,9 +8862,8 @@ msgid "File Commander settings"
 msgstr "File Commander Einstellungen"
 
 #
-#, fuzzy
 msgid "File System"
-msgstr "Dateisystemüberprüfung"
+msgstr "Dateisystem"
 
 #
 msgid "File System Check"
@@ -8939,9 +8878,9 @@ msgstr "Dateiübertragung durch den Benutzer abgebrochen!"
 msgid "File transfer was cancelled by user"
 msgstr "Dateiübertragung durch den Benutzer abgebrochen"
 
-#, fuzzy, python-format
+#, python-format
 msgid "File write error: '%s'"
-msgstr "Mit Fehlern"
+msgstr "Dateischreibfehler: %s"
 
 #
 msgid "Filename"
@@ -8951,7 +8890,6 @@ msgid "Files/folders to exclude from backup"
 msgstr "Nicht zu sichernde Dateien"
 
 #
-#, fuzzy
 msgid "Filesystem Check"
 msgstr "Dateisystemüberprüfung"
 
@@ -9016,10 +8954,10 @@ msgstr "Finnisch"
 
 #, python-format
 msgid "Firmware: %s"
-msgstr ""
+msgstr "Firmware: %s"
 
 msgid "Firmware: unknown"
-msgstr ""
+msgstr "Firmware: unbekannt"
 
 msgid "First playable time shift file!"
 msgstr "Dies ist der Anfang der ersten abspielbaren Timeshift-Datei!"
@@ -9034,15 +8972,15 @@ msgstr "Fest"
 msgid "Fixed X11 font (SD)"
 msgstr "Feste X11 Schriftart (SD)"
 
-# MovieSelection.py
-#, fuzzy
 msgid "Fixed mount"
-msgstr "Gerätemounts"
+msgstr "Fest montiert"
 
 msgid ""
 "Fixed mounted first initialized Storage Device to /media/hdd. It needs a system restart in order to take effect.\n"
 "Restart your STB now?"
 msgstr ""
+"Das erste initialisierte Speichergerät wurde auf /media/hdd gemountet. Damit dies wirksam wird, ist ein Systemneustart erforderlich.\n"
+"Jetzt Ihre STB neu starten?"
 
 msgid "Flash Image"
 msgstr "Image flashen"
@@ -9055,7 +8993,7 @@ msgstr "Flash-Manager - Aktionen"
 
 #, fuzzy, python-format
 msgid "Flash OnLine - %s Images"
-msgstr "Flash-Manager - %s Images"
+msgstr "Flash OnLine - %s Bilder"
 
 msgid "Flash Online"
 msgstr "Flashen online/lokal"
