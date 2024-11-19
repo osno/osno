@@ -162,7 +162,7 @@ void bsodFatal(const char *component)
 
 	char dated[22];
 	time_t now_time = time(0);
-	struct tm loctime;
+	struct tm loctime = {};
 	localtime_r(&now_time, &loctime);
 	strftime (dated, 21, "%Y%m%d-%H%M%S", &loctime);
 
@@ -193,7 +193,7 @@ void bsodFatal(const char *component)
 	if (f)
 	{
 		time_t t = time(0);
-		struct tm tm;
+		struct tm tm = {};
 		char tm_str[32];
 
 		localtime_r(&t, &tm);

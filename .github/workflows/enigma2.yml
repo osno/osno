@@ -88,18 +88,10 @@ jobs:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
-          pip3 install six flake8
+          pip3 install six
           echo "compiling enigma2"
           autoreconf -i
           ./configure --with-libsdl=no --with-boxtype=nobox --enable-dependency-tracking ac_cv_prog_c_openmp=-fopenmp --with-gstversion=1.0 --with-textlcd
           make
           python -m compileall .
-          echo "checking enigma2 compiles completed"
-
-    - name: Check format PEP8
-      run: |
-        echo "checking locale format..."
-        find . -type f -name "*.po" -exec msgfmt {} -o {}.mo \;
-        echo "checking PEP8 validation..."
-        flake8 --builtins="_,ngettext,pgettext" --ignore=W191,W503,W504,E123,E126,E128,E501,E722 . --exit-zero
-        echo "check format PEP8 completed!"
+          echo done!

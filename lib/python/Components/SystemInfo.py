@@ -188,7 +188,7 @@ def getChipsetString():
 		chipset = "73625"
 	elif MODEL in ("dm900", "dm920", "et13000"):
 		chipset = "7252S"
-	elif MODEL in ("hd51", "vs1500", "h7", "h17"):
+	elif MODEL in ("hd51", "vs1500"):
 		chipset = "7251S"
 	elif MODEL in ("dreamone", "dreamtwo"):
 		chipset = "S922X"
