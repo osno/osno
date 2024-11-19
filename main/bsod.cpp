@@ -200,7 +200,7 @@ void bsodFatal(const char *component)
 		strftime(tm_str, sizeof(tm_str), "%a %b %_d %T %Y", &tm);
 
 		fprintf(f,
-			"OpenDroid Enigma2 crash log\n\n"
+			"openDroid Enigma2 crash log\n\n"
 			"crashdate=%s\n"
 			"compiledate=%s\n"
 			"skin=%s\n"
@@ -439,7 +439,7 @@ void handleFatalSignal(int signum, siginfo_t *si, void *ctx)
 
 void bsodCatchSignals()
 {
-	struct sigaction act;
+	struct sigaction act = {};
 	act.sa_sigaction = handleFatalSignal;
 	act.sa_flags = SA_RESTART | SA_SIGINFO;
 	if (sigemptyset(&act.sa_mask) == -1)
