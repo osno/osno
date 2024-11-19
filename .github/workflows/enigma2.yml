@@ -2,9 +2,9 @@ name: Enigma2 Build
 
 on:
   push:
-    branches: [ master, python-3.12 ]
+    branches: [ pyton-3.12 ]
   pull_request:
-    branches: [ master, python-3.12 ]
+    branches: [ pyton-3.12 ]
 
 jobs:
   build:
