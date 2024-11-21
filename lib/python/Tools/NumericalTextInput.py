@@ -1,6 +1,10 @@
 from enigma import eTimer
+
 from Components.International import international
 
+
+# For more information about using NumericalTextInput see /doc/NUMERICALTEXTINPUT
+#
 class NumericalTextInput:
 	MAP_SEARCH_UPCASE = "SearchUpper"  # NOTE: Legacy interface for previous and deprecated versions of NumericalTextInput.
 	MAP_SEARCH = "SearchLower"
