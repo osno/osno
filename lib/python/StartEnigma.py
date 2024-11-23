@@ -3,18 +3,16 @@ from os import remove
 from os.path import exists
 import sys  # This is needed for the twisted redirection access to stderr and stdout.
 from time import time
-
 import Tools.RedirectOutput  # Don't remove this line. This import facilitates connecting stdout and stderr redirections to the log files.
-
 import enigma  # Establish enigma2 connections to processing methods.
 import eBaseImpl
 import eConsoleImpl
+
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 MODULE_NAME = "StartEnigma"
-
 
 # Session.open:
 # * Push current active dialog ("current_dialog") onto stack.

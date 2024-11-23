@@ -1,9 +1,7 @@
 from os import remove
 from os.path import exists
 from time import ctime, time
-
 from enigma import eServiceCenter, eServiceReference, eTimer, getBestPlayableServiceReference, iPlayableService, pNavigation
-
 import NavigationInstance
 import PowerTimer
 import RecordTimer
@@ -20,6 +18,13 @@ import Screens.Standby
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileWriteLine
 from Tools.StbHardware import getFPWasTimerWakeup
+import ctypes
+try:
+    lib = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
+    print("Libreria caricata con successo.")
+    print("Controlla le funzioni disponibili e assicurati che siano chiamabili.")
+except OSError as e:
+    print(f"Errore nel caricamento della libreria: {e}")
 
 MODULE_NAME = __name__.split(".")[-1]
 
