@@ -67,11 +67,11 @@ AC_ARG_WITH(oarev,
 AC_SUBST(OAREV)
 AC_DEFINE_UNQUOTED(OAREV,"$OAREV",[oa-core revision])
 
-AC_ARG_WITH(exclude_machine,
-  AS_HELP_STRING([--with-exclude-machine],[Path to exclude_machine library, default is system path]),
-  [EXCLUDE_MACHINE_LIB="$withval"], [EXCLUDE_MACHINE_LIB="/usr/lib/libexclude_machine.so"])
-AC_SUBST(EXCLUDE_MACHINE_LIB)
-AC_DEFINE_UNQUOTED(EXCLUDE_MACHINE_LIB, "$EXCLUDE_MACHINE_LIB", [Path to the exclude_machine library])
+AC_ARG_WITH(OPD,
+  AS_HELP_STRING([--with-exclude-machine],[Path to OPD library, default is system path]),
+  [OPD_LIB="$withval"], [OPD_LIB="/usr/lib/libOPD.so"])
+AC_SUBST(OPD_LIB)
+AC_DEFINE_UNQUOTED(OPD_LIB, "$OPD_LIB", [Path to the OPD library])
 
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm800...]]],
