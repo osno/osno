@@ -1,5 +1,5 @@
 bin_SCRIPTS = enigma2.sh
-lib_LTLIBRARIES = libopen.la libexclude_machine.la
+lib_LTLIBRARIES = libopen.la OPD.la
 
 AM_CFLAGS = -DLIBC_SO=\"$(base_libdir)/libc.so.6\"
 
