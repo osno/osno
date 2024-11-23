@@ -70,8 +70,6 @@ AC_DEFINE_UNQUOTED(OAREV,"$OAREV",[oa-core revision])
 AC_ARG_WITH(OPD,
   AS_HELP_STRING([--with-exclude-machine],[Path to OPD library, default is system path]),
   [OPD_LIB="$withval"], [OPD_LIB="/usr/lib/libOPD.so"])
-AC_SUBST(OPD_LIB)
-AC_DEFINE_UNQUOTED(OPD_LIB, "$OPD_LIB", [Path to the OPD library])
 
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm800...]]],
