@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>  // Per la funzione access()
 
-#define NUM_EXCLUDED_MACHINES 3
+#define NUM_EXCLUDED_MACHINES 20
 
 // Definizione delle macchine escluse
 const char* EXCLUDED_MACHINES[NUM_EXCLUDED_MACHINES] = {
