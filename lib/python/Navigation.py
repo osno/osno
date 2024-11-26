@@ -23,12 +23,7 @@ from boxbranding import getMachineBuild
 import os
 
 machine = getMachineBuild()
-print(f"Macchina corrente: {machine}")
-libopd = ctypes.CDLL("/usr/lib/libOPD.so.0.0.0")
-libopd.my_function.argtypes = [ctypes.c_int]
-libopd.my_function.restype = ctypes.c_int
-result = libopd.my_function(10)
-print(f"Risultato della funzione: {result}")
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 
 MODULE_NAME = __name__.split(".")[-1]
