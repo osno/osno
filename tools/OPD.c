@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #if ENABLE_MACHINE_CHECK
+#endif
 // Elenco delle macchine compatibili
 const char *COMPATIBLE_MACHINES[] = {
     "gbquad4k", "gbx34k", "gbtrio4k", "gbtrio4kpro", "gbue4k", "sf8008",
