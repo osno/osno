@@ -19,12 +19,17 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileWriteLine
 from Tools.StbHardware import getFPWasTimerWakeup
 import ctypes
-try:
-    lib = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
-    print("Libreria caricata con successo.")
-    print("Controlla le funzioni disponibili e assicurati che siano chiamabili.")
-except OSError as e:
-    print(f"Errore nel caricamento della libreria: {e}")
+from boxbranding import getMachineBuild
+import os
+
+machine = getMachineBuild()
+print(f"Macchina corrente: {machine}")
+libopd = ctypes.CDLL("/usr/lib/libOPD.so.0.0.0")
+libopd.my_function.argtypes = [ctypes.c_int]
+libopd.my_function.restype = ctypes.c_int
+result = libopd.my_function(10)
+print(f"Risultato della funzione: {result}")
+
 
 MODULE_NAME = __name__.split(".")[-1]
 

