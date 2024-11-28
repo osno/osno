@@ -4,11 +4,11 @@
 
 // Elenco delle macchine compatibili
 const char *COMPATIBLE_MACHINES[] = {
-    "gbquad4k", "gbquad4kpro", "gbx34k", "gbtrio4k", "gbtrio4kpro", "gbue4k", "gbip4k", 
-    "sf8008", "sf8008m", "sf4008",
-    "ustym4kpro", "ustym4kottpremium",
-    "vuduo4kse", "vuuno4kse", "vusolo4k", "vuuno4k", "vuduo4k", "vuultimo4k", "vuzero4k",
-    "dm920", "dm900"
+    "gbquad4k", "gbx34k", "gbtrio4k", "gbtrio4kpro", "gbue4k", "sf8008",
+    "sf4008", "sf8008m", "ustym4kpro", "ustym4kottpremium", "vuduo4kse",
+    "vuuno4kse", "vusolo4k", "vuuno4k", "vuduo4k", "vuultimo4k", "vuzero4k",
+    "iziboxelite4k", "iziboxone4k", "iziboxone4kplus", "hitube4k", "hitube4kplus",
+    "hitube4kpro", "dm920", "dm900", "gb7252", "gb72604", "gbmv200"
 };
 
 // Funzione per verificare se la macchina è compatibile
