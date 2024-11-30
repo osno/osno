@@ -14,10 +14,10 @@ enigma2-py.pot: $(top_srcdir)/lib/python/*.py $(top_srcdir)/lib/python/*/*.py $(
 
 enigma2-xml.pot: $(srcdir)/xml2po.py $(top_srcdir)/data/*.xml $(top_srcdir)/lib/python/Plugins/SystemPlugins/*/*.xml $(top_srcdir)/lib/python/Plugins/Extensions/*/*.xml
 	$(PYTHON) $^ > $@
-
+																				  
 
 enigma2.pot: enigma2-py.pot enigma2-xml.pot
-
+													 
 	cat $^ | $(MSGUNIQ) --no-wrap --no-location -o $@ -
 
 %.po: enigma2.pot

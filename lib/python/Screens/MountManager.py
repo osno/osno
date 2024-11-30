@@ -1,38 +1,42 @@
-from os import system, rename, path, mkdir, remove
-from time import sleep
+from os import mkdir
+from os.path import exists, isfile, join, realpath
 from re import search, sub
-from six import ensure_str
-from enigma import eTimer
 
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Screens.Standby import TryQuitMainloop
-from Components.ActionMap import ActionMap
-from Components.Label import Label
-from Components.Pixmap import Pixmap
-from Components.ConfigList import ConfigListScreen
-from Components.config import getConfigListEntry, ConfigSelection, NoSave
+from Components.ActionMap import HelpableActionMap
+#from Components.ConfigList import ConfigListScreen
+from Components.config import ConfigSelection, ConfigText, NoSave
 from Components.Console import Console
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from Components.SystemInfo import BoxInfo, getBoxDisplayName
+from Components.SystemInfo import BoxInfo  # , getBoxDisplayName
+from Screens.ChoiceBox import ChoiceBox
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Setup import Setup
+from Screens.Standby import QUIT_REBOOT, TryQuitMainloop
+from Tools.Conversions import scaleNumber
 from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import SCOPE_GUISKIN, fileReadLine, fileReadLines, fileWriteLines, resolveFilename
 
-MODEL = BoxInfo.getItem("model")
+MODULE_NAME = __name__.split(".")[-1]
 
 
-class HddMount(Screen):
+class MountManager(Screen):
+	BLKID = "/sbin/blkid"
+	MOUNT = "/bin/mount"
+	UMOUNT = "/bin/umount"
+
+	DEVICE_TYPES = {
+		0: ("USB: ", "icons/dev_usbstick.png"),
+		1: ("MMC: ", "icons/dev_mmc.png"),
+		2: (_("HARD DISK: "), "icons/dev_hdd.png")
+	}
+	DEVICE_TYPES_NAME = 0
+	DEVICE_TYPES_ICON = 1
+
 	skin = """
-	<screen position="center,center" size="640,460" title="Mount Manager">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="25,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="175,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="325,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="475,0" size="140,40" alphatest="on" />
-		<widget name="key_red" position="25,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget name="key_green" position="175,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="key_yellow" position="325,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-		<widget name="key_blue" position="475,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-		<widget source="list" render="Listbox" position="10,50" size="620,450" scrollbarMode="showOnDemand" >
+	<screen name="MountManager" title="Mount Manager" position="center,center" size="980,465" resolution="1280,720">
+		<widget source="devicelist" render="Listbox" position="0,0" size="980,425">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 					MultiContentEntryText(pos = (90, 0), size = (600, 30), font=0, text = 0),
@@ -44,482 +48,355 @@ class HddMount(Screen):
 				}
 			</convert>
 		</widget>
-		<widget name="lab1" zPosition="2" position="50,90" size="600,40" font="Regular;22" halign="center" transparent="1"/>
+		<widget source="key_red" render="Label" position="0,e-40" size="180,40" backgroundColor="key_red" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" noWrap="1" verticalAlignment="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_green" render="Label" position="190,e-40" size="180,40" backgroundColor="key_green" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" noWrap="1" verticalAlignment="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_yellow" render="Label" position="380,e-40" size="180,40" backgroundColor="key_yellow" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" noWrap="1" verticalAlignment="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_blue" render="Label" position="570,e-40" size="180,40" backgroundColor="key_blue" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" noWrap="1" verticalAlignment="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_help" render="Label" position="e-80,e-40" size="80,40" backgroundColor="key_back" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" noWrap="1" verticalAlignment="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
 	</screen>"""
 
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Mount Manager"))
-		self['key_red'] = StaticText(" ")
-		self['key_green'] = Label(_("Setup Mounts"))
-		self['key_yellow'] = Label(_("Unmount"))
-		self['key_blue'] = Label(_("Mount"))
-		self['lab1'] = Label()
+		Screen.__init__(self, session, mandatoryWidgets=["mounts"], enableHelp=True)
+		self.setTitle(_("Mount Manager"))
 		self.onChangedEntry = []
-		self.list = []
-		self['list'] = List(self.list)
-		self["list"].onSelectionChanged.append(self.selectionChanged)
-		self['actions'] = ActionMap(['WizardActions', 'ColorActions', "MenuActions"], {'back': self.close, 'green': self.SetupMounts, 'red': self.saveMypoints, 'yellow': self.Unmount, 'blue': self.Mount, "menu": self.close})
-		self.activityTimer = eTimer()
-		self.activityTimer.timeout.get().append(self.updateList2)
-		self.updateList()
-
-	def createSummary(self):
-		return DevicesPanelSummary
+		self.deviceList = []
+		indexNames = {
+			"A": 0,
+			"B": 1
+		}
+		self["devicelist"] = List(self.deviceList, indexNames=indexNames)
+		self["devicelist"].onSelectionChanged.append(self.selectionChanged)
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Mount Point"))
+		self["key_yellow"] = StaticText(_("Unmount"))
+		self["key_blue"] = StaticText()
+		self["actions"] = HelpableActionMap(self, ["CancelActions", "ColorActions"], {
+			"cancel": (self.close, _("Close the Mount Manager screen")),
+			"close": (self.keyClose, _("Close the Mount Manager screen and exit all menus")),
+			"red": (self.close, _("Close the Mount Manager screen")),
+			"green": (self.keyMountPoint, _("Select a permanent mount point for the current device")),
+			"yellow": (self.keyToggleMount, _("Toggle a temporary mount for the current device"))
+			# "blue": (self.keyBlue _("Reserved for future use"))
+		}, prio=0, description=_("Mount Manager Actions"))
+		self.console = Console()
+		self.mounts = []
+		self.partitions = []
+		self.fstab = []
+		self.knownDevices = []
+		self.swapDevices = []
+		self.deviceUUID = {}
+		self.needReboot = False
+		self.readDevices()
 
 	def selectionChanged(self):
-		if len(self.list) == 0:
-			return
-		self.sel = self['list'].getCurrent()
-		mountp = self.sel[3]
-		if mountp.find('/media/hdd') < 0:
-			self["key_red"].setText(_("Use as HDD"))
-		else:
-			self["key_red"].setText(" ")
-
-		if self.sel:
-			try:
-				name = str(self.sel[0])
-				desc = str(self.sel[1].replace('\t', '  '))
-			except:
-				name = ""
-				desc = ""
-		else:
-			name = ""
-			desc = ""
-		for cb in self.onChangedEntry:
-			cb(name, desc)
-
-	def updateList(self, result=None, retval=None, extra_args=None):
-		scanning = _("Wait please while scanning for devices...")
-		self['lab1'].setText(scanning)
-		self.activityTimer.start(10)
-
-	def updateList2(self):
-		self.activityTimer.stop()
-		self.list = []
-
-		def swapCallback(data, retVal, extraArgs):
-			list2 = []
-			swapdevices = data.replace('\n', '').split('/')
-			f = open('/proc/partitions', 'r')
-			for line in f.readlines():
-				parts = line.strip().split()
-				if not parts:
-					continue
-				device = parts[3]
-				if not search(r'^sd[a-z][1-9][\d]*$', device) and not search(r'^mmcblk[\d]p[\d]*$', device):
-					continue
-				if BoxInfo.getItem("mtdrootfs").startswith("mmcblk0p") and device.startswith("mmcblk0p"):
-					continue
-				if BoxInfo.getItem("mtdrootfs").startswith("mmcblk1p") and device.startswith("mmcblk1p"):
-					continue
-				if device in list2:
-					continue
-				self.buildMy_rec(device, swapdevices)
-				list2.append(device)
-			f.close()
-			self['list'].list = self.list
-			self['lab1'].hide()
-
-		self.Console = Console()
-		self.Console.ePopen("sfdisk -l | grep swap | awk '{print $(NF-9)}'", swapCallback)
-
-	def buildMy_rec(self, device, swapdevices):
-		if device.startswith('mmcblk'):
-			device2 = device[:7]
-		else:
-			device2 = sub(r'[\d]', '', device)
-		devicetype = path.realpath('/sys/block/' + device2 + '/device')
-		name = 'USB: '
-		mypixmap = '/usr/share/enigma2/icons/dev_usbstick.png'
-		if device2.startswith('mmcblk'):
-			try:
-				model = open('/sys/block/' + device2 + '/device/name').read()
-			except:
-				model = ''
-			mypixmap = '/usr/share/enigma2/icons/dev_mmc.png'
-			name = 'MMC: '
-		else:
-			try:
-				model = open('/sys/block/' + device2 + '/device/model').read()
-			except:
-				model = ''
-		model = str(model).replace('\n', '')
-		des = ''
-		if devicetype.find('/devices/pci') != -1 or devicetype.find('ahci') != -1:
-			name = _("HARD DISK: ")
-			mypixmap = '/usr/share/enigma2/icons/dev_hdd.png'
-		name = name + model
-		f = open('/proc/mounts', 'r')
-		for line in f.readlines():
-			if line.find(device) != -1:
-				parts = line.strip().split()
-				d1 = parts[1]
-				dtype = parts[2]
-				rw = parts[3]
-				break
-				continue
-			else:
-				if device in swapdevices:
-					parts = line.strip().split()
-					d1 = _("None")
-					dtype = 'swap'
-					rw = _("None")
-					break
-					continue
-				else:
-					d1 = _("None")
-					dtype = _("unavailable")
-					rw = _("None")
-		f.close()
-		f = open('/proc/partitions', 'r')
-		for line in f.readlines():
-			if line.find(device) != -1:
-				parts = line.strip().split()
-				size = int(parts[2])
-				if (((float(size) / 1024) / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(round((((float(size) / 1024) / 1024) / 1024), 2)), _("TB"))
-				elif ((size / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(round(((float(size) / 1024) / 1024), 2)), _("GB"))
-				else:
-					des = "%s: %s%s" % (_("Size"), str(round((float(size) / 1024), 2)), _("MB"))
-			else:
+		if self.deviceList:
+			current = self["devicelist"].getCurrent()
+			# mountPoint = current[3]
+			isMounted = current[5]
+			if current:
 				try:
-					size = open('/sys/block/' + device2 + '/' + device + '/size').read()
-					size = str(size).replace('\n', '')
-					size = int(size)
-				except:
-					size = 0
-				if ((((float(size) / 2) / 1024) / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(round(((((float(size) / 2) / 1024) / 1024) / 1024), 2)), _("TB"))
-				elif (((size / 2) / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(round((((float(size) / 2) / 1024) / 1024), 2)), _("GB"))
-				else:
-					des = "%s: %s%s" % (_("Size"), str(round(((float(size) / 2) / 1024), 2)), _("MB"))
-		f.close()
-		if des != '':
-			if rw.startswith('rw'):
-				rw = ' R/W'
-			elif rw.startswith('ro'):
-				rw = ' R/O'
+					name = str(current[0])
+					description = str(current[1].replace("\t", "  "))
+				except Exception:
+					name = ""
+					description = ""
 			else:
-				rw = ""
-			des += '\t' + _("Mount: ") + d1 + '\n' + _("Device: ") + '/dev/' + device + '\t' + _("Type: ") + dtype + rw
-			png = LoadPixmap(mypixmap)
-			mountP = d1
-			deviceP = '/dev/' + device
-			res = (name, des, png, mountP, deviceP)
-			self.list.append(res)
+				name = ""
+				description = ""
+			self["key_yellow"].setText(_("Unmount") if isMounted else _("Mount"))
+			for callback in self.onChangedEntry:
+				if callback and callable(callback):
+					callback(name, description)
 
-	def SetupMounts(self):
-		self.session.openWithCallback(self.updateList, DevicePanelConf)
+	def readDevices(self):
+		def readDevicesCallback(output=None, retVal=None, extraArgs=None):
+			self.deviceUUID = {}
+			lines = output.splitlines()
+			lines = [line for line in lines if "UUID=" in line and ("/dev/sd" in line or "/dev/cf" in line)]
+			for line in lines:
+				data = line.split()
+				UUID = [x.split("UUID=")[1] for x in data if "UUID=" in x][0].replace("\"", "")
+				self.deviceUUID[data[0][:-1]] = UUID
+			self.swapdevices = [x for x in fileReadLines("/proc/swaps", default=[], source=MODULE_NAME) if x.startswith("/")]
+			self.updateDevices()
 
-	def Mount(self):
-		sel = self['list'].getCurrent()
-		if sel:
-			mountp = sel[3]
-			device = sel[4]
-			system('mount ' + device)
-			mountok = False
-			f = open('/proc/mounts', 'r')
-			for line in f.readlines():
-				if line.find(device) != -1:
-					mountok = True
-			if not mountok:
-				self.session.open(MessageBox, _("Mount failed"), MessageBox.TYPE_INFO, timeout=5)
-			self.updateList()
+		self.console.ePopen([self.BLKID, self.BLKID], callback=readDevicesCallback)
 
-	def Unmount(self):
-		sel = self['list'].getCurrent()
-		if sel:
-			mountp = sel[3]
-			device = sel[4]
-			system('umount ' + mountp)
-			try:
-				mounts = open("/proc/mounts")
-			except OSError:
-				return -1
-			mountcheck = mounts.readlines()
-			mounts.close()
-			for line in mountcheck:
-				parts = line.strip().split(" ")
-				if path.realpath(parts[0]).startswith(device):
-					self.session.open(MessageBox, _("Can't unmount partition, make sure it is not being used for swap or record/time shift paths"), MessageBox.TYPE_INFO)
-			self.updateList()
-
-	def saveMypoints(self):
-		sel = self['list'].getCurrent()
-		if sel:
-			self.mountp = sel[3]
-			self.device = sel[4]
-			if self.mountp.find('/media/hdd') < 0:
-				self.Console.ePopen('umount ' + self.device)
-				if not path.exists('/media/hdd'):
-					mkdir('/media/hdd', 0o755)
-				else:
-					self.Console.ePopen('umount /media/hdd')
-				self.Console.ePopen('mount ' + self.device + ' /media/hdd')
-				self.Console.ePopen("/sbin/blkid | grep " + self.device, self.add_fstab, [self.device, self.mountp])
-			else:
-				self.session.open(MessageBox, _("This Device is already mounted as HDD."), MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
-
-	def add_fstab(self, result=None, retval=None, extra_args=None):
-		self.device = extra_args[0]
-		self.mountp = extra_args[1]
-		self.device_uuid_tmp = ensure_str(result).split('UUID=')
-		self.device_uuid_tmp = self.device_uuid_tmp[1].replace('"', "")
-		self.device_uuid_tmp = self.device_uuid_tmp.replace('\n', "")
-		self.device_uuid_tmp = self.device_uuid_tmp.split()[0]
-		self.device_uuid = 'UUID=' + self.device_uuid_tmp
-		if not path.exists(self.mountp):
-			mkdir(self.mountp, 0o755)
-		open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if '/media/hdd' not in l])
-		rename('/etc/fstab.tmp', '/etc/fstab')
-		open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if self.device not in l])
-		rename('/etc/fstab.tmp', '/etc/fstab')
-		open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if self.device_uuid not in l])
-		rename('/etc/fstab.tmp', '/etc/fstab')
-		out = open('/etc/fstab', 'a')
-		line = self.device_uuid + '\t/media/hdd\tauto\tdefaults\t0 0\n'
-		out.write(line)
-		out.close()
-		self.Console.ePopen('mount /media/hdd', self.updateList)
-
-	def restBo(self, answer):
-		if answer is True:
-			self.session.open(TryQuitMainloop, 2)
-		else:
-			self.updateList()
-			self.selectionChanged()
-
-
-class DevicePanelConf(Screen, ConfigListScreen):
-	skin = """
-	<screen position="center,center" size="640,460" title="Choose where to mount your devices to:">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="25,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="175,0" size="140,40" alphatest="on" />
-		<widget name="key_red" position="25,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget name="key_green" position="175,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="config" position="30,60" size="580,275" scrollbarMode="showOnDemand"/>
-		<widget name="Linconn" position="30,375" size="580,20" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313"/>
-	</screen>"""
-
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.list = []
-		self.device_type = 'auto'
-		self.device_uuid = ""
-		ConfigListScreen.__init__(self, self.list)
-		Screen.setTitle(self, _("Choose where to mount your devices to:"))
-		self['key_green'] = Label(_("Save"))
-		self['key_red'] = Label(_("Cancel"))
-		self['Linconn'] = Label(_("Wait please while scanning your %s %s devices...") % getBoxDisplayName())
-		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'green': self.saveMypoints, 'red': self.close, 'back': self.close})
-		self.updateList()
-
-	def updateList(self):
-		self.list = []
-		list2 = []
-		self.Console = Console()
-		self.Console.ePopen("sfdisk -l | grep swap | awk '{print $(NF-9)}' >/tmp/devices.tmp")
-		sleep(0.5)
-		f = open('/tmp/devices.tmp', 'r')
-		swapdevices = f.read()
-		f.close()
-		if path.exists('/tmp/devices.tmp'):
-			remove('/tmp/devices.tmp')
-		swapdevices = swapdevices.replace('\n', '')
-		swapdevices = swapdevices.split('/')
-		f = open('/proc/partitions', 'r')
-		for line in f.readlines():
+	def updateDevices(self):
+		self.partitions = fileReadLines("/proc/partitions", default=[], source=MODULE_NAME)
+		self.mounts = fileReadLines("/proc/mounts", default=[], source=MODULE_NAME)
+		self.fstab = fileReadLines("/etc/fstab", default=[], source=MODULE_NAME)
+		self.knownDevices = fileReadLines("/etc/udev/known_devices", default=[], source=MODULE_NAME)
+		self.deviceList = []
+		seenDevices = []
+		for line in self.partitions:
 			parts = line.strip().split()
 			if not parts:
 				continue
 			device = parts[3]
-			if not search(r'^sd[a-z][1-9][\d]*$', device) and not search(r'^mmcblk[\d]p[\d]*$', device):
+			if not search(r"^sd[a-z][1-9][\d]*$", device) and not search(r"^mmcblk[\d]p[\d]*$", device):
 				continue
 			if BoxInfo.getItem("mtdrootfs").startswith("mmcblk0p") and device.startswith("mmcblk0p"):
 				continue
 			if BoxInfo.getItem("mtdrootfs").startswith("mmcblk1p") and device.startswith("mmcblk1p"):
 				continue
-			if device in list2:
+			if device in seenDevices:
 				continue
-			if device in swapdevices:
-				continue
-			self.buildMy_rec(device)
-			list2.append(device)
-		f.close()
-		self['config'].list = self.list
-		self['config'].l.setList(self.list)
-		self['Linconn'].hide()
+			seenDevices.append(device)
+			self.buildList(device)
+		self["devicelist"].list = self.deviceList
 
-	def buildMy_rec(self, device):
-		if device.startswith('mmcblk'):
-			device2 = device[:7]
-		else:
-			device2 = sub(r'[\d]', '', device)
-		devicetype = path.realpath('/sys/block/' + device2 + '/device')
-		name = 'USB: '
-		mypixmap = '/usr/share/enigma2/icons/dev_usbstick.png'
-		if device2.startswith('mmcblk'):
-			model = open('/sys/block/' + device2 + '/device/name').read()
-			mypixmap = '/usr/share/enigma2/icons/dev_mmc.png'
-			name = 'MMC: '
-		else:
-			model = open('/sys/block/' + device2 + '/device/model').read()
-		model = str(model).replace('\n', '')
-		des = ''
-		print("test:")
-		if devicetype.find('/devices/pci') != -1 or devicetype.find('ahci') != -1:
-			name = _("HARD DISK: ")
-			mypixmap = '/usr/share/enigma2/icons/dev_hdd.png'
-		name = name + model
-		f = open('/proc/mounts', 'r')
-		for line in f.readlines():
+	def buildList(self, device):
+		def getDeviceTypeModel():
+			devicePath = realpath(join("/sys/block", device2, "device"))
+			deviceType = 0
+			if device2.startswith("mmcblk"):
+				model = fileReadLine(join("/sys/block", device2, "device/name"), default="", source=MODULE_NAME)
+				deviceType = 1
+			else:
+				model = fileReadLine(join("/sys/block", device2, "device/model"), default="", source=MODULE_NAME)
+			if devicePath.find("/devices/pci") != -1 or devicePath.find("ahci") != -1:
+				deviceType = 2
+			return deviceType, model
+
+		device2 = device[:7] if device.startswith("mmcblk") else sub(r"[\d]", "", device)
+		deviceType, model = getDeviceTypeModel()
+		devicePixmap = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.DEVICE_TYPES[deviceType][self.DEVICE_TYPES_ICON]))
+		deviceName = self.DEVICE_TYPES[deviceType][self.DEVICE_TYPES_NAME]
+		deviceName = f"{deviceName}{model}"
+		for line in self.mounts:
 			if line.find(device) != -1:
 				parts = line.strip().split()
 				d1 = parts[1]
 				dtype = parts[2]
-				break
+				rw = parts[3]
+				# break - Use the last mount if the divice exists multiple times
 			else:
-				d1 = _("None")
-				dtype = _("unavailable")
-		f.close()
-		f = open('/proc/partitions', 'r')
-		for line in f.readlines():
+				if device in self.swapDevices:
+					parts = line.strip().split()
+					d1 = _("None")
+					dtype = "swap"
+					rw = _("None")
+					break
+				else:
+					d1 = _("None")
+					dtype = _("unavailable")
+					rw = _("None")
+
+		size = 0
+		for line in self.partitions:
 			if line.find(device) != -1:
 				parts = line.strip().split()
-				size = int(parts[2])
-				if (((float(size) / 1024) / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(round((((float(size) / 1024) / 1024) / 1024), 2)), _("TB"))
-				elif ((size / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str((size // 1024) // 1024), _("GB"))
-				else:
-					des = "%s: %s%s" % (_("Size"), str(size // 1024), _("MB"))
+				size = int(parts[2]) * 1024
+				break
+		if not size:
+			size = fileReadLine(join("/sys/block", device2, device, "size"), default=None, source=MODULE_NAME)
+			try:
+				size = int(size) * 512
+			except ValueError:
+				size = 0
+		if size:
+			size = f"{_("Size")}: {scaleNumber(size, format="%.2f")}"
+			if rw.startswith("rw"):
+				rw = " R/W"
+			elif rw.startswith("ro"):
+				rw = " R/O"
 			else:
-				try:
-					size = open('/sys/block/' + device2 + '/' + device + '/size').read()
-					size = str(size).replace('\n', '')
-					size = int(size)
-				except:
-					size = 0
-				if ((((float(size) / 2) / 1024) / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(round(((((float(size) / 2) / 1024) / 1024) / 1024), 2)), _("TB"))
-				elif (((size / 2) / 1024) / 1024) > 1:
-					des = "%s: %s%s" % (_("Size"), str(((size // 2) // 1024) // 1024), _("GB"))
+				rw = ""
+			des = f"{size}\t{_("Mount: ")}{d1}\n{_("Device: ")}{join("/dev", device)}\t{_("Type: ")}{dtype}{rw}"
+			mountP = d1
+			deviceP = f"/dev/{device}"
+			isMounted = len([m for m in self.mounts if mountP in m])
+			UUID = self.deviceUUID.get(deviceP)
+			UUIDMount = ""
+			devMount = ""
+			knownDevice = ""
+			for known in self.knownDevices:
+				if UUID in known:
+					knownDevice = known
+			for fstab in self.fstab:
+				fstabData = fstab.split()
+				if fstabData:
+					if UUID in fstabData:
+						UUIDMount = (fstabData[0], fstabData[1])
+					elif deviceP in fstabData:
+						devMount = (fstabData[0], fstabData[1])
+			res = (deviceName, des, devicePixmap, mountP, deviceP, isMounted, UUID, UUIDMount, devMount, knownDevice, deviceType, model)
+			print(res)
+			self.deviceList.append(res)
+
+	def keyClose(self):
+		if self.needReboot:
+			self.session.open(TryQuitMainloop, QUIT_REBOOT)
+		else:
+			self.close((True, ))
+
+	def keyMountPoint(self):
+		def keyMountPointCallback(answer):
+			def keyMountPointCallback2(result=None, retval=None, extra_args=None):
+				reboot = False
+				isMounted = current[5]
+				mountp = current[3]
+				device = current[4]
+				self.updateDevices()
+				if answer[1] == "None" or device != current[4] or current[5] != isMounted or mountp != current[3]:
+					self.needReboot = True
+
+			if answer:
+				answerMoutPoint = answer[0]
+				answerFS = answer[1]
+				answerOptions = answer[2]
+				newFstab = fileReadLines("/etc/fstab", default=[], source=MODULE_NAME)
+				newFstab = [l for l in newFstab if answerMoutPoint not in l]
+				newFstab = [l for l in newFstab if deviceP not in l]
+				newFstab = [l for l in newFstab if deviceUuid not in l]
+				if answer[1] != "None":
+					newFstab.append(f"UUID={deviceUuid}\t{answerMoutPoint}\t{answerFS}\t{answerOptions}\t0 0\n")
+				fileWriteLines("/etc/fstab", newFstab, source=MODULE_NAME)
+				if answerMoutPoint != "None":
+					if not exists(answerMoutPoint):
+						mkdir(answerMoutPoint, 0o755)
+				self.console.eBatch([f"{self.MOUNT} -a", "sync", "sleep 1"], keyMountPointCallback2)
+#				self.console.ePopen([self.MOUNT, self.MOUNT, "-a"], keyMountPointCallback2)
+
+		if self.deviceList:
+			current = self["devicelist"].getCurrent()
+			if current:
+				deviceP = current[4]
+				deviceUuid = self.deviceUUID.get(deviceP)
+				choiceList = [("None", "None"), ("", "Custom")]
+				if "sr" in current[11]:
+					choiceList.extend([("/media/cdrom", "/media/cdrom")], [("/media/dvd", "/media/dvd")])
 				else:
-					des = "%s: %s%s" % (_("Size"), str((size // 2) // 1024), _("MB"))
-		f.close()
-		item = NoSave(ConfigSelection(default='/media/' + device, choices=[('/media/' + device, '/media/' + device),
-		('/media/hdd', '/media/hdd'),
-		('/media/hdd2', '/media/hdd2'),
-		('/media/hdd3', '/media/hdd3'),
-		('/media/usb', '/media/usb'),
-		('/media/usb2', '/media/usb2'),
-		('/media/usb3', '/media/usb3'),
-		('/media/mmc', '/media/mmc'),
-		('/media/mmc2', '/media/mmc2'),
-		('/media/mmc3', '/media/mmc3'),
-		('/usr', '/usr')]))
-		if dtype == 'Linux':
-			dtype = 'ext3'
+					choiceList.extend([(f"/media/{x}", f"/media/{x}") for x in self.getMountPoints(current[10])])
+				self.session.openWithCallback(keyMountPointCallback, MountManagerMountPoint, choiceList, current[11])
+
+	def keyToggleMount(self):
+		def keyYellowCallback(answer):
+			def checkMount(data, retVal, extraArgs):
+				if retVal:
+					print(f"[MountManager] mount failed for device:{device} / RC:{retVal}")
+				self.updateDevices()
+				mountok = False
+				for line in self.mounts:
+					if line.find(device) != -1:
+						mountok = True
+				if not mountok:
+					self.session.open(MessageBox, _("Mount failed"), MessageBox.TYPE_INFO, timeout=5)
+			if answer:
+				if not exists(answer[1]):
+					mkdir(answer[1], 0o755)
+				self.console.ePopen([self.MOUNT, self.MOUNT, device, f"{answer[1]}/"], checkMount)
+
+		current = self["devicelist"].getCurrent()
+		if current:
+			isMounted = current[5]
+			mountp = current[3]
+			device = current[4]
+			if isMounted:
+				self.console.ePopen([self.UMOUNT, self.UMOUNT, mountp])
+				try:
+					mounts = open("/proc/mounts")
+				except OSError:
+					return -1
+				mountcheck = mounts.readlines()
+				mounts.close()
+				for line in mountcheck:
+					parts = line.strip().split(" ")
+					if realpath(parts[0]).startswith(device):
+						self.session.open(MessageBox, _("Can't unmount partition, make sure it is not being used for swap or record/time shift paths"), MessageBox.TYPE_INFO)
+			else:
+				title = _("Select the new mount point for: '%s'") % current[11]
+				choiceList = [(f"/media/{x}", f"/media/{x}") for x in self.getMountPoints(current[10])]
+				self.session.openWithCallback(keyYellowCallback, ChoiceBox, choiceList=choiceList, buttonList=[], windowTitle=title)
+			self.updateDevices()
+
+	def keyBlue(self):
+		pass
+
+	def getMountPoints(self, deviceType):
+		match deviceType:
+			case 0:
+				result = ["usb", "usb2", "usb3"]
+			case 1:
+				result = ["mmc", "mmc2", "mmc3"]
+			case _:
+				result = []
+		result.extend(["hdd", "hdd2", "hdd3"])
+		return result
+
+	def createSummary(self):
+		return DevicesPanelSummary
+
+
+class MountManagerMountPoint(Setup):
+	defaultOptions = {
+		"auto": "",
+		"ext4": "defaults,noatime",
+		"vfat": "rw,iocharset=utf8,uid=0,gid=0,umask=0022",
+		"extfat": "rw,iocharset=utf8,uid=0,gid=0,umask=0022",
+		"ntfs-3g": "defaults,uid=0,gid=0,umask=0022",
+		"iso9660": "ro,defaults",
+		"udf": "ro,defaults",
+		"hfsplus": "rw,force,uid=0,gid=0",
+		"btrfs": "defaults,noatime",
+		"xfs": "defaults,compress=zstd,noatime",
+		"fuseblk": "defaults,uid=0,gid=0"
+	}
+
+	def __init__(self, session, mountPoints, device):
+		self.mountPoint = NoSave(ConfigSelection(default=mountPoints[2][0], choices=mountPoints))
+		self.customMountPoint = NoSave(ConfigText())
+		if "sr" in device:
+			fileSystems = ["auto", "iso9660", "udf"]
 		else:
-			dtype = 'auto'
-		item.value = d1.strip()
-		text = name + ' ' + des + ' /dev/' + device
-		res = getConfigListEntry(text, item, device, dtype)
+			fileSystems = ["auto", "ext4", "vfat"]
+			if exists("/sbin/mount.exfat"):
+				fileSystems.append("exfat")
+			if exists("/sbin/mount.ntfs-3g"):
+				fileSystems.append("ntfs-3g")
+			if exists("/sbin/mount.fuse"):
+				fileSystems.append("fuseblk")
+			fileSystems.extend(["hfsplus", "btrfs", "xfs"])
+		fileSystemChoices = [(x, x) for x in fileSystems]
+		self.fileSystem = NoSave(ConfigSelection(default=fileSystems[0][0], choices=fileSystemChoices))
+		self.options = NoSave(ConfigText("default"))
+		Setup.__init__(self, session=session, setup="MountManagerMountPoint")
+		self.setTitle(_("Select the new mount point for: '%s'") % device)
 
-		if des != '' and self.list.append(res):
-			pass
+	def changedEntry(self):
+		current = self["config"].getCurrent()[1]
+		if current == self.fileSystem:
+			self.options.value = self.defaultOptions.get(self.fileSystem.value)
+		Setup.changedEntry(self)
 
-	def saveMypoints(self):
-		self.Console = Console()
-		mycheck = False
-		for x in self['config'].list:
-			self.device = x[2]
-			self.mountp = x[1].value
-			self.type = x[3]
-			self.Console.ePopen('umount ' + self.device)
-			self.Console.ePopen("/sbin/blkid | grep " + self.device, self.add_fstab, [self.device, self.mountp])
-		message = _("Updating mount locations.")
-		ybox = self.session.openWithCallback(self.delay, MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5, enable_input=False)
-		ybox.setTitle(_("Please wait."))
+	def keySave(self):
+		self.close((self.mountPoint.value or self.customMountPoint.value, self.fileSystem.value, self.options.value))
 
-	def delay(self, val):
-		message = _("Changes need a system restart to take effect.\nRestart your %s %s now?") % getBoxDisplayName()
-		ybox = self.session.openWithCallback(self.restartBox, MessageBox, message, MessageBox.TYPE_YESNO)
-		ybox.setTitle(_("Restart %s %s.") % getBoxDisplayName())
+	def keyCancel(self):
+		self.close(None)
 
-	def add_fstab(self, result=None, retval=None, extra_args=None):
-		self.device = extra_args[0]
-		self.mountp = extra_args[1]
-		if len(result) == 0 or " UUID=" not in result:
-			print("[MountManager] error get UUID for device %s" % self.device)
-			return
-		self.device_tmp = ensure_str(result).split(' ')
-		if self.device_tmp[0].startswith('UUID='):
-			self.device_uuid = self.device_tmp[0].replace('"', "")
-			self.device_uuid = self.device_uuid.replace('\n', "")
-		elif self.device_tmp[1].startswith('UUID='):
-			self.device_uuid = self.device_tmp[1].replace('"', "")
-			self.device_uuid = self.device_uuid.replace('\n', "")
-		elif self.device_tmp[2].startswith('UUID='):
-			self.device_uuid = self.device_tmp[2].replace('"', "")
-			self.device_uuid = self.device_uuid.replace('\n', "")
-		elif self.device_tmp[3].startswith('UUID='):
-			self.device_uuid = self.device_tmp[3].replace('"', "")
-			self.device_uuid = self.device_uuid.replace('\n', "")
-		try:
-			if self.device_tmp[0].startswith('TYPE='):
-				self.device_type = self.device_tmp[0].replace('TYPE=', "")
-				self.device_type = self.device_type.replace('"', "")
-				self.device_type = self.device_type.replace('\n', "")
-			elif self.device_tmp[1].startswith('TYPE='):
-				self.device_type = self.device_tmp[1].replace('TYPE=', "")
-				self.device_type = self.device_type.replace('"', "")
-				self.device_type = self.device_type.replace('\n', "")
-			elif self.device_tmp[2].startswith('TYPE='):
-				self.device_type = self.device_tmp[2].replace('TYPE=', "")
-				self.device_type = self.device_type.replace('"', "")
-				self.device_type = self.device_type.replace('\n', "")
-			elif self.device_tmp[3].startswith('TYPE='):
-				self.device_type = self.device_tmp[3].replace('TYPE=', "")
-				self.device_type = self.device_type.replace('"', "")
-				self.device_type = self.device_type.replace('\n', "")
-			elif self.device_tmp[4].startswith('TYPE='):
-				self.device_type = self.device_tmp[4].replace('TYPE=', "")
-				self.device_type = self.device_type.replace('"', "")
-				self.device_type = self.device_type.replace('\n', "")
-		except:
-			self.device_type = 'auto'
 
-		if self.device_type.startswith('ext'):
-			self.device_type = 'auto'
-
-		if not path.exists(self.mountp):
-			mkdir(self.mountp, 0o755)
-		open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if self.device not in l])
-		rename('/etc/fstab.tmp', '/etc/fstab')
-		open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if self.device_uuid not in l])
-		rename('/etc/fstab.tmp', '/etc/fstab')
-		out = open('/etc/fstab', 'a')
-		line = self.device_uuid + '\t' + self.mountp + '\t' + self.device_type + '\tdefaults\t0 0\n'
-		out.write(line)
-		out.close()
-
-	def restartBox(self, answer):
-		if answer is True:
-			self.session.open(TryQuitMainloop, 2)
-		else:
-			self.close()
+class HddMount(MountManager):
+	pass
 
 
 class DevicesPanelSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
+		self.skinName = "SetupSummary"
 		self["entry"] = StaticText("")
-		self["desc"] = StaticText("")
+		self["value"] = StaticText("")
 		self.onShow.append(self.addWatcher)
 		self.onHide.append(self.removeWatcher)
 
@@ -532,4 +409,4 @@ class DevicesPanelSummary(Screen):
 
 	def selectionChanged(self, name, desc):
 		self["entry"].text = name
-		self["desc"].text = desc
+		self["value"].text = desc

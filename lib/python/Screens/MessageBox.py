@@ -1,9 +1,8 @@
-from enigma import eTimer
+from enigma import eTimer, eSize
 
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Pixmap import MultiPixmap
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen, ScreenSummary
@@ -32,7 +31,7 @@ class MessageBox(Screen):
 	}
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, list=None, default=True, closeOnAnyKey=False, enableInput=True, msgBoxID=None, typeIcon=None, timeoutDefault=None, windowTitle=None, skinName=None, close_on_any_key=False, enable_input=True, timeout_default=None, title=None, picon=None, skin_name=None, simple=None):
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, mandatoryWidgets=["icon", "list", "text"], enableHelp=True)
 		self.text = text
 		self["text"] = Label(text)
 		self.type = type
@@ -56,25 +55,7 @@ class MessageBox(Screen):
 		if enable_input is False:  # Process legacy enable_input argument.
 			enableInput = False
 		if enableInput:
-			if self.list:
-				self["actions"] = HelpableActionMap(self, ["MsgBoxActions", "NavigationActions"], {
-					"cancel": (self.cancel, _("Select the No / False response")),
-					"select": (self.select, _("Return the current selection response")),
-					"selectOk": (self.selectOk, _("Select the Yes / True response")),
-					"top": (self.top, _("Move to first line")),
-					"pageUp": (self.pageUp, _("Move up a page")),
-					"up": (self.up, _("Move up a line")),
-					# "first": (self.top, _("Move to first line")),
-					# "last": (self.bottom, _("Move to last line")),
-					"down": (self.down, _("Move down a line")),
-					"pageDown": (self.pageDown, _("Move down a page")),
-					"bottom": (self.bottom, _("Move to last line"))
-				}, prio=0, description=_("Message Box Actions"))
-			else:
-				self["actions"] = HelpableActionMap(self, ["OkCancelActions"], {
-					"cancel": (self.cancel, _("Close the window")),
-					"ok": (self.select, _("Close the window"))
-				}, prio=0, description=_("Message Box Actions"))
+			self.createActionMap(0)
 		self.msgBoxID = msgBoxID
 		if picon is not None:  # Process legacy picon argument.
 			typeIcon = picon
@@ -84,18 +65,6 @@ class MessageBox(Screen):
 		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
 		if typeIcon:
 			self["icon"] = MultiPixmap()
-			self["QuestionPixmap"] = Pixmap()
-			self["QuestionPixmap"].hide()
-			self["InfoPixmap"] = Pixmap()
-			self["InfoPixmap"].hide()
-			self["ErrorPixmap"] = Pixmap()
-			self["ErrorPixmap"].hide()
-			if typeIcon == self.TYPE_YESNO:
-				self["QuestionPixmap"].show()
-			elif typeIcon == self.TYPE_INFO or typeIcon == self.TYPE_WARNING:
-				self["InfoPixmap"].show()
-			elif typeIcon == self.TYPE_ERROR:
-				self["ErrorPixmap"].show()
 		if timeout_default is not None:  # Process legacy timeout_default argument.
 			timeoutDefault = timeout_default
 		self.timeoutDefault = timeoutDefault
@@ -117,6 +86,27 @@ class MessageBox(Screen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.processTimer)
 		self.onLayoutFinish.append(self.layoutFinished)
+
+	def createActionMap(self, prio):
+		if self.list:
+			self["actions"] = HelpableActionMap(self, ["MsgBoxActions", "NavigationActions"], {
+				"cancel": (self.cancel, _("Select the No / False response")),
+				"select": (self.select, _("Return the current selection response")),
+				"selectOk": (self.selectOk, _("Select the Yes / True response")),
+				"top": (self.top, _("Move to first line")),
+				"pageUp": (self.pageUp, _("Move up a page")),
+				"up": (self.up, _("Move up a line")),
+				# "first": (self.top, _("Move to first line")),
+				# "last": (self.bottom, _("Move to last line")),
+				"down": (self.down, _("Move down a line")),
+				"pageDown": (self.pageDown, _("Move down a page")),
+				"bottom": (self.bottom, _("Move to last line"))
+			}, prio=prio, description=_("Message Box Actions"))
+		else:
+			self["actions"] = HelpableActionMap(self, ["OkCancelActions"], {
+				"cancel": (self.cancel, _("Close the window")),
+				"ok": (self.select, _("Close the window"))
+			}, prio=prio, description=_("Message Box Actions"))
 
 	def __repr__(self):
 		return f"{str(type(self))}({self.text})"
@@ -210,6 +200,14 @@ class MessageBox(Screen):
 	def createSummary(self):
 		return MessageBoxSummary
 
+	def reloadLayout(self):
+		for method in self.onLayoutFinish:
+			if not isinstance(method, type(self.close)):
+				exec(method, globals(), locals())
+			else:
+				method()
+		self.layoutFinished()
+
 
 class MessageBoxSummary(ScreenSummary):
 	def __init__(self, session, parent):
@@ -233,3 +231,57 @@ class MessageBoxSummary(ScreenSummary):
 
 	def selectionChanged(self):
 		self["option"].setText(self.parent["list"].getCurrent()[0])
+
+
+class ModalMessageBox:
+	instance = None
+
+	def __init__(self, session):
+		if ModalMessageBox.instance:
+			print("[ModalMessageBox] Error: Only one ModalMessageBox instance is allowed!")
+		else:
+			ModalMessageBox.instance = self
+			self.dialog = session.instantiateDialog(MessageBox, "", enableInput=False, skinName="MessageBoxModal")
+			self.dialog.setAnimationMode(0)
+
+	def showMessageBox(self, text=None, timeout=-1, list=None, default=True, closeOnAnyKey=False, timeoutDefault=None, windowTitle=None, msgBoxID=None, typeIcon=MessageBox.TYPE_YESNO, enableInput=True, callback=None):
+		self.dialog.text = text
+		self.dialog["text"].setText(text)
+		self.dialog.typeIcon = typeIcon
+		self.dialog.type = typeIcon
+		self.dialog.picon = (typeIcon != MessageBox.TYPE_NOICON)  # Legacy picon argument to support old skins.
+		if typeIcon == MessageBox.TYPE_YESNO:
+			self.dialog.list = [(_("Yes"), True), (_("No"), False)] if list is None else list
+			self.dialog["list"].setList(self.dialog.list)
+			if isinstance(default, bool):
+				self.dialog.startIndex = 0 if default else 1
+			elif isinstance(default, int):
+				self.dialog.startIndex = default
+			else:
+				print(f"[MessageBox] Error: The context of the default ({default}) can't be determined!")
+			self.dialog["list"].show()
+		else:
+			self.dialog["list"].hide()
+			self.dialog.list = None
+		self.callback = callback
+		self.dialog.timeout = timeout
+		self.dialog.msgBoxID = msgBoxID
+		self.dialog.enableInput = enableInput
+		if enableInput:
+			self.dialog.createActionMap(-20)
+			self.dialog["actions"].execBegin()
+		self.dialog.closeOnAnyKey = closeOnAnyKey
+		self.dialog.timeoutDefault = timeoutDefault
+		self.dialog.windowTitle = windowTitle or self.dialog.TYPE_PREFIX.get(type, _("Message"))
+		self.dialog.baseTitle = self.dialog.windowTitle
+		self.dialog.activeTitle = self.dialog.windowTitle
+		self.dialog.reloadLayout()
+		self.dialog.close = self.close
+		self.dialog.show()
+
+	def close(self, *retVal):
+		if self.callback and callable(self.callback):
+			self.callback(*retVal)
+		if self.dialog.enableInput:
+			self.dialog["actions"].execEnd()
+		self.dialog.hide()

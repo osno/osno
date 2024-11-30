@@ -6,6 +6,7 @@ install_PYTHON = \
 	e2reactor.py \
 	BoxBrandingTest.py \
 	GlobalActions.py \
+	GlobalStrings.py \
 	keyids.py \
 	keymapparser.py \
 	Navigation.py \
@@ -16,4 +17,5 @@ install_PYTHON = \
 	StartEnigma.py \
 	timer.py \
 	upgrade.py \
-	PowerTimer.py
+	PowerTimer.py \
+	Janitor.py
