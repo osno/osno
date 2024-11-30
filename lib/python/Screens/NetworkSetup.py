@@ -3357,13 +3357,13 @@ class NetworkPassword(Setup):
 			self.session.open(MessageBox, _("Error: The new password may not be blank!"), MessageBox.TYPE_ERROR)
 			return
 		# print("[NetworkSetup] NetworkPassword: Changing the password for '%s' to '%s'." % (self.user, password))
-		print(f"[NetworkSetup] NetworkPassword: Changing the password for '{self.user}'.")
+		print("[NetworkSetup] NetworkPassword: Changing the password for '%s'." % self.user)
 		self.container = eConsoleAppContainer()
 		self.container.dataAvail.append(self.dataAvail)
 		self.container.appClosed.append(self.appClosed)
 		status = self.container.execute(*("/usr/bin/passwd", "/usr/bin/passwd", self.user))
 		if status:  # If status is -1 code is already/still running, is status is -3 code can not be started!
-		print(f"[NetworkSetup] NetworkPassword: Changing the password for '{self.user}'.")
+			self.session.open(MessageBox, _("Error %d: Unable to start 'passwd' command!") % status, MessageBox.TYPE_ERROR)
 			Setup.keySave(self)
 		else:
 			self.timer.start(3000)
