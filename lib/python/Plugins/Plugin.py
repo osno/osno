@@ -1,6 +1,5 @@
-from os.path import join
+from os.path import basename, isdir, join, normpath
 
-from Components.config import ConfigSubsection, config
 from Tools.LoadPixmap import LoadPixmap
 
 
@@ -62,7 +61,7 @@ class PluginDescriptor:
 	WHERE_SERVICESCAN = 21
 	WHERE_EXTENSIONSINGLE = 22
 	# Support zap hook to modify the service ref.
-	WHERE_CHANNEL_ZAP = 23
+	WHERE_PLAYSERVICE = 23
 	# Arguments: reason, session, instance, type.
 	WHERE_INFOBARLOADED = 24
 	# Argument: session
@@ -86,6 +85,7 @@ class PluginDescriptor:
 		self.internal = internal
 		self.weight = weight
 		self.path = None
+		self.key = name
 
 	def __call__(self, *args, **kwargs):
 		if callable(self.function):
@@ -101,6 +101,8 @@ class PluginDescriptor:
 
 	def updateIcon(self, path):
 		self.path = path
+		if isdir(path):
+			self.key = basename(normpath(path))
 
 	def getWakeupTime(self):
 		return self.wakeupfnc and self.wakeupfnc() or -1

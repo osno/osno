@@ -3357,13 +3357,13 @@ class NetworkPassword(Setup):
 			self.session.open(MessageBox, _("Error: The new password may not be blank!"), MessageBox.TYPE_ERROR)
 			return
 		# print("[NetworkSetup] NetworkPassword: Changing the password for '%s' to '%s'." % (self.user, password))
-		print("[NetworkSetup] NetworkPassword: Changing the password for '%s'." % self.user)
+		print(f"[NetworkSetup] NetworkPassword: Changing the password for '{self.user}'.")
 		self.container = eConsoleAppContainer()
 		self.container.dataAvail.append(self.dataAvail)
 		self.container.appClosed.append(self.appClosed)
 		status = self.container.execute(*("/usr/bin/passwd", "/usr/bin/passwd", self.user))
 		if status:  # If status is -1 code is already/still running, is status is -3 code can not be started!
-			self.session.open(MessageBox, _("Error %d: Unable to start 'passwd' command!") % status, MessageBox.TYPE_ERROR)
+		print(f"[NetworkSetup] NetworkPassword: Changing the password for '{self.user}'.")
 			Setup.keySave(self)
 		else:
 			self.timer.start(3000)
@@ -3379,7 +3379,7 @@ class NetworkPassword(Setup):
 		data = data.decode("UTF-8", "ignore")
 		# print("[NetworkSetup] DEBUG NetworkPassword: data='%s'." % data)
 		if data.endswith("password: "):
-			self.container.write("%s\n" % config.network.password.value)
+			self.container.write(f"{config.network.password.value}\n")
 			self.counter += 1
 
 	def appClosed(self, retVal=ETIMEDOUT):
@@ -3387,7 +3387,7 @@ class NetworkPassword(Setup):
 		if retVal:
 			if retVal == ETIMEDOUT:
 				self.container.kill()
-			print("[NetworkSetup] NetworkPassword: Error %d: Unable to change password!  (%s)" % (retVal, strerror(retVal)))
+			print(f"[NetworkSetup] NetworkPassword: Error {retVal}: Unable to change password!  ({strerror(retVal)})")
 			self.session.open(MessageBox, _("Error %d: Unable to change password!  (%s)") % (retVal, strerror(retVal)), MessageBox.TYPE_ERROR)
 		elif self.counter == 2:
 			print("[NetworkSetup] NetworkPassword: Password changed.")

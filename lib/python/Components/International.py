@@ -3,7 +3,7 @@
 from gettext import bindtextdomain, install, textdomain, translation
 from locale import Error as LocaleError, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MESSAGES, LC_MONETARY, LC_NUMERIC, LC_TIME, setlocale
 from os import environ, listdir
-from os.path import isdir
+from os.path import isdir, split
 from subprocess import PIPE, Popen
 
 from Tools.Directories import SCOPE_CONFIG, SCOPE_LANGUAGE, fileReadLines, resolveFilename
@@ -584,7 +584,6 @@ class International:
 				else:
 					for package in packageText.split("\n\n"):
 						if package.startswith(f"Package: {self.LOCALE_TEMPLATE % ''}") and "meta" not in package:
-							list = []
 							for data in package.split("\n"):
 								if data.startswith("Package: "):
 									templateLength = len(f"Package: {self.LOCALE_TEMPLATE % ''}")
@@ -704,12 +703,12 @@ class International:
 				if category[self.CAT_PYTHON] is not None:
 					try:  # Try and set the Python locale to the current locale.
 						setlocale(category[self.CAT_PYTHON], locale=(locale, "UTF-8"))
-					except LocaleError as err:
+					except LocaleError:
 						try:  # If unavailable, try for the Python locale to the language base locale.
 							locales = self.packageToLocales(self.getLanguage(locale))
 							setlocale(category[self.CAT_PYTHON], locale=(locales[0], "UTF-8"))
 							replacement = locales[0]
-						except LocaleError as err:  # If unavailable fall back to the US English locale.
+						except LocaleError:  # If unavailable fall back to the US English locale.
 							setlocale(category[self.CAT_PYTHON], locale=("POSIX", ""))
 							replacement = "POSIX"
 						if localeError is None:
@@ -782,11 +781,13 @@ class International:
 		return None
 
 	def splitPackage(self, package):
-		data = package.split("-", 1)
+		if not package:  # Controlla se `package` è None o una stringa vuota
+			return ["UNKNOWN", None]  # Restituisce un valore predefinito
+		data = package.split("-", 1)  # Divide il pacchetto al primo "-"
 		if len(data) < 2:
-			data.append(None)
+			data.append(None)  # Se manca la parte dopo "-", aggiunge None
 		else:
-			data[1] = data[1].upper()
+			data[1] = data[1].upper()  # Converte la seconda parte in maiuscolo
 		return data
 
 	def getLocaleList(self):

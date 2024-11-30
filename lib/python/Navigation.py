@@ -2,6 +2,7 @@ from os import remove
 from os.path import exists
 from time import ctime, time
 from enigma import eServiceCenter, eServiceReference, eTimer, getBestPlayableServiceReference, iPlayableService, pNavigation
+from Tools.Notifications import AddPopup
 import NavigationInstance
 import PowerTimer
 import RecordTimer
@@ -14,6 +15,7 @@ from Components.SystemInfo import BoxInfo
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.InfoBarGenerics import streamrelay
+from Screens.MessageBox import MessageBox
 import Screens.Standby
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileWriteLine
@@ -285,9 +287,25 @@ class Navigation:
 			self.currentlyPlayingService = None
 
 	def dispatchRecordEvent(self, rec_service, event):
-#		print "record_event", rec_service, event
+		# print(f"[Navigation] Record_event {rec_service}, {event}.")
 		for x in self.record_event:
 			x(rec_service, event)
+
+	def serviceHook(self, ref):
+		wrappererror = None
+		nref = ref
+		if nref.getPath():
+			for p in plugins.getPlugins(PluginDescriptor.WHERE_PLAYSERVICE):
+				(newurl, errormsg) = p(service=nref)
+				if errormsg:
+					wrappererror = _("Error getting link via %s\n%s") % (p.name, errormsg)
+					break
+				elif newurl:
+					nref.setAlternativeUrl(newurl)
+					break
+			if wrappererror:
+				AddPopup(text=wrappererror, type=MessageBox.TYPE_ERROR, timeout=5, id="channelzapwrapper")
+		return nref, wrappererror
 
 	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False):
 		oldref = self.currentlyPlayingServiceOrGroup
@@ -310,6 +328,10 @@ class Navigation:
 				playref = getBestPlayableServiceReference(ref, oldref)
 				if not ignoreStreamRelay:
 					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
+				if not isStreamRelay:
+					playref, wrappererror = self.serviceHook(playref)
+					if wrappererror:
+						return 1
 				print(f"[Navigation] Playref is '{str(playref)}'.")
 				if playref and oldref and playref == oldref and not forceRestart:
 					print("[Navigation] Ignore request to play already running service.  (2)")
@@ -346,6 +368,10 @@ class Navigation:
 				self.currentlyPlayingServiceReference = playref
 				if not ignoreStreamRelay:
 					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
+				if not isStreamRelay:
+					playref, wrappererror = self.serviceHook(playref)
+					if wrappererror:
+						return 1
 				print(f"[Navigation] Playref is '{playref.toString()}'.")
 				self.currentlyPlayingServiceOrGroup = ref
 				if InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(ref, adjust):
@@ -385,6 +411,17 @@ class Navigation:
 
 	def getCurrentlyPlayingServiceOrGroup(self):
 		return self.currentlyPlayingServiceOrGroup
+
+	def getCurrentServiceRef(self):
+		curPlayService = self.getCurrentService()
+		info = curPlayService and curPlayService.info()
+		return info and info.getInfoString(iServiceInformation.sServiceref)
+
+	def isCurrentServiceIPTV(self):
+		ref = self.getCurrentServiceRef()
+		ref = ref and eServiceReference(ref)
+		path = ref and ref.getPath()
+		return path and not path.startswith("/") and ref.type in [0x1, 0x1001, 0x138A, 0x1389]
 
 	def isMovieplayerActive(self):
 		MoviePlayerInstance = MoviePlayer.instance
