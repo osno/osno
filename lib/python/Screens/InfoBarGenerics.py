@@ -61,6 +61,11 @@ from Tools.Directories import SCOPE_VOD
 from Tools import Notifications
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_CONFIG, SCOPE_SKINS, fileReadLines, fileWriteLines, isPluginInstalled, pathExists, resolveFilename
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -876,11 +881,12 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				if self.secondInfoBarScreen and self.secondInfoBarScreen.shown:
 					self.secondInfoBarScreen.hide()
 					self.secondInfoBarWasShown = False
-			if self.session.pipshown and "popup" in config.usage.pip_hideOnExit.value:
-				if config.usage.pip_hideOnExit.value == "popup":
-					self.session.openWithCallback(self.hidePipOnExitCallback, MessageBox, _("Disable Picture in Picture"), simple=True)
-				else:
-					self.hidePipOnExitCallback(True)
+			if SHOW:
+				if self.session.pipshown and "popup" in config.usage.pip_hideOnExit.value:
+					if config.usage.pip_hideOnExit.value == "popup":
+						self.session.openWithCallback(self.hidePipOnExitCallback, MessageBox, _("Disable Picture in Picture"), simple=True)
+					else:
+						self.hidePipOnExitCallback(True)
 		else:
 			self.hide()
 			if hasattr(self, "pvrStateDialog"):

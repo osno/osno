@@ -1,11 +1,14 @@
 from sys import maxsize
-
 from enigma import eActionMap
-
 from keyids import KEYIDS
 from Components.config import config
 from Tools.Directories import fileReadXML
 from GlobalStrings import globalStrings
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 

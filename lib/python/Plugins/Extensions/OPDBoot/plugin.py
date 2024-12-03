@@ -20,6 +20,10 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 import os
 from skin import parseColor
+import ctypes
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
+
 PLUGINVERSION = 'V.3.1 - OPD Team'
 choicelist = [('0',_("Audio Selection")),('1',_("Default (Timeshift)")), ('2',_("Toggle Pillarbox <> Pan&Scan")),('3',_("Teletext"))]
 config.plugins.OPDBoot_yellowkey = ConfigSubsection()

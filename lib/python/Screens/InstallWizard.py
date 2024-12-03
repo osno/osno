@@ -7,6 +7,11 @@ from Components.Network import iNetwork
 from Components.Opkg import OpkgComponent
 from Components.Sources.StaticText import StaticText
 from enigma import eDVBDB
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 config.misc.installwizard = ConfigSubsection()
 config.misc.installwizard.hasnetwork = ConfigBoolean(default=False)

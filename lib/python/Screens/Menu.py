@@ -1,8 +1,6 @@
 from os.path import isdir, isfile
 from xml.etree.ElementTree import parse
-
 from enigma import eTimer
-
 from skin import findSkinScreen, menus
 from Components.ActionMap import HelpableNumberActionMap, HelpableActionMap
 from Components.AVSwitch import avSwitch
@@ -21,6 +19,11 @@ from Screens.Setup import Setup
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_GUISKIN, SCOPE_SKINS, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MENU_TEXT = 0
 MENU_MODULE = 1

@@ -1,9 +1,6 @@
 from glob import glob
 from os.path import splitext
-
 from enigma import eProfileWrite
-
-# workaround for required config entry dependencies.
 import Screens.MovieSelection
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -14,8 +11,13 @@ from Components.Pixmap import MultiPixmap
 from Components.SystemInfo import BoxInfo, getBoxDisplayName
 from Tools.Directories import fileExists
 from Screens.ButtonSetup import InfoBarButtonSetup
-
 import enigma
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
+
 eProfileWrite("LOAD:enigma")
 
 boxtype = BoxInfo.getItem("machinebuild")

@@ -16,6 +16,11 @@ from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo
 from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT, SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename, fileWriteLine
 from Components.AVSwitch import iAVSwitch
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")

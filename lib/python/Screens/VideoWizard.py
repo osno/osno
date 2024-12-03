@@ -4,7 +4,11 @@ from Components.SystemInfo import BoxInfo
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.Wizard import WizardSummary, Wizard
 from Tools.Directories import SCOPE_SKINS, resolveFilename
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class VideoWizard(Wizard, ShowRemoteControl):
 	def __init__(self, session):

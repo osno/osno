@@ -4,9 +4,7 @@ from os import access, fsync, makedirs, remove, rename, statvfs, W_OK
 from os.path import exists, isdir, realpath, ismount
 from threading import Thread, Timer as ThreadTimer
 from time import ctime, localtime, strftime, time
-
 from enigma import eEPGCache, getBestPlayableServiceReference, eStreamServer, eServiceEventEnums, eServiceReference, iRecordableService, quitMainloop, eActionMap, setPreferredTuner, pNavigation
-
 import NavigationInstance
 from timer import Timer, TimerEntry
 from Components.config import config
@@ -24,7 +22,11 @@ from Tools.Directories import SCOPE_CONFIG, fileReadXML, getRecordingFilename, r
 from Tools.Notifications import AddNotification, AddNotificationWithCallback, AddPopup
 from Tools import Trashcan
 from Tools.XMLTools import stringToXML
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 # try:  # Import later (no error message on system start)!
 # 	from Screens.InfoBar import InfoBar

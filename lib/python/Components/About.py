@@ -11,10 +11,14 @@ from struct import pack, unpack
 from subprocess import PIPE, Popen
 from sys import maxsize, modules, version as pyversion
 from time import localtime, strftime
-
 from boxbranding import getBoxType, getMachineBuild, getImageVersion
 from Components.SystemInfo import BoxInfo
 from Tools.Directories import fileReadLine, fileReadLines
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 

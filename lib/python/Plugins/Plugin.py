@@ -1,7 +1,10 @@
 from os.path import basename, isdir, join, normpath
-
 from Tools.LoadPixmap import LoadPixmap
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class PluginDescriptor:
 	"""An object to describe a plugin."""

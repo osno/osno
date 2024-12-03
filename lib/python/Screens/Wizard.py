@@ -1,8 +1,6 @@
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
-
 from enigma import ePoint, eTimer
-
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
 from Components.config import ConfigPassword, ConfigText, KEY_0, KEY_ASCII, KEY_BACKSPACE, KEY_DELETE, KEY_LEFT, KEY_RIGHT, config
 from Components.ConfigList import ConfigList
@@ -16,7 +14,11 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen, ScreenSummary
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import SCOPE_SKINS, resolveFilename
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class Wizard(Screen):
 	instance = None

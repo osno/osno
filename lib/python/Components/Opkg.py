@@ -1,12 +1,15 @@
 from os import sync
 from os.path import join
 from time import sleep
-
 from enigma import eConsoleAppContainer
-
 from Components.config import config
 from Components.SystemInfo import BoxInfo
 from Tools.Directories import SCOPE_LIBDIR, fileReadLines, fileWriteLine, resolveFilename
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 

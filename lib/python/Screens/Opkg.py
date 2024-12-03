@@ -1,5 +1,4 @@
 from enigma import eTimer
-
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.Opkg import OpkgComponent
@@ -8,7 +7,11 @@ from Components.Slider import Slider
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class Opkg(Screen):
 	def __init__(self, session, cmdList=None):

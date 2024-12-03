@@ -1,8 +1,11 @@
-#!/usr/bin/python
-
 from errno import EEXIST
 from os import listdir, mkdir, system
 from os.path import isdir, join
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 system("clear")
 internalName = input("Internal plugin name (no whitespaces, plugin directory): ").strip()

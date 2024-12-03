@@ -1,7 +1,10 @@
 from enigma import eListbox, eListboxPythonStringContent
-
 from Components.GUIComponent import GUIComponent
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class MenuList(GUIComponent):
 	GUI_WIDGET = eListbox

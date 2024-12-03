@@ -1,9 +1,7 @@
 from re import sub
 from os.path import exists, isfile, splitext
 from time import localtime
-
 from enigma import eConsoleAppContainer, eTimer
-
 from skin import parseColor
 from Components.ActionMap import HelpableActionMap
 from Components.ScrollLabel import ScrollLabel
@@ -11,6 +9,11 @@ from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.Directories import fileReadLines, fileWriteLines
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 
