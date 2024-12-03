@@ -160,7 +160,14 @@ def InitUsageConfig():
 		("opendns-familyshield", _("OpenDNS FamilyShield")),
 		("opendns-home", _("OpenDNS Home"))
 	])
-
+	config.usage.dnsMode = ConfigSelection(default=0, choices=[
+		(0, _("Prefer IPv4")),
+		(1, _("Prefer IPv6")),
+		(2, _("IPv4 only")),
+		(3, _("IPv6 only"))
+	])
+	config.usage.dnsSuffix = ConfigText(default="")
+	config.usage.dnsRotate = ConfigYesNo(default=False)
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)
 	config.usage.subnetwork_terrestrial = ConfigYesNo(default=True)

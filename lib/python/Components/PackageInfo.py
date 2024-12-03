@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import xml.sax
 from Tools.Directories import crawlDirectory, resolveFilename, SCOPE_CONFIG, SCOPE_SKINS, copyfile, copytree
 from Components.NimManager import nimmanager
@@ -6,7 +5,7 @@ from Components.Opkg import OpkgComponent
 from Components.config import config, configfile
 from Components.SystemInfo import BoxInfo
 from enigma import eConsoleAppContainer, eDVBDB
-import os
+from os import listdir, path, system
 
 
 class InfoHandlerParseError(Exception):
@@ -68,7 +67,7 @@ class InfoHandler(xml.sax.ContentHandler):
 					if "directory" not in attrs:
 						directory = self.directory
 					type = attrs["type"]
-					if not type in self.validFileTypes:
+					if type not in self.validFileTypes:
 						self.printError("file tag with invalid type attribute")
 					else:
 						self.filetype = type
@@ -191,7 +190,7 @@ class PackageInfoHandler:
 			self.directory = [self.directory]
 
 		for directory in self.directory:
-			packages += crawlDirectory(directory, ".*\.info$")
+			packages += crawlDirectory(directory, r".*\.info$")
 
 		for package in packages:
 			self.readInfo(package[0] + "/", package[0] + "/" + package[1])
@@ -209,7 +208,7 @@ class PackageInfoHandler:
 		if not isinstance(self.directory, list):
 			self.directory = [self.directory]
 
-		for indexfile in os.listdir(self.directory[0]):
+		for indexfile in listdir(self.directory[0]):
 			if indexfile.startswith("index-"):
 				if indexfile.endswith(".xml"):
 					if indexfile[-7:-6] == "_":
@@ -218,7 +217,7 @@ class PackageInfoHandler:
 		if len(indexfileList):
 			for file in indexfileList:
 				neededFile = self.directory[0] + "/" + file
-				if os.path.isfile(neededFile):
+				if path.isfile(neededFile):
 					self.readIndex(self.directory[0] + "/", neededFile)
 
 		if prerequisites:
@@ -236,7 +235,6 @@ class PackageInfoHandler:
 		return self.packageDetails
 
 	def prerequisiteMet(self, prerequisites):
-		met = True
 		if self.neededTag is None:
 			if "tag" in prerequisites:
 				return False
@@ -355,7 +353,7 @@ class PackageInfoHandler:
 			self.mergeServices(service["directory"], service["name"])
 
 	def readfile(self, filename):
-		if not os.path.isfile(filename):
+		if not path.isfile(filename):
 			return []
 		fd = open(filename)
 		lines = fd.readlines()
@@ -363,14 +361,14 @@ class PackageInfoHandler:
 		return lines
 
 	def mergeConfig(self, directory, name, merge=True):
-		if os.path.isfile(directory + name):
+		if path.isfile(directory + name):
 			config.loadFromFile(directory + name, base_file=False)
 			configfile.save()
 		self.installNext()
 
 	def installIPK(self, directory, name):
 		if self.blocking:
-			os.system("opkg install " + directory + name)
+			system("opkg install " + directory + name)
 			self.installNext()
 		else:
 			self.opkg = OpkgComponent()
@@ -392,7 +390,7 @@ class PackageInfoHandler:
 				self.installNext()
 
 	def mergeServices(self, directory, name, merge=False):
-		if os.path.isfile(directory + name):
+		if path.isfile(directory + name):
 			db = eDVBDB.getInstance()
 			db.reloadServicelist()
 			db.loadServicelist(directory + name)

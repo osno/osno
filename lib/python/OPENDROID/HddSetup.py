@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import absolute_import
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_GUISKIN, resolveFilename
 from enigma import *
 from enigma import getDesktop
