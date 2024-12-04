@@ -706,7 +706,7 @@ int eDVBCICcSession::generate_sign_A()
     RSA_private_encrypt(sizeof(dbuf), dbuf, sign_A, m_rsa_device_key, RSA_NO_PADDING);
 
     // Set the signature
-    m_ci_elements.set(SIGNATURE_A, sign_A, sizeof(sign_A);
+    m_ci_elements.set(SIGNATURE_A, sign_A, sizeof(sign_A));
 
 	return 0;
 }
