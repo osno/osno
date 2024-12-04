@@ -1062,6 +1062,27 @@ int eDVBCICcSession::sac_crypt(uint8_t *dst, const uint8_t *src, unsigned int le
 
     return 0;
 }
+
+X509 *eDVBCICcSession::import_ci_certificates(unsigned int id)
+{
+	X509 *cert;
+
+	if (!m_ci_elements.valid(id))
+	{
+		eWarning("[CI%d RCC] %u not valid", m_slot->getSlotID(), id);
+		return NULL;
+	}
+
+	cert = certificate_import_and_check(m_root_ca_store, m_ci_elements.get_ptr(id), m_ci_elements.get_buf(NULL, id));
+	if (!cert)
+	{
+		eWarning("[CI%d RCC] can not verify certificate %u", m_slot->getSlotID(), id);
+		return NULL;
+	}
+
+	return cert;
+}
+
 int eDVBCICcSession::check_ci_certificates()
 {
 	if (!m_ci_elements.valid(CICAM_BRAND_CERT))
