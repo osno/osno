@@ -1241,7 +1241,8 @@ class Disks:
                 size = 0
                 partitions = open("/proc/partitions")
                 for part in partitions:
-                        res = re.sub("\s+", " ", part).strip().split(" ")
+#                        res = re.sub("\s+", " ", part).strip().split(" ")
+                        res = re.sub(r"\s+", " ", part).strip().split(" ")
                         if res and len(res) == 4:
                                 if res[3] == dev:
                                         size = int(res[2])
