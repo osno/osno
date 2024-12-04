@@ -809,6 +809,12 @@ int eDVBCICcSession::generate_uri_confirm()
         EVP_MD_CTX_free(sha_ctx);
         return -8;
     }
+
+    EVP_MD_CTX_free(sha_ctx);
+
+    return 0;
+}
+
 void eDVBCICcSession::check_new_key()
 {
 	AES_KEY aes_ctx;
