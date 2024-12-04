@@ -1024,6 +1024,44 @@ int eDVBCICcSession::sac_crypt(uint8_t *dst, const uint8_t *src, unsigned int le
             EVP_CIPHER_CTX_free(ctx);
             return -1;
         }
+    }
+    else
+    {
+        // Esegui la decrittazione
+        if (EVP_DecryptUpdate(ctx, dst, &outlen, src, len) != 1)
+        {
+            eWarning("[CI%d RCC] Decryption failed", m_slot->getSlotID());
+            EVP_CIPHER_CTX_free(ctx);
+            return -1;
+        }
+    }
+
+    // Finalizza la cifratura/decrittazione
+    int tmplen;
+    if (encrypt)
+    {
+        if (EVP_EncryptFinal_ex(ctx, dst + outlen, &tmplen) != 1)
+        {
+            eWarning("[CI%d RCC] Final encryption failed", m_slot->getSlotID());
+            EVP_CIPHER_CTX_free(ctx);
+            return -1;
+        }
+    }
+    else
+    {
+        if (EVP_DecryptFinal_ex(ctx, dst + outlen, &tmplen) != 1)
+        {
+            eWarning("[CI%d RCC] Final decryption failed", m_slot->getSlotID());
+            EVP_CIPHER_CTX_free(ctx);
+            return -1;
+        }
+    }
+
+    // Libera il contesto
+    EVP_CIPHER_CTX_free(ctx);
+
+    return 0;
+}
 int eDVBCICcSession::check_ci_certificates()
 {
 	if (!m_ci_elements.valid(CICAM_BRAND_CERT))
