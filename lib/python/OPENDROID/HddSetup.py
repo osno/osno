@@ -1320,7 +1320,8 @@ class MountPoints():
                 for row in rows:
                         self.entries.append({
                                 "row": row,
-                                "data": re.split("\s+", row),
+#                                "data": re.split("\s+", row),
+                                "data": re.split(r"\s+", row),
                                 "modified": False
                         })
 
