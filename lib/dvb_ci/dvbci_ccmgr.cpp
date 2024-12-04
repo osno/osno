@@ -1011,7 +1011,6 @@ int eDVBCICcSession::sac_crypt(uint8_t *dst, const uint8_t *src, unsigned int le
             EVP_CIPHER_CTX_free(ctx);
             return -1;
         }
-    }
 int eDVBCICcSession::check_ci_certificates()
 {
 	if (!m_ci_elements.valid(CICAM_BRAND_CERT))
