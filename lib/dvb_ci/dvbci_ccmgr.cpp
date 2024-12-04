@@ -6,8 +6,12 @@
 #include <lib/dvb_ci/aes_xcbc_mac.h>
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci_ccmgr_helper.h>
-
-#include <openssl/evp.h>  // Includi l'header per la nuova API
+#include <openssl/aes.h>
+#include <openssl/evp.h>
+#include <openssl/rsa.h>
+#include <openssl/pem.h>
+#include <openssl/sha.h>
+#include <openssl/err.h>
 
 
 eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version) : 
@@ -650,50 +654,59 @@ int eDVBCICcSession::generate_dh_key()
 
 int eDVBCICcSession::generate_sign_A()
 {
-	unsigned char dest[302];
-	uint8_t hash[20];
-	unsigned char dbuf[256];
-	unsigned char sign_A[256];
+    unsigned char dest[302];
+    uint8_t hash[32];  // SHA256 produces a 32-byte hash
+    unsigned char dbuf[256];
+    unsigned char sign_A[256];
 
-	if (!m_ci_elements.valid(AUTH_NONCE))
-		return -1;
+    // Check if required elements are valid
+    if (!m_ci_elements.valid(AUTH_NONCE))
+        return -1;
 
-	if (!m_ci_elements.valid(DHPH))
-		return -1;
+    if (!m_ci_elements.valid(DHPH))
+        return -1;
 
-	dest[0x00] = 0x00; /* version */
-	dest[0x01] = 0x00;
-	dest[0x02] = 0x08; /* len (bits) */
-	dest[0x03] = 0x01; /* version data */
+    // Fill the destination buffer with data
+    dest[0x00] = 0x00;  /* version */
+    dest[0x01] = 0x00;
+    dest[0x02] = 0x08;  /* len (bits) */
+    dest[0x03] = 0x01;  /* version data */
 
-	dest[0x04] = 0x01; /* msg_label */
-	dest[0x05] = 0x00;
-	dest[0x06] = 0x08; /* len (bits) */
-	dest[0x07] = 0x02; /* message data */
+    dest[0x04] = 0x01;  /* msg_label */
+    dest[0x05] = 0x00;
+    dest[0x06] = 0x08;  /* len (bits) */
+    dest[0x07] = 0x02;  /* message data */
 
-	dest[0x08] = 0x02; /* auth_nonce */
-	dest[0x09] = 0x01;
-	dest[0x0a] = 0x00; /* len (bits) */
-	memcpy(&dest[0x0b], m_ci_elements.get_ptr(AUTH_NONCE), 32);
+    dest[0x08] = 0x02;  /* auth_nonce */
+    dest[0x09] = 0x01;
+    dest[0x0a] = 0x00;  /* len (bits) */
+    memcpy(&dest[0x0b], m_ci_elements.get_ptr(AUTH_NONCE), 32);
 
-	dest[0x2b] = 0x04; /* DHPH */
-	dest[0x2c] = 0x08;
-	dest[0x2d] = 0x00; /* len (bits) */
-	memcpy(&dest[0x2e], m_ci_elements.get_ptr(DHPH), 256);
+    dest[0x2b] = 0x04;  /* DHPH */
+    dest[0x2c] = 0x08;
+    dest[0x2d] = 0x00;  /* len (bits) */
+    memcpy(&dest[0x2e], m_ci_elements.get_ptr(DHPH), 256);
 
-	SHA1(dest, 0x12e, hash);
+    // SHA256 hashing
+    SHA256_CTX sha;
+    SHA256_Init(&sha);
+    SHA256_Update(&sha, dest, sizeof(dest));
+    SHA256_Final(hash, &sha);
 
-	m_rsa_device_key = rsa_privatekey_open("/etc/ciplus/device.pem");
-	if (!m_rsa_device_key)
-	{
-		eWarning("[CI%d RCC] can not read private key", m_slot->getSlotID());
-		return -1;
-	}
+    // Open the RSA private key
+    m_rsa_device_key = rsa_privatekey_open("/etc/ciplus/device.pem");
+    if (!m_rsa_device_key)
+    {
+        eWarning("[CI%d RCC] can not read private key", m_slot->getSlotID());
+        return -1;
+    }
 
-	RSA_padding_add_PKCS1_PSS(m_rsa_device_key, dbuf, hash, EVP_sha1(), 20);
-	RSA_private_encrypt(sizeof(dbuf), dbuf, sign_A, m_rsa_device_key, RSA_NO_PADDING);
+    // RSA padding and signing
+    RSA_padding_add_PKCS1_PSS(m_rsa_device_key, dbuf, hash, EVP_sha256(), 32);
+    RSA_private_encrypt(sizeof(dbuf), dbuf, sign_A, m_rsa_device_key, RSA_NO_PADDING);
 
-	m_ci_elements.set(SIGNATURE_A, sign_A, sizeof(sign_A));
+    // Set the signature
+    m_ci_elements.set(SIGNATURE_A, sign_A, sizeof(sign_A)
 
 	return 0;
 }
@@ -749,28 +762,53 @@ int eDVBCICcSession::restart_dh_challenge()
 
 int eDVBCICcSession::generate_uri_confirm()
 {
-	SHA256_CTX sha;
-	uint8_t uck[32];
-	uint8_t uri_confirm[32];
+    uint8_t uck[32];
+    uint8_t uri_confirm[32];
 
-	// eDebug("[CI%d RCC] uri_confirm...", m_slot->getSlotID());
+    EVP_MD_CTX *sha_ctx = EVP_MD_CTX_new(); // Crea un contesto per SHA256
+    if (sha_ctx == nullptr) {
+        // Gestisci l'errore in caso di fallimento della creazione del contesto
+        return -1;
+    }
 
-	// UCK
-	SHA256_Init(&sha);
-	SHA256_Update(&sha, m_sak, 16);
-	SHA256_Final(uck, &sha);
+    // Calcolo UCK
+    if (EVP_DigestInit_ex(sha_ctx, EVP_sha256(), nullptr) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -2;
+    }
+    if (EVP_DigestUpdate(sha_ctx, m_sak, 16) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -3;
+    }
+    if (EVP_DigestFinal_ex(sha_ctx, uck, nullptr) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -4;
+    }
 
-	// uri_confirm
-	SHA256_Init(&sha);
-	SHA256_Update(&sha, m_ci_elements.get_ptr(URI_MESSAGE), m_ci_elements.get_buf(NULL, URI_MESSAGE));
-	SHA256_Update(&sha, uck, 32);
-	SHA256_Final(uri_confirm, &sha);
-
-	m_ci_elements.set(URI_CONFIRM, uri_confirm, 32);
-
-	return 0;
-}
-
+    // Calcolo uri_confirm
+    if (EVP_DigestInit_ex(sha_ctx, EVP_sha256(), nullptr) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -5;
+    }
+    if (EVP_DigestUpdate(sha_ctx, m_ci_elements.get_ptr(URI_MESSAGE), m_ci_elements.get_buf(nullptr, URI_MESSAGE)) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -6;
+    }
+    if (EVP_DigestUpdate(sha_ctx, uck, 32) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -7;
+    }
+    if (EVP_DigestFinal_ex(sha_ctx, uri_confirm, nullptr) != 1) {
+        // Gestisci l'errore
+        EVP_MD_CTX_free(sha_ctx);
+        return -8;
+    }
 void eDVBCICcSession::check_new_key()
 {
 	AES_KEY aes_ctx;
@@ -844,14 +882,34 @@ void eDVBCICcSession::set_descrambler_key()
 
 void eDVBCICcSession::generate_key_seed()
 {
-	SHA256_CTX sha;
+    EVP_MD_CTX *mdctx = EVP_MD_CTX_new();  // Crea un contesto per l'hash
 
-	SHA256_Init(&sha);
-	SHA256_Update(&sha, &m_dhsk[240], 16);
-	SHA256_Update(&sha, m_ci_elements.get_ptr(AKH), m_ci_elements.get_buf(NULL, AKH));
-	SHA256_Update(&sha, m_ci_elements.get_ptr(NS_HOST), m_ci_elements.get_buf(NULL, NS_HOST));
-	SHA256_Update(&sha, m_ci_elements.get_ptr(NS_MODULE), m_ci_elements.get_buf(NULL, NS_MODULE));
-	SHA256_Final(m_ks_host, &sha);
+    if (mdctx == NULL) {
+        // Gestisci l'errore se non è stato possibile creare il contesto
+        return;
+    }
+
+    // Inizializza il contesto con SHA-256
+    if (EVP_DigestInit_ex(mdctx, EVP_sha256(), NULL) != 1) {
+        EVP_MD_CTX_free(mdctx);  // Libera il contesto in caso di errore
+        return;
+    }
+
+    // Aggiungi i dati al digest
+    EVP_DigestUpdate(mdctx, &m_dhsk[240], 16);
+    EVP_DigestUpdate(mdctx, m_ci_elements.get_ptr(AKH), m_ci_elements.get_buf(NULL, AKH));
+    EVP_DigestUpdate(mdctx, m_ci_elements.get_ptr(NS_HOST), m_ci_elements.get_buf(NULL, NS_HOST));
+    EVP_DigestUpdate(mdctx, m_ci_elements.get_ptr(NS_MODULE), m_ci_elements.get_buf(NULL, NS_MODULE));
+
+    // Calcola il risultato e memorizzalo in `m_ks_host`
+    unsigned int len;
+    if (EVP_DigestFinal_ex(mdctx, m_ks_host, &len) != 1) {
+        EVP_MD_CTX_free(mdctx);  // Libera il contesto in caso di errore
+        return;
+    }
+
+    // Libera il contesto
+    EVP_MD_CTX_free(mdctx);
 }
 
 void eDVBCICcSession::generate_ns_host()
