@@ -986,40 +986,32 @@ int eDVBCICcSession::sac_gen_auth(uint8_t *out, uint8_t *in, unsigned int len)
 
 int eDVBCICcSession::sac_crypt(uint8_t *dst, const uint8_t *src, unsigned int len, int encrypt)
 {
-	AES_KEY key;
-	uint8_t iv[16];
-	memcpy(iv, m_iv, 16); // use copy as iv is changed by AES_cbc_encrypt
+    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new(); // Crea un contesto di cifratura
+    if (ctx == nullptr)
+    {
+        eWarning("[CI%d RCC] Failed to create cipher context", m_slot->getSlotID());
+        return -1;
+    }
 
-	if (encrypt)
-		AES_set_encrypt_key(m_sek, 128, &key);
-	else
-		AES_set_decrypt_key(m_sek, 128, &key);
-
-	AES_cbc_encrypt(src, dst, len, &key, iv, encrypt);
-
-	return 0;
-}
-
-X509 *eDVBCICcSession::import_ci_certificates(unsigned int id)
-{
-	X509 *cert;
-
-	if (!m_ci_elements.valid(id))
-	{
-		eWarning("[CI%d RCC] %u not valid", m_slot->getSlotID(), id);
-		return NULL;
-	}
-
-	cert = certificate_import_and_check(m_root_ca_store, m_ci_elements.get_ptr(id), m_ci_elements.get_buf(NULL, id));
-	if (!cert)
-	{
-		eWarning("[CI%d RCC] can not verify certificate %u", m_slot->getSlotID(), id);
-		return NULL;
-	}
-
-	return cert;
-}
-
+    // Inizializza il contesto di cifratura con AES-128 CBC
+    if (encrypt)
+    {
+        if (EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, m_sek, m_iv) != 1)
+        {
+            eWarning("[CI%d RCC] Encryption init failed", m_slot->getSlotID());
+            EVP_CIPHER_CTX_free(ctx);
+            return -1;
+        }
+    }
+    else
+    {
+        if (EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, m_sek, m_iv) != 1)
+        {
+            eWarning("[CI%d RCC] Decryption init failed", m_slot->getSlotID());
+            EVP_CIPHER_CTX_free(ctx);
+            return -1;
+        }
+    }
 int eDVBCICcSession::check_ci_certificates()
 {
 	if (!m_ci_elements.valid(CICAM_BRAND_CERT))
