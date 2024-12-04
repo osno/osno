@@ -7,12 +7,14 @@
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci_ccmgr_helper.h>
 
-#include <openssl/aes.h>
+#include <openssl/evp.h>  // Includi l'header per la nuova API
 
-eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version) : m_slot(slot), m_akh_index(0),
-																  m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
-																  m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
-																  m_rsa_device_key(nullptr), m_dh(nullptr)
+
+eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version) : 
+	m_slot(slot), m_akh_index(0),
+	m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
+	m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
+	m_rsa_device_key(nullptr), m_dh(nullptr)
 {
 	uint8_t buf[32], host_id[8];
 
@@ -486,18 +488,39 @@ int eDVBCICcSession::data_req_handle_new(unsigned int id)
 
 int eDVBCICcSession::generate_akh()
 {
-	uint8_t akh[32];
-	SHA256_CTX sha;
+    uint8_t akh[32];  // Array per memorizzare l'AKH
+    EVP_MD_CTX *mdctx = EVP_MD_CTX_new();  // Crea un contesto per l'hash
 
-	SHA256_Init(&sha);
-	SHA256_Update(&sha, m_ci_elements.get_ptr(CICAM_ID), m_ci_elements.get_buf(NULL, CICAM_ID));
-	SHA256_Update(&sha, m_ci_elements.get_ptr(HOST_ID), m_ci_elements.get_buf(NULL, HOST_ID));
-	SHA256_Update(&sha, m_dhsk, 256);
-	SHA256_Final(akh, &sha);
+    if (mdctx == NULL) {
+        // Gestisci l'errore se non è stato possibile creare il contesto
+        return -1;
+    }
 
-	m_ci_elements.set(AKH, akh, sizeof(akh));
+    // Inizializza il contesto con SHA-256
+    if (EVP_DigestInit_ex(mdctx, EVP_sha256(), NULL) != 1) {
+        EVP_MD_CTX_free(mdctx);  // Libera il contesto in caso di errore
+        return -1;
+    }
 
-	return 0;
+    // Aggiungi i dati al digest
+    EVP_DigestUpdate(mdctx, m_ci_elements.get_ptr(CICAM_ID), m_ci_elements.get_buf(NULL, CICAM_ID));
+    EVP_DigestUpdate(mdctx, m_ci_elements.get_ptr(HOST_ID), m_ci_elements.get_buf(NULL, HOST_ID));
+    EVP_DigestUpdate(mdctx, m_dhsk, 256);
+
+    // Calcola il risultato e memorizzalo in `akh`
+    unsigned int len;
+    if (EVP_DigestFinal_ex(mdctx, akh, &len) != 1) {
+        EVP_MD_CTX_free(mdctx);  // Libera il contesto in caso di errore
+        return -1;
+    }
+
+    // Libera il contesto
+    EVP_MD_CTX_free(mdctx);
+
+    // Memorizza l'AKH
+    m_ci_elements.set(AKH, akh, sizeof(akh));
+
+    return 0;
 }
 
 int eDVBCICcSession::compute_dh_key()
