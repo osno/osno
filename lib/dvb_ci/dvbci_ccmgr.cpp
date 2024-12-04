@@ -1011,6 +1011,19 @@ int eDVBCICcSession::sac_crypt(uint8_t *dst, const uint8_t *src, unsigned int le
             EVP_CIPHER_CTX_free(ctx);
             return -1;
         }
+    }
+
+    // Buffer temporaneo per i dati cifrati
+    int outlen;
+    if (encrypt)
+    {
+        // Esegui la cifratura
+        if (EVP_EncryptUpdate(ctx, dst, &outlen, src, len) != 1)
+        {
+            eWarning("[CI%d RCC] Encryption failed", m_slot->getSlotID());
+            EVP_CIPHER_CTX_free(ctx);
+            return -1;
+        }
 int eDVBCICcSession::check_ci_certificates()
 {
 	if (!m_ci_elements.valid(CICAM_BRAND_CERT))
