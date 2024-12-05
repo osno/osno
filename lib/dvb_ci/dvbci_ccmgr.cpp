@@ -74,7 +74,7 @@ eDVBCICcSession::~eDVBCICcSession()
 
     // Sostituito RSA_free con EVP_PKEY_free per compatibilità con OpenSSL 3.0
     if (m_rsa_device_key)
-        EVP_PKEY_free(m_rsa_device_key); // Dealloca usando EVP_PKEY
+        EVP_PKEY*_free(m_rsa_device_key); // Dealloca usando EVP_PKEY
 
     if (m_dh)
         DH_free(m_dh);
