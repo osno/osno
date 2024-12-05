@@ -7,80 +7,209 @@
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci_ccmgr_helper.h>
 #include <openssl/aes.h>
+
 #include <openssl/evp.h>
-#include <openssl/rsa.h>
-#include <openssl/pem.h>
-#include <openssl/sha.h>
-#include <openssl/err.h>
+#include <openssl/x509.h>
+#include <openssl/core_names.h>
+#include <openssl/params.h>
+#include <cstring> // Per memset
+#include "eDVBCISlot.h" // Includi il file della classe
+#include "eDVBCICcSession.h" // Includi il file header della classe
 
-
-eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version) : 
-	m_slot(slot), m_akh_index(0),
-	m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
-	m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
-	m_rsa_device_key(nullptr), m_dh(nullptr)
+eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version)
+    : m_slot(slot), m_akh_index(0),
+      m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
+      m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
+      m_rsa_device_key(nullptr), m_dh_key(nullptr) // Usando EVP_PKEY al posto di DH*
 {
-	uint8_t buf[32], host_id[8];
+    uint8_t buf[32], host_id[8];
 
-	m_slot->setCCManager(this);
-	m_descrambler_fd = -1;
-	m_current_ca_demux_id = 0;
-	m_descrambler_new_key = false;
+    m_slot->setCCManager(this);
+    m_descrambler_fd = -1;
+    m_current_ca_demux_id = 0;
+    m_descrambler_new_key = false;
 
-	parameter_init(m_slot->getSlotID(), m_dh_p, m_dh_g, m_dh_q, m_s_key, m_key_data, m_iv);
+    // Funzione per inizializzare i parametri
+    parameter_init(m_slot->getSlotID(), m_dh_p, m_dh_g, m_dh_q, m_s_key, m_key_data, m_iv);
 
-	m_ci_elements.init();
+    m_ci_elements.init();
 
-	memset(buf, 0, 1);
-	if (!m_ci_elements.set(STATUS_FIELD, buf, 1))
-		eWarning("[CI%d RCC] can not set status", m_slot->getSlotID());
+    memset(buf, 0, 1);
+    if (!m_ci_elements.set(STATUS_FIELD, buf, 1))
+        eWarning("[CI%d RCC] can not set status", m_slot->getSlotID());
 
-	memset(buf, 0, 32);
-	buf[31] = 0x01; // URI_PROTOCOL_V1
-	if (version >= 2)
-		buf[31] |= 0x02; // URI_PROTOCOL_V2
-	if (version >= 4)
-		buf[31] |= 0x04; // URI_PROTOCOL_V4
+    memset(buf, 0, 32);
+    buf[31] = 0x01; // URI_PROTOCOL_V1
+    if (version >= 2)
+        buf[31] |= 0x02; // URI_PROTOCOL_V2
+    if (version >= 4)
+        buf[31] |= 0x04; // URI_PROTOCOL_V4
 
-	if (!m_ci_elements.set(URI_VERSIONS, buf, 32))
-		eWarning("[CI%d RCC] can not set uri_versions", m_slot->getSlotID());
+    if (!m_ci_elements.set(URI_VERSIONS, buf, 32))
+        eWarning("[CI%d RCC] can not set uri_versions", m_slot->getSlotID());
 
-	if (!get_authdata(host_id, m_dhsk, buf, m_slot->getSlotID(), m_akh_index))
-	{
-		memset(buf, 0, sizeof(buf));
-		m_akh_index = 5;
-	}
+    if (!get_authdata(host_id, m_dhsk, buf, m_slot->getSlotID(), m_akh_index))
+    {
+        memset(buf, 0, sizeof(buf));
+        m_akh_index = 5;
+    }
 
-	if (!m_ci_elements.set(AKH, buf, 32))
-		eWarning("[CI%d RCC] can not set AKH", m_slot->getSlotID());
+    if (!m_ci_elements.set(AKH, buf, 32))
+        eWarning("[CI%d RCC] can not set AKH", m_slot->getSlotID());
 
-	if (!m_ci_elements.set(HOST_ID, host_id, 8))
-		eWarning("[CI%d RCC] can not set host_id", m_slot->getSlotID());
+    if (!m_ci_elements.set(HOST_ID, host_id, 8))
+        eWarning("[CI%d RCC] can not set host_id", m_slot->getSlotID());
 }
 
 eDVBCICcSession::~eDVBCICcSession()
 {
-	m_slot->setCCManager(0);
-	if (m_slot->getDescramblingOptions() != 1 && m_slot->getDescramblingOptions() != 3)
-		descrambler_deinit(m_descrambler_fd);
+    m_slot->setCCManager(nullptr);
 
-	if (m_root_ca_store)
-		X509_STORE_free(m_root_ca_store);
-	if (m_cust_cert)
-		X509_free(m_cust_cert);
-	if (m_device_cert)
-		X509_free(m_device_cert);
-	if (m_ci_cust_cert)
-		X509_free(m_ci_cust_cert);
-	if (m_ci_device_cert)
-		X509_free(m_ci_device_cert);
-	if (m_rsa_device_key)
-		RSA_free(m_rsa_device_key);
-	if (m_dh)
-		DH_free(m_dh);
+    if (m_slot->getDescramblingOptions() != 1 && m_slot->getDescramblingOptions() != 3)
+        descrambler_deinit(m_descrambler_fd);
 
-	m_ci_elements.init();
+    if (m_root_ca_store)
+        X509_STORE_free(m_root_ca_store);
+    if (m_cust_cert)
+        X509_free(m_cust_cert);
+    if (m_device_cert)
+        X509_free(m_device_cert);
+    if (m_ci_cust_cert)
+        X509_free(m_ci_cust_cert);
+    if (m_ci_device_cert)
+        X509_free(m_ci_device_cert);
+    if (m_rsa_device_key)
+        RSA_free(m_rsa_device_key);
+    if (m_dh_key)
+        EVP_PKEY_free(m_dh_key); // Libera la chiave DH usando la nuova API
+
+    m_ci_elements.init();
 }
+
+// Metodo per generare la chiave DH utilizzando la nuova API
+void eDVBCICcSession::generate_dh_key()
+{
+    // Usa EVP_PKEY per generare una chiave DH
+    EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_DH, nullptr);
+    if (!ctx)
+    {
+        eError("Error creating EVP_PKEY_CTX for DH key generation.");
+        return;
+    }
+
+    if (EVP_PKEY_keygen_init(ctx) <= 0)
+    {
+        eError("Error initializing DH keygen.");
+        EVP_PKEY_CTX_free(ctx);
+        return;
+    }
+
+    if (EVP_PKEY_keygen(ctx, &m_dh_key) <= 0)
+    {
+        eError("Error generating DH key.");
+        EVP_PKEY_CTX_free(ctx);
+        return;
+    }
+
+    EVP_PKEY_CTX_free(ctx);
+}
+
+// Metodo per calcolare la chiave condivisa DH
+int eDVBCICcSession::compute_dh_key()
+{
+    if (!m_dh_key)
+    {
+        eError("DH key not initialized.");
+        return -1;
+    }
+
+    EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new(m_dh_key, nullptr);
+    if (!ctx)
+    {
+        eError("Error creating EVP_PKEY_CTX for DH key computation.");
+        return -1;
+    }
+
+    uint8_t shared_key[256];
+    size_t shared_key_len = sizeof(shared_key);
+
+    if (EVP_PKEY_derive(ctx, shared_key, &shared_key_len) <= 0)
+    {
+        eError("Error deriving DH shared key.");
+        EVP_PKEY_CTX_free(ctx);
+        return -1;
+    }
+
+    EVP_PKEY_CTX_free(ctx);
+    return 0;
+}
+
+// Modifica delle funzioni di hashing con SHA256
+void eDVBCICcSession::generate_sign_A()
+{
+    uint8_t hash[SHA256_DIGEST_LENGTH];
+    EVP_MD_CTX *md_ctx = EVP_MD_CTX_new();
+
+    if (!md_ctx)
+    {
+        eError("Error creating EVP_MD_CTX for SHA256.");
+        return;
+    }
+
+    if (EVP_DigestInit_ex(md_ctx, EVP_sha256(), nullptr) <= 0)
+    {
+        eError("Error initializing SHA256.");
+        EVP_MD_CTX_free(md_ctx);
+        return;
+    }
+
+    if (EVP_DigestUpdate(md_ctx, m_s_key, sizeof(m_s_key)) <= 0)
+    {
+        eError("Error updating SHA256.");
+        EVP_MD_CTX_free(md_ctx);
+        return;
+    }
+
+    if (EVP_DigestFinal_ex(md_ctx, hash, nullptr) <= 0)
+    {
+        eError("Error finalizing SHA256.");
+        EVP_MD_CTX_free(md_ctx);
+        return;
+    }
+
+    EVP_MD_CTX_free(md_ctx);
+
+    // Usa RSA per la firma
+    if (RSA_padding_add_PKCS1_PSS(m_rsa_device_key, hash, EVP_sha256(), 32) <= 0)
+    {
+        eError("Error padding RSA PSS.");
+        return;
+    }
+
+    uint8_t signature[256];
+    if (RSA_private_encrypt(sizeof(hash), hash, signature, m_rsa_device_key, RSA_NO_PADDING) <= 0)
+    {
+        eError("Error encrypting with RSA.");
+        return;
+    }
+
+    // Aggiungi la firma al campo appropriato
+    // ...
+}
+
+void eDVBCICcSession::check_new_key()
+{
+    AES_KEY aes_ctx;
+    if (AES_set_encrypt_key(m_s_key, 128, &aes_ctx) != 0)
+    {
+        eError("Error setting AES encryption key.");
+        return;
+    }
+
+    uint8_t enc_data[128]; // Dati cifrati
+    AES_ecb_encrypt(m_key_data, enc_data, &aes_ctx, AES_ENCRYPT);
+}
+
 
 int eDVBCICcSession::receivedAPDU(const unsigned char *tag, const void *data, int len)
 {
