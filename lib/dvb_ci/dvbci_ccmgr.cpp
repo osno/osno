@@ -5,7 +5,8 @@
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci_ccmgr_helper.h>
 #include <openssl/evp.h>
-#include <openssl/aes.h> // Inclusione della libreria AES
+#include <openssl/aes.h>
+#include <openssl/rsa.h>  // Inclusione di RSA
 
 eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version) 
     : m_slot(slot), m_akh_index(0),
@@ -74,7 +75,7 @@ eDVBCICcSession::~eDVBCICcSession()
 
     // Sostituito RSA_free con EVP_PKEY_free per compatibilità con OpenSSL 3.0
     if (m_rsa_device_key)
-        EVP_PKEY* m_rsa_device_key; // Dealloca usando EVP_PKEY
+        EVP_PKEY_free(m_rsa_device_key); // Dealloca usando EVP_PKEY
 
     if (m_dh)
         DH_free(m_dh);
