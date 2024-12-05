@@ -1,7 +1,5 @@
 /* DVB CI Content Control Manager */
-
 #include <lib/dvb_ci/dvbci_ccmgr.h>
-
 #include <lib/dvb_ci/dvbci.h>
 #include <lib/dvb_ci/aes_xcbc_mac.h>
 #include <lib/dvb_ci/descrambler.h>
@@ -73,8 +71,11 @@ eDVBCICcSession::~eDVBCICcSession()
         X509_free(m_ci_cust_cert);
     if (m_ci_device_cert)
         X509_free(m_ci_device_cert);
+
+    // Sostituito RSA_free con EVP_PKEY_free per compatibilità con OpenSSL 3.0
     if (m_rsa_device_key)
-        RSA_free(m_rsa_device_key);
+        EVP_PKEY_free(m_rsa_device_key); // Dealloca usando EVP_PKEY
+
     if (m_dh)
         DH_free(m_dh);
 
