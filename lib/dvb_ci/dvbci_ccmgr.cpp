@@ -1,80 +1,85 @@
 /* DVB CI Content Control Manager */
-
 #include <lib/dvb_ci/dvbci_ccmgr.h>
-
 #include <lib/dvb_ci/dvbci.h>
 #include <lib/dvb_ci/aes_xcbc_mac.h>
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci_ccmgr_helper.h>
-
 #include <openssl/aes.h>
+#include <openssl/evp.h>  // Per gestione generica delle chiavi (RSA, DH)
+#include <openssl/rsa.h>   // Per RSA
+#include <openssl/dh.h>    // Per DH
+#include <openssl/x509.h>
 
-eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version) : m_slot(slot), m_akh_index(0),
-																  m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
-																  m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
-																  m_rsa_device_key(nullptr), m_dh(nullptr)
+eDVBCICcSession::eDVBCICcSession(eDVBCISlot *slot, int version)
+    : m_slot(slot), m_akh_index(0),
+      m_root_ca_store(nullptr), m_cust_cert(nullptr), m_device_cert(nullptr),
+      m_ci_cust_cert(nullptr), m_ci_device_cert(nullptr),
+      m_rsa_device_key(nullptr), m_dh(nullptr)  // Usato EVP_PKEY per RSA e DH
 {
-	uint8_t buf[32], host_id[8];
+    uint8_t buf[32], host_id[8];
 
-	m_slot->setCCManager(this);
-	m_descrambler_fd = -1;
-	m_current_ca_demux_id = 0;
-	m_descrambler_new_key = false;
+    m_slot->setCCManager(this);
+    m_descrambler_fd = -1;
+    m_current_ca_demux_id = 0;
+    m_descrambler_new_key = false;
 
-	parameter_init(m_slot->getSlotID(), m_dh_p, m_dh_g, m_dh_q, m_s_key, m_key_data, m_iv);
+    parameter_init(m_slot->getSlotID(), m_dh_p, m_dh_g, m_dh_q, m_s_key, m_key_data, m_iv);
 
-	m_ci_elements.init();
+    m_ci_elements.init();
 
-	memset(buf, 0, 1);
-	if (!m_ci_elements.set(STATUS_FIELD, buf, 1))
-		eWarning("[CI%d RCC] can not set status", m_slot->getSlotID());
+    memset(buf, 0, 1);
+    if (!m_ci_elements.set(STATUS_FIELD, buf, 1))
+        eWarning("[CI%d RCC] can not set status", m_slot->getSlotID());
 
-	memset(buf, 0, 32);
-	buf[31] = 0x01; // URI_PROTOCOL_V1
-	if (version >= 2)
-		buf[31] |= 0x02; // URI_PROTOCOL_V2
-	if (version >= 4)
-		buf[31] |= 0x04; // URI_PROTOCOL_V4
+    memset(buf, 0, 32);
+    buf[31] = 0x01; // URI_PROTOCOL_V1
+    if (version >= 2)
+        buf[31] |= 0x02; // URI_PROTOCOL_V2
+    if (version >= 4)
+        buf[31] |= 0x04; // URI_PROTOCOL_V4
 
-	if (!m_ci_elements.set(URI_VERSIONS, buf, 32))
-		eWarning("[CI%d RCC] can not set uri_versions", m_slot->getSlotID());
+    if (!m_ci_elements.set(URI_VERSIONS, buf, 32))
+        eWarning("[CI%d RCC] can not set uri_versions", m_slot->getSlotID());
 
-	if (!get_authdata(host_id, m_dhsk, buf, m_slot->getSlotID(), m_akh_index))
-	{
-		memset(buf, 0, sizeof(buf));
-		m_akh_index = 5;
-	}
+    if (!get_authdata(host_id, m_dhsk, buf, m_slot->getSlotID(), m_akh_index))
+    {
+        memset(buf, 0, sizeof(buf));
+        m_akh_index = 5;
+    }
 
-	if (!m_ci_elements.set(AKH, buf, 32))
-		eWarning("[CI%d RCC] can not set AKH", m_slot->getSlotID());
+    if (!m_ci_elements.set(AKH, buf, 32))
+        eWarning("[CI%d RCC] can not set AKH", m_slot->getSlotID());
 
-	if (!m_ci_elements.set(HOST_ID, host_id, 8))
-		eWarning("[CI%d RCC] can not set host_id", m_slot->getSlotID());
+    if (!m_ci_elements.set(HOST_ID, host_id, 8))
+        eWarning("[CI%d RCC] can not set host_id", m_slot->getSlotID());
 }
 
 eDVBCICcSession::~eDVBCICcSession()
 {
-	m_slot->setCCManager(0);
-	if (m_slot->getDescramblingOptions() != 1 && m_slot->getDescramblingOptions() != 3)
-		descrambler_deinit(m_descrambler_fd);
+    m_slot->setCCManager(0);
+    if (m_slot->getDescramblingOptions() != 1 && m_slot->getDescramblingOptions() != 3)
+        descrambler_deinit(m_descrambler_fd);
 
-	if (m_root_ca_store)
-		X509_STORE_free(m_root_ca_store);
-	if (m_cust_cert)
-		X509_free(m_cust_cert);
-	if (m_device_cert)
-		X509_free(m_device_cert);
-	if (m_ci_cust_cert)
-		X509_free(m_ci_cust_cert);
-	if (m_ci_device_cert)
-		X509_free(m_ci_device_cert);
-	if (m_rsa_device_key)
-		RSA_free(m_rsa_device_key);
-	if (m_dh)
-		DH_free(m_dh);
+    if (m_root_ca_store)
+        X509_STORE_free(m_root_ca_store);
+    if (m_cust_cert)
+        X509_free(m_cust_cert);
+    if (m_device_cert)
+        X509_free(m_device_cert);
+    if (m_ci_cust_cert)
+        X509_free(m_ci_cust_cert);
+    if (m_ci_device_cert)
+        X509_free(m_ci_device_cert);
 
-	m_ci_elements.init();
+    // Gestione delle chiavi con EVP_PKEY
+    if (m_rsa_device_key)
+        EVP_PKEY_free(m_rsa_device_key);  // Deallocazione della chiave RSA
+    if (m_dh)
+        EVP_PKEY_free(m_dh);  // Deallocazione della chiave DH
+
+    m_ci_elements.init();
 }
+
 
 int eDVBCICcSession::receivedAPDU(const unsigned char *tag, const void *data, int len)
 {
@@ -221,144 +226,229 @@ void eDVBCICcSession::cc_sync_req(const uint8_t *data, unsigned int len)
 
 void eDVBCICcSession::cc_sac_data_req(const uint8_t *data, unsigned int len)
 {
-	const uint8_t data_cnf_tag[3] = {0x9f, 0x90, 0x08};
-	uint8_t dest[BUFSIZ];
-	uint8_t tmp[len];
-	int id_bitmask, dt_nr;
-	unsigned int serial;
-	int answ_len;
-	int pos = 0;
-	unsigned int rp = 0;
+    const uint8_t data_cnf_tag[3] = {0x9f, 0x90, 0x08};
+    uint8_t dest[BUFSIZ];
+    uint8_t tmp[len];
+    int id_bitmask, dt_nr;
+    unsigned int serial;
+    int answ_len;
+    int pos = 0;
+    unsigned int rp = 0;
 
-	if (len < 10)
-		return;
+    if (len < 10)
+        return;
 
-	eTraceNoNewLineStart("[CI%d RCC] cc_sac_data_req: ", m_slot->getSlotID());
-	traceHexdump(data, len);
+    eTraceNoNewLineStart("[CI%d RCC] cc_sac_data_req: ", m_slot->getSlotID());
+    traceHexdump(data, len);
 
-	memcpy(tmp, data, 8);
-	sac_crypt(&tmp[8], &data[8], len - 8, AES_DECRYPT);
-	data = tmp;
+    // Decrypt the data using EVP interface
+    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+    if (!ctx)
+    {
+        eWarning("[CI%d RCC] Failed to create EVP_CIPHER_CTX", m_slot->getSlotID());
+        return;
+    }
 
-	if (!sac_check_auth(data, len))
-	{
-		eWarning("[CI%d RCC] cc_sac_data_req check_auth of message failed", m_slot->getSlotID());
-		return;
-	}
+    uint8_t key[16], iv[16]; // Replace these with actual key and IV
+    memset(key, 0, sizeof(key));
+    memset(iv, 0, sizeof(iv));
 
-	serial = UINT32(&data[rp], 4);
-	eDebug("[CI%d RCC] cc_sac_data_req serial %u\n", m_slot->getSlotID(), serial);
+    if (EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv) != 1)
+    {
+        eWarning("[CI%d RCC] EVP_DecryptInit_ex failed", m_slot->getSlotID());
+        EVP_CIPHER_CTX_free(ctx);
+        return;
+    }
 
-	/* skip serial & header */
-	rp += 8;
+    int out_len = 0, final_len = 0;
 
-	id_bitmask = data[rp++];
+    if (EVP_DecryptUpdate(ctx, tmp, &out_len, data, len) != 1)
+    {
+        eWarning("[CI%d RCC] EVP_DecryptUpdate failed", m_slot->getSlotID());
+        EVP_CIPHER_CTX_free(ctx);
+        return;
+    }
 
-	/* handle data loop */
-	dt_nr = data[rp++];
-	rp += data_get_loop(&data[rp], len - rp, dt_nr);
+    if (EVP_DecryptFinal_ex(ctx, tmp + out_len, &final_len) != 1)
+    {
+        eWarning("[CI%d RCC] EVP_DecryptFinal_ex failed", m_slot->getSlotID());
+        EVP_CIPHER_CTX_free(ctx);
+        return;
+    }
 
-	if (len < rp + 1)
-	{
-		eWarning("[CI%d RCC] cc_sac_data_req check_auth of message too short", m_slot->getSlotID());
-		return;
-	}
+    EVP_CIPHER_CTX_free(ctx);
 
-	dt_nr = data[rp++];
+    unsigned int decrypted_len = out_len + final_len;
+    eDebug("[CI%d RCC] Decrypted data length: %u", m_slot->getSlotID(), decrypted_len);
 
-	/* create answer */
-	unsigned int dest_len = sizeof(dest);
+    if (!sac_check_auth(tmp, decrypted_len))
+    {
+        eWarning("[CI%d RCC] cc_sac_data_req check_auth of message failed", m_slot->getSlotID());
+        return;
+    }
 
-	if (dest_len < 10)
-	{
-		eWarning("[CI%d RCC] cc_sac_data_req not enough space", m_slot->getSlotID());
-		return;
-	}
+    serial = UINT32(&tmp[rp], 4);
+    eDebug("[CI%d RCC] cc_sac_data_req serial %u\n", m_slot->getSlotID(), serial);
 
-	pos += BYTE32(&dest[pos], serial);
-	pos += BYTE32(&dest[pos], 0x01000000);
+    /* skip serial & header */
+    rp += 8;
 
-	dest[pos++] = id_bitmask;
-	dest[pos++] = dt_nr; /* dt_nbr */
+    id_bitmask = tmp[rp++];
 
-	answ_len = data_req_loop(&dest[pos], dest_len - 10, &data[rp], len - rp, dt_nr);
-	if (answ_len <= 0)
-	{
-		eWarning("[CI%d RCC] cc_sac_data_req can not get data", m_slot->getSlotID());
-		return;
-	}
-	pos += answ_len;
+    /* handle data loop */
+    dt_nr = tmp[rp++];
+    rp += data_get_loop(&tmp[rp], decrypted_len - rp, dt_nr);
 
-	cc_sac_send(data_cnf_tag, dest, pos);
+    if (decrypted_len < rp + 1)
+    {
+        eWarning("[CI%d RCC] cc_sac_data_req check_auth of message too short", m_slot->getSlotID());
+        return;
+    }
+
+    dt_nr = tmp[rp++];
+
+    /* create answer */
+    unsigned int dest_len = sizeof(dest);
+
+    if (dest_len < 10)
+    {
+        eWarning("[CI%d RCC] cc_sac_data_req not enough space", m_slot->getSlotID());
+        return;
+    }
+
+    pos += BYTE32(&dest[pos], serial);
+    pos += BYTE32(&dest[pos], 0x01000000);
+
+    dest[pos++] = id_bitmask;
+    dest[pos++] = dt_nr; /* dt_nbr */
+
+    answ_len = data_req_loop(&dest[pos], dest_len - 10, &tmp[rp], decrypted_len - rp, dt_nr);
+    if (answ_len <= 0)
+    {
+        eWarning("[CI%d RCC] cc_sac_data_req can not get data", m_slot->getSlotID());
+        return;
+    }
+    pos += answ_len;
+
+    cc_sac_send(data_cnf_tag, dest, pos);
 }
 
 void eDVBCICcSession::cc_sac_sync_req(const uint8_t *data, unsigned int len)
 {
-	const uint8_t sync_cnf_tag[3] = {0x9f, 0x90, 0x10};
-	uint8_t dest[64];
-	unsigned int serial;
-	int pos = 0;
+    const uint8_t sync_cnf_tag[3] = {0x9f, 0x90, 0x10};
+    uint8_t dest[64];
+    unsigned int serial;
+    int pos = 0;
 
-	eTraceNoNewLineStart("[CI%d RCC] cc_sac_sync_req: ", m_slot->getSlotID());
-	traceHexdump(data, len);
+    eTraceNoNewLineStart("[CI%d RCC] cc_sac_sync_req: ", m_slot->getSlotID());
+    traceHexdump(data, len);
 
-	serial = UINT32(data, 4);
-	eTrace("[CI%d RCC] serial %u\n", m_slot->getSlotID(), serial);
+    // Verifica lunghezza minima dei dati
+    if (len < 4)
+    {
+        eWarning("[CI%d RCC] cc_sac_sync_req: data too short", m_slot->getSlotID());
+        return;
+    }
 
-	pos += BYTE32(&dest[pos], serial);
-	pos += BYTE32(&dest[pos], 0x01000000);
+    // Estrai il seriale dai dati
+    serial = UINT32(data, 4);
+    eTrace("[CI%d RCC] serial %u\n", m_slot->getSlotID(), serial);
 
-	/* status OK */
-	dest[pos++] = 0;
+    // Crea la risposta con seriale e stato OK
+    pos += BYTE32(&dest[pos], serial);
+    pos += BYTE32(&dest[pos], 0x01000000); // Versione o codice risposta
+    dest[pos++] = 0; // Stato OK
 
-	set_descrambler_key();
+    // Imposta la chiave per il descrambler
+    set_descrambler_key();
 
-	cc_sac_send(sync_cnf_tag, dest, pos);
+    // Invio della risposta con crittografia e autenticazione
+    cc_sac_send(sync_cnf_tag, dest, pos);
 }
 
 void eDVBCICcSession::cc_sac_send(const uint8_t *tag, uint8_t *data, unsigned int pos)
 {
 	if (pos < 8)
 	{
-		eWarning("[CI%d RCC] cc_sac_send too short data", m_slot->getSlotID());
+		eWarning("[CI%d RCC] cc_sac_send: data too short", m_slot->getSlotID());
 		return;
 	}
 
-	pos += add_padding(&data[pos], pos - 8, 16);
-	BYTE16(&data[6], pos - 8); /* len in header */
+    // Padding per allineamento dati (multiplo di 16 byte)
+    int padding = add_padding(&data[pos], pos - 8, 16);
+    if (padding < 0)
+    {
+        eWarning("[CI%d RCC] cc_sac_send: padding failed", m_slot->getSlotID());
+        return;
+    }
+    pos += padding;
 
-	pos += sac_gen_auth(&data[pos], data, pos);
-	sac_crypt(&data[8], &data[8], pos - 8, AES_ENCRYPT);
+    // Imposta la lunghezza dell'header
+    BYTE16(&data[6], pos - 8);
 
-	send(tag, data, pos);
+    // Genera autenticazione del messaggio
+    int auth_len = sac_gen_auth(&data[pos], data, pos);
+    if (auth_len <= 0)
+    {
+        eWarning("[CI%d RCC] cc_sac_send: authentication failed", m_slot->getSlotID());
+        return;
+    }
+    pos += auth_len;
+
+    // Crittografia dei dati (AES)
+    if (!sac_crypt(&data[8], &data[8], pos - 8, AES_ENCRYPT))
+    {
+        eWarning("[CI%d RCC] cc_sac_send: encryption failed", m_slot->getSlotID());
+        return;
+    }
+
+    // Invio del messaggio tramite APDU
+    send(tag, data, pos);
 
 	return;
 }
 
 int eDVBCICcSession::data_get_loop(const uint8_t *data, unsigned int datalen, unsigned int items)
 {
-	unsigned int i;
-	int dt_id, dt_len;
-	unsigned int pos = 0;
+    unsigned int pos = 0;
 
-	for (i = 0; i < items; i++)
-	{
-		if (pos + 3 > datalen)
-			return 0;
+    for (unsigned int i = 0; i < items; i++)
+    {
+        // Controllo: ci sono abbastanza dati per leggere dt_id e dt_len?
+        if (pos + 3 > datalen)
+        {
+            eWarning("[CI%d RCC] data_get_loop: insufficient data for element header (item %u)", 
+                     m_slot->getSlotID(), i);
+            return -1; // Errore: dati insufficienti
+        }
 
-		dt_id = data[pos++];
-		dt_len = data[pos++] << 8;
-		dt_len |= data[pos++];
+        // Lettura di dt_id e dt_len
+        int dt_id = data[pos++];
+        int dt_len = (data[pos++] << 8) | data[pos++];
 
-		if (pos + dt_len > datalen)
-			return 0;
+        // Controllo: ci sono abbastanza dati per il contenuto dell'elemento?
+        if (pos + dt_len > datalen)
+        {
+            eWarning("[CI%d RCC] data_get_loop: insufficient data for element content (id %d, len %d)", 
+                     m_slot->getSlotID(), dt_id, dt_len);
+            return -1; // Errore: contenuto incompleto
+        }
 
-		eTraceNoNewLineStart("[CI%d RCC] set element %d: ", m_slot->getSlotID(), dt_id);
-		traceHexdump(&data[pos], dt_len);
+        // Log per il debug: elemento letto
+        eTraceNoNewLineStart("[CI%d RCC] set element id=%d, len=%d: ", 
+                             m_slot->getSlotID(), dt_id, dt_len);
+        traceHexdump(&data[pos], dt_len);
 
-		m_ci_elements.set(dt_id, &data[pos], dt_len);
+        // Salvataggio dell'elemento
+        if (!m_ci_elements.set(dt_id, &data[pos], dt_len))
+        {
+            eWarning("[CI%d RCC] data_get_loop: failed to set element id=%d", 
+                     m_slot->getSlotID(), dt_id);
+            return -1; // Errore: impossibile salvare l'elemento
+        }
 
-		data_get_handle_new(dt_id);
+        // Gestione personalizzata dell'elemento
+        data_get_handle_new(dt_id);
 
 		pos += dt_len;
 	}
@@ -368,122 +458,139 @@ int eDVBCICcSession::data_get_loop(const uint8_t *data, unsigned int datalen, un
 
 int eDVBCICcSession::data_req_loop(uint8_t *dest, unsigned int dest_len, const uint8_t *data, unsigned int data_len, unsigned int items)
 {
-	int dt_id;
-	unsigned int i;
-	int pos = 0;
-	unsigned int len;
+    unsigned int pos = 0;
 
-	if (items > data_len)
-		return -1;
+    // Verifica che il numero di items non superi la lunghezza dei dati disponibili
+    if (items > data_len)
+    {
+        eWarning("[CI%d RCC] data_req_loop: items count exceeds available data length", m_slot->getSlotID());
+        return -1; // Errore, numero di elementi maggiore della lunghezza dei dati
+    }
 
-	for (i = 0; i < items; i++)
-	{
-		dt_id = data[i];
-		data_req_handle_new(dt_id); /* check if there is any action needed before we answer */
+    for (unsigned int i = 0; i < items; i++)
+    {
+        int dt_id = data[i];
 
-		len = m_ci_elements.get_buf(NULL, dt_id);
-		if ((len + 3) > dest_len)
-		{
-			eWarning("[CI%d RCC] req element %d: not enough space", m_slot->getSlotID(), dt_id);
-			return -1;
-		}
+        // Gestisce eventuali azioni necessarie prima di inviare la risposta
+        data_req_handle_new(dt_id);
 
-		len = m_ci_elements.get_req(dest, dt_id);
-		if (len > 0)
-		{
-			eTraceNoNewLineStart("[CI%d RCC] req element %d: ", m_slot->getSlotID(), dt_id);
-			traceHexdump(&dest[3], len - 3);
-		}
+        // Recupera la lunghezza del buffer per l'elemento identificato da dt_id
+        unsigned int len = m_ci_elements.get_buf(nullptr, dt_id);
 
-		pos += len;
-		dest += len;
-		dest_len -= len;
-	}
+        // Controlla se c'è spazio sufficiente nel buffer di destinazione
+        if ((len + 3) > dest_len)
+        {
+            eWarning("[CI%d RCC] req element %d: not enough space in destination buffer", 
+                     m_slot->getSlotID(), dt_id);
+            return -1; // Errore, spazio insufficiente nel buffer di destinazione
+        }
 
-	return pos;
+        // Ottieni il contenuto dell'elemento e inseriscilo nel buffer di destinazione
+        len = m_ci_elements.get_req(dest, dt_id);
+        if (len > 0)
+        {
+            // Mostra il contenuto dell'elemento nel log per il debug
+            eTraceNoNewLineStart("[CI%d RCC] req element id=%d, len=%d: ", 
+                                 m_slot->getSlotID(), dt_id, len - 3);
+            traceHexdump(&dest[3], len - 3); // Mostra solo i dati, escludendo i 3 byte di intestazione
+        }
+
+        // Aggiorna i puntatori e la lunghezza residua del buffer
+        pos += len;
+        dest += len;
+        dest_len -= len;
+    }
+
+    // Restituisce il numero totale di byte scritti nel buffer di destinazione
+    return pos;
 }
 
 int eDVBCICcSession::data_get_handle_new(unsigned int id)
 {
-	switch (id)
-	{
-	case CICAM_BRAND_CERT:
-	case DHPM:
-	case CICAM_DEV_CERT:
-		//		case CICAM_ID:
-	case SIGNATURE_B:
-		if (check_ci_certificates())
-			break;
+    switch (id)
+    {
+    case CICAM_BRAND_CERT:
+    case DHPM:
+    case CICAM_DEV_CERT:
+    case SIGNATURE_B:
+        // Se i certificati CI sono validi, non fare nulla. Altrimenti, avvia un challenge Diffie-Hellman
+        if (check_ci_certificates())
+            break;
 
-		check_dh_challenge();
-		break;
+        // Se i certificati non sono validi, avvia un challenge Diffie-Hellman
+        check_dh_challenge();
+        break;
 
-	case AUTH_NONCE:
-		restart_dh_challenge();
-		break;
+    case AUTH_NONCE:
+        // Riavvia il challenge Diffie-Hellman se necessario
+        restart_dh_challenge();
+        break;
 
-	case NS_MODULE:
-		generate_ns_host();
-		generate_key_seed();
-		generate_SAK_SEK();
-		break;
+    case NS_MODULE:
+        // Se si tratta di un modulo NS, genera l'host, la chiave seed, e i parametri di sicurezza
+        generate_ns_host();
+        generate_key_seed();
+        generate_SAK_SEK();
+        break;
 
-	case CICAM_ID:
-	case KP:
-	case KEY_REGISTER:
-		check_new_key();
-		break;
+    case CICAM_ID:
+    case KP:
+    case KEY_REGISTER:
+        // Gestisce nuovi registri di chiavi
+        check_new_key();
+        break;
 
-	case PROGRAM_NUMBER:
-	case URI_MESSAGE:
-		generate_uri_confirm();
-		break;
+    case PROGRAM_NUMBER:
+    case URI_MESSAGE:
+        // Se l'ID è legato a un programma o a un messaggio URI, genera una conferma URI
+        generate_uri_confirm();
+        break;
 
-	default:
-		eWarning("[CI%d RCC] unhandled id %u", m_slot->getSlotID(), id);
-		break;
-	}
+    default:
+        // Se l'ID non è gestito, genera un avviso
+        eWarning("[CI%d RCC] unhandled id %u", m_slot->getSlotID(), id);
+        break;
+    }
 
-	return 0;
+    return 0;
 }
 
 int eDVBCICcSession::data_req_handle_new(unsigned int id)
 {
-	switch (id)
-	{
-	case AKH:
-	{
-		uint8_t akh[32], host_id[8];
+    switch (id)
+    {
+    case AKH:
+    {
+        uint8_t akh[32], host_id[8];
 
-		memset(akh, 0, sizeof(akh));
+        memset(akh, 0, sizeof(akh));
 
-		if (m_akh_index != 5)
-		{
-			if (!get_authdata(host_id, m_dhsk, akh, m_slot->getSlotID(), m_akh_index++))
-				m_akh_index = 5;
+        if (m_akh_index != 5)
+        {
+            if (!get_authdata(host_id, m_dhsk, akh, m_slot->getSlotID(), m_akh_index++))
+                m_akh_index = 5;
 
-			if (!m_ci_elements.set(AKH, akh, 32))
-				eWarning("[CI%d RCC] can not set AKH in elements", m_slot->getSlotID());
+            if (!m_ci_elements.set(AKH, akh, 32))
+                eWarning("[CI%d RCC] can not set AKH in elements", m_slot->getSlotID());
 
-			if (!m_ci_elements.set(HOST_ID, host_id, 8))
-				eWarning("[CI%d RCC] can not set host_id in elements", m_slot->getSlotID());
-		}
-		break;
-	}
-	case CRITICAL_SEC_UPDATE:
-	{
-		uint8_t csu[1];
-		csu[0] = 0x00;
-		m_ci_elements.set(CRITICAL_SEC_UPDATE, csu, 1);
-		break;
-	}
-	default:
-		break;
-	}
+            if (!m_ci_elements.set(HOST_ID, host_id, 8))
+                eWarning("[CI%d RCC] can not set host_id in elements", m_slot->getSlotID());
+        }
+        break;
+    }
+    case CRITICAL_SEC_UPDATE:
+    {
+        uint8_t csu[1];
+        csu[0] = 0x00;
+        m_ci_elements.set(CRITICAL_SEC_UPDATE, csu, 1);
+        break;
+    }
+    default:
+        break;
+    }
 
-	return 0;
+    return 0;
 }
-
 int eDVBCICcSession::generate_akh()
 {
 	uint8_t akh[32];
