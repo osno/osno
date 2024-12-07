@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Opendroid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-28 18:27+0100\n"
-"PO-Revision-Date: 2024-11-25 14:18+0100\n"
+"PO-Revision-Date: 2024-12-07 17:32+0100\n"
 "Last-Translator: OPD Team <opendroid2013@gmail.com>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
 "Language: de\n"
@@ -9817,7 +9817,6 @@ msgstr "IP-Adresse 5"
 msgid "IP Address to be checked on timer activation."
 msgstr "IP-Adresse, die bei der Aktivierung des Timers überprüft werden soll."
 
-#
 msgid "IP address"
 msgstr "IP-Adresse"
 
@@ -9827,15 +9826,12 @@ msgstr "IP-Adresse des Stream Relay-Servers, um Dienste zu entschlüsseln, die n
 msgid "IP of fallback remote receiver"
 msgstr "IP des Reserve-Receivers"
 
-#, fuzzy
 msgid "IP:"
-msgstr "IP"
+msgstr "IP:"
 
-#
 msgid "ISO file is too large for this file system!"
 msgstr "Die ISO-Datei ist für dieses Dateisystem zu groß!"
 
-#
 msgid "ISO path"
 msgstr "ISO-Datei-Ausgabepfad"
 
@@ -9897,7 +9893,7 @@ msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby
 msgstr "Bei 'Ja' werden bei Deep-Standby-Ereignissen dieselben Befehle an das Fernsehgerät gesendet wie bei normalen Standby-Ereignissen."
 
 msgid "If set to 'yes' it will enable PLAY,PAUSE, SEEK on channel list movies"
-msgstr ""
+msgstr "Bei der Einstellung 'Ja' werden die Funktionen ,Wiedergabe, pause, und Suche für Filme in der Kanalliste aktivi"
 
 msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
 msgstr "Bei 'Ja' kann Timeshift mit alternativen Audio-Plugins verwendet werden."
@@ -9930,7 +9926,6 @@ msgstr ""
 "Die Scart-Verbindung ist fehlerhaft!\n"
 "OK drücken, um zurückzukehren."
 
-#
 msgid ""
 "If your TV has a brightness or contrast enhancement, disable it. If there is something called \"dynamic\", set it to standard. Adjust the backlight level to a value suiting your taste. Turn down contrast on your TV as much as possible.\n"
 "Then turn the brightness setting as low as possible, but make sure that the two lowermost shades of gray stay distinguishable.\n"
@@ -9945,6 +9940,8 @@ msgid ""
 "If your usb drive is connected and mounted you have to poweroff your box, remove the usb device and reboot.\n"
 "\n"
 msgstr ""
+"Wenn Ihr USB-Laufwerk angeschlossen und gemountet ist, müssen Sie Ihre Box ausschalten, das USB-Gerät entfernen und neu starten.\n"
+"\n"
 
 msgid "Igbo"
 msgstr "Igbo"
@@ -9977,48 +9974,38 @@ msgstr "Image-Sicherung nach %s"
 msgid "Image Flash Actions"
 msgstr "Image-Flash-Aktionen"
 
-#, fuzzy
 msgid "Image Info"
-msgstr "[Image-Informationen]\n"
+msgstr "Image-Informationen"
 
-#
-#, fuzzy
 msgid "Image Information"
-msgstr "Informationen"
+msgstr "Image Informationen"
 
-#, fuzzy
 msgid "Image Name"
-msgstr "Image erstellt:"
+msgstr "Image Name"
 
-#, fuzzy
 msgid "Image Version"
-msgstr "Version"
+msgstr "Image Version"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Image Version %s"
-msgstr "IceTV-Version %s"
+msgstr "Image-Version %s"
 
 msgid "Image will be booted on the next STB boot!"
-msgstr ""
+msgstr "Das Image wird beim nächsten STB-Start gebootet!"
 
-#, fuzzy
 msgid "Image-Flasher"
-msgstr "Image-Flash-Aktionen"
+msgstr "Image-Flasher"
 
-#, fuzzy
 msgid "Image-Version"
-msgstr "EXIF-Version"
+msgstr "Image-Version"
 
 #, python-format
 msgid "Image:\t%s"
-msgstr ""
+msgstr "Image:\t%s"
 
-#
-#, fuzzy
 msgid "ImageWizard"
-msgstr "Einstellungen wiederherstellen"
+msgstr "ImageWizard"
 
-#
 msgid "Immediate shut down"
 msgstr "Direkt herunterfahren"
 
@@ -10139,7 +10126,6 @@ msgstr "Erhöhe Zeitspanne"
 msgid "Increased voltage"
 msgstr "Erhöhte Spannung"
 
-#
 msgid "Index"
 msgstr "Index"
 
@@ -10155,25 +10141,21 @@ msgstr "Indonesien"
 msgid "Indonesian"
 msgstr "Indonesisch"
 
-#
 msgid "Info"
 msgstr "Info"
 
 msgid "Info (EPG)"
 msgstr "INFO/EPG"
 
-#
 msgid "Info button (long)"
 msgstr "Taste INFO lang"
 
-#
 msgid "Info button (short)"
 msgstr "Taste INFO kurz"
 
 msgid "Info icon width"
 msgstr "Info-Icon Breite"
 
-#
 msgid "InfoBar"
 msgstr "Infoleiste"
 
@@ -10192,7 +10174,6 @@ msgstr "Infoleisten EPG-Modus"
 msgid "InfoBar Event View Actions"
 msgstr "Infoleiste Sendungsanzeige-Aktionen"
 
-#
 msgid "InfoBar RDS Actions"
 msgstr "Infoleiste RDS-Aktionen"
 
@@ -10205,34 +10186,24 @@ msgstr "Infoleiste Ausblendegeschwindigkeit"
 msgid "InfoBar front end data source"
 msgstr "Infoleiste Datenquelle"
 
-#
-#, fuzzy
 msgid "Infobar Setup"
-msgstr "Tunereinstellungen"
+msgstr "Infobar-Setup"
 
-#, fuzzy
 msgid "Infobar frontend data source"
-msgstr "Infoleiste Datenquelle"
+msgstr "Infobar-Frontend-Datenquelle"
 
-#
-#, fuzzy
 msgid "Infobar_Setup"
-msgstr "Infoleiste"
+msgstr "Infobar_Setup"
 
-#
 msgid "Information"
 msgstr "Informationen"
 
-#
-#, fuzzy
 msgid "Infos"
-msgstr "Info"
+msgstr "Infos"
 
-#
 msgid "Infotainment"
 msgstr "Infotainment"
 
-#
 msgid "Init"
 msgstr "Initialisieren"
 
@@ -10242,22 +10213,18 @@ msgstr "Anfängliche Vorlaufgeschwindigkeit"
 msgid "Initial rewind speed"
 msgstr "Anfängliche Rücklaufgeschwindigkeit"
 
-# Display neu 5.1
+# Display neu 7.5
 msgid "Initial scroll delay"
 msgstr "Verzögerung vor Textdurchlauf"
 
-#
 msgid "Initialization"
 msgstr "Initialisierung"
 
-#
 msgid "Initialize"
 msgstr "Initialisieren"
 
-#
-#, fuzzy
 msgid "Initialize disk"
-msgstr "Initialisieren"
+msgstr "Initialisieren disk"
 
 msgid "Initializing storage device..."
 msgstr "Speichergerät initialisieren..."
@@ -10268,7 +10235,6 @@ msgstr "Inode"
 msgid "Inotify Monitoring"
 msgstr "Inotify Überwachung"
 
-#
 msgid "Input"
 msgstr "Eingabe"
 
@@ -10287,9 +10253,8 @@ msgstr "Einen Sendernamen eingeben."
 msgid "Input config file name:"
 msgstr "Name der Konfigurationsdatei:"
 
-#, fuzzy
 msgid "Input devices"
-msgstr "Eingabegeräte Einstellungen"
+msgstr "Eingabegeräte"
 
 msgid "Input scroll position"
 msgstr "Scrollposition eingeben"
@@ -10300,11 +10265,9 @@ msgstr "Zeile einfügen"
 msgid "Insert line before current line"
 msgstr "Zeile vor der aktuellen Zeile einfügen"
 
-#, fuzzy
 msgid "Insert mount point:"
-msgstr "Mountpunkt"
+msgstr "Mountpunkt einfügen:"
 
-#
 msgid "Install"
 msgstr "Installieren"
 
@@ -10316,21 +10279,15 @@ msgstr "%s installieren"
 msgid "Install '%s' command"
 msgstr "Befehl '%s' installieren"
 
-#
-#, fuzzy
 msgid "Install All"
-msgstr "Installieren"
+msgstr "Alles installieren"
 
-#
-#, fuzzy
 msgid "Install Confirmation"
-msgstr "Bestätigung"
+msgstr "Installations bestätigung"
 
-#, fuzzy
 msgid "Install Image"
-msgstr "Installiert"
+msgstr "Image installieren"
 
-#
 msgid "Install Local Extension"
 msgstr "Lokale Erweiterung installieren"
 
@@ -10340,45 +10297,38 @@ msgstr "Plugin installieren"
 msgid "Install Plugins"
 msgstr "Plugins installieren"
 
-#
 msgid "Install a new image with a USB stick"
 msgstr "Neues Image mittels USB-Stick installieren"
 
-#
 msgid "Install a new image with your web browser"
 msgstr "Neues Image mittels Webbrowser installieren"
 
-#, fuzzy
 msgid "Install channel list"
-msgstr "keine Senderliste"
+msgstr "Senderliste installieren"
 
 msgid "Install extensions"
 msgstr "Erweiterungen installieren"
 
-#
 msgid "Install extensions."
 msgstr "Erweiterungen installieren..."
 
 msgid "Install from /media/opdboot/OPDBootUpload"
-msgstr ""
+msgstr "Installieren Sie von /media/opdboot/OPDBootUpload"
 
 msgid "Install from Internet (openDroid,openATV,openNFR,openVIX,openHDF)"
-msgstr ""
+msgstr "Installation aus dem Internet (openDroid, openATV, openNFR, openVIX, openHDF)"
 
-#, fuzzy
 msgid "Install lcd picons on"
-msgstr "Plugins installieren"
+msgstr "Installieren Sie LCD-Picons auf"
 
-#, fuzzy
 msgid "Install picons on"
-msgstr "Plugins installieren"
+msgstr "Installieren Sie Picons auf"
 
-#, fuzzy
 msgid "Install settings, skins, software..."
 msgstr "Installiere Software..."
 
 msgid "Install tar.gz, bh.tgz, nab.tgz"
-msgstr ""
+msgstr "Installieren Sie Einstellungen, Skins, Software …"
 
 msgid "Install the package"
 msgstr "Das Paket installieren"
@@ -10386,20 +10336,16 @@ msgstr "Das Paket installieren"
 msgid "Install the selected plugin / list of plugins"
 msgstr "Markiertes Plugin / Pluginliste installieren"
 
-#
-#, fuzzy
 msgid "Installation aborted !"
-msgstr "Installation beendet."
+msgstr "Installation abgebrochen!"
 
-#
 msgid "Installation finished."
 msgstr "Installation beendet."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installed:\t%s"
-msgstr "Installiert"
+msgstr "Installiert:\t%s"
 
-#
 msgid "Installing"
 msgstr "Installiere"
 
@@ -10413,9 +10359,9 @@ msgstr "Dienst wird installiert"
 msgid "Installing Software..."
 msgstr "Installiere Software..."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installing addon %s"
-msgstr "Installation %s (%s)..."
+msgstr "Add-on %s wird installiert"
 
 msgid "Instant Recording Actions"
 msgstr "Sofortaufnahme-Aktionen"
@@ -10432,8 +10378,6 @@ msgstr "Sofortaufnahme-Verzeichnis"
 msgid "Interface"
 msgstr "Schnittstelle"
 
-#
-#, fuzzy
 msgid "Interface:"
 msgstr "Schnittstelle: "
 
@@ -10462,15 +10406,14 @@ msgid "Internal Flash"
 msgstr "Interner Flash"
 
 msgid "Internal Reader /dev/sci0:"
-msgstr ""
+msgstr "Interner Leser /dev/sci0:"
 
 msgid "Internal Reader /dev/sci1:"
-msgstr ""
+msgstr "Interner Leser /dev/sci1:"
 
 msgid "Internal USB"
 msgstr "Interner USB"
 
-#
 msgid "Internal flash"
 msgstr "Interner Flash"
 
@@ -10500,13 +10443,12 @@ msgstr "Inupiaq"
 msgid "Invalid"
 msgstr "Ungültig"
 
-#
 msgid "Invalid location!"
 msgstr "Unzulässiger Ort!"
 
 #, python-format
 msgid "Invalid response from server. Please report: %s"
-msgstr ""
+msgstr "Ungültige Antwort vom Server. Bitte melden: %s"
 
 # ScanSetup.py
 msgid "Invalid transponder data"
@@ -10515,7 +10457,6 @@ msgstr "Ungültige Transponder-Daten"
 msgid "Invalid type"
 msgstr "Ungültiger Typ"
 
-#
 msgid "Inversion"
 msgstr "Inversion"
 
@@ -10532,9 +10473,8 @@ msgid "Inverts the button function."
 msgstr "Bei 'Ja' werden die Funktionen der Tasten P+/CH+ und P-/CH- umgekehrt."
 
 msgid "Ipk Tools"
-msgstr ""
+msgstr "Ipk-Werkzeuge"
 
-#
 msgid "Ipkg"
 msgstr "Ipkg"
 
@@ -10550,9 +10490,8 @@ msgstr "Irland"
 msgid "Irish"
 msgstr "Irisch"
 
-#, fuzzy
 msgid "Is a Ci+ Module installed:"
-msgstr "Aktuell installiert"
+msgstr "Ist ein Ci+ Modul installiert:"
 
 msgid "Is the keyboard working?"
 msgstr "Funktioniert die Tastatur?"
@@ -10560,7 +10499,6 @@ msgstr "Funktioniert die Tastatur?"
 msgid "Is this setting ok?"
 msgstr "Ist diese Einstellung in Ordnung?"
 
-#
 msgid "Is this video mode ok?"
 msgstr "Diesen Videomodus beibehalten?"
 
@@ -10579,6 +10517,10 @@ msgid ""
 "Otherwise\n"
 "Press OK to continue"
 msgstr ""
+"Es wird empfohlen!!\n"
+"um das entsprechende Gerät vor dem Herunterladen zu mounten.\n"
+"Andernfalls\n"
+"Drücken Sie OK, um fortzufahren"
 
 msgid "Italian"
 msgstr "Italienisch"
@@ -10607,16 +10549,15 @@ msgstr "Javanisch"
 msgid "Jersey"
 msgstr "Jersey"
 
-#, fuzzy
 msgid "Job Manager"
-msgstr "Logverwaltung"
+msgstr "Job Manager"
 
 msgid "Job overview"
 msgstr "Jobübersicht"
 
 #, fuzzy
 msgid "JobManager"
-msgstr "Logverwaltung"
+msgstr "Job-Manager"
 
 msgid "Jordan"
 msgstr "Jordanien"
@@ -10657,14 +10598,12 @@ msgstr "Springe zur aktuellen Zeit"
 msgid "Jump to end of list"
 msgstr "Zum Ende der Liste springen"
 
-#
 msgid "Jump to next marked position"
 msgstr "Springe zur nächsten Markerposition"
 
 msgid "Jump to next page or all up (setup in menu)"
 msgstr "Zur nächsten Seite oder ganz nach oben springen (Einstellung im Menü)"
 
-#
 msgid "Jump to previous marked position"
 msgstr "Springe zur vorherigen Markerposition"
 
@@ -10677,11 +10616,11 @@ msgstr "Springe zur Primetime"
 msgid "Jump to the currently active locale/language"
 msgstr "Zur aktuell aktiven Sprache springen"
 
-# Record neu 5.1
+# Record neu 7.5
 msgid "Just abort, no message"
 msgstr "Abbrechen, ohne Hinweis"
 
-# Record neu 5.1
+# Record neu 7.5
 msgid "Just abort, show message"
 msgstr "Abbrechen, zeige Hinweis"
 
@@ -10695,17 +10634,14 @@ msgstr "Nur Bouquet wechseln"
 msgid "Just change channels"
 msgstr "Nur Sender wechseln"
 
-#
 msgid "Just zap"
 msgstr "Umschalthistorie"
 
 msgid "KA-SAT"
 msgstr "KA-SAT"
 
-#
-#, fuzzy
 msgid "KB"
-msgstr "B"
+msgstr "KB"
 
 msgid "Kalaallisut / Greenlandic"
 msgstr "Kalaallisut / Grönländisch"
@@ -10728,9 +10664,8 @@ msgstr "Kasachstan"
 msgid "Keep EPG history (in minutes)"
 msgstr "Alte EPG-Daten für x Minuten halten"
 
-#, fuzzy
 msgid "Keep old drive"
-msgstr "Laufender Kanal"
+msgstr "Altes Laufwerk behalten"
 
 msgid "Keep service"
 msgstr "Laufender Kanal"
@@ -10746,21 +10681,20 @@ msgstr "Bei 'Ja' bleibt die Filmauswahl geöffnet, wenn Audiodateien abgespielt 
 msgid "Kenya"
 msgstr "Kenia"
 
-#, fuzzy
 msgid "Kernel"
-msgstr "Kerneldatei"
+msgstr "Kernel"
 
 #, python-format
 msgid "Kernel (Box):\t%s"
-msgstr ""
+msgstr "Kernel (Box):\t%s"
 
 #, python-format
 msgid "Kernel:\t%s"
-msgstr ""
+msgstr "Kernel:\t%s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Kernel: %s"
-msgstr "Kerneldatei"
+msgstr "Kernel: %s"
 
 msgid "Kexec MultiBoot Actions"
 msgstr "Kexec MultiBoot-Aktionen"
@@ -10774,25 +10708,20 @@ msgstr "Kexec MultiBoot-Manager"
 msgid "Kexec MultiBoot files are missing."
 msgstr "Keine Kexec MultiBoot-Dateien vorhanden!"
 
-#
 msgid "Keyboard"
 msgstr "Externe Tastatur"
 
-#
 msgid "Keyboard Settings"
 msgstr "Tastatur"
 
-#
 msgid "Keyboard data entry"
 msgstr "Tastatureingabe"
 
-#
-#, fuzzy
 msgid "Keymap Selection"
-msgstr "EPG-Auswahl"
+msgstr "Keymap-Auswahl"
 
 msgid "Keymap changed, you need to restart the GUI"
-msgstr ""
+msgstr "Keymap geändert, Sie müssen die GUI neu starten"
 
 msgid "Kikuyu / Gikuyu"
 msgstr "Kikuyu / Gikuyu"
@@ -10908,22 +10837,18 @@ msgstr "LED-Helligkeit im Betrieb."
 msgid "LED brightness during standby."
 msgstr "LED-Helligkeit im Standby."
 
-#
 msgid "LNB"
 msgstr "LNB"
 
 msgid "LNB/Switch Bootup time [ms]"
 msgstr "LNB/Switch-Startzeit [ms]"
 
-#
 msgid "LOF/H"
 msgstr "LOF/H"
 
-#
 msgid "LOF/L"
 msgstr "LOF/L"
 
-#
 msgid "Language"
 msgstr "Systemsprache"
 
@@ -10935,15 +10860,12 @@ msgstr "Sprache %s (%s) installiert und ausgewählt."
 msgid "Language %s (%s) selected."
 msgstr "Sprache %s (%s) ausgewählt."
 
-#
-#, fuzzy
 msgid "Language Team"
-msgstr "Systemsprache"
+msgstr "Sprachenteam"
 
 msgid "Language already selected."
 msgstr "Sprache bereits ausgewählt."
 
-#
 msgid "Language selection"
 msgstr "Sprachauswahl"
 
