@@ -306,7 +306,7 @@ def getButtonSetupFunctions():
 	ButtonSetupFunctions.append((_("OPD BluePanel"), "Module/Screens.BluePanel/BluePanel", "OPD"))
 	ButtonSetupFunctions.append((_("OPD Green Panel"), "Module/OPENDROID.GreenPanel/GreenPanel", "OPD"))
 	ButtonSetupFunctions.append((_("OPD Download Panel"), "Module/OPENDROID.AddonsPanel/AddonsUtility", "OPD"))
-	ButtonSetupFunctions.append((_("OPD OPD_panel"), "Module/OPENDROID.OPD_panel/OPD_panel", "OPD"))
+	ButtonSetupFunctions.append((_("OPD Panel"), "Module/OPENDROID.OPD_panel/OPD_panel", "OPD"))
 	ButtonSetupFunctions.append((_("OPD ScriptRunner"), "Module/OPENDROID.ScriptRunner/ScriptRunner", "OPD"))
 	ButtonSetupFunctions.append((_("OPD SwapManager"), "Module/OPENDROID.SwapManager/Swap", "OPD"))
 	ButtonSetupFunctions.append((_("OPD SoftwarePanel"), "Module/OPENDROID.SoftwarePanel/SoftwarePanel", "OPD"))

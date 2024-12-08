@@ -13000,8 +13000,8 @@ msgstr "OPD Multiboot"
 msgid "OPD MultiBoot_Client"
 msgstr "OPD MultiBoot_Client"
 
-msgid "OPD OPD_panel"
-msgstr "OPD_Panel"
+msgid "OPD Panel"
+msgstr "OPD Panel"
 
 msgid "OPD ScriptRunner"
 msgstr "OPD ScriptRunner"
