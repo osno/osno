@@ -139,6 +139,8 @@ class Setup(ConfigListScreen, Screen):
 		else:
 			itemText = _(element.get("text", "??"))
 			itemDescription = _(element.get("description", " "))
+		if element.get("restart", "").lower() in ("1", "true") and not itemText.endswith(" *"):  # Add * as restart indicator based on the restart attribute
+			itemText = f"{itemText} *"
 		item = eval(element.text) if element.text else ""
 		if item == "":
 			self.list.append((self.formatItemText(itemText),))  # Add the comment line to the config list.
@@ -219,7 +221,7 @@ class Setup(ConfigListScreen, Screen):
 				self["footnote"].hide()
 		else:
 			self["footnote"].setText(footnote)
-			self["footnote"].show()
+			self["footnote"].setVisible(footnote != "")
 
 	def getFootnote(self):
 		return self["footnote"].text

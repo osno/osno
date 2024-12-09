@@ -830,7 +830,7 @@ class PowerTimerOverview(TimerOverviewBase):
 class RecordTimerOverview(TimerOverviewBase):
 	def __init__(self, session):
 		self["timerlist"] = RecordTimerList([])
-		self.fallbackTimer = FallbackTimerList(self, self.loadTimerList)
+		self.fallbackTimer = FallbackTimerList(self, self.fallbackRefresh)
 		TimerOverviewBase.__init__(self, session, mode=MODE_RECORD)
 		self["Event"] = Event()
 		self["Service"] = ServiceEvent()
@@ -840,6 +840,10 @@ class RecordTimerOverview(TimerOverviewBase):
 
 	def doChangeCallbackRemove(self):
 		self.session.nav.RecordTimer.on_state_change.remove(self.onStateChange)
+
+	def fallbackRefresh(self):
+		self.loadTimerList()
+		self.selectionChanged()
 
 	def loadTimerList(self):
 		def condition(element):
@@ -863,19 +867,16 @@ class RecordTimerOverview(TimerOverviewBase):
 		event = eEPGCache.getInstance().lookupEventId(timer.service_ref.ref, timer.eit) if timer.eit else None
 		if event:
 			self["Event"].newEvent(event)
-			#
-			# This is not in openOPD but could be helpful to update the timer description with the actual recording details!
-			#
-			# shortDescription = event.getShortDescription()
-			# if shortDescription and description != shortDescription:
-			# 	if description and shortDescription:
-			# 		description = "%s %s\n\n%s %s" % (_("Timer:"), description, _("EPG:"), shortDescription)
-			# 	elif shortDescription:
-			# 		description = shortDescription
-			# 		timer.description = shortDescription
-			# extendDescription = event.getExtendedDescription()
-			# if extendDescription and description != extendDescription:
-			# 	description = "%s\n%s" % (description, extendDescription) if description else extendDescription
+			shortDescription = event.getShortDescription()
+			if shortDescription and description != shortDescription:
+				if description and shortDescription:
+					description = "%s %s\n\n%s %s" % (_("Timer:"), description, _("EPG:"), shortDescription)
+				elif shortDescription:
+					description = shortDescription
+					timer.description = shortDescription
+			extendDescription = event.getExtendedDescription()
+			if extendDescription and description != extendDescription:
+				description = "%s\n%s" % (description, extendDescription) if description else extendDescription
 		return description
 
 	def selectionChanged(self):
@@ -899,7 +900,7 @@ class RecordTimerOverview(TimerOverviewBase):
 				yellowText = ""
 			elif (not stateRunning or timer.repeated and timer.isRunning()) and not timer.disabled:
 				yellowText = _("Disable")
-			if not timer.repeated and timer.state == TimerEntry.StateEnded:
+			if not timer.disabled and not timer.repeated and timer.state == TimerEntry.StateEnded:
 				yellowText = ""
 			self["key_yellow"].setText(yellowText)
 			self["toggleActions"].setEnabled(yellowText != "")
@@ -949,7 +950,7 @@ class RecordTimerOverview(TimerOverviewBase):
 		if result[0]:
 			entry = result[1]
 			if entry.external:
-				self.fallbackTimer.addTimer(entry, self.loadTimerList)
+				self.fallbackTimer.addTimer(entry, self.fallbackRefresh)
 			else:
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList:
@@ -1057,6 +1058,7 @@ class RecordTimerOverview(TimerOverviewBase):
 							timerChanged = False
 					else:
 						timer.disable()
+						timerChanged = False
 				if timerChanged:
 					self.session.nav.RecordTimer.timeChanged(timer)
 				self.reloadTimerList()
@@ -1398,6 +1400,7 @@ class RecordTimerEdit(Setup):
 		self.timer.dirname_prev = self.timer.dirname
 		self.fallbackInfo = None
 		self.initEndTime = True
+		self.session = session  # We need session before createConfig
 		self.createConfig()
 		if self.timer.external:
 			FallbackTimerDirs(self, self.fallbackResult)
@@ -1405,10 +1408,9 @@ class RecordTimerEdit(Setup):
 
 	def fallbackResult(self, locations, default, tags):
 		self.fallbackInfo = (locations, default, tags)
-		if default not in locations:
-			locations.append(default)
-		self.timerLocation.setChoices(locations)
-		self.timerLocation.value = default
+		if self.timer.dirname and self.timer.dirname not in locations:
+			locations.append(self.timer.dirname)
+		self.timerLocation.setChoices(choices=locations, default=self.timer.dirname)
 
 	def createConfig(self):
 		days = {}
@@ -1728,8 +1730,10 @@ class RecordTimerEdit(Setup):
 			return (default, locations)
 		elif self.fallbackInfo and len(self.fallbackInfo) > 1:
 			return (self.fallbackInfo[1], self.fallbackInfo[0])
+		elif self.timer.dirname:
+			return (self.timer.dirname, [self.timer.dirname])
 		else:
-			return ("", [""])
+			return (defaultMoviePath(), [defaultMoviePath()])
 
 	def getLocation(self):
 		if not self.timer.external:  # TODO Fallback

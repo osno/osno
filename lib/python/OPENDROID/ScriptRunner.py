@@ -1,16 +1,12 @@
-from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
-from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.Language import language
 from Components.Button import Button
 from Components.MenuList import MenuList
-from Components.Sources.List import List
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
-from os import listdir, remove, mkdir, path, access, X_OK, chmod
-import datetime, time
+from os import listdir, mkdir, path, access, X_OK, chmod
+
 
 class ScriptRunner(Screen):
 	skin = """<screen name="ScriptRunner" position="center,center" size="700,500" title="Script Runner" flags="wfBorder" >
@@ -25,10 +21,9 @@ class ScriptRunner(Screen):
 		</applet>
 	</screen>"""
 
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Job Manager"))
+		self.setTitle(_("Script Manager"))
 		self['lab1'] = Label()
 		self.list = []
 		self.populate_List()
@@ -43,7 +38,7 @@ class ScriptRunner(Screen):
 
 		self["key_red"] = Button(_("Close"))
 		self["key_green"] = Button(_("Run"))
-		
+
 	def populate_List(self):
 		if not path.exists('/usr/script'):
 			mkdir('/usr/script', 0o755)
@@ -55,7 +50,7 @@ class ScriptRunner(Screen):
 			pkg = parts[0]
 			if pkg.find('.sh') >= 0:
 				self.list.append(pkg)
-		self.list.sort()	
+		self.list.sort()
 
 	def runscript(self):
 		self.sel = self['list'].getCurrent()
@@ -64,15 +59,14 @@ class ScriptRunner(Screen):
 			ybox = self.session.openWithCallback(self.Run, MessageBox, message, MessageBox.TYPE_YESNO)
 			ybox.setTitle(_("Run Confirmation"))
 		else:
-			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout=10)
 
 	def Run(self, answer):
 		if answer is True:
 			if not access("/usr/script/" + self.sel, X_OK):
 				chmod("/usr/script/" + self.sel, 0o755)
 			cmd1 = ". /usr/script/" + self.sel
-			self.session.open(Console, title=self.sel, cmdlist = [cmd1], closeOnSuccess = False)	
-					
+			self.session.open(Console, title=self.sel, cmdlist=[cmd1], closeOnSuccess=False)
+
 	def myclose(self):
 		self.close()
-		

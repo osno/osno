@@ -24,6 +24,11 @@ from Screens.MessageBox import MessageBox
 from ServiceReference import ServiceReference
 from Tools.Directories import isPluginInstalled
 from Tools.GetEcmInfo import GetEcmInfo
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class CamControl:
 	'''CAM convention is that a softlink named /etc/init.c/softcam.* points

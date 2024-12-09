@@ -9,7 +9,11 @@ from Screens.Screen import Screen
 from Screens.Setup import Setup
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 class InputDeviceSelection(Screen):
 	def __init__(self, session):

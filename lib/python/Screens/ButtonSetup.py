@@ -1,6 +1,5 @@
 from os import listdir
 from os.path import isdir, isfile
-
 from enigma import eActionMap, eServiceReference
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import ConfigYesNo, ConfigSubsection, ConfigText, config
@@ -17,7 +16,11 @@ from Screens.MessageBox import MessageBox
 from ServiceReference import ServiceReference
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import isPluginInstalled
-
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 BUTTON_SETUP_KEYS = [
 	(_("Red"), "red", ""),

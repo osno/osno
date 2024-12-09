@@ -33,6 +33,10 @@ from re import search
 from datetime import datetime
 from locale import format_string
 import six
+import ctypes
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 

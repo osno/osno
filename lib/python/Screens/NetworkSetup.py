@@ -3379,7 +3379,7 @@ class NetworkPassword(Setup):
 		data = data.decode("UTF-8", "ignore")
 		# print("[NetworkSetup] DEBUG NetworkPassword: data='%s'." % data)
 		if data.endswith("password: "):
-			self.container.write("%s\n" % config.network.password.value)
+			self.container.write(f"{config.network.password.value}\n")
 			self.counter += 1
 
 	def appClosed(self, retVal=ETIMEDOUT):
@@ -3387,7 +3387,7 @@ class NetworkPassword(Setup):
 		if retVal:
 			if retVal == ETIMEDOUT:
 				self.container.kill()
-			print("[NetworkSetup] NetworkPassword: Error %d: Unable to change password!  (%s)" % (retVal, strerror(retVal)))
+			print(f"[NetworkSetup] NetworkPassword: Error {retVal}: Unable to change password!  ({strerror(retVal)})")
 			self.session.open(MessageBox, _("Error %d: Unable to change password!  (%s)") % (retVal, strerror(retVal)), MessageBox.TYPE_ERROR)
 		elif self.counter == 2:
 			print("[NetworkSetup] NetworkPassword: Password changed.")

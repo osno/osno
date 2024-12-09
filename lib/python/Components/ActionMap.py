@@ -1,10 +1,14 @@
 from sys import maxsize
-
 from enigma import eActionMap
-
 from keyids import KEYIDS
 from Components.config import config
 from Tools.Directories import fileReadXML
+from GlobalStrings import globalStrings
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -335,7 +339,10 @@ class HelpableActionMap(ActionMap):
 				if not isinstance(response, (list, tuple)):
 					response = (response, None)
 				if queryKeyBinding(context, action):
-					actionList.append((action, response[1]))
+					helpText = response[1]
+					if isinstance(helpText, int):
+						helpText = globalStrings.getCommonString(action) if helpText == 0 else globalStrings.getString(helpText)
+					actionList.append((action, helpText))
 				actionDict[action] = response[0]
 			parent.helpList.append((self, context, actionList))
 		ActionMap.__init__(self, contexts, actionDict, prio, parentScreen=parent)

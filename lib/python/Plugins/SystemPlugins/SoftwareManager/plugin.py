@@ -6,11 +6,8 @@ from pickle import dump, load
 from urllib.request import urlopen
 from socket import getdefaulttimeout, setdefaulttimeout
 from time import time
-
 from twisted.internet import reactor
-
 from enigma import eTimer, getDesktop, ePicLoad, eRCInput, getPrevAsciiCode, eEnv, getEnigmaVersionString
-
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
 from Components.AVSwitch import AVSwitch
 from Components.config import config

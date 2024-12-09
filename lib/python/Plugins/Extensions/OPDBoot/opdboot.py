@@ -1,13 +1,16 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 
-from __future__ import print_function
 import sys
 import os
 import struct
 import shutil
 from boxbranding import getBoxType, getImageDistro, getMachineName, getMachineBrand, getImageVersion, getMachineKernelFile, getMachineRootFile, getMachineBuild, getImageArch, getImageFolder
 from os import path
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
+
 media_nf = '/media/opdboot'
 mediahome = media_nf + '/OPDBootI/'
 

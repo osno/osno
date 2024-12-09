@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import absolute_import
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_GUISKIN, resolveFilename
 from enigma import *
 from enigma import getDesktop
@@ -1243,7 +1241,8 @@ class Disks:
                 size = 0
                 partitions = open("/proc/partitions")
                 for part in partitions:
-                        res = re.sub("\s+", " ", part).strip().split(" ")
+#                        res = re.sub("\s+", " ", part).strip().split(" ")
+                        res = re.sub(r"\s+", " ", part).strip().split(" ")
                         if res and len(res) == 4:
                                 if res[3] == dev:
                                         size = int(res[2])
@@ -1321,7 +1320,8 @@ class MountPoints():
                 for row in rows:
                         self.entries.append({
                                 "row": row,
-                                "data": re.split("\s+", row),
+#                                "data": re.split("\s+", row),
+                                "data": re.split(r"\s+", row),
                                 "modified": False
                         })
 

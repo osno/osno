@@ -1,7 +1,6 @@
 from os import W_OK, access, remove, stat, statvfs
 from os.path import exists, isdir, join
 from shlex import split
-
 from Components.ActionMap import HelpableActionMap
 from Components.ChoiceList import ChoiceEntryComponent, ChoiceList
 from Components.config import ConfigInteger, ConfigSelection
@@ -18,6 +17,11 @@ from Screens.Setup import Setup
 from Screens.Standby import QUIT_REBOOT, TryQuitMainloop
 from Tools.Directories import fileReadLines, fileWriteLine
 from Tools.MultiBoot import MultiBoot
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 

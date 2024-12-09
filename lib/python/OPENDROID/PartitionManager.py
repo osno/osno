@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 from enigma import eTimer
 from enigma import getDesktop
 from Screens.Screen import Screen

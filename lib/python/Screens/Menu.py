@@ -1,8 +1,6 @@
 from os.path import isdir, isfile
 from xml.etree.ElementTree import parse
-
 from enigma import eTimer
-
 from skin import findSkinScreen, menus
 from Components.ActionMap import HelpableNumberActionMap, HelpableActionMap
 from Components.AVSwitch import avSwitch
@@ -14,12 +12,18 @@ from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.NimManager import nimmanager
 from Plugins.Plugin import PluginDescriptor
+from Screens.LocaleSelection import LocaleSelection
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen, ScreenSummary
 from Screens.Setup import Setup
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_GUISKIN, SCOPE_SKINS, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MENU_TEXT = 0
 MENU_MODULE = 1
@@ -226,17 +230,17 @@ class Menu(Screen, ProtectedScreen):
 			"0": (self.keyNumberGlobal, _("Direct menu item selection")),
 			"textlong": (self.keyText, _("Switch to 720p video"))
 		}, prio=0, description=_("Menu Common Actions"))
+		self["navigationActions"] = HelpableActionMap(self, ["NavigationActions"], {
+			"top": (self.keyTop, _("Move to first line / screen")),
+			"pageUp": (self.keyPageUp, _("Move up a screen")),
+			"up": (self.keyUp, _("Move up a line")),
+			# "first": (self.keyFirst, _("Jump to first item in list or the start of text")),
+			# "last": (self.keyLast, _("Jump to last item in list or the end of text")),
+			"down": (self.keyDown, _("Move down a line")),
+			"pageDown": (self.keyPageDown, _("Move down a screen")),
+			"bottom": (self.keyBottom, _("Move to last line / screen"))
+		}, prio=-1, description=_("Menu Navigation Actions"))
 		if config.usage.menuSortOrder.value == "user":
-			self["moveActions"] = HelpableActionMap(self, ["NavigationActions"], {
-				"top": (self.keyTop, _("Move to first line / screen")),
-				"pageUp": (self.keyPageUp, _("Move up a screen")),
-				"up": (self.keyUp, _("Move up a line")),
-				# "first": (self.keyFirst, _("Jump to first item in list or the start of text")),
-				# "last": (self.keyLast, _("Jump to last item in list or the end of text")),
-				"down": (self.keyDown, _("Move down a line")),
-				"pageDown": (self.keyPageDown, _("Move down a screen")),
-				"bottom": (self.keyBottom, _("Move to last line / screen"))
-			}, prio=-1, description=_("Menu Navigation Actions"))
 			self["editActions"] = HelpableActionMap(self, ["ColorActions"], {
 				"green": (self.keyGreen, _("Toggle item move mode on/off")),
 				"yellow": (self.keyYellow, _("Toggle hide/show of the current item")),
@@ -274,7 +278,7 @@ class Menu(Screen, ProtectedScreen):
 						self.menuList.append(data)
 		if self.menuID:
 			for plugin in plugins.getPluginsForMenu(self.menuID):  # Plugins.
-				# print("[Menu] DEBUG 1: Plugin data=%s." % str(plugin))
+				# print(f"[Menu] DEBUG 1: Plugin data={str(plugin)}.")
 				pluginKey = plugin[PLUGIN_KEY]  # Check if a plugin overrides an existing menu.
 				for entry in self.menuList:
 					if entry[PLUGIN_KEY] == pluginKey:
@@ -291,7 +295,7 @@ class Menu(Screen, ProtectedScreen):
 		if config.usage.menuSortOrder.value == "user" and self.menuID == "mainmenu":
 			idList = []
 			for plugin in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
-				# print("[Menu] DEBUG 2: Plugin data=%s." % str(plugin))
+				# print(f"[Menu] DEBUG 2: Plugin data={str(plugin)}.")
 				plugin.id = (plugin.name.lower()).replace(" ", "_")
 				if plugin.id not in idList:
 					idList.append(plugin.id)
@@ -432,6 +436,7 @@ class Menu(Screen, ProtectedScreen):
 		self["menu"].setList(menu)
 
 	def layoutFinished(self):
+		self["menu"].enableAutoNavigation(False)
 		self["menu"].setStyle(config.usage.menuEntryStyle.value)
 		self.selectionChanged()
 
@@ -473,7 +478,7 @@ class Menu(Screen, ProtectedScreen):
 		#	string (as we want to reference
 		#	stuff which is just imported)
 		if arg[0] != "":
-			exec(f"from {arg[0]} import {arg[1].split(',')[0]}")
+			exec(f"from {arg[0]} import {arg[1].split(',')[0]}", globals())
 			self.openDialog(*eval(arg[1]))
 
 	def nothing(self):  # Dummy.

@@ -31,6 +31,10 @@ import six
 import re
 import subprocess
 import platform
+import ctypes
+from boxbranding import getMachineBuild
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 def get_arch_suffix():
     # Forza il ritorno della corretta architettura per questa macchina

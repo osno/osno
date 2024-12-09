@@ -1,14 +1,17 @@
 from os.path import exists
 from os import W_OK, access, system
 from time import sleep
-
 from enigma import eAVControl, getDesktop
-
 from Components.config import ConfigBoolean, ConfigEnableDisable, ConfigInteger, ConfigNothing, ConfigOnOff, ConfigSelection, ConfigSelectionInteger, ConfigSelectionNumber, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config
 from Components.About import about
 from Components.SystemInfo import BoxInfo
 from Tools.CList import CList
 from Tools.Directories import fileReadLine, fileWriteLine
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 AMLOGIC = BoxInfo.getItem("AmlogicFamily")

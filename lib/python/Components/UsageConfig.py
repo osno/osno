@@ -16,6 +16,11 @@ from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo
 from Tools.Directories import SCOPE_HDD, SCOPE_SKINS, SCOPE_TIMESHIFT, SCOPE_VOD, defaultRecordingLocation, fileReadXML, resolveFilename, fileWriteLine
 from Components.AVSwitch import iAVSwitch
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 MODULE_NAME = __name__.split(".")[-1]
 DEFAULTKEYMAP = eEnv.resolve("${datadir}/enigma2/keymap.xml")
@@ -155,7 +160,14 @@ def InitUsageConfig():
 		("opendns-familyshield", _("OpenDNS FamilyShield")),
 		("opendns-home", _("OpenDNS Home"))
 	])
-
+	config.usage.dnsMode = ConfigSelection(default=0, choices=[
+		(0, _("Prefer IPv4")),
+		(1, _("Prefer IPv6")),
+		(2, _("IPv4 only")),
+		(3, _("IPv6 only"))
+	])
+	config.usage.dnsSuffix = ConfigText(default="")
+	config.usage.dnsRotate = ConfigYesNo(default=False)
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)
 	config.usage.subnetwork_terrestrial = ConfigYesNo(default=True)
@@ -362,7 +374,6 @@ def InitUsageConfig():
 	config.usage.tuxtxt_TTFHeightFactor16 = ConfigInteger(default=14, limits=(8, 31))
 	config.usage.tuxtxt_CleanAlgo = ConfigInteger(default=0, limits=(0, 9))
 	config.usage.tuxtxt_ConfFileHasBeenPatched = NoSave(ConfigYesNo(default=False))
-
 	config.usage.tuxtxt_font_and_res.addNotifier(patchTuxtxtConfFile, initial_call=False, immediate_feedback=False, call_on_save_or_cancel=True)
 	config.usage.tuxtxt_UseTTF.addNotifier(patchTuxtxtConfFile, initial_call=False, immediate_feedback=False, call_on_save_or_cancel=True)
 	config.usage.tuxtxt_TTFBold.addNotifier(patchTuxtxtConfFile, initial_call=False, immediate_feedback=False, call_on_save_or_cancel=True)
@@ -376,7 +387,6 @@ def InitUsageConfig():
 	config.usage.tuxtxt_TTFWidthFactor16.addNotifier(patchTuxtxtConfFile, initial_call=False, immediate_feedback=False, call_on_save_or_cancel=True)
 	config.usage.tuxtxt_TTFHeightFactor16.addNotifier(patchTuxtxtConfFile, initial_call=False, immediate_feedback=False, call_on_save_or_cancel=True)
 	config.usage.tuxtxt_CleanAlgo.addNotifier(patchTuxtxtConfFile, initial_call=False, immediate_feedback=False, call_on_save_or_cancel=True)
-
 	config.usage.sort_settings = ConfigYesNo(default=False)
 	config.usage.sort_menu_byname = ConfigYesNo(default=False)
 	config.usage.sort_plugins_byname = ConfigYesNo(default=True)
@@ -2473,7 +2483,8 @@ def patchTuxtxtConfFile(dummyConfigElement):
 	command = "sed -i -r '"
 	for f in tuxtxt2:
 		#replace keyword (%s) followed by any value ([-0-9]+) by that keyword \1 and the new value %d
-		command += "s|(%s)\s+([-0-9]+)|\\1 %d|;" % (f[0], f[1])
+#		command += "s|(%s)\s+([-0-9]+)|\\1 %d|;" % (f[0], f[1])
+		command += "s|(%s)\\s+([-0-9]+)|\\1 %d|;" % (f[0], f[1])
 	command += "' %s" % TUXTXT_CFG_FILE
 	for f in tuxtxt2:
 		#if keyword is not found in file, append keyword and value

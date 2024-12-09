@@ -5,9 +5,7 @@ from os.path import exists
 from subprocess import call
 from sys import maxsize
 from time import ctime, localtime, mktime, strftime, time
-
 from enigma import eActionMap, quitMainloop
-
 import NavigationInstance
 from timer import Timer, TimerEntry
 from Components.config import config
@@ -18,6 +16,11 @@ import Screens.Standby
 from Tools.Directories import SCOPE_CONFIG, fileReadLines, fileReadXML, resolveFilename
 from Tools.Notifications import AddNotification, AddNotificationWithCallback, AddPopup
 from Tools.XMLTools import stringToXML
+import ctypes
+from boxbranding import getMachineBuild
+import os
+machine = getMachineBuild()
+lib_opd = ctypes.CDLL('/usr/lib/libOPD.so.0.0.0')
 
 # try:
 # 	from Screens.InfoBar import InfoBar
