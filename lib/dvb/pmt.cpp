@@ -125,6 +125,7 @@ void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
 			(state == iDVBChannel::state_failed))
 	{
 		eDebug("[eDVBServicePMTHandler] tune failed.");
+		eDebug("[eDVBServicePMTHandler] tune failed. %s", m_reference.toString().c_str());
 		serviceEvent(eventTuneFailed);
 	}
 }
@@ -1196,6 +1197,10 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, ePtr<iTsSource> &s
 				sigc::mem_fun(*this, &eDVBServicePMTHandler::channelStateChanged),
 				m_channelStateChanged_connection);
 			m_last_channel_state = -1;
+			int _state;
+			m_channel->getState(_state);
+			if(eDVBServicePMTHandler::m_debug)
+				eDebug("[eDVBServicePMTHandler] tuneExt state. %d" , _state);
 			channelStateChanged(m_channel);
 
 			m_channel->connectEvent(
