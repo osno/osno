@@ -40,15 +40,24 @@ AC_ARG_WITH(gstversion,
 	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
 	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=0.10])
 
+AC_ARG_WITH([sigc-version],
+    AS_HELP_STRING([--with-sigc-version=VERSION], [use sigc++ version (2.0 or 3.0)]),
+    [SIGC_VERSION=$withval], [SIGC_VERSION=2.0])
+
+AS_IF([test "$SIGC_VERSION" = "3.0"], [
+    PKG_CHECK_MODULES(SIGC, sigc++-3.0, [], [AC_MSG_ERROR([sigc++-3.0 not found])])
+    ENIGMA2_SIGC="sigc++-3.0"
+], [
+    PKG_CHECK_MODULES(SIGC, sigc++-2.0, [], [AC_MSG_ERROR([sigc++-2.0 not found])])
+    ENIGMA2_SIGC="sigc++-2.0"
+])
 PKG_CHECK_MODULES(TUXTXT, tuxbox-tuxtxt)
 PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
-PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 sigc++-2.0 libssl libcrypto libcurl])
-#PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 sigc++-2.0 sigc++-3.0 libssl libcrypto libcurl])
-
+PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 $ENIGMA2_SIGC libssl libcrypto libcurl])
 PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
 AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
 PKG_CHECK_MODULES(AVAHI, avahi-client)
-
+AC_SUBST(ENIGMA2_SIGC)
 AC_CHECK_LIB([udfread], [udfread_init])
 AC_CHECK_LIB([dl], [dlopen], [LIBDL_LIBS="-ldl"], [AC_MSG_ERROR([Could not find libdl])])
 AC_SUBST(LIBDL_LIBS)
