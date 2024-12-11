@@ -7,7 +7,16 @@ from Components.MenuList import MenuList
 from Components.NimManager import iDVBFrontendDict, nimmanager
 from Components.ProgressBar import ProgressBar
 from Components.Sources.FrontendInfo import FrontendInfo
-from Components.config import config
+from Components.Sources.StaticText import StaticText
+try:
+	from Plugins.SystemPlugins.LCNScanner.plugin import LCNScanner
+except ImportError:
+	LCNScanner = None
+from Screens.InfoBar import InfoBar
+from Screens.Processing import Processing
+from Screens.Screen import Screen, ScreenSummary
+from Tools.Directories import SCOPE_CONFIG, fileReadLines, resolveFilename
+from Tools.Transponder import getChannelNumber
 
 MODULE_NAME = __name__.split(".")[-1]
 
