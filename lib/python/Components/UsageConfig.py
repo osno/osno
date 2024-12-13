@@ -182,13 +182,19 @@ def InitUsageConfig():
 	])
 	config.usage.correct_invalid_epgdata.addNotifier(correctInvalidEPGDataChange)
 
-	config.usage.alternative_number_mode = ConfigYesNo(default=False)
-
-	def alternativeNumberModeChange(configElement):
+	def setNumberModeChange(configElement):
 		eDVBDB.getInstance().setNumberingMode(configElement.value)
+		config.usage.alternative_number_mode.value = config.usage.numberMode.value != 0
 		refreshServiceList()
 
-	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
+	config.usage.numberMode = ConfigSelection(default=0, choices=[
+		(0, _("Unique numbering")),
+		(1, _("Bouquets start at 1")),
+		(2, _("LCN numbering"))
+	])
+	config.usage.numberMode.addNotifier(setNumberModeChange, initial_call=False)
+
+	config.usage.alternative_number_mode = ConfigYesNo(default=config.usage.numberMode.value != 0)
 
 	config.usage.hide_number_markers = ConfigYesNo(default=True)
 	config.usage.hide_number_markers.addNotifier(refreshServiceList)
