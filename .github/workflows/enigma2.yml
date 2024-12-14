@@ -2,9 +2,9 @@ name: Enigma2 Build
 
 on:
   push:
-    branches: [ pyton-3.12 ]
+    branches: [ main ]
   pull_request:
-    branches: [ pyton-3.12 ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
