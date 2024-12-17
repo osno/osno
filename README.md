@@ -1,11 +1,4 @@
 ## Our buildserver is currently running on: ##
-## SonarCloud status
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=bugs)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
 
 ## Current OS
 
