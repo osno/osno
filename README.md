@@ -1,8 +1,15 @@
 ## Our buildserver is currently running on: ##
+## SonarCloud status
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=bugs)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=formiano_enigma2&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=formiano_enigma2)
 
 ## Current OS
 
-> Ubuntu 22.04.1 LTS (Kernel 5.15.0) 64-bit
+> Ubuntu 24.04 LTS (GNU/Linux 6.8.0-31-generic x86_64)
 
 ## Hardware requirements
 
@@ -22,8 +29,6 @@
 
 * [https://github.com/stein17/Skins-for-openOPD/tree/python3)
 
-## DOXYGEN Documentation
-
 
 ----------
 
@@ -31,7 +36,7 @@
 
 1 - Install packages on your buildserver
 
-    sudo apt-get install -y autoconf automake bison bzip2 chrpath coreutils cpio curl cvs debianutils default-jre default-jre-headless diffstat flex g++ gawk gcc gcc-12 gcc-multilib g++-multilib gettext git git-core gzip help2man info iputils-ping java-common libc6-dev libegl1-mesa libglib2.0-dev libncurses5-dev libperl4-corelibs-perl libproc-processtable-perl libsdl1.2-dev libserf-dev libtool libxml2-utils make ncurses-bin patch perl pkg-config psmisc python3 python3-git python3-jinja2 python3-pexpect python3-pip python-setuptools qemu quilt socat sshpass subversion tar texi2html texinfo unzip wget xsltproc xterm xz-utils zip zlib1g-dev zstd fakeroot lz4 liblz4-tool git-lfs
+    sudo apt-get install -y autoconf automake bison bzip2 chrpath coreutils cpio curl cvs debianutils default-jre default-jre-headless diffstat flex g++ gawk gcc gcc-12 gcc-multilib g++-multilib gettext git gzip help2man info iputils-ping java-common libc6-dev libglib2.0-dev libncurses-dev libperl4-corelibs-perl libproc-processtable-perl libsdl1.2-dev libserf-dev libtool libxml2-utils make ncurses-bin patch perl pkg-config psmisc python3 python3-git python3-jinja2 python3-pexpect python3-pip python3-setuptools quilt socat sshpass subversion tar texi2html texinfo unzip wget xsltproc xterm xz-utils zip zlib1g-dev zstd fakeroot lz4 git-lfs
 
 ----------
 2 - Set python3 as preferred provider for python
