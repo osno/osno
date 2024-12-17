@@ -138,7 +138,8 @@ class Session:
 		readSkin(dialog, None, dialog.skinName, desktop)  # Read skin data.
 		dialog.setDesktop(desktop)  # Create GUI view of this dialog.
 		dialog.applySkin()
-		self.allDialogs.append(dialog)
+		if not hasattr(dialog, "noSkinReload"):
+			self.allDialogs.append(dialog)
 		return dialog
 
 	def pushCurrent(self):
@@ -221,9 +222,13 @@ class Session:
 		for function in self.onShutdown:
 			if callable(function):
 				function()
-#		for dialog in self.allDialogs:
-#			if hasattr(dialog, "onShutdown"):
-#				dialog.onShutdown()
+
+	def reloadDialogs(self):
+		for dialog in self.allDialogs:
+			if hasattr(dialog, "desktop"):
+				oldDesktop = dialog.desktop
+				readSkin(dialog, None, dialog.skinName, oldDesktop)
+				dialog.applySkin()
 
 
 class PowerKey:
