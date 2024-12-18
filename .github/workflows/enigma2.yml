@@ -29,11 +29,19 @@ jobs:
               libfribidi-dev libavahi-client-dev libjpeg-turbo8-dev libgif-dev \
               libcurl4-openssl-dev mm-common
           
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2  # Utilizzare la versione 2 per stabilità
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v2  # Versione stabile di setup-python
         with:
           python-version: ${{ matrix.python }}
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-cache-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-cache-
 
       - name: Clear Python bytecode cache
         run: |
