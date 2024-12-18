@@ -1,24 +1,31 @@
+
 name: Cleanup Artifacts
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Delete Artifacts
+      - name: List Artifacts
         run: |
           artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
                             -H "Accept: application/vnd.github.v3+json" \
                             https://api.github.com/repos/${{ github.repository }}/actions/artifacts)
-          echo "Artifacts: $artifacts"
-          echo "$artifacts" | jq '.artifacts[] | select(.expired == false)' | while read artifact; do
+          echo "Available artifacts:"
+          echo "$artifacts" | jq '.artifacts[] | {id: .id, name: .name, created_at: .created_at, expired: .expired}'
+
+      - name: Delete Old Artifacts
+        run: |
+          artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+                            -H "Accept: application/vnd.github.v3+json" \
+                            https://api.github.com/repos/${{ github.repository }}/actions/artifacts)
+          echo "$artifacts" | jq -c '.artifacts[] | select(.expired == false)' | while read artifact; do
             id=$(echo "$artifact" | jq -r '.id')
-            echo "Deleting artifact $id"
+            name=$(echo "$artifact" | jq -r '.name')
+            echo "Deleting artifact $id ($name)"
             curl -X DELETE -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
                  -H "Accept: application/vnd.github.v3+json" \
                  https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$id
