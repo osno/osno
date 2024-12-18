@@ -1,35 +1,26 @@
-name: Remove Old Artifacts
+name: Cleanup Artifacts
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # Esegue il workflow ogni giorno a mezzanotte
-  workflow_dispatch: # Permette di avviarlo manualmente
+    - cron: '0 0 * * *'
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
 
     steps:
-      - name: List Artifacts
-        id: list-artifacts
+      - name: Delete Artifacts
         run: |
-          curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/artifacts \
-            | jq '.artifacts[] | select(.expired == false) | {id: .id, name: .name, created_at: .created_at}' > artifacts.json
-
-      - name: Delete Old Artifacts
-        run: |
-          now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          cutoff=$(date -u -d "-30 days" +"%Y-%m-%dT%H:%M:%SZ")
-          jq -c '.[]' artifacts.json | while read artifact; do
-            created=$(echo "$artifact" | jq -r '.created_at')
+          artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+                            -H "Accept: application/vnd.github.v3+json" \
+                            https://api.github.com/repos/${{ github.repository }}/actions/artifacts)
+          echo "Artifacts: $artifacts"
+          echo "$artifacts" | jq '.artifacts[] | select(.expired == false)' | while read artifact; do
             id=$(echo "$artifact" | jq -r '.id')
-            if [[ "$created" < "$cutoff" ]]; then
-              echo "Deleting artifact $id created at $created"
-              curl -X DELETE -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                -H "Accept: application/vnd.github.v3+json" \
-                https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$id
-            fi
+            echo "Deleting artifact $id"
+            curl -X DELETE -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$id
           done
 
