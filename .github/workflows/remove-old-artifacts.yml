@@ -20,7 +20,7 @@ jobs:
             echo "jq is not installed. Installing..."
             sudo apt-get update && sudo apt-get install -y jq
           else
-            echo "jq is already installed..."
+            echo "jq is already installed."
           fi
 
       - name: Fetch artifacts from GitHub API
@@ -35,6 +35,7 @@ jobs:
           if [ -z "$artifacts" ] || [ "$artifacts" == "null" ]; then
             echo "No artifacts found."
             echo "No artifacts found." >> $GITHUB_ENV
+            echo "No artifacts found." # Output visibile nel log per chiarezza
           else
             echo "Available artifacts:"
             echo "$artifacts" | jq '.artifacts[] | {id: .id, name: .name, created_at: .created_at, expired: .expired}'
