@@ -1,20 +1,35 @@
-name: Remove old artifacts
+name: Remove Old Artifacts
 
 on:
   schedule:
-    # Every day at 1am
-    - cron: '0 1 * * *'
+    - cron: '0 0 * * *' # Esegue il workflow ogni giorno a mezzanotte
+  workflow_dispatch: # Permette di avviarlo manualmente
 
 jobs:
-  remove-old-artifacts:
+  cleanup:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-    - name: Remove old artifacts
-      uses: c-hive/gha-remove-artifacts@v1
-      with:
-        age: '1 month' # '<number> <unit>', e.g. 5 days, 2 years, 90 seconds, parsed by Moment.js
-        # Optional inputs
-        # skip-tags: true
-        # skip-recent: 5
+      - name: List Artifacts
+        id: list-artifacts
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/artifacts \
+            | jq '.artifacts[] | select(.expired == false) | {id: .id, name: .name, created_at: .created_at}' > artifacts.json
+
+      - name: Delete Old Artifacts
+        run: |
+          now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          cutoff=$(date -u -d "-30 days" +"%Y-%m-%dT%H:%M:%SZ")
+          jq -c '.[]' artifacts.json | while read artifact; do
+            created=$(echo "$artifact" | jq -r '.created_at')
+            id=$(echo "$artifact" | jq -r '.id')
+            if [[ "$created" < "$cutoff" ]]; then
+              echo "Deleting artifact $id created at $created"
+              curl -X DELETE -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$id
+            fi
+          done
+
