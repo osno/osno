@@ -20,7 +20,7 @@ jobs:
             echo "jq is not installed. Installing..."
             sudo apt-get update && sudo apt-get install -y jq
           else
-            echo "jq is already installed."
+            echo "jq is already installed..."
           fi
 
       - name: Fetch artifacts from GitHub API
