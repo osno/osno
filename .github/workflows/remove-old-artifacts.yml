@@ -1,33 +1,60 @@
-
-name: Cleanup Artifacts
+name: Clean Up Artifacts
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   cleanup:
-    runs-on: ubuntu-latest
-
+    name: Cleanup Old Artifacts
+    runs-on: ubuntu-24.04
     steps:
-      - name: List Artifacts
-        run: |
-          artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-                            -H "Accept: application/vnd.github.v3+json" \
-                            https://api.github.com/repos/${{ github.repository }}/actions/artifacts)
-          echo "Available artifacts:"
-          echo "$artifacts" | jq '.artifacts[] | {id: .id, name: .name, created_at: .created_at, expired: .expired}'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Delete Old Artifacts
+      - name: Verify jq installation
         run: |
-          artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+          if ! command -v jq &> /dev/null; then
+            echo "jq is not installed. Installing..."
+            sudo apt-get update && sudo apt-get install -y jq
+          else
+            echo "jq is already installed."
+          fi
+
+      - name: Fetch artifacts from GitHub API
+        id: fetch_artifacts
+        run: |
+          echo "Fetching artifacts from GitHub API..."
+          artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
                             -H "Accept: application/vnd.github.v3+json" \
-                            https://api.github.com/repos/${{ github.repository }}/actions/artifacts)
-          echo "$artifacts" | jq -c '.artifacts[] | select(.expired == false)' | while read artifact; do
-            id=$(echo "$artifact" | jq -r '.id')
-            name=$(echo "$artifact" | jq -r '.name')
-            echo "Deleting artifact $id ($name)"
-            curl -X DELETE -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-                 -H "Accept: application/vnd.github.v3+json" \
-                 https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$id
+                            https://api.github.com/repos/formiano/enigma2/actions/artifacts)
+
+          # Verifica se la risposta è vuota o null
+          if [ -z "$artifacts" ] || [ "$artifacts" == "null" ]; then
+            echo "No artifacts found."
+            echo "No artifacts found." >> $GITHUB_ENV
+          else
+            echo "Available artifacts:"
+            echo "$artifacts" | jq '.artifacts[] | {id: .id, name: .name, created_at: .created_at, expired: .expired}'
+            echo "$artifacts" >> $GITHUB_ENV
+          fi
+
+      - name: Clean up old artifacts (if any)
+        if: env.No_artifacts != 'No artifacts found.'
+        run: |
+          echo "Cleaning up old artifacts..."
+          # Estrai l'ID degli artefatti (puoi personalizzare la logica qui in base a come desideri rimuoverli)
+          artifact_ids=$(echo "$artifacts" | jq -r '.artifacts[] | .id')
+
+          for artifact_id in $artifact_ids; do
+            echo "Deleting artifact with ID: $artifact_id"
+            curl -X DELETE -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+                         https://api.github.com/repos/formiano/enigma2/actions/artifacts/$artifact_id
           done
+
+      - name: Final check and cleanup log
+        run: |
+          echo "Cleanup job complete!"
 
