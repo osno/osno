@@ -1,30 +1,76 @@
-echo "Fetching artifacts from GitHub API..."
+name: Clean Up Artifacts
 
-# Eseguiamo la richiesta API e memorizziamo la risposta
-artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
-                    -H "Accept: application/vnd.github.v3+json" \
-                    https://api.github.com/repos/formiano/enigma2/actions/artifacts)
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
-# Mostriamo la risposta raw per il debug
-echo "API response: $artifacts"
+jobs:
+  cleanup:
+    name: Cleanup Old Artifacts
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-# Verifica se la risposta è vuota o null
-if [ -z "$artifacts" ] || [ "$artifacts" == "null" ]; then
-  echo "No artifacts found."
-  echo "No artifacts found." >> $GITHUB_ENV
-  echo "No artifacts found." # Output visibile nel log per chiarezza
-else
-  echo "Available artifacts:"
-  
-  # Aggiungi un controllo per vedere se la risposta contiene effettivamente un campo "artifacts"
-  if echo "$artifacts" | jq -e '.artifacts' > /dev/null; then
-    # Se la risposta contiene artefatti, esegui jq per estrarli
-    echo "$artifacts" | jq '.artifacts[] | {id: .id, name: .name, created_at: .created_at, expired: .expired}'
-  else
-    echo "Artifacts key not found in the response."
-    echo "Artifacts key not found in the response." >> $GITHUB_ENV
-  fi
+      - name: Verify jq installation
+        run: |
+          if ! command -v jq &> /dev/null; then
+            echo "jq is not installed. Installing..."
+            sudo apt-get update && sudo apt-get install -y jq
+          else
+            echo "jq is already installed."
+          fi
 
-  echo "$artifacts" >> $GITHUB_ENV
-fi
+      - name: Fetch artifacts from GitHub API
+        id: fetch_artifacts
+        run: |
+          echo "Fetching artifacts from GitHub API..."
+
+          # Eseguiamo la richiesta API e memorizziamo la risposta
+          artifacts=$(curl -s -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+                            -H "Accept: application/vnd.github.v3+json" \
+                            https://api.github.com/repos/formiano/enigma2/actions/artifacts)
+
+          # Mostriamo la risposta raw per il debug
+          echo "API response: $artifacts"
+
+          # Verifica se la risposta è vuota o null
+          if [ -z "$artifacts" ] || [ "$artifacts" == "null" ]; then
+            echo "No artifacts found."
+            echo "No artifacts found." >> $GITHUB_ENV
+            echo "No artifacts found." # Output visibile nel log per chiarezza
+          else
+            echo "Available artifacts:"
+            
+            # Aggiungi un controllo per vedere se la risposta contiene effettivamente un campo "artifacts"
+            if echo "$artifacts" | jq -e '.artifacts' > /dev/null; then
+              # Se la risposta contiene artefatti, esegui jq per estrarli
+              echo "$artifacts" | jq '.artifacts[] | {id: .id, name: .name, created_at: .created_at, expired: .expired}'
+            else
+              echo "Artifacts key not found in the response."
+              echo "Artifacts key not found in the response." >> $GITHUB_ENV
+            fi
+
+            echo "$artifacts" >> $GITHUB_ENV
+          fi
+
+      - name: Clean up old artifacts (if any)
+        if: env.No_artifacts != 'No artifacts found.'
+        run: |
+          echo "Cleaning up old artifacts..."
+          
+          # Estrai l'ID degli artefatti (puoi personalizzare la logica qui in base a come desideri rimuoverli)
+          artifact_ids=$(echo "$artifacts" | jq -r '.artifacts[] | .id')
+
+          for artifact_id in $artifact_ids; do
+            echo "Deleting artifact with ID: $artifact_id"
+            curl -X DELETE -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+                         https://api.github.com/repos/formiano/enigma2/actions/artifacts/$artifact_id
+          done
+
+      - name: Final check and cleanup log
+        run: |
+          echo "Cleanup job complete!"
 
