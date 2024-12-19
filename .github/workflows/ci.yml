@@ -4,46 +4,41 @@ on:
   workflow_dispatch:
     inputs:
       artifact_name:
-        description: "Name of the artifact to delete"
+        description: 'Name of the artifact to delete'
         required: true
-        default: "build-artifact"
 
 jobs:
-  delete-artifacts:
+  delete-artifact:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List available artifacts
-        id: list_artifacts
+      - name: Fetch Artifacts
         run: |
           echo "Fetching artifacts from GitHub API..."
           artifacts=$(gh api -H "Accept: application/vnd.github+json" \
             /repos/${{ github.repository }}/actions/artifacts)
-
-          echo "$artifacts" | jq '.'
+          echo "Artifacts fetched: $artifacts"
           echo "$artifacts" > artifacts.json
 
-      - name: Parse artifact ID for deletion
-        id: parse_artifact
+      - name: Parse and Delete Artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          artifact_id=$(jq -r ".artifacts[] | select(.name==\"${{ github.event.inputs.artifact_name }}\") | .id" artifacts.json)
+          artifact_name="${{ github.event.inputs.artifact_name }}"
+          echo "Looking for artifact: $artifact_name"
+          artifact_id=$(jq -r ".artifacts[] | select(.name==\"$artifact_name\") | .id" artifacts.json)
 
-          if [ -z "$artifact_id" ]; then
-            echo "Artifact not found: ${{ github.event.inputs.artifact_name }}"
+          if [ -n "$artifact_id" ]; then
+            echo "Deleting artifact ID: $artifact_id"
+            gh api --method DELETE \
+              -H "Accept: application/vnd.github+json" \
+              /repos/${{ github.repository }}/actions/artifacts/$artifact_id
+            echo "Artifact deleted successfully."
+          else
+            echo "Artifact not found: $artifact_name"
             exit 1
           fi
-
-          echo "Artifact ID: $artifact_id"
-          echo "artifact_id=$artifact_id" >> $GITHUB_ENV
-
-      - name: Delete the artifact
-        run: |
-          gh api --method DELETE \
-            -H "Accept: application/vnd.github+json" \
-            /repos/${{ github.repository }}/actions/artifacts/$ARTIFACT_ID
-
-          echo "Artifact deleted successfully."
 
