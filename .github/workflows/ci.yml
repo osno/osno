@@ -38,7 +38,7 @@ jobs:
               /repos/${{ github.repository }}/actions/artifacts/$artifact_id
             echo "Artifact deleted successfully."
           else
-            echo "Artifact not found: $artifact_name"
+            echo "Artifact not found: $artifact_name.."
             exit 1
           fi
 
