@@ -35,7 +35,8 @@ jobs:
           CC: "gcc-13"
           CXX: "g++-13"
         run: |
-          echo "Installazione di libdvbsi++"
+          echo "installing libdvbsi++"
+          pushd .
           cd /tmp
           git clone --depth 1 https://github.com/oe-alliance/libdvbsi.git
           cd libdvbsi
@@ -43,7 +44,9 @@ jobs:
           ./configure
           make
           sudo make install
-          echo "Installazione di tuxbox"
+          popd
+          echo "installing tuxbox"
+          pushd .
           cd /tmp
           git clone --depth 1 https://github.com/oe-alliance/tuxtxt.git
           cd tuxtxt/libtuxtxt
@@ -56,7 +59,10 @@ jobs:
           ./configure --with-boxtype=generic DVB_API_VERSION=5
           make
           sudo make install
+          popd
 
+      - name: Install sonar-scanner and build-wrapper
+        uses: SonarSource/sonarcloud-github-c-cpp@v2
       - name: Run build-wrapper
         env:
           CC: "gcc-13"
