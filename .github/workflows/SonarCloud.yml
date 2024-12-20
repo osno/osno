@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: '3.13'
           
-      - name: Build enigma2 dependencies
+      - name: Build osno dependencies
         env:
           CC: "gcc-13"
           CXX: "g++-13"
