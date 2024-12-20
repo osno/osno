@@ -62,10 +62,6 @@ jobs:
           CC: "gcc-13"
           CXX: "g++-13"
         run: |
-          if [ ! -f ./Makefile ]; then
-            echo "Errore: Makefile non trovato nella directory corrente."
-            exit 1
-          fi
           sed -i 's/include lib main data po tools/include lib main tools/g' Makefile.am
           autoreconf -i
           ./configure --with-libsdl=no --with-boxtype=nobox --enable-dependency-tracking ac_cv_prog_c_openmp=-fopenmp --with-gstversion=1.0 --with-textlcd
