@@ -2,23 +2,23 @@ name: buildbot
 
 on:
   push:
-    branches: [ pyton-3.12 ]
+    branches: [ main ]
 
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
 
       - uses: actions/checkout@v4
         with:
-          ref: 'pyton-3.12'
+          ref: 'pyton-3.13'
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.13'
 
       - name: Build python CI
         run: |
