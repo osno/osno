@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 'python-3.13'  # Verifica che questo sia il branch corretto
+          ref: 'main'  # Verifica che questo sia il branch corretto
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'  # Assicurati che questa versione sia disponibile
+          python-version: '3.12'
 
       - name: List files for debugging
         run: ls -la  # Verifica la presenza dei file
