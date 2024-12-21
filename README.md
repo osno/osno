@@ -8,6 +8,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=osno_osno)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=osno_osno)
 
+
 ## Current OS
 
 > Ubuntu 24.04 LTS (GNU/Linux 6.8.0-31-generic x86_64)
