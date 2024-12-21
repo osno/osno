@@ -13,17 +13,50 @@ commit_files() {
   rm -rf *.pyc
   rm -rf *.pyo
   rm -rf *.mo
-  git checkout pyton-3.13
-  ./CI/chmod.sh
-  ./CI/dos2unix.sh
-  ./CI/PEP8.sh
+
+  # Verifica l'esistenza del branch prima del checkout
+  if git show-ref --verify --quiet refs/heads/pyton-3.13; then
+    git checkout pyton-3.13
+  else
+    echo "Branch pyton-3.13 non trovato!"
+    exit 1
+  fi
+
+  # Esegui gli script solo se esistono
+  if [ -f "./CI/chmod.sh" ]; then
+    ./CI/chmod.sh
+  else
+    echo "File ./CI/chmod.sh non trovato!"
+    exit 1
+  fi
+
+  if [ -f "./CI/dos2unix.sh" ]; then
+    ./CI/dos2unix.sh
+  else
+    echo "File ./CI/dos2unix.sh non trovato!"
+    exit 1
+  fi
+
+  if [ -f "./CI/PEP8.sh" ]; then
+    ./CI/PEP8.sh
+  else
+    echo "File ./CI/PEP8.sh non trovato!"
+    exit 1
+  fi
 }
 
 upload_files() {
+  # Aggiungi remote se non esiste già
   git remote add upstream https://${GITHUB_TOKEN}@github.com/osno/osno.git > /dev/null 2>&1
-  git push --quiet upstream pyton-3.13 || echo "failed to push with error $?"
+
+  # Esegui il pull prima del push per evitare conflitti
+  git pull --rebase origin pyton-3.13
+
+  # Push con gestione errore
+  git push --quiet upstream pyton-3.13 || { echo "Failed to push!"; exit 1; }
 }
 
 setup_git
 commit_files
 upload_files
+

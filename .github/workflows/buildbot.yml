@@ -3,7 +3,6 @@ name: buildbot
 on:
   push:
     branches: [ main ]
-
   workflow_dispatch:
 
 jobs:
@@ -11,18 +10,21 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-
       - uses: actions/checkout@v4
         with:
-          ref: 'pyton-3.13'
+          ref: 'python-3.13'  # Verifica che questo sia il branch corretto
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.13'  # Assicurati che questa versione sia disponibile
+
+      - name: List files for debugging
+        run: ls -la  # Verifica la presenza dei file
 
       - name: Build python CI
         run: |
           sudo apt-get -q update
-          sudo apt-get install dos2unix
+          sudo apt-get install -y dos2unix  # Aggiungi -y per evitare conferme interattive
           pip install --upgrade pip autopep8
-          ./CI/build.sh
+          ./CI/build.sh  # Verifica che questo percorso sia corretto
+
