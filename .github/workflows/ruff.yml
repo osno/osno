@@ -25,12 +25,13 @@ jobs:
       - name: Verify directory structure
         run: |
           echo "Checking project structure..."
-          ls -R ./lib/python/
+          ls -R ./lib/python || echo "Directory ./lib/python not found"
 
       # Step 4: Install Ruff
       - name: Install Ruff
         run: pip install ruff
 
       # Step 5: Run Ruff
+      - name: Run Ruff
         run: ruff check ./lib/python/ --ignore E501,E722,F821,F405,E402,F401,E731
 
