@@ -31,7 +31,7 @@ jobs:
       - name: Install Ruff
         run: pip install ruff
 
-      # Step 5: Run Ruff with automatic fixes and unsafe fixes
+      # Step 5: Run Ruff with automatic and unsafe fixes
       - name: Run Ruff (with automatic and unsafe fixes)
         run: ruff check ./lib/python/ --fix --unsafe-fixes --ignore E501,E722,F821,F405,F401,F841,E731
 
