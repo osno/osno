@@ -14,21 +14,24 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Step 2: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python: ['3.12', '3.13']
 
-      # Step 3: Install Ruff
+      # Step 3: Debug directory structure
+      - name: Verify directory structure
+        run: |
+          echo "Checking project structure..."
+          ls -R ./lib/python/
+
+      # Step 4: Install Ruff
       - name: Install Ruff
         run: pip install ruff
 
-      # Step 4: Run Ruff
+      # Step 5: Run Ruff
       - name: Run Ruff
-        run: ruff ./lib/python/ --ignore E501,E722,F821,F405,E402,F401,E731
-
+        run: ruff check ./lib/python/ --ignore E501,E722,F821,F405,E402,F401,E731
 
