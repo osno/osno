@@ -86,3 +86,4 @@ def extract_vtbl_rec(buf):
                                 vtbl_recs.append(vtbl_rec_ret)
 
         return vtbl_recs
+
