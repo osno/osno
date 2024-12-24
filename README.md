@@ -1,13 +1,5 @@
 ## Our buildserver is currently running on: ##
 [![enigma2 build](https://github.com/osno/osno/actions/workflows/enigma2.yml/badge.svg)](https://github.com/osno/osno/actions/workflows/enigma2.yml)
-## SonarCloud status
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=osno_osno)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=osno_osno)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=bugs)](https://sonarcloud.io/summary/new_code?id=osno_osno)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=osno_osno)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=osno_osno)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=osno_osno&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=osno_osno)
-
 
 ## Current OS
 
